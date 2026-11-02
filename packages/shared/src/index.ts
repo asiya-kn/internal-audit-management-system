@@ -1115,3 +1115,172 @@ export interface ControlTestDashboardDto {
 export type CreateControlTestInput = CreateControlTestRequest;
 export type UpdateControlTestInput = UpdateControlTestRequest;
 export type ListControlTestInput = ControlTestFilters;
+
+// ---- Action Plans ----
+
+export type ActionPlanStatus =
+  | 'OPEN'
+  | 'IN_PROGRESS'
+  | 'PENDING_VERIFICATION'
+  | 'COMPLETED'
+  | 'OVERDUE'
+  | 'CANCELLED';
+
+export type ActionPlanPriority = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+
+export const ACTION_PLAN_STATUSES: ActionPlanStatus[] = [
+  'OPEN',
+  'IN_PROGRESS',
+  'PENDING_VERIFICATION',
+  'COMPLETED',
+  'OVERDUE',
+  'CANCELLED',
+];
+
+export const ACTION_PLAN_PRIORITIES: ActionPlanPriority[] = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
+
+export const ACTION_PLAN_TRANSITIONS: Record<ActionPlanStatus, ActionPlanStatus[]> = {
+  OPEN: ['IN_PROGRESS', 'CANCELLED'],
+  IN_PROGRESS: ['PENDING_VERIFICATION', 'COMPLETED', 'OPEN', 'CANCELLED'],
+  PENDING_VERIFICATION: ['COMPLETED', 'IN_PROGRESS', 'CANCELLED'],
+  COMPLETED: [],
+  OVERDUE: ['IN_PROGRESS', 'CANCELLED'],
+  CANCELLED: [],
+};
+
+export function canTransitionActionPlan(from: ActionPlanStatus, to: ActionPlanStatus): boolean {
+  return ACTION_PLAN_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface ActionPlanUpdateDto {
+  id: string;
+  actionPlanId: string;
+  note: string;
+  progressPct: number;
+  updatedById: string | null;
+  updatedByName: string | null;
+  createdAt: string;
+}
+
+export interface ActionPlanSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  description: string;
+  findingId: string | null;
+  findingReference: string | null;
+  findingTitle: string | null;
+  controlTestId: string | null;
+  controlTestReference: string | null;
+  engagementId: string | null;
+  engagementReference: string | null;
+  auditEntityId: string | null;
+  auditEntityCode: string | null;
+  auditEntityName: string | null;
+  responsibleOwnerId: string | null;
+  responsibleOwnerName: string | null;
+  reviewerId: string | null;
+  reviewerName: string | null;
+  priority: ActionPlanPriority;
+  status: ActionPlanStatus;
+  targetDate: string | null;
+  completedAt: string | null;
+  verifiedAt: string | null;
+  progressPct: number;
+  isOverdue: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ActionPlanDetailDto extends ActionPlanSummaryDto {
+  managementJustification: string | null;
+  proposedRectification: string | null;
+  completionEvidence: string | null;
+  verificationNotes: string | null;
+  createdById: string | null;
+  createdByName: string | null;
+  updates: ActionPlanUpdateDto[];
+}
+
+export interface CreateActionPlanRequest {
+  reference: string;
+  title: string;
+  description: string;
+  findingId?: string | null;
+  controlTestId?: string | null;
+  engagementId?: string | null;
+  auditEntityId?: string | null;
+  responsibleOwnerId?: string | null;
+  reviewerId?: string | null;
+  priority?: ActionPlanPriority;
+  targetDate?: string | null;
+  managementJustification?: string;
+  proposedRectification?: string;
+}
+
+export interface UpdateActionPlanRequest {
+  title?: string;
+  description?: string;
+  findingId?: string | null;
+  controlTestId?: string | null;
+  engagementId?: string | null;
+  auditEntityId?: string | null;
+  responsibleOwnerId?: string | null;
+  reviewerId?: string | null;
+  priority?: ActionPlanPriority;
+  targetDate?: string | null;
+  managementJustification?: string | null;
+  proposedRectification?: string | null;
+}
+
+export interface AddProgressUpdateRequest {
+  note: string;
+  progressPct?: number;
+}
+
+export interface VerifyActionPlanRequest {
+  verificationNotes?: string;
+}
+
+export interface TransitionActionPlanRequest {
+  status: ActionPlanStatus;
+}
+
+export interface ActionPlanFilters {
+  search?: string;
+  findingId?: string;
+  controlTestId?: string;
+  engagementId?: string;
+  auditEntityId?: string;
+  status?: ActionPlanStatus;
+  priority?: ActionPlanPriority;
+  responsibleOwnerId?: string;
+  overdue?: boolean | 'true' | 'false';
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface ActionPlanListResponse {
+  items: ActionPlanSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface ActionPlanDashboardDto {
+  totalPlans: number;
+  byStatus: Record<ActionPlanStatus, number>;
+  byPriority: Record<ActionPlanPriority, number>;
+  openCount: number;
+  inProgressCount: number;
+  pendingVerificationCount: number;
+  completedCount: number;
+  overdueCount: number;
+  recentPlans: ActionPlanSummaryDto[];
+}
+
+export type CreateActionPlanInput = CreateActionPlanRequest;
+export type UpdateActionPlanInput = UpdateActionPlanRequest;
+export type ListActionPlanInput = ActionPlanFilters;

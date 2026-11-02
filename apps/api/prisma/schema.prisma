@@ -58,6 +58,13 @@ model User {
   createdControlTests   ControlTest[] @relation("ControlTestCreator")
   updatedControlTests   ControlTest[] @relation("ControlTestUpdater")
 
+  responsibleActionPlans  ActionPlan[] @relation("ActionPlanResponsibleOwner")
+  reviewerActionPlans    ActionPlan[] @relation("ActionPlanReviewer")
+  createdActionPlans     ActionPlan[] @relation("ActionPlanCreator")
+  updatedActionPlans     ActionPlan[] @relation("ActionPlanUpdater")
+  verifiedActionPlans    ActionPlan[] @relation("ActionPlanVerifier")
+  actionPlanUpdates      ActionPlanUpdate[] @relation("ActionPlanUpdateAuthor")
+
   @@index([email])
   @@index([isActive])
 }
@@ -181,6 +188,7 @@ model AuditUniverse {
   engagements     Engagement[]
   findings        Finding[]
   controlTests    ControlTest[]
+  actionPlans     ActionPlan[]
 
   @@index([parentId])
   @@index([entityType])
@@ -417,6 +425,7 @@ model Engagement {
   teamMembers     EngagementTeamMember[]
   findings        Finding[]
   controlTests    ControlTest[]
+  actionPlans     ActionPlan[]
 
   @@index([auditPlanId])
   @@index([auditEntityId])
@@ -523,6 +532,7 @@ model Finding {
   updatedBy       User?   @relation("FindingUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
   controlTests    ControlTest[] @relation("ControlTestFinding")
+  actionPlans     ActionPlan[]
 
   @@index([engagementId])
   @@index([auditEntityId])
@@ -600,6 +610,7 @@ model ControlTest {
   reviewer        User?         @relation("ControlTestReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
   createdBy       User?         @relation("ControlTestCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy       User?         @relation("ControlTestUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  actionPlans     ActionPlan[]
 
   @@index([engagementId])
   @@index([auditEntityId])
@@ -610,4 +621,95 @@ model ControlTest {
   @@index([reviewerId])
   @@index([findingId])
   @@index([title])
+}
+
+// ---- Action Plans ----
+
+enum ActionPlanStatus {
+  OPEN
+  IN_PROGRESS
+  PENDING_VERIFICATION
+  COMPLETED
+  OVERDUE
+  CANCELLED
+}
+
+enum ActionPlanPriority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model ActionPlan {
+  id              String   @id @default(uuid()) @db.Uuid
+  reference       String   @unique
+  title           String
+  description     String
+
+  findingId       String?  @db.Uuid
+  controlTestId   String?  @db.Uuid
+  engagementId    String?  @db.Uuid
+  auditEntityId   String?  @db.Uuid
+
+  priority        ActionPlanPriority @default(MEDIUM)
+  status          ActionPlanStatus   @default(OPEN)
+
+  responsibleOwnerId String? @db.Uuid
+  reviewerId        String? @db.Uuid
+
+  targetDate        DateTime?
+  completedAt       DateTime?
+  verifiedAt        DateTime?
+  verifiedById      String? @db.Uuid
+
+  managementJustification String?
+  proposedRectification   String?
+  completionEvidence      String?
+  verificationNotes       String?
+
+  progressPct      Int     @default(0)
+
+  createdById      String? @db.Uuid
+  updatedById      String? @db.Uuid
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  finding          Finding?       @relation(fields: [findingId], references: [id], onDelete: SetNull)
+  controlTest      ControlTest?   @relation(fields: [controlTestId], references: [id], onDelete: SetNull)
+  engagement       Engagement?    @relation(fields: [engagementId], references: [id], onDelete: SetNull)
+  auditEntity      AuditUniverse? @relation(fields: [auditEntityId], references: [id], onDelete: SetNull)
+  responsibleOwner User?          @relation("ActionPlanResponsibleOwner", fields: [responsibleOwnerId], references: [id], onDelete: SetNull)
+  reviewer         User?          @relation("ActionPlanReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+  verifiedBy       User?          @relation("ActionPlanVerifier", fields: [verifiedById], references: [id], onDelete: SetNull)
+  createdBy        User?          @relation("ActionPlanCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy        User?          @relation("ActionPlanUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  updates          ActionPlanUpdate[]
+
+  @@index([findingId])
+  @@index([controlTestId])
+  @@index([engagementId])
+  @@index([auditEntityId])
+  @@index([status])
+  @@index([priority])
+  @@index([responsibleOwnerId])
+  @@index([targetDate])
+  @@index([title])
+}
+
+model ActionPlanUpdate {
+  id            String   @id @default(uuid()) @db.Uuid
+  actionPlanId  String   @db.Uuid
+  note          String
+  progressPct   Int      @default(0)
+  updatedById   String?  @db.Uuid
+  createdAt     DateTime @default(now())
+
+  actionPlan    ActionPlan @relation(fields: [actionPlanId], references: [id], onDelete: Cascade)
+  updatedBy     User?      @relation("ActionPlanUpdateAuthor", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([actionPlanId])
+  @@index([updatedById])
 }

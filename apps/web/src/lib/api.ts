@@ -57,6 +57,16 @@ import type {
   ReviewControlTestRequest,
   TransitionControlTestRequest,
   ControlTestStatus,
+  ActionPlanListResponse,
+  ActionPlanDetailDto,
+  ActionPlanDashboardDto,
+  ActionPlanFilters,
+  CreateActionPlanRequest,
+  UpdateActionPlanRequest,
+  AddProgressUpdateRequest,
+  VerifyActionPlanRequest,
+  TransitionActionPlanRequest,
+  ActionPlanStatus,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -313,4 +323,39 @@ export const api = {
     request<ControlTestDetailDto>(`/control-tests/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
   deleteControlTest: (id: string) =>
     request<{ message: string }>(`/control-tests/${id}`, { method: 'DELETE' }),
+
+  // ---- Action Plans ----
+
+  listActionPlans: (filters: ActionPlanFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.findingId) params.set('findingId', filters.findingId);
+    if (filters.controlTestId) params.set('controlTestId', filters.controlTestId);
+    if (filters.engagementId) params.set('engagementId', filters.engagementId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.priority) params.set('priority', filters.priority);
+    if (filters.responsibleOwnerId) params.set('responsibleOwnerId', filters.responsibleOwnerId);
+    if (filters.overdue) params.set('overdue', filters.overdue ? 'true' : 'false');
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<ActionPlanListResponse>(`/action-plans${qs ? `?${qs}` : ''}`);
+  },
+  getActionPlan: (id: string) => request<ActionPlanDetailDto>(`/action-plans/${id}`),
+  getActionPlanDashboard: () => request<ActionPlanDashboardDto>('/action-plans/dashboard'),
+  createActionPlan: (data: CreateActionPlanRequest) =>
+    request<ActionPlanDetailDto>('/action-plans', { method: 'POST', body: JSON.stringify(data) }),
+  updateActionPlan: (id: string, data: UpdateActionPlanRequest) =>
+    request<ActionPlanDetailDto>(`/action-plans/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  addActionPlanProgressUpdate: (id: string, data: AddProgressUpdateRequest) =>
+    request<ActionPlanDetailDto>(`/action-plans/${id}/updates`, { method: 'POST', body: JSON.stringify(data) }),
+  verifyActionPlan: (id: string, data: VerifyActionPlanRequest) =>
+    request<ActionPlanDetailDto>(`/action-plans/${id}/verify`, { method: 'PATCH', body: JSON.stringify(data) }),
+  transitionActionPlan: (id: string, status: ActionPlanStatus) =>
+    request<ActionPlanDetailDto>(`/action-plans/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  deleteActionPlan: (id: string) =>
+    request<{ message: string }>(`/action-plans/${id}`, { method: 'DELETE' }),
 };
