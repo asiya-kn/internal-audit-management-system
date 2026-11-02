@@ -16,6 +16,7 @@ import riskRoutes from './routes/risk.routes.js';
 import auditPlanRoutes from './routes/auditPlan.routes.js';
 import engagementRoutes from './routes/engagement.routes.js';
 import findingRoutes from './routes/finding.routes.js';
+import controlTestRoutes from './routes/controlTest.routes.js';
 
 function buildHelmetConfig() {
   if (config.isProduction) {
@@ -88,6 +89,7 @@ export function createApp(): express.Express {
   app.use('/api/audit-plans', auditPlanRoutes);
   app.use('/api/engagements', engagementRoutes);
   app.use('/api/findings', findingRoutes);
+  app.use('/api/control-tests', controlTestRoutes);
 
   // ---- 404 + error handling (must be last) ----
   app.use(notFoundHandler);

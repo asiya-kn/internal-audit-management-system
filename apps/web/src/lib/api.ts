@@ -47,6 +47,16 @@ import type {
   UpdateFindingRequest,
   TransitionFindingRequest,
   FindingStatus,
+  ControlTestListResponse,
+  ControlTestDetailDto,
+  ControlTestDashboardDto,
+  ControlTestFilters,
+  CreateControlTestRequest,
+  UpdateControlTestRequest,
+  RecordControlTestResultRequest,
+  ReviewControlTestRequest,
+  TransitionControlTestRequest,
+  ControlTestStatus,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -264,4 +274,43 @@ export const api = {
     request<FindingDetailDto>(`/findings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status, managementResponse, verificationNotes }) }),
   deleteFinding: (id: string) =>
     request<{ message: string }>(`/findings/${id}`, { method: 'DELETE' }),
+
+  // ---- Control Testing ----
+
+  listControlTests: (filters: ControlTestFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.engagementId) params.set('engagementId', filters.engagementId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.riskId) params.set('riskId', filters.riskId);
+    if (filters.status) params.set('status', filters.status);
+    if (filters.outcome) params.set('outcome', filters.outcome);
+    if (filters.testerId) params.set('testerId', filters.testerId);
+    if (filters.reviewerId) params.set('reviewerId', filters.reviewerId);
+    if (filters.findingId) params.set('findingId', filters.findingId);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<ControlTestListResponse>(`/control-tests${qs ? `?${qs}` : ''}`);
+  },
+  getControlTest: (id: string) => request<ControlTestDetailDto>(`/control-tests/${id}`),
+  getControlTestDashboard: () => request<ControlTestDashboardDto>('/control-tests/dashboard'),
+  createControlTest: (data: CreateControlTestRequest) =>
+    request<ControlTestDetailDto>('/control-tests', { method: 'POST', body: JSON.stringify(data) }),
+  updateControlTest: (id: string, data: UpdateControlTestRequest) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  recordControlTestResult: (id: string, data: RecordControlTestResultRequest) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}/result`, { method: 'PATCH', body: JSON.stringify(data) }),
+  reviewControlTest: (id: string, data: ReviewControlTestRequest) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}/review`, { method: 'PATCH', body: JSON.stringify(data) }),
+  linkControlTestFinding: (id: string, findingId: string) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}/finding`, { method: 'POST', body: JSON.stringify({ findingId }) }),
+  unlinkControlTestFinding: (id: string) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}/finding`, { method: 'DELETE' }),
+  transitionControlTest: (id: string, status: ControlTestStatus) =>
+    request<ControlTestDetailDto>(`/control-tests/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  deleteControlTest: (id: string) =>
+    request<{ message: string }>(`/control-tests/${id}`, { method: 'DELETE' }),
 };

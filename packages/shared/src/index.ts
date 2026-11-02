@@ -932,3 +932,186 @@ export interface FindingDashboardDto {
 export type CreateFindingInput = CreateFindingRequest;
 export type UpdateFindingInput = UpdateFindingRequest;
 export type ListFindingInput = FindingFilters;
+
+// ---- Control Testing ----
+
+export type ControlTestStatus =
+  | 'PLANNED'
+  | 'IN_PROGRESS'
+  | 'TESTED'
+  | 'REVIEWED'
+  | 'EXCEPTION'
+  | 'CANCELLED';
+
+export type ControlTestOutcome =
+  | 'PASS'
+  | 'FAIL'
+  | 'PASS_WITH_EXCEPTION'
+  | 'NOT_APPLICABLE'
+  | 'INCONCLUSIVE';
+
+export const CONTROL_TEST_STATUSES: ControlTestStatus[] = [
+  'PLANNED',
+  'IN_PROGRESS',
+  'TESTED',
+  'REVIEWED',
+  'EXCEPTION',
+  'CANCELLED',
+];
+
+export const CONTROL_TEST_OUTCOMES: ControlTestOutcome[] = [
+  'PASS',
+  'FAIL',
+  'PASS_WITH_EXCEPTION',
+  'NOT_APPLICABLE',
+  'INCONCLUSIVE',
+];
+
+export const CONTROL_TEST_TRANSITIONS: Record<ControlTestStatus, ControlTestStatus[]> = {
+  PLANNED: ['IN_PROGRESS', 'CANCELLED'],
+  IN_PROGRESS: ['TESTED', 'CANCELLED'],
+  TESTED: ['REVIEWED', 'IN_PROGRESS', 'EXCEPTION'],
+  REVIEWED: [],
+  EXCEPTION: ['IN_PROGRESS', 'CANCELLED'],
+  CANCELLED: [],
+};
+
+export function canTransitionControlTest(from: ControlTestStatus, to: ControlTestStatus): boolean {
+  return CONTROL_TEST_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface ControlTestSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  engagementId: string | null;
+  engagementReference: string | null;
+  auditEntityId: string | null;
+  auditEntityCode: string | null;
+  auditEntityName: string | null;
+  riskId: string | null;
+  riskTitle: string | null;
+  controlReference: string | null;
+  status: ControlTestStatus;
+  outcome: ControlTestOutcome | null;
+  testerId: string | null;
+  testerName: string | null;
+  reviewerId: string | null;
+  reviewerName: string | null;
+  testedAt: string | null;
+  reviewedAt: string | null;
+  findingId: string | null;
+  findingReference: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ControlTestDetailDto extends ControlTestSummaryDto {
+  objective: string;
+  procedures: string;
+  criteria: string | null;
+  sampleDescription: string | null;
+  sampleSize: number | null;
+  expectedResult: string | null;
+  actualResult: string | null;
+  exceptions: string | null;
+  conclusion: string | null;
+  evidenceReference: string | null;
+  testerNotes: string | null;
+  reviewerNotes: string | null;
+  createdById: string | null;
+  createdByName: string | null;
+}
+
+export interface CreateControlTestRequest {
+  reference: string;
+  title: string;
+  engagementId?: string | null;
+  auditEntityId?: string | null;
+  riskId?: string | null;
+  controlReference?: string;
+  objective: string;
+  procedures: string;
+  criteria?: string;
+  sampleDescription?: string;
+  sampleSize?: number;
+  expectedResult?: string;
+  testerId?: string | null;
+}
+
+export interface UpdateControlTestRequest {
+  title?: string;
+  engagementId?: string | null;
+  auditEntityId?: string | null;
+  riskId?: string | null;
+  controlReference?: string | null;
+  objective?: string;
+  procedures?: string;
+  criteria?: string | null;
+  sampleDescription?: string | null;
+  sampleSize?: number | null;
+  expectedResult?: string | null;
+  testerId?: string | null;
+}
+
+export interface RecordControlTestResultRequest {
+  actualResult: string;
+  outcome: ControlTestOutcome;
+  exceptions?: string;
+  conclusion?: string;
+  evidenceReference?: string;
+  testedAt?: string;
+  testerNotes?: string;
+}
+
+export interface ReviewControlTestRequest {
+  reviewerNotes?: string;
+  reviewedAt?: string;
+}
+
+export interface LinkFindingControlTestRequest {
+  findingId: string;
+}
+
+export interface TransitionControlTestRequest {
+  status: ControlTestStatus;
+}
+
+export interface ControlTestFilters {
+  search?: string;
+  engagementId?: string;
+  auditEntityId?: string;
+  riskId?: string;
+  status?: ControlTestStatus;
+  outcome?: ControlTestOutcome;
+  testerId?: string;
+  reviewerId?: string;
+  findingId?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface ControlTestListResponse {
+  items: ControlTestSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface ControlTestDashboardDto {
+  totalTests: number;
+  byStatus: Record<ControlTestStatus, number>;
+  byOutcome: Record<ControlTestOutcome, number>;
+  passCount: number;
+  failCount: number;
+  exceptionCount: number;
+  pendingReviewCount: number;
+  linkedFindingsCount: number;
+  recentTests: ControlTestSummaryDto[];
+}
+
+export type CreateControlTestInput = CreateControlTestRequest;
+export type UpdateControlTestInput = UpdateControlTestRequest;
+export type ListControlTestInput = ControlTestFilters;

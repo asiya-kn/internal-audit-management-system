@@ -317,6 +317,39 @@ exports.Prisma.FindingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ControlTestScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  title: 'title',
+  engagementId: 'engagementId',
+  auditEntityId: 'auditEntityId',
+  riskId: 'riskId',
+  controlReference: 'controlReference',
+  status: 'status',
+  outcome: 'outcome',
+  objective: 'objective',
+  procedures: 'procedures',
+  criteria: 'criteria',
+  sampleDescription: 'sampleDescription',
+  sampleSize: 'sampleSize',
+  expectedResult: 'expectedResult',
+  actualResult: 'actualResult',
+  exceptions: 'exceptions',
+  conclusion: 'conclusion',
+  evidenceReference: 'evidenceReference',
+  testerId: 'testerId',
+  testedAt: 'testedAt',
+  testerNotes: 'testerNotes',
+  reviewerId: 'reviewerId',
+  reviewedAt: 'reviewedAt',
+  reviewerNotes: 'reviewerNotes',
+  findingId: 'findingId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -458,6 +491,23 @@ exports.FindingStatus = exports.$Enums.FindingStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.ControlTestStatus = exports.$Enums.ControlTestStatus = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  TESTED: 'TESTED',
+  REVIEWED: 'REVIEWED',
+  EXCEPTION: 'EXCEPTION',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.ControlTestOutcome = exports.$Enums.ControlTestOutcome = {
+  PASS: 'PASS',
+  FAIL: 'FAIL',
+  PASS_WITH_EXCEPTION: 'PASS_WITH_EXCEPTION',
+  NOT_APPLICABLE: 'NOT_APPLICABLE',
+  INCONCLUSIVE: 'INCONCLUSIVE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -471,7 +521,8 @@ exports.Prisma.ModelName = {
   AuditPlan: 'AuditPlan',
   Engagement: 'Engagement',
   EngagementTeamMember: 'EngagementTeamMember',
-  Finding: 'Finding'
+  Finding: 'Finding',
+  ControlTest: 'ControlTest'
 };
 
 /**

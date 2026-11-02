@@ -53,6 +53,11 @@ model User {
   managementResponseFindings Finding[] @relation("FindingManagementResponder")
   verifiedFindings  Finding[] @relation("FindingVerifier")
 
+  testedControlTests    ControlTest[] @relation("ControlTestTester")
+  reviewedControlTests  ControlTest[] @relation("ControlTestReviewer")
+  createdControlTests   ControlTest[] @relation("ControlTestCreator")
+  updatedControlTests   ControlTest[] @relation("ControlTestUpdater")
+
   @@index([email])
   @@index([isActive])
 }
@@ -175,6 +180,7 @@ model AuditUniverse {
   auditPlans      AuditPlan[]
   engagements     Engagement[]
   findings        Finding[]
+  controlTests    ControlTest[]
 
   @@index([parentId])
   @@index([entityType])
@@ -246,6 +252,7 @@ model Risk {
   actions         RiskAction[]
   auditPlans      AuditPlan[] @relation("AuditPlanRisk")
   engagements     Engagement[] @relation("EngagementRisk")
+  controlTests    ControlTest[] @relation("ControlTestRisk")
 
   @@index([auditEntityId])
   @@index([status])
@@ -409,6 +416,7 @@ model Engagement {
 
   teamMembers     EngagementTeamMember[]
   findings        Finding[]
+  controlTests    ControlTest[]
 
   @@index([auditPlanId])
   @@index([auditEntityId])
@@ -514,6 +522,8 @@ model Finding {
   createdBy       User?   @relation("FindingCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy       User?   @relation("FindingUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
+  controlTests    ControlTest[] @relation("ControlTestFinding")
+
   @@index([engagementId])
   @@index([auditEntityId])
   @@index([category])
@@ -521,5 +531,83 @@ model Finding {
   @@index([status])
   @@index([responsibleOwnerId])
   @@index([targetResolutionDate])
+  @@index([title])
+}
+
+// ---- Control Testing ----
+
+enum ControlTestStatus {
+  PLANNED
+  IN_PROGRESS
+  TESTED
+  REVIEWED
+  EXCEPTION
+  CANCELLED
+}
+
+enum ControlTestOutcome {
+  PASS
+  FAIL
+  PASS_WITH_EXCEPTION
+  NOT_APPLICABLE
+  INCONCLUSIVE
+}
+
+model ControlTest {
+  id              String   @id @default(uuid()) @db.Uuid
+  reference       String   @unique
+  title           String
+  engagementId    String?  @db.Uuid
+  auditEntityId   String?  @db.Uuid
+  riskId          String?  @db.Uuid
+  controlReference String?
+
+  status          ControlTestStatus @default(PLANNED)
+  outcome         ControlTestOutcome?
+
+  objective       String
+  procedures      String
+  criteria       String?
+  sampleDescription String?
+  sampleSize      Int?
+  expectedResult   String?
+  actualResult    String?
+  exceptions      String?
+  conclusion      String?
+  evidenceReference String?
+
+  testerId        String?  @db.Uuid
+  testedAt        DateTime?
+  testerNotes     String?
+
+  reviewerId      String?  @db.Uuid
+  reviewedAt      DateTime?
+  reviewerNotes   String?
+
+  findingId       String?  @db.Uuid
+
+  createdById     String?  @db.Uuid
+  updatedById     String?  @db.Uuid
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  engagement      Engagement?   @relation(fields: [engagementId], references: [id], onDelete: SetNull)
+  auditEntity     AuditUniverse? @relation(fields: [auditEntityId], references: [id], onDelete: SetNull)
+  risk            Risk?         @relation("ControlTestRisk", fields: [riskId], references: [id], onDelete: SetNull)
+  finding         Finding?      @relation("ControlTestFinding", fields: [findingId], references: [id], onDelete: SetNull)
+  tester          User?         @relation("ControlTestTester", fields: [testerId], references: [id], onDelete: SetNull)
+  reviewer        User?         @relation("ControlTestReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+  createdBy       User?         @relation("ControlTestCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?         @relation("ControlTestUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([engagementId])
+  @@index([auditEntityId])
+  @@index([riskId])
+  @@index([status])
+  @@index([outcome])
+  @@index([testerId])
+  @@index([reviewerId])
+  @@index([findingId])
   @@index([title])
 }
