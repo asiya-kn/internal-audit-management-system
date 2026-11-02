@@ -78,6 +78,21 @@ export type EngagementTeamMember = $Result.DefaultSelection<Prisma.$EngagementTe
  * 
  */
 export type Finding = $Result.DefaultSelection<Prisma.$FindingPayload>
+/**
+ * Model ControlTest
+ * 
+ */
+export type ControlTest = $Result.DefaultSelection<Prisma.$ControlTestPayload>
+/**
+ * Model ActionPlan
+ * 
+ */
+export type ActionPlan = $Result.DefaultSelection<Prisma.$ActionPlanPayload>
+/**
+ * Model ActionPlanUpdate
+ * 
+ */
+export type ActionPlanUpdate = $Result.DefaultSelection<Prisma.$ActionPlanUpdatePayload>
 
 /**
  * Enums
@@ -237,6 +252,51 @@ export const FindingStatus: {
 
 export type FindingStatus = (typeof FindingStatus)[keyof typeof FindingStatus]
 
+
+export const ControlTestStatus: {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  TESTED: 'TESTED',
+  REVIEWED: 'REVIEWED',
+  EXCEPTION: 'EXCEPTION',
+  CANCELLED: 'CANCELLED'
+};
+
+export type ControlTestStatus = (typeof ControlTestStatus)[keyof typeof ControlTestStatus]
+
+
+export const ControlTestOutcome: {
+  PASS: 'PASS',
+  FAIL: 'FAIL',
+  PASS_WITH_EXCEPTION: 'PASS_WITH_EXCEPTION',
+  NOT_APPLICABLE: 'NOT_APPLICABLE',
+  INCONCLUSIVE: 'INCONCLUSIVE'
+};
+
+export type ControlTestOutcome = (typeof ControlTestOutcome)[keyof typeof ControlTestOutcome]
+
+
+export const ActionPlanPriority: {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+};
+
+export type ActionPlanPriority = (typeof ActionPlanPriority)[keyof typeof ActionPlanPriority]
+
+
+export const ActionPlanStatus: {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  PENDING_VERIFICATION: 'PENDING_VERIFICATION',
+  COMPLETED: 'COMPLETED',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type ActionPlanStatus = (typeof ActionPlanStatus)[keyof typeof ActionPlanStatus]
+
 }
 
 export type AuditEntityType = $Enums.AuditEntityType
@@ -290,6 +350,22 @@ export const FindingSeverity: typeof $Enums.FindingSeverity
 export type FindingStatus = $Enums.FindingStatus
 
 export const FindingStatus: typeof $Enums.FindingStatus
+
+export type ControlTestStatus = $Enums.ControlTestStatus
+
+export const ControlTestStatus: typeof $Enums.ControlTestStatus
+
+export type ControlTestOutcome = $Enums.ControlTestOutcome
+
+export const ControlTestOutcome: typeof $Enums.ControlTestOutcome
+
+export type ActionPlanPriority = $Enums.ActionPlanPriority
+
+export const ActionPlanPriority: typeof $Enums.ActionPlanPriority
+
+export type ActionPlanStatus = $Enums.ActionPlanStatus
+
+export const ActionPlanStatus: typeof $Enums.ActionPlanStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -543,6 +619,36 @@ export class PrismaClient<
     * ```
     */
   get finding(): Prisma.FindingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.controlTest`: Exposes CRUD operations for the **ControlTest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ControlTests
+    * const controlTests = await prisma.controlTest.findMany()
+    * ```
+    */
+  get controlTest(): Prisma.ControlTestDelegate<ExtArgs>;
+
+  /**
+   * `prisma.actionPlan`: Exposes CRUD operations for the **ActionPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActionPlans
+    * const actionPlans = await prisma.actionPlan.findMany()
+    * ```
+    */
+  get actionPlan(): Prisma.ActionPlanDelegate<ExtArgs>;
+
+  /**
+   * `prisma.actionPlanUpdate`: Exposes CRUD operations for the **ActionPlanUpdate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ActionPlanUpdates
+    * const actionPlanUpdates = await prisma.actionPlanUpdate.findMany()
+    * ```
+    */
+  get actionPlanUpdate(): Prisma.ActionPlanUpdateDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -996,7 +1102,10 @@ export namespace Prisma {
     AuditPlan: 'AuditPlan',
     Engagement: 'Engagement',
     EngagementTeamMember: 'EngagementTeamMember',
-    Finding: 'Finding'
+    Finding: 'Finding',
+    ControlTest: 'ControlTest',
+    ActionPlan: 'ActionPlan',
+    ActionPlanUpdate: 'ActionPlanUpdate'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1012,7 +1121,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember" | "finding"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember" | "finding" | "controlTest" | "actionPlan" | "actionPlanUpdate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1926,6 +2035,216 @@ export namespace Prisma {
           }
         }
       }
+      ControlTest: {
+        payload: Prisma.$ControlTestPayload<ExtArgs>
+        fields: Prisma.ControlTestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ControlTestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ControlTestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          findFirst: {
+            args: Prisma.ControlTestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ControlTestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          findMany: {
+            args: Prisma.ControlTestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>[]
+          }
+          create: {
+            args: Prisma.ControlTestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          createMany: {
+            args: Prisma.ControlTestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ControlTestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>[]
+          }
+          delete: {
+            args: Prisma.ControlTestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          update: {
+            args: Prisma.ControlTestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          deleteMany: {
+            args: Prisma.ControlTestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ControlTestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ControlTestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ControlTestPayload>
+          }
+          aggregate: {
+            args: Prisma.ControlTestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateControlTest>
+          }
+          groupBy: {
+            args: Prisma.ControlTestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ControlTestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ControlTestCountArgs<ExtArgs>
+            result: $Utils.Optional<ControlTestCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActionPlan: {
+        payload: Prisma.$ActionPlanPayload<ExtArgs>
+        fields: Prisma.ActionPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActionPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActionPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.ActionPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActionPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          findMany: {
+            args: Prisma.ActionPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>[]
+          }
+          create: {
+            args: Prisma.ActionPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          createMany: {
+            args: Prisma.ActionPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActionPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.ActionPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          update: {
+            args: Prisma.ActionPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.ActionPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActionPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ActionPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.ActionPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActionPlan>
+          }
+          groupBy: {
+            args: Prisma.ActionPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActionPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActionPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<ActionPlanCountAggregateOutputType> | number
+          }
+        }
+      }
+      ActionPlanUpdate: {
+        payload: Prisma.$ActionPlanUpdatePayload<ExtArgs>
+        fields: Prisma.ActionPlanUpdateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ActionPlanUpdateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ActionPlanUpdateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          findFirst: {
+            args: Prisma.ActionPlanUpdateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ActionPlanUpdateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          findMany: {
+            args: Prisma.ActionPlanUpdateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>[]
+          }
+          create: {
+            args: Prisma.ActionPlanUpdateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          createMany: {
+            args: Prisma.ActionPlanUpdateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ActionPlanUpdateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>[]
+          }
+          delete: {
+            args: Prisma.ActionPlanUpdateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          update: {
+            args: Prisma.ActionPlanUpdateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          deleteMany: {
+            args: Prisma.ActionPlanUpdateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ActionPlanUpdateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ActionPlanUpdateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ActionPlanUpdatePayload>
+          }
+          aggregate: {
+            args: Prisma.ActionPlanUpdateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActionPlanUpdate>
+          }
+          groupBy: {
+            args: Prisma.ActionPlanUpdateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ActionPlanUpdateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ActionPlanUpdateCountArgs<ExtArgs>
+            result: $Utils.Optional<ActionPlanUpdateCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2109,6 +2428,16 @@ export namespace Prisma {
     responsibleFindings: number
     managementResponseFindings: number
     verifiedFindings: number
+    testedControlTests: number
+    reviewedControlTests: number
+    createdControlTests: number
+    updatedControlTests: number
+    responsibleActionPlans: number
+    reviewerActionPlans: number
+    createdActionPlans: number
+    updatedActionPlans: number
+    verifiedActionPlans: number
+    actionPlanUpdates: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2134,6 +2463,16 @@ export namespace Prisma {
     responsibleFindings?: boolean | UserCountOutputTypeCountResponsibleFindingsArgs
     managementResponseFindings?: boolean | UserCountOutputTypeCountManagementResponseFindingsArgs
     verifiedFindings?: boolean | UserCountOutputTypeCountVerifiedFindingsArgs
+    testedControlTests?: boolean | UserCountOutputTypeCountTestedControlTestsArgs
+    reviewedControlTests?: boolean | UserCountOutputTypeCountReviewedControlTestsArgs
+    createdControlTests?: boolean | UserCountOutputTypeCountCreatedControlTestsArgs
+    updatedControlTests?: boolean | UserCountOutputTypeCountUpdatedControlTestsArgs
+    responsibleActionPlans?: boolean | UserCountOutputTypeCountResponsibleActionPlansArgs
+    reviewerActionPlans?: boolean | UserCountOutputTypeCountReviewerActionPlansArgs
+    createdActionPlans?: boolean | UserCountOutputTypeCountCreatedActionPlansArgs
+    updatedActionPlans?: boolean | UserCountOutputTypeCountUpdatedActionPlansArgs
+    verifiedActionPlans?: boolean | UserCountOutputTypeCountVerifiedActionPlansArgs
+    actionPlanUpdates?: boolean | UserCountOutputTypeCountActionPlanUpdatesArgs
   }
 
   // Custom InputTypes
@@ -2301,6 +2640,76 @@ export namespace Prisma {
     where?: FindingWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTestedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResponsibleActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewerActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVerifiedActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountActionPlanUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanUpdateWhereInput
+  }
+
 
   /**
    * Count Type RoleCountOutputType
@@ -2383,6 +2792,8 @@ export namespace Prisma {
     auditPlans: number
     engagements: number
     findings: number
+    controlTests: number
+    actionPlans: number
   }
 
   export type AuditUniverseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2391,6 +2802,8 @@ export namespace Prisma {
     auditPlans?: boolean | AuditUniverseCountOutputTypeCountAuditPlansArgs
     engagements?: boolean | AuditUniverseCountOutputTypeCountEngagementsArgs
     findings?: boolean | AuditUniverseCountOutputTypeCountFindingsArgs
+    controlTests?: boolean | AuditUniverseCountOutputTypeCountControlTestsArgs
+    actionPlans?: boolean | AuditUniverseCountOutputTypeCountActionPlansArgs
   }
 
   // Custom InputTypes
@@ -2439,6 +2852,20 @@ export namespace Prisma {
     where?: FindingWhereInput
   }
 
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
 
   /**
    * Count Type RiskCountOutputType
@@ -2448,12 +2875,14 @@ export namespace Prisma {
     actions: number
     auditPlans: number
     engagements: number
+    controlTests: number
   }
 
   export type RiskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actions?: boolean | RiskCountOutputTypeCountActionsArgs
     auditPlans?: boolean | RiskCountOutputTypeCountAuditPlansArgs
     engagements?: boolean | RiskCountOutputTypeCountEngagementsArgs
+    controlTests?: boolean | RiskCountOutputTypeCountControlTestsArgs
   }
 
   // Custom InputTypes
@@ -2486,6 +2915,13 @@ export namespace Prisma {
    */
   export type RiskCountOutputTypeCountEngagementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EngagementWhereInput
+  }
+
+  /**
+   * RiskCountOutputType without action
+   */
+  export type RiskCountOutputTypeCountControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
   }
 
 
@@ -2527,11 +2963,15 @@ export namespace Prisma {
   export type EngagementCountOutputType = {
     teamMembers: number
     findings: number
+    controlTests: number
+    actionPlans: number
   }
 
   export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     teamMembers?: boolean | EngagementCountOutputTypeCountTeamMembersArgs
     findings?: boolean | EngagementCountOutputTypeCountFindingsArgs
+    controlTests?: boolean | EngagementCountOutputTypeCountControlTestsArgs
+    actionPlans?: boolean | EngagementCountOutputTypeCountActionPlansArgs
   }
 
   // Custom InputTypes
@@ -2557,6 +2997,122 @@ export namespace Prisma {
    */
   export type EngagementCountOutputTypeCountFindingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FindingWhereInput
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+
+  /**
+   * Count Type FindingCountOutputType
+   */
+
+  export type FindingCountOutputType = {
+    controlTests: number
+    actionPlans: number
+  }
+
+  export type FindingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    controlTests?: boolean | FindingCountOutputTypeCountControlTestsArgs
+    actionPlans?: boolean | FindingCountOutputTypeCountActionPlansArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FindingCountOutputType without action
+   */
+  export type FindingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FindingCountOutputType
+     */
+    select?: FindingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FindingCountOutputType without action
+   */
+  export type FindingCountOutputTypeCountControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * FindingCountOutputType without action
+   */
+  export type FindingCountOutputTypeCountActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+
+  /**
+   * Count Type ControlTestCountOutputType
+   */
+
+  export type ControlTestCountOutputType = {
+    actionPlans: number
+  }
+
+  export type ControlTestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    actionPlans?: boolean | ControlTestCountOutputTypeCountActionPlansArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ControlTestCountOutputType without action
+   */
+  export type ControlTestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTestCountOutputType
+     */
+    select?: ControlTestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ControlTestCountOutputType without action
+   */
+  export type ControlTestCountOutputTypeCountActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+  }
+
+
+  /**
+   * Count Type ActionPlanCountOutputType
+   */
+
+  export type ActionPlanCountOutputType = {
+    updates: number
+  }
+
+  export type ActionPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    updates?: boolean | ActionPlanCountOutputTypeCountUpdatesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ActionPlanCountOutputType without action
+   */
+  export type ActionPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanCountOutputType
+     */
+    select?: ActionPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ActionPlanCountOutputType without action
+   */
+  export type ActionPlanCountOutputTypeCountUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanUpdateWhereInput
   }
 
 
@@ -2782,6 +3338,16 @@ export namespace Prisma {
     responsibleFindings?: boolean | User$responsibleFindingsArgs<ExtArgs>
     managementResponseFindings?: boolean | User$managementResponseFindingsArgs<ExtArgs>
     verifiedFindings?: boolean | User$verifiedFindingsArgs<ExtArgs>
+    testedControlTests?: boolean | User$testedControlTestsArgs<ExtArgs>
+    reviewedControlTests?: boolean | User$reviewedControlTestsArgs<ExtArgs>
+    createdControlTests?: boolean | User$createdControlTestsArgs<ExtArgs>
+    updatedControlTests?: boolean | User$updatedControlTestsArgs<ExtArgs>
+    responsibleActionPlans?: boolean | User$responsibleActionPlansArgs<ExtArgs>
+    reviewerActionPlans?: boolean | User$reviewerActionPlansArgs<ExtArgs>
+    createdActionPlans?: boolean | User$createdActionPlansArgs<ExtArgs>
+    updatedActionPlans?: boolean | User$updatedActionPlansArgs<ExtArgs>
+    verifiedActionPlans?: boolean | User$verifiedActionPlansArgs<ExtArgs>
+    actionPlanUpdates?: boolean | User$actionPlanUpdatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2832,6 +3398,16 @@ export namespace Prisma {
     responsibleFindings?: boolean | User$responsibleFindingsArgs<ExtArgs>
     managementResponseFindings?: boolean | User$managementResponseFindingsArgs<ExtArgs>
     verifiedFindings?: boolean | User$verifiedFindingsArgs<ExtArgs>
+    testedControlTests?: boolean | User$testedControlTestsArgs<ExtArgs>
+    reviewedControlTests?: boolean | User$reviewedControlTestsArgs<ExtArgs>
+    createdControlTests?: boolean | User$createdControlTestsArgs<ExtArgs>
+    updatedControlTests?: boolean | User$updatedControlTestsArgs<ExtArgs>
+    responsibleActionPlans?: boolean | User$responsibleActionPlansArgs<ExtArgs>
+    reviewerActionPlans?: boolean | User$reviewerActionPlansArgs<ExtArgs>
+    createdActionPlans?: boolean | User$createdActionPlansArgs<ExtArgs>
+    updatedActionPlans?: boolean | User$updatedActionPlansArgs<ExtArgs>
+    verifiedActionPlans?: boolean | User$verifiedActionPlansArgs<ExtArgs>
+    actionPlanUpdates?: boolean | User$actionPlanUpdatesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2861,6 +3437,16 @@ export namespace Prisma {
       responsibleFindings: Prisma.$FindingPayload<ExtArgs>[]
       managementResponseFindings: Prisma.$FindingPayload<ExtArgs>[]
       verifiedFindings: Prisma.$FindingPayload<ExtArgs>[]
+      testedControlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      reviewedControlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      createdControlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      updatedControlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      responsibleActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      reviewerActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      createdActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      updatedActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      verifiedActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      actionPlanUpdates: Prisma.$ActionPlanUpdatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3258,6 +3844,16 @@ export namespace Prisma {
     responsibleFindings<T extends User$responsibleFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$responsibleFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     managementResponseFindings<T extends User$managementResponseFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$managementResponseFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     verifiedFindings<T extends User$verifiedFindingsArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedFindingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    testedControlTests<T extends User$testedControlTestsArgs<ExtArgs> = {}>(args?: Subset<T, User$testedControlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    reviewedControlTests<T extends User$reviewedControlTestsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedControlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    createdControlTests<T extends User$createdControlTestsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdControlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    updatedControlTests<T extends User$updatedControlTestsArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedControlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    responsibleActionPlans<T extends User$responsibleActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$responsibleActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    reviewerActionPlans<T extends User$reviewerActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewerActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    createdActionPlans<T extends User$createdActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$createdActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    updatedActionPlans<T extends User$updatedActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    verifiedActionPlans<T extends User$verifiedActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    actionPlanUpdates<T extends User$actionPlanUpdatesArgs<ExtArgs> = {}>(args?: Subset<T, User$actionPlanUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4047,6 +4643,206 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * User.testedControlTests
+   */
+  export type User$testedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedControlTests
+   */
+  export type User$reviewedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdControlTests
+   */
+  export type User$createdControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedControlTests
+   */
+  export type User$updatedControlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * User.responsibleActionPlans
+   */
+  export type User$responsibleActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewerActionPlans
+   */
+  export type User$reviewerActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdActionPlans
+   */
+  export type User$createdActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedActionPlans
+   */
+  export type User$updatedActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.verifiedActionPlans
+   */
+  export type User$verifiedActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * User.actionPlanUpdates
+   */
+  export type User$actionPlanUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    where?: ActionPlanUpdateWhereInput
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
   }
 
   /**
@@ -8997,6 +9793,8 @@ export namespace Prisma {
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
     engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
     findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
+    controlTests?: boolean | AuditUniverse$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | AuditUniverse$actionPlansArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditUniverse"]>
 
@@ -9052,6 +9850,8 @@ export namespace Prisma {
     auditPlans?: boolean | AuditUniverse$auditPlansArgs<ExtArgs>
     engagements?: boolean | AuditUniverse$engagementsArgs<ExtArgs>
     findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
+    controlTests?: boolean | AuditUniverse$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | AuditUniverse$actionPlansArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditUniverseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9073,6 +9873,8 @@ export namespace Prisma {
       auditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
       engagements: Prisma.$EngagementPayload<ExtArgs>[]
       findings: Prisma.$FindingPayload<ExtArgs>[]
+      controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9464,6 +10266,8 @@ export namespace Prisma {
     auditPlans<T extends AuditUniverse$auditPlansArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$auditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
     engagements<T extends AuditUniverse$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
     findings<T extends AuditUniverse$findingsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    controlTests<T extends AuditUniverse$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    actionPlans<T extends AuditUniverse$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9987,6 +10791,46 @@ export namespace Prisma {
   }
 
   /**
+   * AuditUniverse.controlTests
+   */
+  export type AuditUniverse$controlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * AuditUniverse.actionPlans
+   */
+  export type AuditUniverse$actionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
    * AuditUniverse without action
    */
   export type AuditUniverseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10342,6 +11186,7 @@ export namespace Prisma {
     actions?: boolean | Risk$actionsArgs<ExtArgs>
     auditPlans?: boolean | Risk$auditPlansArgs<ExtArgs>
     engagements?: boolean | Risk$engagementsArgs<ExtArgs>
+    controlTests?: boolean | Risk$controlTestsArgs<ExtArgs>
     _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["risk"]>
 
@@ -10403,6 +11248,7 @@ export namespace Prisma {
     actions?: boolean | Risk$actionsArgs<ExtArgs>
     auditPlans?: boolean | Risk$auditPlansArgs<ExtArgs>
     engagements?: boolean | Risk$engagementsArgs<ExtArgs>
+    controlTests?: boolean | Risk$controlTestsArgs<ExtArgs>
     _count?: boolean | RiskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RiskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10422,6 +11268,7 @@ export namespace Prisma {
       actions: Prisma.$RiskActionPayload<ExtArgs>[]
       auditPlans: Prisma.$AuditPlanPayload<ExtArgs>[]
       engagements: Prisma.$EngagementPayload<ExtArgs>[]
+      controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10815,6 +11662,7 @@ export namespace Prisma {
     actions<T extends Risk$actionsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RiskActionPayload<ExtArgs>, T, "findMany"> | Null>
     auditPlans<T extends Risk$auditPlansArgs<ExtArgs> = {}>(args?: Subset<T, Risk$auditPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditPlanPayload<ExtArgs>, T, "findMany"> | Null>
     engagements<T extends Risk$engagementsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$engagementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findMany"> | Null>
+    controlTests<T extends Risk$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, Risk$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11284,6 +12132,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EngagementScalarFieldEnum | EngagementScalarFieldEnum[]
+  }
+
+  /**
+   * Risk.controlTests
+   */
+  export type Risk$controlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
   }
 
   /**
@@ -13942,6 +14810,8 @@ export namespace Prisma {
     updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
     teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
     findings?: boolean | Engagement$findingsArgs<ExtArgs>
+    controlTests?: boolean | Engagement$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | Engagement$actionPlansArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["engagement"]>
 
@@ -14016,6 +14886,8 @@ export namespace Prisma {
     updatedBy?: boolean | Engagement$updatedByArgs<ExtArgs>
     teamMembers?: boolean | Engagement$teamMembersArgs<ExtArgs>
     findings?: boolean | Engagement$findingsArgs<ExtArgs>
+    controlTests?: boolean | Engagement$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | Engagement$actionPlansArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EngagementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14040,6 +14912,8 @@ export namespace Prisma {
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       teamMembers: Prisma.$EngagementTeamMemberPayload<ExtArgs>[]
       findings: Prisma.$FindingPayload<ExtArgs>[]
+      controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14439,6 +15313,8 @@ export namespace Prisma {
     updatedBy<T extends Engagement$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     teamMembers<T extends Engagement$teamMembersArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EngagementTeamMemberPayload<ExtArgs>, T, "findMany"> | Null>
     findings<T extends Engagement$findingsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
+    controlTests<T extends Engagement$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    actionPlans<T extends Engagement$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14937,6 +15813,46 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FindingScalarFieldEnum | FindingScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement.controlTests
+   */
+  export type Engagement$controlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement.actionPlans
+   */
+  export type Engagement$actionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
   }
 
   /**
@@ -16220,6 +17136,9 @@ export namespace Prisma {
     verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
     createdBy?: boolean | Finding$createdByArgs<ExtArgs>
     updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+    controlTests?: boolean | Finding$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | Finding$actionPlansArgs<ExtArgs>
+    _count?: boolean | FindingCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["finding"]>
 
   export type FindingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16295,6 +17214,9 @@ export namespace Prisma {
     verifiedBy?: boolean | Finding$verifiedByArgs<ExtArgs>
     createdBy?: boolean | Finding$createdByArgs<ExtArgs>
     updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
+    controlTests?: boolean | Finding$controlTestsArgs<ExtArgs>
+    actionPlans?: boolean | Finding$actionPlansArgs<ExtArgs>
+    _count?: boolean | FindingCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FindingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     engagement?: boolean | Finding$engagementArgs<ExtArgs>
@@ -16316,6 +17238,8 @@ export namespace Prisma {
       verifiedBy: Prisma.$UserPayload<ExtArgs> | null
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
+      actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16715,6 +17639,8 @@ export namespace Prisma {
     verifiedBy<T extends Finding$verifiedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$verifiedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     createdBy<T extends Finding$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends Finding$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    controlTests<T extends Finding$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, Finding$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
+    actionPlans<T extends Finding$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, Finding$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17178,6 +18104,46 @@ export namespace Prisma {
   }
 
   /**
+   * Finding.controlTests
+   */
+  export type Finding$controlTestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    cursor?: ControlTestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * Finding.actionPlans
+   */
+  export type Finding$actionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
    * Finding without action
    */
   export type FindingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17189,6 +18155,3877 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: FindingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ControlTest
+   */
+
+  export type AggregateControlTest = {
+    _count: ControlTestCountAggregateOutputType | null
+    _avg: ControlTestAvgAggregateOutputType | null
+    _sum: ControlTestSumAggregateOutputType | null
+    _min: ControlTestMinAggregateOutputType | null
+    _max: ControlTestMaxAggregateOutputType | null
+  }
+
+  export type ControlTestAvgAggregateOutputType = {
+    sampleSize: number | null
+  }
+
+  export type ControlTestSumAggregateOutputType = {
+    sampleSize: number | null
+  }
+
+  export type ControlTestMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    riskId: string | null
+    controlReference: string | null
+    status: $Enums.ControlTestStatus | null
+    outcome: $Enums.ControlTestOutcome | null
+    objective: string | null
+    procedures: string | null
+    criteria: string | null
+    sampleDescription: string | null
+    sampleSize: number | null
+    expectedResult: string | null
+    actualResult: string | null
+    exceptions: string | null
+    conclusion: string | null
+    evidenceReference: string | null
+    testerId: string | null
+    testedAt: Date | null
+    testerNotes: string | null
+    reviewerId: string | null
+    reviewedAt: Date | null
+    reviewerNotes: string | null
+    findingId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ControlTestMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    riskId: string | null
+    controlReference: string | null
+    status: $Enums.ControlTestStatus | null
+    outcome: $Enums.ControlTestOutcome | null
+    objective: string | null
+    procedures: string | null
+    criteria: string | null
+    sampleDescription: string | null
+    sampleSize: number | null
+    expectedResult: string | null
+    actualResult: string | null
+    exceptions: string | null
+    conclusion: string | null
+    evidenceReference: string | null
+    testerId: string | null
+    testedAt: Date | null
+    testerNotes: string | null
+    reviewerId: string | null
+    reviewedAt: Date | null
+    reviewerNotes: string | null
+    findingId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ControlTestCountAggregateOutputType = {
+    id: number
+    reference: number
+    title: number
+    engagementId: number
+    auditEntityId: number
+    riskId: number
+    controlReference: number
+    status: number
+    outcome: number
+    objective: number
+    procedures: number
+    criteria: number
+    sampleDescription: number
+    sampleSize: number
+    expectedResult: number
+    actualResult: number
+    exceptions: number
+    conclusion: number
+    evidenceReference: number
+    testerId: number
+    testedAt: number
+    testerNotes: number
+    reviewerId: number
+    reviewedAt: number
+    reviewerNotes: number
+    findingId: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ControlTestAvgAggregateInputType = {
+    sampleSize?: true
+  }
+
+  export type ControlTestSumAggregateInputType = {
+    sampleSize?: true
+  }
+
+  export type ControlTestMinAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    riskId?: true
+    controlReference?: true
+    status?: true
+    outcome?: true
+    objective?: true
+    procedures?: true
+    criteria?: true
+    sampleDescription?: true
+    sampleSize?: true
+    expectedResult?: true
+    actualResult?: true
+    exceptions?: true
+    conclusion?: true
+    evidenceReference?: true
+    testerId?: true
+    testedAt?: true
+    testerNotes?: true
+    reviewerId?: true
+    reviewedAt?: true
+    reviewerNotes?: true
+    findingId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ControlTestMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    riskId?: true
+    controlReference?: true
+    status?: true
+    outcome?: true
+    objective?: true
+    procedures?: true
+    criteria?: true
+    sampleDescription?: true
+    sampleSize?: true
+    expectedResult?: true
+    actualResult?: true
+    exceptions?: true
+    conclusion?: true
+    evidenceReference?: true
+    testerId?: true
+    testedAt?: true
+    testerNotes?: true
+    reviewerId?: true
+    reviewedAt?: true
+    reviewerNotes?: true
+    findingId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ControlTestCountAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    engagementId?: true
+    auditEntityId?: true
+    riskId?: true
+    controlReference?: true
+    status?: true
+    outcome?: true
+    objective?: true
+    procedures?: true
+    criteria?: true
+    sampleDescription?: true
+    sampleSize?: true
+    expectedResult?: true
+    actualResult?: true
+    exceptions?: true
+    conclusion?: true
+    evidenceReference?: true
+    testerId?: true
+    testedAt?: true
+    testerNotes?: true
+    reviewerId?: true
+    reviewedAt?: true
+    reviewerNotes?: true
+    findingId?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ControlTestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ControlTest to aggregate.
+     */
+    where?: ControlTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ControlTests to fetch.
+     */
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ControlTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ControlTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ControlTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ControlTests
+    **/
+    _count?: true | ControlTestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ControlTestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ControlTestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ControlTestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ControlTestMaxAggregateInputType
+  }
+
+  export type GetControlTestAggregateType<T extends ControlTestAggregateArgs> = {
+        [P in keyof T & keyof AggregateControlTest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateControlTest[P]>
+      : GetScalarType<T[P], AggregateControlTest[P]>
+  }
+
+
+
+
+  export type ControlTestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ControlTestWhereInput
+    orderBy?: ControlTestOrderByWithAggregationInput | ControlTestOrderByWithAggregationInput[]
+    by: ControlTestScalarFieldEnum[] | ControlTestScalarFieldEnum
+    having?: ControlTestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ControlTestCountAggregateInputType | true
+    _avg?: ControlTestAvgAggregateInputType
+    _sum?: ControlTestSumAggregateInputType
+    _min?: ControlTestMinAggregateInputType
+    _max?: ControlTestMaxAggregateInputType
+  }
+
+  export type ControlTestGroupByOutputType = {
+    id: string
+    reference: string
+    title: string
+    engagementId: string | null
+    auditEntityId: string | null
+    riskId: string | null
+    controlReference: string | null
+    status: $Enums.ControlTestStatus
+    outcome: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria: string | null
+    sampleDescription: string | null
+    sampleSize: number | null
+    expectedResult: string | null
+    actualResult: string | null
+    exceptions: string | null
+    conclusion: string | null
+    evidenceReference: string | null
+    testerId: string | null
+    testedAt: Date | null
+    testerNotes: string | null
+    reviewerId: string | null
+    reviewedAt: Date | null
+    reviewerNotes: string | null
+    findingId: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ControlTestCountAggregateOutputType | null
+    _avg: ControlTestAvgAggregateOutputType | null
+    _sum: ControlTestSumAggregateOutputType | null
+    _min: ControlTestMinAggregateOutputType | null
+    _max: ControlTestMaxAggregateOutputType | null
+  }
+
+  type GetControlTestGroupByPayload<T extends ControlTestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ControlTestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ControlTestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ControlTestGroupByOutputType[P]>
+            : GetScalarType<T[P], ControlTestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ControlTestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    controlReference?: boolean
+    status?: boolean
+    outcome?: boolean
+    objective?: boolean
+    procedures?: boolean
+    criteria?: boolean
+    sampleDescription?: boolean
+    sampleSize?: boolean
+    expectedResult?: boolean
+    actualResult?: boolean
+    exceptions?: boolean
+    conclusion?: boolean
+    evidenceReference?: boolean
+    testerId?: boolean
+    testedAt?: boolean
+    testerNotes?: boolean
+    reviewerId?: boolean
+    reviewedAt?: boolean
+    reviewerNotes?: boolean
+    findingId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | ControlTest$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ControlTest$auditEntityArgs<ExtArgs>
+    risk?: boolean | ControlTest$riskArgs<ExtArgs>
+    finding?: boolean | ControlTest$findingArgs<ExtArgs>
+    tester?: boolean | ControlTest$testerArgs<ExtArgs>
+    reviewer?: boolean | ControlTest$reviewerArgs<ExtArgs>
+    createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
+    actionPlans?: boolean | ControlTest$actionPlansArgs<ExtArgs>
+    _count?: boolean | ControlTestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["controlTest"]>
+
+  export type ControlTestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    controlReference?: boolean
+    status?: boolean
+    outcome?: boolean
+    objective?: boolean
+    procedures?: boolean
+    criteria?: boolean
+    sampleDescription?: boolean
+    sampleSize?: boolean
+    expectedResult?: boolean
+    actualResult?: boolean
+    exceptions?: boolean
+    conclusion?: boolean
+    evidenceReference?: boolean
+    testerId?: boolean
+    testedAt?: boolean
+    testerNotes?: boolean
+    reviewerId?: boolean
+    reviewedAt?: boolean
+    reviewerNotes?: boolean
+    findingId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | ControlTest$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ControlTest$auditEntityArgs<ExtArgs>
+    risk?: boolean | ControlTest$riskArgs<ExtArgs>
+    finding?: boolean | ControlTest$findingArgs<ExtArgs>
+    tester?: boolean | ControlTest$testerArgs<ExtArgs>
+    reviewer?: boolean | ControlTest$reviewerArgs<ExtArgs>
+    createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["controlTest"]>
+
+  export type ControlTestSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    riskId?: boolean
+    controlReference?: boolean
+    status?: boolean
+    outcome?: boolean
+    objective?: boolean
+    procedures?: boolean
+    criteria?: boolean
+    sampleDescription?: boolean
+    sampleSize?: boolean
+    expectedResult?: boolean
+    actualResult?: boolean
+    exceptions?: boolean
+    conclusion?: boolean
+    evidenceReference?: boolean
+    testerId?: boolean
+    testedAt?: boolean
+    testerNotes?: boolean
+    reviewerId?: boolean
+    reviewedAt?: boolean
+    reviewerNotes?: boolean
+    findingId?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ControlTestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | ControlTest$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ControlTest$auditEntityArgs<ExtArgs>
+    risk?: boolean | ControlTest$riskArgs<ExtArgs>
+    finding?: boolean | ControlTest$findingArgs<ExtArgs>
+    tester?: boolean | ControlTest$testerArgs<ExtArgs>
+    reviewer?: boolean | ControlTest$reviewerArgs<ExtArgs>
+    createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
+    actionPlans?: boolean | ControlTest$actionPlansArgs<ExtArgs>
+    _count?: boolean | ControlTestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ControlTestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | ControlTest$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ControlTest$auditEntityArgs<ExtArgs>
+    risk?: boolean | ControlTest$riskArgs<ExtArgs>
+    finding?: boolean | ControlTest$findingArgs<ExtArgs>
+    tester?: boolean | ControlTest$testerArgs<ExtArgs>
+    reviewer?: boolean | ControlTest$reviewerArgs<ExtArgs>
+    createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
+  }
+
+  export type $ControlTestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ControlTest"
+    objects: {
+      engagement: Prisma.$EngagementPayload<ExtArgs> | null
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs> | null
+      risk: Prisma.$RiskPayload<ExtArgs> | null
+      finding: Prisma.$FindingPayload<ExtArgs> | null
+      tester: Prisma.$UserPayload<ExtArgs> | null
+      reviewer: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      title: string
+      engagementId: string | null
+      auditEntityId: string | null
+      riskId: string | null
+      controlReference: string | null
+      status: $Enums.ControlTestStatus
+      outcome: $Enums.ControlTestOutcome | null
+      objective: string
+      procedures: string
+      criteria: string | null
+      sampleDescription: string | null
+      sampleSize: number | null
+      expectedResult: string | null
+      actualResult: string | null
+      exceptions: string | null
+      conclusion: string | null
+      evidenceReference: string | null
+      testerId: string | null
+      testedAt: Date | null
+      testerNotes: string | null
+      reviewerId: string | null
+      reviewedAt: Date | null
+      reviewerNotes: string | null
+      findingId: string | null
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["controlTest"]>
+    composites: {}
+  }
+
+  type ControlTestGetPayload<S extends boolean | null | undefined | ControlTestDefaultArgs> = $Result.GetResult<Prisma.$ControlTestPayload, S>
+
+  type ControlTestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ControlTestFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ControlTestCountAggregateInputType | true
+    }
+
+  export interface ControlTestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ControlTest'], meta: { name: 'ControlTest' } }
+    /**
+     * Find zero or one ControlTest that matches the filter.
+     * @param {ControlTestFindUniqueArgs} args - Arguments to find a ControlTest
+     * @example
+     * // Get one ControlTest
+     * const controlTest = await prisma.controlTest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ControlTestFindUniqueArgs>(args: SelectSubset<T, ControlTestFindUniqueArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ControlTest that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ControlTestFindUniqueOrThrowArgs} args - Arguments to find a ControlTest
+     * @example
+     * // Get one ControlTest
+     * const controlTest = await prisma.controlTest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ControlTestFindUniqueOrThrowArgs>(args: SelectSubset<T, ControlTestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ControlTest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestFindFirstArgs} args - Arguments to find a ControlTest
+     * @example
+     * // Get one ControlTest
+     * const controlTest = await prisma.controlTest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ControlTestFindFirstArgs>(args?: SelectSubset<T, ControlTestFindFirstArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ControlTest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestFindFirstOrThrowArgs} args - Arguments to find a ControlTest
+     * @example
+     * // Get one ControlTest
+     * const controlTest = await prisma.controlTest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ControlTestFindFirstOrThrowArgs>(args?: SelectSubset<T, ControlTestFindFirstOrThrowArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ControlTests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ControlTests
+     * const controlTests = await prisma.controlTest.findMany()
+     * 
+     * // Get first 10 ControlTests
+     * const controlTests = await prisma.controlTest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const controlTestWithIdOnly = await prisma.controlTest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ControlTestFindManyArgs>(args?: SelectSubset<T, ControlTestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ControlTest.
+     * @param {ControlTestCreateArgs} args - Arguments to create a ControlTest.
+     * @example
+     * // Create one ControlTest
+     * const ControlTest = await prisma.controlTest.create({
+     *   data: {
+     *     // ... data to create a ControlTest
+     *   }
+     * })
+     * 
+     */
+    create<T extends ControlTestCreateArgs>(args: SelectSubset<T, ControlTestCreateArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ControlTests.
+     * @param {ControlTestCreateManyArgs} args - Arguments to create many ControlTests.
+     * @example
+     * // Create many ControlTests
+     * const controlTest = await prisma.controlTest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ControlTestCreateManyArgs>(args?: SelectSubset<T, ControlTestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ControlTests and returns the data saved in the database.
+     * @param {ControlTestCreateManyAndReturnArgs} args - Arguments to create many ControlTests.
+     * @example
+     * // Create many ControlTests
+     * const controlTest = await prisma.controlTest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ControlTests and only return the `id`
+     * const controlTestWithIdOnly = await prisma.controlTest.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ControlTestCreateManyAndReturnArgs>(args?: SelectSubset<T, ControlTestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ControlTest.
+     * @param {ControlTestDeleteArgs} args - Arguments to delete one ControlTest.
+     * @example
+     * // Delete one ControlTest
+     * const ControlTest = await prisma.controlTest.delete({
+     *   where: {
+     *     // ... filter to delete one ControlTest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ControlTestDeleteArgs>(args: SelectSubset<T, ControlTestDeleteArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ControlTest.
+     * @param {ControlTestUpdateArgs} args - Arguments to update one ControlTest.
+     * @example
+     * // Update one ControlTest
+     * const controlTest = await prisma.controlTest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ControlTestUpdateArgs>(args: SelectSubset<T, ControlTestUpdateArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ControlTests.
+     * @param {ControlTestDeleteManyArgs} args - Arguments to filter ControlTests to delete.
+     * @example
+     * // Delete a few ControlTests
+     * const { count } = await prisma.controlTest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ControlTestDeleteManyArgs>(args?: SelectSubset<T, ControlTestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ControlTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ControlTests
+     * const controlTest = await prisma.controlTest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ControlTestUpdateManyArgs>(args: SelectSubset<T, ControlTestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ControlTest.
+     * @param {ControlTestUpsertArgs} args - Arguments to update or create a ControlTest.
+     * @example
+     * // Update or create a ControlTest
+     * const controlTest = await prisma.controlTest.upsert({
+     *   create: {
+     *     // ... data to create a ControlTest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ControlTest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ControlTestUpsertArgs>(args: SelectSubset<T, ControlTestUpsertArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ControlTests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestCountArgs} args - Arguments to filter ControlTests to count.
+     * @example
+     * // Count the number of ControlTests
+     * const count = await prisma.controlTest.count({
+     *   where: {
+     *     // ... the filter for the ControlTests we want to count
+     *   }
+     * })
+    **/
+    count<T extends ControlTestCountArgs>(
+      args?: Subset<T, ControlTestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ControlTestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ControlTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ControlTestAggregateArgs>(args: Subset<T, ControlTestAggregateArgs>): Prisma.PrismaPromise<GetControlTestAggregateType<T>>
+
+    /**
+     * Group by ControlTest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ControlTestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ControlTestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ControlTestGroupByArgs['orderBy'] }
+        : { orderBy?: ControlTestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ControlTestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetControlTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ControlTest model
+   */
+  readonly fields: ControlTestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ControlTest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ControlTestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    engagement<T extends ControlTest$engagementArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$engagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditEntity<T extends ControlTest$auditEntityArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$auditEntityArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    risk<T extends ControlTest$riskArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$riskArgs<ExtArgs>>): Prisma__RiskClient<$Result.GetResult<Prisma.$RiskPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    finding<T extends ControlTest$findingArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$findingArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    tester<T extends ControlTest$testerArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$testerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    reviewer<T extends ControlTest$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$reviewerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends ControlTest$createdByArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends ControlTest$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    actionPlans<T extends ControlTest$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ControlTest model
+   */ 
+  interface ControlTestFieldRefs {
+    readonly id: FieldRef<"ControlTest", 'String'>
+    readonly reference: FieldRef<"ControlTest", 'String'>
+    readonly title: FieldRef<"ControlTest", 'String'>
+    readonly engagementId: FieldRef<"ControlTest", 'String'>
+    readonly auditEntityId: FieldRef<"ControlTest", 'String'>
+    readonly riskId: FieldRef<"ControlTest", 'String'>
+    readonly controlReference: FieldRef<"ControlTest", 'String'>
+    readonly status: FieldRef<"ControlTest", 'ControlTestStatus'>
+    readonly outcome: FieldRef<"ControlTest", 'ControlTestOutcome'>
+    readonly objective: FieldRef<"ControlTest", 'String'>
+    readonly procedures: FieldRef<"ControlTest", 'String'>
+    readonly criteria: FieldRef<"ControlTest", 'String'>
+    readonly sampleDescription: FieldRef<"ControlTest", 'String'>
+    readonly sampleSize: FieldRef<"ControlTest", 'Int'>
+    readonly expectedResult: FieldRef<"ControlTest", 'String'>
+    readonly actualResult: FieldRef<"ControlTest", 'String'>
+    readonly exceptions: FieldRef<"ControlTest", 'String'>
+    readonly conclusion: FieldRef<"ControlTest", 'String'>
+    readonly evidenceReference: FieldRef<"ControlTest", 'String'>
+    readonly testerId: FieldRef<"ControlTest", 'String'>
+    readonly testedAt: FieldRef<"ControlTest", 'DateTime'>
+    readonly testerNotes: FieldRef<"ControlTest", 'String'>
+    readonly reviewerId: FieldRef<"ControlTest", 'String'>
+    readonly reviewedAt: FieldRef<"ControlTest", 'DateTime'>
+    readonly reviewerNotes: FieldRef<"ControlTest", 'String'>
+    readonly findingId: FieldRef<"ControlTest", 'String'>
+    readonly createdById: FieldRef<"ControlTest", 'String'>
+    readonly updatedById: FieldRef<"ControlTest", 'String'>
+    readonly createdAt: FieldRef<"ControlTest", 'DateTime'>
+    readonly updatedAt: FieldRef<"ControlTest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ControlTest findUnique
+   */
+  export type ControlTestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter, which ControlTest to fetch.
+     */
+    where: ControlTestWhereUniqueInput
+  }
+
+  /**
+   * ControlTest findUniqueOrThrow
+   */
+  export type ControlTestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter, which ControlTest to fetch.
+     */
+    where: ControlTestWhereUniqueInput
+  }
+
+  /**
+   * ControlTest findFirst
+   */
+  export type ControlTestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter, which ControlTest to fetch.
+     */
+    where?: ControlTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ControlTests to fetch.
+     */
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ControlTests.
+     */
+    cursor?: ControlTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ControlTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ControlTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ControlTests.
+     */
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * ControlTest findFirstOrThrow
+   */
+  export type ControlTestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter, which ControlTest to fetch.
+     */
+    where?: ControlTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ControlTests to fetch.
+     */
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ControlTests.
+     */
+    cursor?: ControlTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ControlTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ControlTests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ControlTests.
+     */
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * ControlTest findMany
+   */
+  export type ControlTestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter, which ControlTests to fetch.
+     */
+    where?: ControlTestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ControlTests to fetch.
+     */
+    orderBy?: ControlTestOrderByWithRelationInput | ControlTestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ControlTests.
+     */
+    cursor?: ControlTestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ControlTests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ControlTests.
+     */
+    skip?: number
+    distinct?: ControlTestScalarFieldEnum | ControlTestScalarFieldEnum[]
+  }
+
+  /**
+   * ControlTest create
+   */
+  export type ControlTestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ControlTest.
+     */
+    data: XOR<ControlTestCreateInput, ControlTestUncheckedCreateInput>
+  }
+
+  /**
+   * ControlTest createMany
+   */
+  export type ControlTestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ControlTests.
+     */
+    data: ControlTestCreateManyInput | ControlTestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ControlTest createManyAndReturn
+   */
+  export type ControlTestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ControlTests.
+     */
+    data: ControlTestCreateManyInput | ControlTestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ControlTest update
+   */
+  export type ControlTestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ControlTest.
+     */
+    data: XOR<ControlTestUpdateInput, ControlTestUncheckedUpdateInput>
+    /**
+     * Choose, which ControlTest to update.
+     */
+    where: ControlTestWhereUniqueInput
+  }
+
+  /**
+   * ControlTest updateMany
+   */
+  export type ControlTestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ControlTests.
+     */
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyInput>
+    /**
+     * Filter which ControlTests to update
+     */
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * ControlTest upsert
+   */
+  export type ControlTestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ControlTest to update in case it exists.
+     */
+    where: ControlTestWhereUniqueInput
+    /**
+     * In case the ControlTest found by the `where` argument doesn't exist, create a new ControlTest with this data.
+     */
+    create: XOR<ControlTestCreateInput, ControlTestUncheckedCreateInput>
+    /**
+     * In case the ControlTest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ControlTestUpdateInput, ControlTestUncheckedUpdateInput>
+  }
+
+  /**
+   * ControlTest delete
+   */
+  export type ControlTestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    /**
+     * Filter which ControlTest to delete.
+     */
+    where: ControlTestWhereUniqueInput
+  }
+
+  /**
+   * ControlTest deleteMany
+   */
+  export type ControlTestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ControlTests to delete
+     */
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * ControlTest.engagement
+   */
+  export type ControlTest$engagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * ControlTest.auditEntity
+   */
+  export type ControlTest$auditEntityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditUniverse
+     */
+    select?: AuditUniverseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditUniverseInclude<ExtArgs> | null
+    where?: AuditUniverseWhereInput
+  }
+
+  /**
+   * ControlTest.risk
+   */
+  export type ControlTest$riskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Risk
+     */
+    select?: RiskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RiskInclude<ExtArgs> | null
+    where?: RiskWhereInput
+  }
+
+  /**
+   * ControlTest.finding
+   */
+  export type ControlTest$findingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+  }
+
+  /**
+   * ControlTest.tester
+   */
+  export type ControlTest$testerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ControlTest.reviewer
+   */
+  export type ControlTest$reviewerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ControlTest.createdBy
+   */
+  export type ControlTest$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ControlTest.updatedBy
+   */
+  export type ControlTest$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ControlTest.actionPlans
+   */
+  export type ControlTest$actionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    cursor?: ActionPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * ControlTest without action
+   */
+  export type ControlTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActionPlan
+   */
+
+  export type AggregateActionPlan = {
+    _count: ActionPlanCountAggregateOutputType | null
+    _avg: ActionPlanAvgAggregateOutputType | null
+    _sum: ActionPlanSumAggregateOutputType | null
+    _min: ActionPlanMinAggregateOutputType | null
+    _max: ActionPlanMaxAggregateOutputType | null
+  }
+
+  export type ActionPlanAvgAggregateOutputType = {
+    progressPct: number | null
+  }
+
+  export type ActionPlanSumAggregateOutputType = {
+    progressPct: number | null
+  }
+
+  export type ActionPlanMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    findingId: string | null
+    controlTestId: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    priority: $Enums.ActionPlanPriority | null
+    status: $Enums.ActionPlanStatus | null
+    responsibleOwnerId: string | null
+    reviewerId: string | null
+    targetDate: Date | null
+    completedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    managementJustification: string | null
+    proposedRectification: string | null
+    completionEvidence: string | null
+    verificationNotes: string | null
+    progressPct: number | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ActionPlanMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    findingId: string | null
+    controlTestId: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    priority: $Enums.ActionPlanPriority | null
+    status: $Enums.ActionPlanStatus | null
+    responsibleOwnerId: string | null
+    reviewerId: string | null
+    targetDate: Date | null
+    completedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    managementJustification: string | null
+    proposedRectification: string | null
+    completionEvidence: string | null
+    verificationNotes: string | null
+    progressPct: number | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ActionPlanCountAggregateOutputType = {
+    id: number
+    reference: number
+    title: number
+    description: number
+    findingId: number
+    controlTestId: number
+    engagementId: number
+    auditEntityId: number
+    priority: number
+    status: number
+    responsibleOwnerId: number
+    reviewerId: number
+    targetDate: number
+    completedAt: number
+    verifiedAt: number
+    verifiedById: number
+    managementJustification: number
+    proposedRectification: number
+    completionEvidence: number
+    verificationNotes: number
+    progressPct: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ActionPlanAvgAggregateInputType = {
+    progressPct?: true
+  }
+
+  export type ActionPlanSumAggregateInputType = {
+    progressPct?: true
+  }
+
+  export type ActionPlanMinAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    findingId?: true
+    controlTestId?: true
+    engagementId?: true
+    auditEntityId?: true
+    priority?: true
+    status?: true
+    responsibleOwnerId?: true
+    reviewerId?: true
+    targetDate?: true
+    completedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    managementJustification?: true
+    proposedRectification?: true
+    completionEvidence?: true
+    verificationNotes?: true
+    progressPct?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ActionPlanMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    findingId?: true
+    controlTestId?: true
+    engagementId?: true
+    auditEntityId?: true
+    priority?: true
+    status?: true
+    responsibleOwnerId?: true
+    reviewerId?: true
+    targetDate?: true
+    completedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    managementJustification?: true
+    proposedRectification?: true
+    completionEvidence?: true
+    verificationNotes?: true
+    progressPct?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ActionPlanCountAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    findingId?: true
+    controlTestId?: true
+    engagementId?: true
+    auditEntityId?: true
+    priority?: true
+    status?: true
+    responsibleOwnerId?: true
+    reviewerId?: true
+    targetDate?: true
+    completedAt?: true
+    verifiedAt?: true
+    verifiedById?: true
+    managementJustification?: true
+    proposedRectification?: true
+    completionEvidence?: true
+    verificationNotes?: true
+    progressPct?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ActionPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActionPlan to aggregate.
+     */
+    where?: ActionPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlans to fetch.
+     */
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActionPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActionPlans
+    **/
+    _count?: true | ActionPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActionPlanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActionPlanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActionPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActionPlanMaxAggregateInputType
+  }
+
+  export type GetActionPlanAggregateType<T extends ActionPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateActionPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActionPlan[P]>
+      : GetScalarType<T[P], AggregateActionPlan[P]>
+  }
+
+
+
+
+  export type ActionPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanWhereInput
+    orderBy?: ActionPlanOrderByWithAggregationInput | ActionPlanOrderByWithAggregationInput[]
+    by: ActionPlanScalarFieldEnum[] | ActionPlanScalarFieldEnum
+    having?: ActionPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActionPlanCountAggregateInputType | true
+    _avg?: ActionPlanAvgAggregateInputType
+    _sum?: ActionPlanSumAggregateInputType
+    _min?: ActionPlanMinAggregateInputType
+    _max?: ActionPlanMaxAggregateInputType
+  }
+
+  export type ActionPlanGroupByOutputType = {
+    id: string
+    reference: string
+    title: string
+    description: string
+    findingId: string | null
+    controlTestId: string | null
+    engagementId: string | null
+    auditEntityId: string | null
+    priority: $Enums.ActionPlanPriority
+    status: $Enums.ActionPlanStatus
+    responsibleOwnerId: string | null
+    reviewerId: string | null
+    targetDate: Date | null
+    completedAt: Date | null
+    verifiedAt: Date | null
+    verifiedById: string | null
+    managementJustification: string | null
+    proposedRectification: string | null
+    completionEvidence: string | null
+    verificationNotes: string | null
+    progressPct: number
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ActionPlanCountAggregateOutputType | null
+    _avg: ActionPlanAvgAggregateOutputType | null
+    _sum: ActionPlanSumAggregateOutputType | null
+    _min: ActionPlanMinAggregateOutputType | null
+    _max: ActionPlanMaxAggregateOutputType | null
+  }
+
+  type GetActionPlanGroupByPayload<T extends ActionPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActionPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActionPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActionPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], ActionPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActionPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    findingId?: boolean
+    controlTestId?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    priority?: boolean
+    status?: boolean
+    responsibleOwnerId?: boolean
+    reviewerId?: boolean
+    targetDate?: boolean
+    completedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    managementJustification?: boolean
+    proposedRectification?: boolean
+    completionEvidence?: boolean
+    verificationNotes?: boolean
+    progressPct?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    finding?: boolean | ActionPlan$findingArgs<ExtArgs>
+    controlTest?: boolean | ActionPlan$controlTestArgs<ExtArgs>
+    engagement?: boolean | ActionPlan$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ActionPlan$auditEntityArgs<ExtArgs>
+    responsibleOwner?: boolean | ActionPlan$responsibleOwnerArgs<ExtArgs>
+    reviewer?: boolean | ActionPlan$reviewerArgs<ExtArgs>
+    verifiedBy?: boolean | ActionPlan$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
+    updates?: boolean | ActionPlan$updatesArgs<ExtArgs>
+    _count?: boolean | ActionPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["actionPlan"]>
+
+  export type ActionPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    findingId?: boolean
+    controlTestId?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    priority?: boolean
+    status?: boolean
+    responsibleOwnerId?: boolean
+    reviewerId?: boolean
+    targetDate?: boolean
+    completedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    managementJustification?: boolean
+    proposedRectification?: boolean
+    completionEvidence?: boolean
+    verificationNotes?: boolean
+    progressPct?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    finding?: boolean | ActionPlan$findingArgs<ExtArgs>
+    controlTest?: boolean | ActionPlan$controlTestArgs<ExtArgs>
+    engagement?: boolean | ActionPlan$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ActionPlan$auditEntityArgs<ExtArgs>
+    responsibleOwner?: boolean | ActionPlan$responsibleOwnerArgs<ExtArgs>
+    reviewer?: boolean | ActionPlan$reviewerArgs<ExtArgs>
+    verifiedBy?: boolean | ActionPlan$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["actionPlan"]>
+
+  export type ActionPlanSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    findingId?: boolean
+    controlTestId?: boolean
+    engagementId?: boolean
+    auditEntityId?: boolean
+    priority?: boolean
+    status?: boolean
+    responsibleOwnerId?: boolean
+    reviewerId?: boolean
+    targetDate?: boolean
+    completedAt?: boolean
+    verifiedAt?: boolean
+    verifiedById?: boolean
+    managementJustification?: boolean
+    proposedRectification?: boolean
+    completionEvidence?: boolean
+    verificationNotes?: boolean
+    progressPct?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ActionPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    finding?: boolean | ActionPlan$findingArgs<ExtArgs>
+    controlTest?: boolean | ActionPlan$controlTestArgs<ExtArgs>
+    engagement?: boolean | ActionPlan$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ActionPlan$auditEntityArgs<ExtArgs>
+    responsibleOwner?: boolean | ActionPlan$responsibleOwnerArgs<ExtArgs>
+    reviewer?: boolean | ActionPlan$reviewerArgs<ExtArgs>
+    verifiedBy?: boolean | ActionPlan$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
+    updates?: boolean | ActionPlan$updatesArgs<ExtArgs>
+    _count?: boolean | ActionPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ActionPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    finding?: boolean | ActionPlan$findingArgs<ExtArgs>
+    controlTest?: boolean | ActionPlan$controlTestArgs<ExtArgs>
+    engagement?: boolean | ActionPlan$engagementArgs<ExtArgs>
+    auditEntity?: boolean | ActionPlan$auditEntityArgs<ExtArgs>
+    responsibleOwner?: boolean | ActionPlan$responsibleOwnerArgs<ExtArgs>
+    reviewer?: boolean | ActionPlan$reviewerArgs<ExtArgs>
+    verifiedBy?: boolean | ActionPlan$verifiedByArgs<ExtArgs>
+    createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
+  }
+
+  export type $ActionPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActionPlan"
+    objects: {
+      finding: Prisma.$FindingPayload<ExtArgs> | null
+      controlTest: Prisma.$ControlTestPayload<ExtArgs> | null
+      engagement: Prisma.$EngagementPayload<ExtArgs> | null
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs> | null
+      responsibleOwner: Prisma.$UserPayload<ExtArgs> | null
+      reviewer: Prisma.$UserPayload<ExtArgs> | null
+      verifiedBy: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+      updates: Prisma.$ActionPlanUpdatePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      title: string
+      description: string
+      findingId: string | null
+      controlTestId: string | null
+      engagementId: string | null
+      auditEntityId: string | null
+      priority: $Enums.ActionPlanPriority
+      status: $Enums.ActionPlanStatus
+      responsibleOwnerId: string | null
+      reviewerId: string | null
+      targetDate: Date | null
+      completedAt: Date | null
+      verifiedAt: Date | null
+      verifiedById: string | null
+      managementJustification: string | null
+      proposedRectification: string | null
+      completionEvidence: string | null
+      verificationNotes: string | null
+      progressPct: number
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["actionPlan"]>
+    composites: {}
+  }
+
+  type ActionPlanGetPayload<S extends boolean | null | undefined | ActionPlanDefaultArgs> = $Result.GetResult<Prisma.$ActionPlanPayload, S>
+
+  type ActionPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ActionPlanFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ActionPlanCountAggregateInputType | true
+    }
+
+  export interface ActionPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActionPlan'], meta: { name: 'ActionPlan' } }
+    /**
+     * Find zero or one ActionPlan that matches the filter.
+     * @param {ActionPlanFindUniqueArgs} args - Arguments to find a ActionPlan
+     * @example
+     * // Get one ActionPlan
+     * const actionPlan = await prisma.actionPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActionPlanFindUniqueArgs>(args: SelectSubset<T, ActionPlanFindUniqueArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ActionPlan that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ActionPlanFindUniqueOrThrowArgs} args - Arguments to find a ActionPlan
+     * @example
+     * // Get one ActionPlan
+     * const actionPlan = await prisma.actionPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActionPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, ActionPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ActionPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanFindFirstArgs} args - Arguments to find a ActionPlan
+     * @example
+     * // Get one ActionPlan
+     * const actionPlan = await prisma.actionPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActionPlanFindFirstArgs>(args?: SelectSubset<T, ActionPlanFindFirstArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ActionPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanFindFirstOrThrowArgs} args - Arguments to find a ActionPlan
+     * @example
+     * // Get one ActionPlan
+     * const actionPlan = await prisma.actionPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActionPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, ActionPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ActionPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActionPlans
+     * const actionPlans = await prisma.actionPlan.findMany()
+     * 
+     * // Get first 10 ActionPlans
+     * const actionPlans = await prisma.actionPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const actionPlanWithIdOnly = await prisma.actionPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActionPlanFindManyArgs>(args?: SelectSubset<T, ActionPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ActionPlan.
+     * @param {ActionPlanCreateArgs} args - Arguments to create a ActionPlan.
+     * @example
+     * // Create one ActionPlan
+     * const ActionPlan = await prisma.actionPlan.create({
+     *   data: {
+     *     // ... data to create a ActionPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActionPlanCreateArgs>(args: SelectSubset<T, ActionPlanCreateArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ActionPlans.
+     * @param {ActionPlanCreateManyArgs} args - Arguments to create many ActionPlans.
+     * @example
+     * // Create many ActionPlans
+     * const actionPlan = await prisma.actionPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActionPlanCreateManyArgs>(args?: SelectSubset<T, ActionPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActionPlans and returns the data saved in the database.
+     * @param {ActionPlanCreateManyAndReturnArgs} args - Arguments to create many ActionPlans.
+     * @example
+     * // Create many ActionPlans
+     * const actionPlan = await prisma.actionPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActionPlans and only return the `id`
+     * const actionPlanWithIdOnly = await prisma.actionPlan.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActionPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, ActionPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ActionPlan.
+     * @param {ActionPlanDeleteArgs} args - Arguments to delete one ActionPlan.
+     * @example
+     * // Delete one ActionPlan
+     * const ActionPlan = await prisma.actionPlan.delete({
+     *   where: {
+     *     // ... filter to delete one ActionPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActionPlanDeleteArgs>(args: SelectSubset<T, ActionPlanDeleteArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ActionPlan.
+     * @param {ActionPlanUpdateArgs} args - Arguments to update one ActionPlan.
+     * @example
+     * // Update one ActionPlan
+     * const actionPlan = await prisma.actionPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActionPlanUpdateArgs>(args: SelectSubset<T, ActionPlanUpdateArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ActionPlans.
+     * @param {ActionPlanDeleteManyArgs} args - Arguments to filter ActionPlans to delete.
+     * @example
+     * // Delete a few ActionPlans
+     * const { count } = await prisma.actionPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActionPlanDeleteManyArgs>(args?: SelectSubset<T, ActionPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActionPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActionPlans
+     * const actionPlan = await prisma.actionPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActionPlanUpdateManyArgs>(args: SelectSubset<T, ActionPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ActionPlan.
+     * @param {ActionPlanUpsertArgs} args - Arguments to update or create a ActionPlan.
+     * @example
+     * // Update or create a ActionPlan
+     * const actionPlan = await prisma.actionPlan.upsert({
+     *   create: {
+     *     // ... data to create a ActionPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActionPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActionPlanUpsertArgs>(args: SelectSubset<T, ActionPlanUpsertArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ActionPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanCountArgs} args - Arguments to filter ActionPlans to count.
+     * @example
+     * // Count the number of ActionPlans
+     * const count = await prisma.actionPlan.count({
+     *   where: {
+     *     // ... the filter for the ActionPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActionPlanCountArgs>(
+      args?: Subset<T, ActionPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActionPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActionPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActionPlanAggregateArgs>(args: Subset<T, ActionPlanAggregateArgs>): Prisma.PrismaPromise<GetActionPlanAggregateType<T>>
+
+    /**
+     * Group by ActionPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActionPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActionPlanGroupByArgs['orderBy'] }
+        : { orderBy?: ActionPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActionPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActionPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActionPlan model
+   */
+  readonly fields: ActionPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActionPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActionPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    finding<T extends ActionPlan$findingArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$findingArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    controlTest<T extends ActionPlan$controlTestArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$controlTestArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    engagement<T extends ActionPlan$engagementArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$engagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditEntity<T extends ActionPlan$auditEntityArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$auditEntityArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    responsibleOwner<T extends ActionPlan$responsibleOwnerArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$responsibleOwnerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    reviewer<T extends ActionPlan$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$reviewerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    verifiedBy<T extends ActionPlan$verifiedByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$verifiedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends ActionPlan$createdByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends ActionPlan$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updates<T extends ActionPlan$updatesArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActionPlan model
+   */ 
+  interface ActionPlanFieldRefs {
+    readonly id: FieldRef<"ActionPlan", 'String'>
+    readonly reference: FieldRef<"ActionPlan", 'String'>
+    readonly title: FieldRef<"ActionPlan", 'String'>
+    readonly description: FieldRef<"ActionPlan", 'String'>
+    readonly findingId: FieldRef<"ActionPlan", 'String'>
+    readonly controlTestId: FieldRef<"ActionPlan", 'String'>
+    readonly engagementId: FieldRef<"ActionPlan", 'String'>
+    readonly auditEntityId: FieldRef<"ActionPlan", 'String'>
+    readonly priority: FieldRef<"ActionPlan", 'ActionPlanPriority'>
+    readonly status: FieldRef<"ActionPlan", 'ActionPlanStatus'>
+    readonly responsibleOwnerId: FieldRef<"ActionPlan", 'String'>
+    readonly reviewerId: FieldRef<"ActionPlan", 'String'>
+    readonly targetDate: FieldRef<"ActionPlan", 'DateTime'>
+    readonly completedAt: FieldRef<"ActionPlan", 'DateTime'>
+    readonly verifiedAt: FieldRef<"ActionPlan", 'DateTime'>
+    readonly verifiedById: FieldRef<"ActionPlan", 'String'>
+    readonly managementJustification: FieldRef<"ActionPlan", 'String'>
+    readonly proposedRectification: FieldRef<"ActionPlan", 'String'>
+    readonly completionEvidence: FieldRef<"ActionPlan", 'String'>
+    readonly verificationNotes: FieldRef<"ActionPlan", 'String'>
+    readonly progressPct: FieldRef<"ActionPlan", 'Int'>
+    readonly createdById: FieldRef<"ActionPlan", 'String'>
+    readonly updatedById: FieldRef<"ActionPlan", 'String'>
+    readonly createdAt: FieldRef<"ActionPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"ActionPlan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActionPlan findUnique
+   */
+  export type ActionPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlan to fetch.
+     */
+    where: ActionPlanWhereUniqueInput
+  }
+
+  /**
+   * ActionPlan findUniqueOrThrow
+   */
+  export type ActionPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlan to fetch.
+     */
+    where: ActionPlanWhereUniqueInput
+  }
+
+  /**
+   * ActionPlan findFirst
+   */
+  export type ActionPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlan to fetch.
+     */
+    where?: ActionPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlans to fetch.
+     */
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActionPlans.
+     */
+    cursor?: ActionPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActionPlans.
+     */
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlan findFirstOrThrow
+   */
+  export type ActionPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlan to fetch.
+     */
+    where?: ActionPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlans to fetch.
+     */
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActionPlans.
+     */
+    cursor?: ActionPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActionPlans.
+     */
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlan findMany
+   */
+  export type ActionPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlans to fetch.
+     */
+    where?: ActionPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlans to fetch.
+     */
+    orderBy?: ActionPlanOrderByWithRelationInput | ActionPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActionPlans.
+     */
+    cursor?: ActionPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlans.
+     */
+    skip?: number
+    distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlan create
+   */
+  export type ActionPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActionPlan.
+     */
+    data: XOR<ActionPlanCreateInput, ActionPlanUncheckedCreateInput>
+  }
+
+  /**
+   * ActionPlan createMany
+   */
+  export type ActionPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActionPlans.
+     */
+    data: ActionPlanCreateManyInput | ActionPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActionPlan createManyAndReturn
+   */
+  export type ActionPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ActionPlans.
+     */
+    data: ActionPlanCreateManyInput | ActionPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActionPlan update
+   */
+  export type ActionPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActionPlan.
+     */
+    data: XOR<ActionPlanUpdateInput, ActionPlanUncheckedUpdateInput>
+    /**
+     * Choose, which ActionPlan to update.
+     */
+    where: ActionPlanWhereUniqueInput
+  }
+
+  /**
+   * ActionPlan updateMany
+   */
+  export type ActionPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActionPlans.
+     */
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which ActionPlans to update
+     */
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * ActionPlan upsert
+   */
+  export type ActionPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActionPlan to update in case it exists.
+     */
+    where: ActionPlanWhereUniqueInput
+    /**
+     * In case the ActionPlan found by the `where` argument doesn't exist, create a new ActionPlan with this data.
+     */
+    create: XOR<ActionPlanCreateInput, ActionPlanUncheckedCreateInput>
+    /**
+     * In case the ActionPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActionPlanUpdateInput, ActionPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * ActionPlan delete
+   */
+  export type ActionPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    /**
+     * Filter which ActionPlan to delete.
+     */
+    where: ActionPlanWhereUniqueInput
+  }
+
+  /**
+   * ActionPlan deleteMany
+   */
+  export type ActionPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActionPlans to delete
+     */
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * ActionPlan.finding
+   */
+  export type ActionPlan$findingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+  }
+
+  /**
+   * ActionPlan.controlTest
+   */
+  export type ActionPlan$controlTestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * ActionPlan.engagement
+   */
+  export type ActionPlan$engagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * ActionPlan.auditEntity
+   */
+  export type ActionPlan$auditEntityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditUniverse
+     */
+    select?: AuditUniverseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditUniverseInclude<ExtArgs> | null
+    where?: AuditUniverseWhereInput
+  }
+
+  /**
+   * ActionPlan.responsibleOwner
+   */
+  export type ActionPlan$responsibleOwnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlan.reviewer
+   */
+  export type ActionPlan$reviewerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlan.verifiedBy
+   */
+  export type ActionPlan$verifiedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlan.createdBy
+   */
+  export type ActionPlan$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlan.updatedBy
+   */
+  export type ActionPlan$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlan.updates
+   */
+  export type ActionPlan$updatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    where?: ActionPlanUpdateWhereInput
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlan without action
+   */
+  export type ActionPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ActionPlanUpdate
+   */
+
+  export type AggregateActionPlanUpdate = {
+    _count: ActionPlanUpdateCountAggregateOutputType | null
+    _avg: ActionPlanUpdateAvgAggregateOutputType | null
+    _sum: ActionPlanUpdateSumAggregateOutputType | null
+    _min: ActionPlanUpdateMinAggregateOutputType | null
+    _max: ActionPlanUpdateMaxAggregateOutputType | null
+  }
+
+  export type ActionPlanUpdateAvgAggregateOutputType = {
+    progressPct: number | null
+  }
+
+  export type ActionPlanUpdateSumAggregateOutputType = {
+    progressPct: number | null
+  }
+
+  export type ActionPlanUpdateMinAggregateOutputType = {
+    id: string | null
+    actionPlanId: string | null
+    note: string | null
+    progressPct: number | null
+    updatedById: string | null
+    createdAt: Date | null
+  }
+
+  export type ActionPlanUpdateMaxAggregateOutputType = {
+    id: string | null
+    actionPlanId: string | null
+    note: string | null
+    progressPct: number | null
+    updatedById: string | null
+    createdAt: Date | null
+  }
+
+  export type ActionPlanUpdateCountAggregateOutputType = {
+    id: number
+    actionPlanId: number
+    note: number
+    progressPct: number
+    updatedById: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ActionPlanUpdateAvgAggregateInputType = {
+    progressPct?: true
+  }
+
+  export type ActionPlanUpdateSumAggregateInputType = {
+    progressPct?: true
+  }
+
+  export type ActionPlanUpdateMinAggregateInputType = {
+    id?: true
+    actionPlanId?: true
+    note?: true
+    progressPct?: true
+    updatedById?: true
+    createdAt?: true
+  }
+
+  export type ActionPlanUpdateMaxAggregateInputType = {
+    id?: true
+    actionPlanId?: true
+    note?: true
+    progressPct?: true
+    updatedById?: true
+    createdAt?: true
+  }
+
+  export type ActionPlanUpdateCountAggregateInputType = {
+    id?: true
+    actionPlanId?: true
+    note?: true
+    progressPct?: true
+    updatedById?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ActionPlanUpdateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActionPlanUpdate to aggregate.
+     */
+    where?: ActionPlanUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlanUpdates to fetch.
+     */
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlanUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlanUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ActionPlanUpdates
+    **/
+    _count?: true | ActionPlanUpdateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ActionPlanUpdateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ActionPlanUpdateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ActionPlanUpdateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ActionPlanUpdateMaxAggregateInputType
+  }
+
+  export type GetActionPlanUpdateAggregateType<T extends ActionPlanUpdateAggregateArgs> = {
+        [P in keyof T & keyof AggregateActionPlanUpdate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActionPlanUpdate[P]>
+      : GetScalarType<T[P], AggregateActionPlanUpdate[P]>
+  }
+
+
+
+
+  export type ActionPlanUpdateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ActionPlanUpdateWhereInput
+    orderBy?: ActionPlanUpdateOrderByWithAggregationInput | ActionPlanUpdateOrderByWithAggregationInput[]
+    by: ActionPlanUpdateScalarFieldEnum[] | ActionPlanUpdateScalarFieldEnum
+    having?: ActionPlanUpdateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ActionPlanUpdateCountAggregateInputType | true
+    _avg?: ActionPlanUpdateAvgAggregateInputType
+    _sum?: ActionPlanUpdateSumAggregateInputType
+    _min?: ActionPlanUpdateMinAggregateInputType
+    _max?: ActionPlanUpdateMaxAggregateInputType
+  }
+
+  export type ActionPlanUpdateGroupByOutputType = {
+    id: string
+    actionPlanId: string
+    note: string
+    progressPct: number
+    updatedById: string | null
+    createdAt: Date
+    _count: ActionPlanUpdateCountAggregateOutputType | null
+    _avg: ActionPlanUpdateAvgAggregateOutputType | null
+    _sum: ActionPlanUpdateSumAggregateOutputType | null
+    _min: ActionPlanUpdateMinAggregateOutputType | null
+    _max: ActionPlanUpdateMaxAggregateOutputType | null
+  }
+
+  type GetActionPlanUpdateGroupByPayload<T extends ActionPlanUpdateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ActionPlanUpdateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ActionPlanUpdateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ActionPlanUpdateGroupByOutputType[P]>
+            : GetScalarType<T[P], ActionPlanUpdateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ActionPlanUpdateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    actionPlanId?: boolean
+    note?: boolean
+    progressPct?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    actionPlan?: boolean | ActionPlanDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlanUpdate$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["actionPlanUpdate"]>
+
+  export type ActionPlanUpdateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    actionPlanId?: boolean
+    note?: boolean
+    progressPct?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    actionPlan?: boolean | ActionPlanDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlanUpdate$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["actionPlanUpdate"]>
+
+  export type ActionPlanUpdateSelectScalar = {
+    id?: boolean
+    actionPlanId?: boolean
+    note?: boolean
+    progressPct?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+  }
+
+  export type ActionPlanUpdateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    actionPlan?: boolean | ActionPlanDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlanUpdate$updatedByArgs<ExtArgs>
+  }
+  export type ActionPlanUpdateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    actionPlan?: boolean | ActionPlanDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ActionPlanUpdate$updatedByArgs<ExtArgs>
+  }
+
+  export type $ActionPlanUpdatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ActionPlanUpdate"
+    objects: {
+      actionPlan: Prisma.$ActionPlanPayload<ExtArgs>
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      actionPlanId: string
+      note: string
+      progressPct: number
+      updatedById: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["actionPlanUpdate"]>
+    composites: {}
+  }
+
+  type ActionPlanUpdateGetPayload<S extends boolean | null | undefined | ActionPlanUpdateDefaultArgs> = $Result.GetResult<Prisma.$ActionPlanUpdatePayload, S>
+
+  type ActionPlanUpdateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ActionPlanUpdateFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ActionPlanUpdateCountAggregateInputType | true
+    }
+
+  export interface ActionPlanUpdateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ActionPlanUpdate'], meta: { name: 'ActionPlanUpdate' } }
+    /**
+     * Find zero or one ActionPlanUpdate that matches the filter.
+     * @param {ActionPlanUpdateFindUniqueArgs} args - Arguments to find a ActionPlanUpdate
+     * @example
+     * // Get one ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ActionPlanUpdateFindUniqueArgs>(args: SelectSubset<T, ActionPlanUpdateFindUniqueArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ActionPlanUpdate that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ActionPlanUpdateFindUniqueOrThrowArgs} args - Arguments to find a ActionPlanUpdate
+     * @example
+     * // Get one ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ActionPlanUpdateFindUniqueOrThrowArgs>(args: SelectSubset<T, ActionPlanUpdateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ActionPlanUpdate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateFindFirstArgs} args - Arguments to find a ActionPlanUpdate
+     * @example
+     * // Get one ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ActionPlanUpdateFindFirstArgs>(args?: SelectSubset<T, ActionPlanUpdateFindFirstArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ActionPlanUpdate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateFindFirstOrThrowArgs} args - Arguments to find a ActionPlanUpdate
+     * @example
+     * // Get one ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ActionPlanUpdateFindFirstOrThrowArgs>(args?: SelectSubset<T, ActionPlanUpdateFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ActionPlanUpdates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ActionPlanUpdates
+     * const actionPlanUpdates = await prisma.actionPlanUpdate.findMany()
+     * 
+     * // Get first 10 ActionPlanUpdates
+     * const actionPlanUpdates = await prisma.actionPlanUpdate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const actionPlanUpdateWithIdOnly = await prisma.actionPlanUpdate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ActionPlanUpdateFindManyArgs>(args?: SelectSubset<T, ActionPlanUpdateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ActionPlanUpdate.
+     * @param {ActionPlanUpdateCreateArgs} args - Arguments to create a ActionPlanUpdate.
+     * @example
+     * // Create one ActionPlanUpdate
+     * const ActionPlanUpdate = await prisma.actionPlanUpdate.create({
+     *   data: {
+     *     // ... data to create a ActionPlanUpdate
+     *   }
+     * })
+     * 
+     */
+    create<T extends ActionPlanUpdateCreateArgs>(args: SelectSubset<T, ActionPlanUpdateCreateArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ActionPlanUpdates.
+     * @param {ActionPlanUpdateCreateManyArgs} args - Arguments to create many ActionPlanUpdates.
+     * @example
+     * // Create many ActionPlanUpdates
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ActionPlanUpdateCreateManyArgs>(args?: SelectSubset<T, ActionPlanUpdateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ActionPlanUpdates and returns the data saved in the database.
+     * @param {ActionPlanUpdateCreateManyAndReturnArgs} args - Arguments to create many ActionPlanUpdates.
+     * @example
+     * // Create many ActionPlanUpdates
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ActionPlanUpdates and only return the `id`
+     * const actionPlanUpdateWithIdOnly = await prisma.actionPlanUpdate.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ActionPlanUpdateCreateManyAndReturnArgs>(args?: SelectSubset<T, ActionPlanUpdateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ActionPlanUpdate.
+     * @param {ActionPlanUpdateDeleteArgs} args - Arguments to delete one ActionPlanUpdate.
+     * @example
+     * // Delete one ActionPlanUpdate
+     * const ActionPlanUpdate = await prisma.actionPlanUpdate.delete({
+     *   where: {
+     *     // ... filter to delete one ActionPlanUpdate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ActionPlanUpdateDeleteArgs>(args: SelectSubset<T, ActionPlanUpdateDeleteArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ActionPlanUpdate.
+     * @param {ActionPlanUpdateUpdateArgs} args - Arguments to update one ActionPlanUpdate.
+     * @example
+     * // Update one ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ActionPlanUpdateUpdateArgs>(args: SelectSubset<T, ActionPlanUpdateUpdateArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ActionPlanUpdates.
+     * @param {ActionPlanUpdateDeleteManyArgs} args - Arguments to filter ActionPlanUpdates to delete.
+     * @example
+     * // Delete a few ActionPlanUpdates
+     * const { count } = await prisma.actionPlanUpdate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ActionPlanUpdateDeleteManyArgs>(args?: SelectSubset<T, ActionPlanUpdateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ActionPlanUpdates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ActionPlanUpdates
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ActionPlanUpdateUpdateManyArgs>(args: SelectSubset<T, ActionPlanUpdateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ActionPlanUpdate.
+     * @param {ActionPlanUpdateUpsertArgs} args - Arguments to update or create a ActionPlanUpdate.
+     * @example
+     * // Update or create a ActionPlanUpdate
+     * const actionPlanUpdate = await prisma.actionPlanUpdate.upsert({
+     *   create: {
+     *     // ... data to create a ActionPlanUpdate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ActionPlanUpdate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ActionPlanUpdateUpsertArgs>(args: SelectSubset<T, ActionPlanUpdateUpsertArgs<ExtArgs>>): Prisma__ActionPlanUpdateClient<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ActionPlanUpdates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateCountArgs} args - Arguments to filter ActionPlanUpdates to count.
+     * @example
+     * // Count the number of ActionPlanUpdates
+     * const count = await prisma.actionPlanUpdate.count({
+     *   where: {
+     *     // ... the filter for the ActionPlanUpdates we want to count
+     *   }
+     * })
+    **/
+    count<T extends ActionPlanUpdateCountArgs>(
+      args?: Subset<T, ActionPlanUpdateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ActionPlanUpdateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ActionPlanUpdate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ActionPlanUpdateAggregateArgs>(args: Subset<T, ActionPlanUpdateAggregateArgs>): Prisma.PrismaPromise<GetActionPlanUpdateAggregateType<T>>
+
+    /**
+     * Group by ActionPlanUpdate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ActionPlanUpdateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ActionPlanUpdateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ActionPlanUpdateGroupByArgs['orderBy'] }
+        : { orderBy?: ActionPlanUpdateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ActionPlanUpdateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActionPlanUpdateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ActionPlanUpdate model
+   */
+  readonly fields: ActionPlanUpdateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ActionPlanUpdate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ActionPlanUpdateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    actionPlan<T extends ActionPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlanDefaultArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    updatedBy<T extends ActionPlanUpdate$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlanUpdate$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ActionPlanUpdate model
+   */ 
+  interface ActionPlanUpdateFieldRefs {
+    readonly id: FieldRef<"ActionPlanUpdate", 'String'>
+    readonly actionPlanId: FieldRef<"ActionPlanUpdate", 'String'>
+    readonly note: FieldRef<"ActionPlanUpdate", 'String'>
+    readonly progressPct: FieldRef<"ActionPlanUpdate", 'Int'>
+    readonly updatedById: FieldRef<"ActionPlanUpdate", 'String'>
+    readonly createdAt: FieldRef<"ActionPlanUpdate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ActionPlanUpdate findUnique
+   */
+  export type ActionPlanUpdateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlanUpdate to fetch.
+     */
+    where: ActionPlanUpdateWhereUniqueInput
+  }
+
+  /**
+   * ActionPlanUpdate findUniqueOrThrow
+   */
+  export type ActionPlanUpdateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlanUpdate to fetch.
+     */
+    where: ActionPlanUpdateWhereUniqueInput
+  }
+
+  /**
+   * ActionPlanUpdate findFirst
+   */
+  export type ActionPlanUpdateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlanUpdate to fetch.
+     */
+    where?: ActionPlanUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlanUpdates to fetch.
+     */
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActionPlanUpdates.
+     */
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlanUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlanUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActionPlanUpdates.
+     */
+    distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlanUpdate findFirstOrThrow
+   */
+  export type ActionPlanUpdateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlanUpdate to fetch.
+     */
+    where?: ActionPlanUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlanUpdates to fetch.
+     */
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ActionPlanUpdates.
+     */
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlanUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlanUpdates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ActionPlanUpdates.
+     */
+    distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlanUpdate findMany
+   */
+  export type ActionPlanUpdateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter, which ActionPlanUpdates to fetch.
+     */
+    where?: ActionPlanUpdateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ActionPlanUpdates to fetch.
+     */
+    orderBy?: ActionPlanUpdateOrderByWithRelationInput | ActionPlanUpdateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ActionPlanUpdates.
+     */
+    cursor?: ActionPlanUpdateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ActionPlanUpdates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ActionPlanUpdates.
+     */
+    skip?: number
+    distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlanUpdate create
+   */
+  export type ActionPlanUpdateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ActionPlanUpdate.
+     */
+    data: XOR<ActionPlanUpdateCreateInput, ActionPlanUpdateUncheckedCreateInput>
+  }
+
+  /**
+   * ActionPlanUpdate createMany
+   */
+  export type ActionPlanUpdateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ActionPlanUpdates.
+     */
+    data: ActionPlanUpdateCreateManyInput | ActionPlanUpdateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ActionPlanUpdate createManyAndReturn
+   */
+  export type ActionPlanUpdateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ActionPlanUpdates.
+     */
+    data: ActionPlanUpdateCreateManyInput | ActionPlanUpdateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ActionPlanUpdate update
+   */
+  export type ActionPlanUpdateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ActionPlanUpdate.
+     */
+    data: XOR<ActionPlanUpdateUpdateInput, ActionPlanUpdateUncheckedUpdateInput>
+    /**
+     * Choose, which ActionPlanUpdate to update.
+     */
+    where: ActionPlanUpdateWhereUniqueInput
+  }
+
+  /**
+   * ActionPlanUpdate updateMany
+   */
+  export type ActionPlanUpdateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ActionPlanUpdates.
+     */
+    data: XOR<ActionPlanUpdateUpdateManyMutationInput, ActionPlanUpdateUncheckedUpdateManyInput>
+    /**
+     * Filter which ActionPlanUpdates to update
+     */
+    where?: ActionPlanUpdateWhereInput
+  }
+
+  /**
+   * ActionPlanUpdate upsert
+   */
+  export type ActionPlanUpdateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ActionPlanUpdate to update in case it exists.
+     */
+    where: ActionPlanUpdateWhereUniqueInput
+    /**
+     * In case the ActionPlanUpdate found by the `where` argument doesn't exist, create a new ActionPlanUpdate with this data.
+     */
+    create: XOR<ActionPlanUpdateCreateInput, ActionPlanUpdateUncheckedCreateInput>
+    /**
+     * In case the ActionPlanUpdate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ActionPlanUpdateUpdateInput, ActionPlanUpdateUncheckedUpdateInput>
+  }
+
+  /**
+   * ActionPlanUpdate delete
+   */
+  export type ActionPlanUpdateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
+    /**
+     * Filter which ActionPlanUpdate to delete.
+     */
+    where: ActionPlanUpdateWhereUniqueInput
+  }
+
+  /**
+   * ActionPlanUpdate deleteMany
+   */
+  export type ActionPlanUpdateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ActionPlanUpdates to delete
+     */
+    where?: ActionPlanUpdateWhereInput
+  }
+
+  /**
+   * ActionPlanUpdate.updatedBy
+   */
+  export type ActionPlanUpdate$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * ActionPlanUpdate without action
+   */
+  export type ActionPlanUpdateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlanUpdate
+     */
+    select?: ActionPlanUpdateSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanUpdateInclude<ExtArgs> | null
   }
 
 
@@ -17438,6 +22275,85 @@ export namespace Prisma {
   };
 
   export type FindingScalarFieldEnum = (typeof FindingScalarFieldEnum)[keyof typeof FindingScalarFieldEnum]
+
+
+  export const ControlTestScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    title: 'title',
+    engagementId: 'engagementId',
+    auditEntityId: 'auditEntityId',
+    riskId: 'riskId',
+    controlReference: 'controlReference',
+    status: 'status',
+    outcome: 'outcome',
+    objective: 'objective',
+    procedures: 'procedures',
+    criteria: 'criteria',
+    sampleDescription: 'sampleDescription',
+    sampleSize: 'sampleSize',
+    expectedResult: 'expectedResult',
+    actualResult: 'actualResult',
+    exceptions: 'exceptions',
+    conclusion: 'conclusion',
+    evidenceReference: 'evidenceReference',
+    testerId: 'testerId',
+    testedAt: 'testedAt',
+    testerNotes: 'testerNotes',
+    reviewerId: 'reviewerId',
+    reviewedAt: 'reviewedAt',
+    reviewerNotes: 'reviewerNotes',
+    findingId: 'findingId',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ControlTestScalarFieldEnum = (typeof ControlTestScalarFieldEnum)[keyof typeof ControlTestScalarFieldEnum]
+
+
+  export const ActionPlanScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    title: 'title',
+    description: 'description',
+    findingId: 'findingId',
+    controlTestId: 'controlTestId',
+    engagementId: 'engagementId',
+    auditEntityId: 'auditEntityId',
+    priority: 'priority',
+    status: 'status',
+    responsibleOwnerId: 'responsibleOwnerId',
+    reviewerId: 'reviewerId',
+    targetDate: 'targetDate',
+    completedAt: 'completedAt',
+    verifiedAt: 'verifiedAt',
+    verifiedById: 'verifiedById',
+    managementJustification: 'managementJustification',
+    proposedRectification: 'proposedRectification',
+    completionEvidence: 'completionEvidence',
+    verificationNotes: 'verificationNotes',
+    progressPct: 'progressPct',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ActionPlanScalarFieldEnum = (typeof ActionPlanScalarFieldEnum)[keyof typeof ActionPlanScalarFieldEnum]
+
+
+  export const ActionPlanUpdateScalarFieldEnum: {
+    id: 'id',
+    actionPlanId: 'actionPlanId',
+    note: 'note',
+    progressPct: 'progressPct',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt'
+  };
+
+  export type ActionPlanUpdateScalarFieldEnum = (typeof ActionPlanUpdateScalarFieldEnum)[keyof typeof ActionPlanUpdateScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -17725,6 +22641,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ControlTestStatus'
+   */
+  export type EnumControlTestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ControlTestStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ControlTestStatus[]'
+   */
+  export type ListEnumControlTestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ControlTestStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ControlTestOutcome'
+   */
+  export type EnumControlTestOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ControlTestOutcome'>
+    
+
+
+  /**
+   * Reference to a field of type 'ControlTestOutcome[]'
+   */
+  export type ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ControlTestOutcome[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionPlanPriority'
+   */
+  export type EnumActionPlanPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanPriority'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionPlanPriority[]'
+   */
+  export type ListEnumActionPlanPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanPriority[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionPlanStatus'
+   */
+  export type EnumActionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ActionPlanStatus[]'
+   */
+  export type ListEnumActionPlanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionPlanStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -17776,6 +22748,16 @@ export namespace Prisma {
     responsibleFindings?: FindingListRelationFilter
     managementResponseFindings?: FindingListRelationFilter
     verifiedFindings?: FindingListRelationFilter
+    testedControlTests?: ControlTestListRelationFilter
+    reviewedControlTests?: ControlTestListRelationFilter
+    createdControlTests?: ControlTestListRelationFilter
+    updatedControlTests?: ControlTestListRelationFilter
+    responsibleActionPlans?: ActionPlanListRelationFilter
+    reviewerActionPlans?: ActionPlanListRelationFilter
+    createdActionPlans?: ActionPlanListRelationFilter
+    updatedActionPlans?: ActionPlanListRelationFilter
+    verifiedActionPlans?: ActionPlanListRelationFilter
+    actionPlanUpdates?: ActionPlanUpdateListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17810,6 +22792,16 @@ export namespace Prisma {
     responsibleFindings?: FindingOrderByRelationAggregateInput
     managementResponseFindings?: FindingOrderByRelationAggregateInput
     verifiedFindings?: FindingOrderByRelationAggregateInput
+    testedControlTests?: ControlTestOrderByRelationAggregateInput
+    reviewedControlTests?: ControlTestOrderByRelationAggregateInput
+    createdControlTests?: ControlTestOrderByRelationAggregateInput
+    updatedControlTests?: ControlTestOrderByRelationAggregateInput
+    responsibleActionPlans?: ActionPlanOrderByRelationAggregateInput
+    reviewerActionPlans?: ActionPlanOrderByRelationAggregateInput
+    createdActionPlans?: ActionPlanOrderByRelationAggregateInput
+    updatedActionPlans?: ActionPlanOrderByRelationAggregateInput
+    verifiedActionPlans?: ActionPlanOrderByRelationAggregateInput
+    actionPlanUpdates?: ActionPlanUpdateOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17847,6 +22839,16 @@ export namespace Prisma {
     responsibleFindings?: FindingListRelationFilter
     managementResponseFindings?: FindingListRelationFilter
     verifiedFindings?: FindingListRelationFilter
+    testedControlTests?: ControlTestListRelationFilter
+    reviewedControlTests?: ControlTestListRelationFilter
+    createdControlTests?: ControlTestListRelationFilter
+    updatedControlTests?: ControlTestListRelationFilter
+    responsibleActionPlans?: ActionPlanListRelationFilter
+    reviewerActionPlans?: ActionPlanListRelationFilter
+    createdActionPlans?: ActionPlanListRelationFilter
+    updatedActionPlans?: ActionPlanListRelationFilter
+    verifiedActionPlans?: ActionPlanListRelationFilter
+    actionPlanUpdates?: ActionPlanUpdateListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -18191,6 +23193,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
     findings?: FindingListRelationFilter
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }
 
   export type AuditUniverseOrderByWithRelationInput = {
@@ -18219,6 +23223,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanOrderByRelationAggregateInput
     engagements?: EngagementOrderByRelationAggregateInput
     findings?: FindingOrderByRelationAggregateInput
+    controlTests?: ControlTestOrderByRelationAggregateInput
+    actionPlans?: ActionPlanOrderByRelationAggregateInput
   }
 
   export type AuditUniverseWhereUniqueInput = Prisma.AtLeast<{
@@ -18250,6 +23256,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
     findings?: FindingListRelationFilter
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }, "id" | "code">
 
   export type AuditUniverseOrderByWithAggregationInput = {
@@ -18327,6 +23335,7 @@ export namespace Prisma {
     actions?: RiskActionListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
+    controlTests?: ControlTestListRelationFilter
   }
 
   export type RiskOrderByWithRelationInput = {
@@ -18357,6 +23366,7 @@ export namespace Prisma {
     actions?: RiskActionOrderByRelationAggregateInput
     auditPlans?: AuditPlanOrderByRelationAggregateInput
     engagements?: EngagementOrderByRelationAggregateInput
+    controlTests?: ControlTestOrderByRelationAggregateInput
   }
 
   export type RiskWhereUniqueInput = Prisma.AtLeast<{
@@ -18390,6 +23400,7 @@ export namespace Prisma {
     actions?: RiskActionListRelationFilter
     auditPlans?: AuditPlanListRelationFilter
     engagements?: EngagementListRelationFilter
+    controlTests?: ControlTestListRelationFilter
   }, "id">
 
   export type RiskOrderByWithAggregationInput = {
@@ -18726,6 +23737,8 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     teamMembers?: EngagementTeamMemberListRelationFilter
     findings?: FindingListRelationFilter
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }
 
   export type EngagementOrderByWithRelationInput = {
@@ -18762,6 +23775,8 @@ export namespace Prisma {
     updatedBy?: UserOrderByWithRelationInput
     teamMembers?: EngagementTeamMemberOrderByRelationAggregateInput
     findings?: FindingOrderByRelationAggregateInput
+    controlTests?: ControlTestOrderByRelationAggregateInput
+    actionPlans?: ActionPlanOrderByRelationAggregateInput
   }
 
   export type EngagementWhereUniqueInput = Prisma.AtLeast<{
@@ -18801,6 +23816,8 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     teamMembers?: EngagementTeamMemberListRelationFilter
     findings?: FindingListRelationFilter
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }, "id" | "reference">
 
   export type EngagementOrderByWithAggregationInput = {
@@ -18954,6 +23971,8 @@ export namespace Prisma {
     verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }
 
   export type FindingOrderByWithRelationInput = {
@@ -18990,6 +24009,8 @@ export namespace Prisma {
     verifiedBy?: UserOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
+    controlTests?: ControlTestOrderByRelationAggregateInput
+    actionPlans?: ActionPlanOrderByRelationAggregateInput
   }
 
   export type FindingWhereUniqueInput = Prisma.AtLeast<{
@@ -19029,6 +24050,8 @@ export namespace Prisma {
     verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    controlTests?: ControlTestListRelationFilter
+    actionPlans?: ActionPlanListRelationFilter
   }, "id" | "reference">
 
   export type FindingOrderByWithAggregationInput = {
@@ -19095,6 +24118,461 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Finding"> | Date | string
   }
 
+  export type ControlTestWhereInput = {
+    AND?: ControlTestWhereInput | ControlTestWhereInput[]
+    OR?: ControlTestWhereInput[]
+    NOT?: ControlTestWhereInput | ControlTestWhereInput[]
+    id?: UuidFilter<"ControlTest"> | string
+    reference?: StringFilter<"ControlTest"> | string
+    title?: StringFilter<"ControlTest"> | string
+    engagementId?: UuidNullableFilter<"ControlTest"> | string | null
+    auditEntityId?: UuidNullableFilter<"ControlTest"> | string | null
+    riskId?: UuidNullableFilter<"ControlTest"> | string | null
+    controlReference?: StringNullableFilter<"ControlTest"> | string | null
+    status?: EnumControlTestStatusFilter<"ControlTest"> | $Enums.ControlTestStatus
+    outcome?: EnumControlTestOutcomeNullableFilter<"ControlTest"> | $Enums.ControlTestOutcome | null
+    objective?: StringFilter<"ControlTest"> | string
+    procedures?: StringFilter<"ControlTest"> | string
+    criteria?: StringNullableFilter<"ControlTest"> | string | null
+    sampleDescription?: StringNullableFilter<"ControlTest"> | string | null
+    sampleSize?: IntNullableFilter<"ControlTest"> | number | null
+    expectedResult?: StringNullableFilter<"ControlTest"> | string | null
+    actualResult?: StringNullableFilter<"ControlTest"> | string | null
+    exceptions?: StringNullableFilter<"ControlTest"> | string | null
+    conclusion?: StringNullableFilter<"ControlTest"> | string | null
+    evidenceReference?: StringNullableFilter<"ControlTest"> | string | null
+    testerId?: UuidNullableFilter<"ControlTest"> | string | null
+    testedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    testerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    reviewerId?: UuidNullableFilter<"ControlTest"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    reviewerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    findingId?: UuidNullableFilter<"ControlTest"> | string | null
+    createdById?: UuidNullableFilter<"ControlTest"> | string | null
+    updatedById?: UuidNullableFilter<"ControlTest"> | string | null
+    createdAt?: DateTimeFilter<"ControlTest"> | Date | string
+    updatedAt?: DateTimeFilter<"ControlTest"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    risk?: XOR<RiskNullableRelationFilter, RiskWhereInput> | null
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    tester?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    actionPlans?: ActionPlanListRelationFilter
+  }
+
+  export type ControlTestOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    riskId?: SortOrderInput | SortOrder
+    controlReference?: SortOrderInput | SortOrder
+    status?: SortOrder
+    outcome?: SortOrderInput | SortOrder
+    objective?: SortOrder
+    procedures?: SortOrder
+    criteria?: SortOrderInput | SortOrder
+    sampleDescription?: SortOrderInput | SortOrder
+    sampleSize?: SortOrderInput | SortOrder
+    expectedResult?: SortOrderInput | SortOrder
+    actualResult?: SortOrderInput | SortOrder
+    exceptions?: SortOrderInput | SortOrder
+    conclusion?: SortOrderInput | SortOrder
+    evidenceReference?: SortOrderInput | SortOrder
+    testerId?: SortOrderInput | SortOrder
+    testedAt?: SortOrderInput | SortOrder
+    testerNotes?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewerNotes?: SortOrderInput | SortOrder
+    findingId?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    engagement?: EngagementOrderByWithRelationInput
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    risk?: RiskOrderByWithRelationInput
+    finding?: FindingOrderByWithRelationInput
+    tester?: UserOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+    actionPlans?: ActionPlanOrderByRelationAggregateInput
+  }
+
+  export type ControlTestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: ControlTestWhereInput | ControlTestWhereInput[]
+    OR?: ControlTestWhereInput[]
+    NOT?: ControlTestWhereInput | ControlTestWhereInput[]
+    title?: StringFilter<"ControlTest"> | string
+    engagementId?: UuidNullableFilter<"ControlTest"> | string | null
+    auditEntityId?: UuidNullableFilter<"ControlTest"> | string | null
+    riskId?: UuidNullableFilter<"ControlTest"> | string | null
+    controlReference?: StringNullableFilter<"ControlTest"> | string | null
+    status?: EnumControlTestStatusFilter<"ControlTest"> | $Enums.ControlTestStatus
+    outcome?: EnumControlTestOutcomeNullableFilter<"ControlTest"> | $Enums.ControlTestOutcome | null
+    objective?: StringFilter<"ControlTest"> | string
+    procedures?: StringFilter<"ControlTest"> | string
+    criteria?: StringNullableFilter<"ControlTest"> | string | null
+    sampleDescription?: StringNullableFilter<"ControlTest"> | string | null
+    sampleSize?: IntNullableFilter<"ControlTest"> | number | null
+    expectedResult?: StringNullableFilter<"ControlTest"> | string | null
+    actualResult?: StringNullableFilter<"ControlTest"> | string | null
+    exceptions?: StringNullableFilter<"ControlTest"> | string | null
+    conclusion?: StringNullableFilter<"ControlTest"> | string | null
+    evidenceReference?: StringNullableFilter<"ControlTest"> | string | null
+    testerId?: UuidNullableFilter<"ControlTest"> | string | null
+    testedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    testerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    reviewerId?: UuidNullableFilter<"ControlTest"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    reviewerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    findingId?: UuidNullableFilter<"ControlTest"> | string | null
+    createdById?: UuidNullableFilter<"ControlTest"> | string | null
+    updatedById?: UuidNullableFilter<"ControlTest"> | string | null
+    createdAt?: DateTimeFilter<"ControlTest"> | Date | string
+    updatedAt?: DateTimeFilter<"ControlTest"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    risk?: XOR<RiskNullableRelationFilter, RiskWhereInput> | null
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    tester?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    actionPlans?: ActionPlanListRelationFilter
+  }, "id" | "reference">
+
+  export type ControlTestOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    riskId?: SortOrderInput | SortOrder
+    controlReference?: SortOrderInput | SortOrder
+    status?: SortOrder
+    outcome?: SortOrderInput | SortOrder
+    objective?: SortOrder
+    procedures?: SortOrder
+    criteria?: SortOrderInput | SortOrder
+    sampleDescription?: SortOrderInput | SortOrder
+    sampleSize?: SortOrderInput | SortOrder
+    expectedResult?: SortOrderInput | SortOrder
+    actualResult?: SortOrderInput | SortOrder
+    exceptions?: SortOrderInput | SortOrder
+    conclusion?: SortOrderInput | SortOrder
+    evidenceReference?: SortOrderInput | SortOrder
+    testerId?: SortOrderInput | SortOrder
+    testedAt?: SortOrderInput | SortOrder
+    testerNotes?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewerNotes?: SortOrderInput | SortOrder
+    findingId?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ControlTestCountOrderByAggregateInput
+    _avg?: ControlTestAvgOrderByAggregateInput
+    _max?: ControlTestMaxOrderByAggregateInput
+    _min?: ControlTestMinOrderByAggregateInput
+    _sum?: ControlTestSumOrderByAggregateInput
+  }
+
+  export type ControlTestScalarWhereWithAggregatesInput = {
+    AND?: ControlTestScalarWhereWithAggregatesInput | ControlTestScalarWhereWithAggregatesInput[]
+    OR?: ControlTestScalarWhereWithAggregatesInput[]
+    NOT?: ControlTestScalarWhereWithAggregatesInput | ControlTestScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ControlTest"> | string
+    reference?: StringWithAggregatesFilter<"ControlTest"> | string
+    title?: StringWithAggregatesFilter<"ControlTest"> | string
+    engagementId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    auditEntityId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    riskId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    controlReference?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    status?: EnumControlTestStatusWithAggregatesFilter<"ControlTest"> | $Enums.ControlTestStatus
+    outcome?: EnumControlTestOutcomeNullableWithAggregatesFilter<"ControlTest"> | $Enums.ControlTestOutcome | null
+    objective?: StringWithAggregatesFilter<"ControlTest"> | string
+    procedures?: StringWithAggregatesFilter<"ControlTest"> | string
+    criteria?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    sampleDescription?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    sampleSize?: IntNullableWithAggregatesFilter<"ControlTest"> | number | null
+    expectedResult?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    actualResult?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    exceptions?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    conclusion?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    evidenceReference?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    testerId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    testedAt?: DateTimeNullableWithAggregatesFilter<"ControlTest"> | Date | string | null
+    testerNotes?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    reviewerId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"ControlTest"> | Date | string | null
+    reviewerNotes?: StringNullableWithAggregatesFilter<"ControlTest"> | string | null
+    findingId?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    createdById?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"ControlTest"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ControlTest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ControlTest"> | Date | string
+  }
+
+  export type ActionPlanWhereInput = {
+    AND?: ActionPlanWhereInput | ActionPlanWhereInput[]
+    OR?: ActionPlanWhereInput[]
+    NOT?: ActionPlanWhereInput | ActionPlanWhereInput[]
+    id?: UuidFilter<"ActionPlan"> | string
+    reference?: StringFilter<"ActionPlan"> | string
+    title?: StringFilter<"ActionPlan"> | string
+    description?: StringFilter<"ActionPlan"> | string
+    findingId?: UuidNullableFilter<"ActionPlan"> | string | null
+    controlTestId?: UuidNullableFilter<"ActionPlan"> | string | null
+    engagementId?: UuidNullableFilter<"ActionPlan"> | string | null
+    auditEntityId?: UuidNullableFilter<"ActionPlan"> | string | null
+    priority?: EnumActionPlanPriorityFilter<"ActionPlan"> | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFilter<"ActionPlan"> | $Enums.ActionPlanStatus
+    responsibleOwnerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    reviewerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    targetDate?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    managementJustification?: StringNullableFilter<"ActionPlan"> | string | null
+    proposedRectification?: StringNullableFilter<"ActionPlan"> | string | null
+    completionEvidence?: StringNullableFilter<"ActionPlan"> | string | null
+    verificationNotes?: StringNullableFilter<"ActionPlan"> | string | null
+    progressPct?: IntFilter<"ActionPlan"> | number
+    createdById?: UuidNullableFilter<"ActionPlan"> | string | null
+    updatedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"ActionPlan"> | Date | string
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    controlTest?: XOR<ControlTestNullableRelationFilter, ControlTestWhereInput> | null
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    responsibleOwner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updates?: ActionPlanUpdateListRelationFilter
+  }
+
+  export type ActionPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    findingId?: SortOrderInput | SortOrder
+    controlTestId?: SortOrderInput | SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    responsibleOwnerId?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedById?: SortOrderInput | SortOrder
+    managementJustification?: SortOrderInput | SortOrder
+    proposedRectification?: SortOrderInput | SortOrder
+    completionEvidence?: SortOrderInput | SortOrder
+    verificationNotes?: SortOrderInput | SortOrder
+    progressPct?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    finding?: FindingOrderByWithRelationInput
+    controlTest?: ControlTestOrderByWithRelationInput
+    engagement?: EngagementOrderByWithRelationInput
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    responsibleOwner?: UserOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+    verifiedBy?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+    updates?: ActionPlanUpdateOrderByRelationAggregateInput
+  }
+
+  export type ActionPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: ActionPlanWhereInput | ActionPlanWhereInput[]
+    OR?: ActionPlanWhereInput[]
+    NOT?: ActionPlanWhereInput | ActionPlanWhereInput[]
+    title?: StringFilter<"ActionPlan"> | string
+    description?: StringFilter<"ActionPlan"> | string
+    findingId?: UuidNullableFilter<"ActionPlan"> | string | null
+    controlTestId?: UuidNullableFilter<"ActionPlan"> | string | null
+    engagementId?: UuidNullableFilter<"ActionPlan"> | string | null
+    auditEntityId?: UuidNullableFilter<"ActionPlan"> | string | null
+    priority?: EnumActionPlanPriorityFilter<"ActionPlan"> | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFilter<"ActionPlan"> | $Enums.ActionPlanStatus
+    responsibleOwnerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    reviewerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    targetDate?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    managementJustification?: StringNullableFilter<"ActionPlan"> | string | null
+    proposedRectification?: StringNullableFilter<"ActionPlan"> | string | null
+    completionEvidence?: StringNullableFilter<"ActionPlan"> | string | null
+    verificationNotes?: StringNullableFilter<"ActionPlan"> | string | null
+    progressPct?: IntFilter<"ActionPlan"> | number
+    createdById?: UuidNullableFilter<"ActionPlan"> | string | null
+    updatedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"ActionPlan"> | Date | string
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    controlTest?: XOR<ControlTestNullableRelationFilter, ControlTestWhereInput> | null
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    responsibleOwner?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    verifiedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updates?: ActionPlanUpdateListRelationFilter
+  }, "id" | "reference">
+
+  export type ActionPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    findingId?: SortOrderInput | SortOrder
+    controlTestId?: SortOrderInput | SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    responsibleOwnerId?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    verifiedAt?: SortOrderInput | SortOrder
+    verifiedById?: SortOrderInput | SortOrder
+    managementJustification?: SortOrderInput | SortOrder
+    proposedRectification?: SortOrderInput | SortOrder
+    completionEvidence?: SortOrderInput | SortOrder
+    verificationNotes?: SortOrderInput | SortOrder
+    progressPct?: SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ActionPlanCountOrderByAggregateInput
+    _avg?: ActionPlanAvgOrderByAggregateInput
+    _max?: ActionPlanMaxOrderByAggregateInput
+    _min?: ActionPlanMinOrderByAggregateInput
+    _sum?: ActionPlanSumOrderByAggregateInput
+  }
+
+  export type ActionPlanScalarWhereWithAggregatesInput = {
+    AND?: ActionPlanScalarWhereWithAggregatesInput | ActionPlanScalarWhereWithAggregatesInput[]
+    OR?: ActionPlanScalarWhereWithAggregatesInput[]
+    NOT?: ActionPlanScalarWhereWithAggregatesInput | ActionPlanScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ActionPlan"> | string
+    reference?: StringWithAggregatesFilter<"ActionPlan"> | string
+    title?: StringWithAggregatesFilter<"ActionPlan"> | string
+    description?: StringWithAggregatesFilter<"ActionPlan"> | string
+    findingId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    controlTestId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    engagementId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    auditEntityId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    priority?: EnumActionPlanPriorityWithAggregatesFilter<"ActionPlan"> | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusWithAggregatesFilter<"ActionPlan"> | $Enums.ActionPlanStatus
+    responsibleOwnerId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    reviewerId?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    targetDate?: DateTimeNullableWithAggregatesFilter<"ActionPlan"> | Date | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"ActionPlan"> | Date | string | null
+    verifiedAt?: DateTimeNullableWithAggregatesFilter<"ActionPlan"> | Date | string | null
+    verifiedById?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    managementJustification?: StringNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    proposedRectification?: StringNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    completionEvidence?: StringNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    verificationNotes?: StringNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    progressPct?: IntWithAggregatesFilter<"ActionPlan"> | number
+    createdById?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"ActionPlan"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ActionPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ActionPlan"> | Date | string
+  }
+
+  export type ActionPlanUpdateWhereInput = {
+    AND?: ActionPlanUpdateWhereInput | ActionPlanUpdateWhereInput[]
+    OR?: ActionPlanUpdateWhereInput[]
+    NOT?: ActionPlanUpdateWhereInput | ActionPlanUpdateWhereInput[]
+    id?: UuidFilter<"ActionPlanUpdate"> | string
+    actionPlanId?: UuidFilter<"ActionPlanUpdate"> | string
+    note?: StringFilter<"ActionPlanUpdate"> | string
+    progressPct?: IntFilter<"ActionPlanUpdate"> | number
+    updatedById?: UuidNullableFilter<"ActionPlanUpdate"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlanUpdate"> | Date | string
+    actionPlan?: XOR<ActionPlanRelationFilter, ActionPlanWhereInput>
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type ActionPlanUpdateOrderByWithRelationInput = {
+    id?: SortOrder
+    actionPlanId?: SortOrder
+    note?: SortOrder
+    progressPct?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    actionPlan?: ActionPlanOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+  }
+
+  export type ActionPlanUpdateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ActionPlanUpdateWhereInput | ActionPlanUpdateWhereInput[]
+    OR?: ActionPlanUpdateWhereInput[]
+    NOT?: ActionPlanUpdateWhereInput | ActionPlanUpdateWhereInput[]
+    actionPlanId?: UuidFilter<"ActionPlanUpdate"> | string
+    note?: StringFilter<"ActionPlanUpdate"> | string
+    progressPct?: IntFilter<"ActionPlanUpdate"> | number
+    updatedById?: UuidNullableFilter<"ActionPlanUpdate"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlanUpdate"> | Date | string
+    actionPlan?: XOR<ActionPlanRelationFilter, ActionPlanWhereInput>
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type ActionPlanUpdateOrderByWithAggregationInput = {
+    id?: SortOrder
+    actionPlanId?: SortOrder
+    note?: SortOrder
+    progressPct?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ActionPlanUpdateCountOrderByAggregateInput
+    _avg?: ActionPlanUpdateAvgOrderByAggregateInput
+    _max?: ActionPlanUpdateMaxOrderByAggregateInput
+    _min?: ActionPlanUpdateMinOrderByAggregateInput
+    _sum?: ActionPlanUpdateSumOrderByAggregateInput
+  }
+
+  export type ActionPlanUpdateScalarWhereWithAggregatesInput = {
+    AND?: ActionPlanUpdateScalarWhereWithAggregatesInput | ActionPlanUpdateScalarWhereWithAggregatesInput[]
+    OR?: ActionPlanUpdateScalarWhereWithAggregatesInput[]
+    NOT?: ActionPlanUpdateScalarWhereWithAggregatesInput | ActionPlanUpdateScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ActionPlanUpdate"> | string
+    actionPlanId?: UuidWithAggregatesFilter<"ActionPlanUpdate"> | string
+    note?: StringWithAggregatesFilter<"ActionPlanUpdate"> | string
+    progressPct?: IntWithAggregatesFilter<"ActionPlanUpdate"> | number
+    updatedById?: UuidNullableWithAggregatesFilter<"ActionPlanUpdate"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ActionPlanUpdate"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -19127,6 +24605,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19161,6 +24649,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUpdateInput = {
@@ -19195,6 +24693,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19229,6 +24737,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -19577,6 +25095,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateInput = {
@@ -19601,6 +25121,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUpdateInput = {
@@ -19625,6 +25147,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateInput = {
@@ -19649,6 +25173,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseCreateManyInput = {
@@ -19728,6 +25254,7 @@ export namespace Prisma {
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateInput = {
@@ -19754,6 +25281,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUpdateInput = {
@@ -19780,6 +25308,7 @@ export namespace Prisma {
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateInput = {
@@ -19806,6 +25335,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskCreateManyInput = {
@@ -20162,6 +25692,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateInput = {
@@ -20191,6 +25723,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUpdateInput = {
@@ -20220,6 +25754,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateInput = {
@@ -20249,6 +25785,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementCreateManyInput = {
@@ -20399,6 +25937,8 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateInput = {
@@ -20428,6 +25968,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUpdateInput = {
@@ -20457,6 +25999,8 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateInput = {
@@ -20486,6 +26030,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingCreateManyInput = {
@@ -20566,6 +26112,485 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestCreateManyInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanCreateManyInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateCreateInput = {
+    id?: string
+    note: string
+    progressPct?: number
+    createdAt?: Date | string
+    actionPlan: ActionPlanCreateNestedOneWithoutUpdatesInput
+    updatedBy?: UserCreateNestedOneWithoutActionPlanUpdatesInput
+  }
+
+  export type ActionPlanUpdateUncheckedCreateInput = {
+    id?: string
+    actionPlanId: string
+    note: string
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ActionPlanUpdateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlan?: ActionPlanUpdateOneRequiredWithoutUpdatesNestedInput
+    updatedBy?: UserUpdateOneWithoutActionPlanUpdatesNestedInput
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionPlanId?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateCreateManyInput = {
+    id?: string
+    actionPlanId: string
+    note: string
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ActionPlanUpdateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionPlanId?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UuidFilter<$PrismaModel = never> = {
@@ -20670,6 +26695,24 @@ export namespace Prisma {
     none?: FindingWhereInput
   }
 
+  export type ControlTestListRelationFilter = {
+    every?: ControlTestWhereInput
+    some?: ControlTestWhereInput
+    none?: ControlTestWhereInput
+  }
+
+  export type ActionPlanListRelationFilter = {
+    every?: ActionPlanWhereInput
+    some?: ActionPlanWhereInput
+    none?: ActionPlanWhereInput
+  }
+
+  export type ActionPlanUpdateListRelationFilter = {
+    every?: ActionPlanUpdateWhereInput
+    some?: ActionPlanUpdateWhereInput
+    none?: ActionPlanUpdateWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -20704,6 +26747,18 @@ export namespace Prisma {
   }
 
   export type FindingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ControlTestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActionPlanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ActionPlanUpdateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21818,6 +27873,350 @@ export namespace Prisma {
     _max?: NestedEnumFindingStatusFilter<$PrismaModel>
   }
 
+  export type EnumControlTestStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestStatus | EnumControlTestStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumControlTestStatusFilter<$PrismaModel> | $Enums.ControlTestStatus
+  }
+
+  export type EnumControlTestOutcomeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestOutcome | EnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel> | $Enums.ControlTestOutcome | null
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FindingNullableRelationFilter = {
+    is?: FindingWhereInput | null
+    isNot?: FindingWhereInput | null
+  }
+
+  export type ControlTestCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    controlReference?: SortOrder
+    status?: SortOrder
+    outcome?: SortOrder
+    objective?: SortOrder
+    procedures?: SortOrder
+    criteria?: SortOrder
+    sampleDescription?: SortOrder
+    sampleSize?: SortOrder
+    expectedResult?: SortOrder
+    actualResult?: SortOrder
+    exceptions?: SortOrder
+    conclusion?: SortOrder
+    evidenceReference?: SortOrder
+    testerId?: SortOrder
+    testedAt?: SortOrder
+    testerNotes?: SortOrder
+    reviewerId?: SortOrder
+    reviewedAt?: SortOrder
+    reviewerNotes?: SortOrder
+    findingId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ControlTestAvgOrderByAggregateInput = {
+    sampleSize?: SortOrder
+  }
+
+  export type ControlTestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    controlReference?: SortOrder
+    status?: SortOrder
+    outcome?: SortOrder
+    objective?: SortOrder
+    procedures?: SortOrder
+    criteria?: SortOrder
+    sampleDescription?: SortOrder
+    sampleSize?: SortOrder
+    expectedResult?: SortOrder
+    actualResult?: SortOrder
+    exceptions?: SortOrder
+    conclusion?: SortOrder
+    evidenceReference?: SortOrder
+    testerId?: SortOrder
+    testedAt?: SortOrder
+    testerNotes?: SortOrder
+    reviewerId?: SortOrder
+    reviewedAt?: SortOrder
+    reviewerNotes?: SortOrder
+    findingId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ControlTestMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    riskId?: SortOrder
+    controlReference?: SortOrder
+    status?: SortOrder
+    outcome?: SortOrder
+    objective?: SortOrder
+    procedures?: SortOrder
+    criteria?: SortOrder
+    sampleDescription?: SortOrder
+    sampleSize?: SortOrder
+    expectedResult?: SortOrder
+    actualResult?: SortOrder
+    exceptions?: SortOrder
+    conclusion?: SortOrder
+    evidenceReference?: SortOrder
+    testerId?: SortOrder
+    testedAt?: SortOrder
+    testerNotes?: SortOrder
+    reviewerId?: SortOrder
+    reviewedAt?: SortOrder
+    reviewerNotes?: SortOrder
+    findingId?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ControlTestSumOrderByAggregateInput = {
+    sampleSize?: SortOrder
+  }
+
+  export type EnumControlTestStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestStatus | EnumControlTestStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumControlTestStatusWithAggregatesFilter<$PrismaModel> | $Enums.ControlTestStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumControlTestStatusFilter<$PrismaModel>
+    _max?: NestedEnumControlTestStatusFilter<$PrismaModel>
+  }
+
+  export type EnumControlTestOutcomeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestOutcome | EnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumControlTestOutcomeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ControlTestOutcome | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel>
+    _max?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumActionPlanPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanPriority | EnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanPriorityFilter<$PrismaModel> | $Enums.ActionPlanPriority
+  }
+
+  export type EnumActionPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanStatus | EnumActionPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanStatusFilter<$PrismaModel> | $Enums.ActionPlanStatus
+  }
+
+  export type ControlTestNullableRelationFilter = {
+    is?: ControlTestWhereInput | null
+    isNot?: ControlTestWhereInput | null
+  }
+
+  export type ActionPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    findingId?: SortOrder
+    controlTestId?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    responsibleOwnerId?: SortOrder
+    reviewerId?: SortOrder
+    targetDate?: SortOrder
+    completedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    managementJustification?: SortOrder
+    proposedRectification?: SortOrder
+    completionEvidence?: SortOrder
+    verificationNotes?: SortOrder
+    progressPct?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ActionPlanAvgOrderByAggregateInput = {
+    progressPct?: SortOrder
+  }
+
+  export type ActionPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    findingId?: SortOrder
+    controlTestId?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    responsibleOwnerId?: SortOrder
+    reviewerId?: SortOrder
+    targetDate?: SortOrder
+    completedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    managementJustification?: SortOrder
+    proposedRectification?: SortOrder
+    completionEvidence?: SortOrder
+    verificationNotes?: SortOrder
+    progressPct?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ActionPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    findingId?: SortOrder
+    controlTestId?: SortOrder
+    engagementId?: SortOrder
+    auditEntityId?: SortOrder
+    priority?: SortOrder
+    status?: SortOrder
+    responsibleOwnerId?: SortOrder
+    reviewerId?: SortOrder
+    targetDate?: SortOrder
+    completedAt?: SortOrder
+    verifiedAt?: SortOrder
+    verifiedById?: SortOrder
+    managementJustification?: SortOrder
+    proposedRectification?: SortOrder
+    completionEvidence?: SortOrder
+    verificationNotes?: SortOrder
+    progressPct?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ActionPlanSumOrderByAggregateInput = {
+    progressPct?: SortOrder
+  }
+
+  export type EnumActionPlanPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanPriority | EnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanPriorityWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanPriorityFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumActionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanStatus | EnumActionPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanStatusFilter<$PrismaModel>
+  }
+
+  export type ActionPlanRelationFilter = {
+    is?: ActionPlanWhereInput
+    isNot?: ActionPlanWhereInput
+  }
+
+  export type ActionPlanUpdateCountOrderByAggregateInput = {
+    id?: SortOrder
+    actionPlanId?: SortOrder
+    note?: SortOrder
+    progressPct?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ActionPlanUpdateAvgOrderByAggregateInput = {
+    progressPct?: SortOrder
+  }
+
+  export type ActionPlanUpdateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    actionPlanId?: SortOrder
+    note?: SortOrder
+    progressPct?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ActionPlanUpdateMinOrderByAggregateInput = {
+    id?: SortOrder
+    actionPlanId?: SortOrder
+    note?: SortOrder
+    progressPct?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ActionPlanUpdateSumOrderByAggregateInput = {
+    progressPct?: SortOrder
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -21972,6 +28371,76 @@ export namespace Prisma {
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
+  export type ControlTestCreateNestedManyWithoutTesterInput = {
+    create?: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput> | ControlTestCreateWithoutTesterInput[] | ControlTestUncheckedCreateWithoutTesterInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutTesterInput | ControlTestCreateOrConnectWithoutTesterInput[]
+    createMany?: ControlTestCreateManyTesterInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput> | ControlTestCreateWithoutReviewerInput[] | ControlTestUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutReviewerInput | ControlTestCreateOrConnectWithoutReviewerInput[]
+    createMany?: ControlTestCreateManyReviewerInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput> | ControlTestCreateWithoutCreatedByInput[] | ControlTestUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutCreatedByInput | ControlTestCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ControlTestCreateManyCreatedByInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput> | ControlTestCreateWithoutUpdatedByInput[] | ControlTestUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutUpdatedByInput | ControlTestCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ControlTestCreateManyUpdatedByInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutResponsibleOwnerInput = {
+    create?: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput> | ActionPlanCreateWithoutResponsibleOwnerInput[] | ActionPlanUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutResponsibleOwnerInput | ActionPlanCreateOrConnectWithoutResponsibleOwnerInput[]
+    createMany?: ActionPlanCreateManyResponsibleOwnerInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput> | ActionPlanCreateWithoutReviewerInput[] | ActionPlanUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutReviewerInput | ActionPlanCreateOrConnectWithoutReviewerInput[]
+    createMany?: ActionPlanCreateManyReviewerInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput> | ActionPlanCreateWithoutCreatedByInput[] | ActionPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutCreatedByInput | ActionPlanCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ActionPlanCreateManyCreatedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput> | ActionPlanCreateWithoutUpdatedByInput[] | ActionPlanUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatedByInput | ActionPlanCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ActionPlanCreateManyUpdatedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput> | ActionPlanCreateWithoutVerifiedByInput[] | ActionPlanUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutVerifiedByInput | ActionPlanCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: ActionPlanCreateManyVerifiedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput> | ActionPlanUpdateCreateWithoutUpdatedByInput[] | ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput | ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ActionPlanUpdateCreateManyUpdatedByInputEnvelope
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -22124,6 +28593,76 @@ export namespace Prisma {
     connectOrCreate?: FindingCreateOrConnectWithoutVerifiedByInput | FindingCreateOrConnectWithoutVerifiedByInput[]
     createMany?: FindingCreateManyVerifiedByInputEnvelope
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutTesterInput = {
+    create?: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput> | ControlTestCreateWithoutTesterInput[] | ControlTestUncheckedCreateWithoutTesterInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutTesterInput | ControlTestCreateOrConnectWithoutTesterInput[]
+    createMany?: ControlTestCreateManyTesterInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput> | ControlTestCreateWithoutReviewerInput[] | ControlTestUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutReviewerInput | ControlTestCreateOrConnectWithoutReviewerInput[]
+    createMany?: ControlTestCreateManyReviewerInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput> | ControlTestCreateWithoutCreatedByInput[] | ControlTestUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutCreatedByInput | ControlTestCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ControlTestCreateManyCreatedByInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput> | ControlTestCreateWithoutUpdatedByInput[] | ControlTestUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutUpdatedByInput | ControlTestCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ControlTestCreateManyUpdatedByInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput = {
+    create?: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput> | ActionPlanCreateWithoutResponsibleOwnerInput[] | ActionPlanUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutResponsibleOwnerInput | ActionPlanCreateOrConnectWithoutResponsibleOwnerInput[]
+    createMany?: ActionPlanCreateManyResponsibleOwnerInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput> | ActionPlanCreateWithoutReviewerInput[] | ActionPlanUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutReviewerInput | ActionPlanCreateOrConnectWithoutReviewerInput[]
+    createMany?: ActionPlanCreateManyReviewerInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput> | ActionPlanCreateWithoutCreatedByInput[] | ActionPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutCreatedByInput | ActionPlanCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ActionPlanCreateManyCreatedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput> | ActionPlanCreateWithoutUpdatedByInput[] | ActionPlanUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatedByInput | ActionPlanCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ActionPlanCreateManyUpdatedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput = {
+    create?: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput> | ActionPlanCreateWithoutVerifiedByInput[] | ActionPlanUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutVerifiedByInput | ActionPlanCreateOrConnectWithoutVerifiedByInput[]
+    createMany?: ActionPlanCreateManyVerifiedByInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput> | ActionPlanUpdateCreateWithoutUpdatedByInput[] | ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput | ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ActionPlanUpdateCreateManyUpdatedByInputEnvelope
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -22450,6 +28989,146 @@ export namespace Prisma {
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
+  export type ControlTestUpdateManyWithoutTesterNestedInput = {
+    create?: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput> | ControlTestCreateWithoutTesterInput[] | ControlTestUncheckedCreateWithoutTesterInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutTesterInput | ControlTestCreateOrConnectWithoutTesterInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutTesterInput | ControlTestUpsertWithWhereUniqueWithoutTesterInput[]
+    createMany?: ControlTestCreateManyTesterInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutTesterInput | ControlTestUpdateWithWhereUniqueWithoutTesterInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutTesterInput | ControlTestUpdateManyWithWhereWithoutTesterInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput> | ControlTestCreateWithoutReviewerInput[] | ControlTestUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutReviewerInput | ControlTestCreateOrConnectWithoutReviewerInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutReviewerInput | ControlTestUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: ControlTestCreateManyReviewerInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutReviewerInput | ControlTestUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutReviewerInput | ControlTestUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput> | ControlTestCreateWithoutCreatedByInput[] | ControlTestUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutCreatedByInput | ControlTestCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutCreatedByInput | ControlTestUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ControlTestCreateManyCreatedByInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutCreatedByInput | ControlTestUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutCreatedByInput | ControlTestUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput> | ControlTestCreateWithoutUpdatedByInput[] | ControlTestUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutUpdatedByInput | ControlTestCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutUpdatedByInput | ControlTestUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ControlTestCreateManyUpdatedByInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutUpdatedByInput | ControlTestUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutUpdatedByInput | ControlTestUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput> | ActionPlanCreateWithoutResponsibleOwnerInput[] | ActionPlanUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutResponsibleOwnerInput | ActionPlanCreateOrConnectWithoutResponsibleOwnerInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutResponsibleOwnerInput | ActionPlanUpsertWithWhereUniqueWithoutResponsibleOwnerInput[]
+    createMany?: ActionPlanCreateManyResponsibleOwnerInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutResponsibleOwnerInput | ActionPlanUpdateWithWhereUniqueWithoutResponsibleOwnerInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutResponsibleOwnerInput | ActionPlanUpdateManyWithWhereWithoutResponsibleOwnerInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput> | ActionPlanCreateWithoutReviewerInput[] | ActionPlanUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutReviewerInput | ActionPlanCreateOrConnectWithoutReviewerInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutReviewerInput | ActionPlanUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: ActionPlanCreateManyReviewerInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutReviewerInput | ActionPlanUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutReviewerInput | ActionPlanUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput> | ActionPlanCreateWithoutCreatedByInput[] | ActionPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutCreatedByInput | ActionPlanCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutCreatedByInput | ActionPlanUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ActionPlanCreateManyCreatedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutCreatedByInput | ActionPlanUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutCreatedByInput | ActionPlanUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput> | ActionPlanCreateWithoutUpdatedByInput[] | ActionPlanUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatedByInput | ActionPlanCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ActionPlanCreateManyUpdatedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutUpdatedByInput | ActionPlanUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput> | ActionPlanCreateWithoutVerifiedByInput[] | ActionPlanUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutVerifiedByInput | ActionPlanCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutVerifiedByInput | ActionPlanUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: ActionPlanCreateManyVerifiedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutVerifiedByInput | ActionPlanUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutVerifiedByInput | ActionPlanUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput> | ActionPlanUpdateCreateWithoutUpdatedByInput[] | ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput | ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ActionPlanUpdateUpsertWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ActionPlanUpdateCreateManyUpdatedByInputEnvelope
+    set?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    disconnect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    delete?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    update?: ActionPlanUpdateUpdateWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ActionPlanUpdateUpdateManyWithWhereWithoutUpdatedByInput | ActionPlanUpdateUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -22758,6 +29437,146 @@ export namespace Prisma {
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
+  export type ControlTestUncheckedUpdateManyWithoutTesterNestedInput = {
+    create?: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput> | ControlTestCreateWithoutTesterInput[] | ControlTestUncheckedCreateWithoutTesterInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutTesterInput | ControlTestCreateOrConnectWithoutTesterInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutTesterInput | ControlTestUpsertWithWhereUniqueWithoutTesterInput[]
+    createMany?: ControlTestCreateManyTesterInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutTesterInput | ControlTestUpdateWithWhereUniqueWithoutTesterInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutTesterInput | ControlTestUpdateManyWithWhereWithoutTesterInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput> | ControlTestCreateWithoutReviewerInput[] | ControlTestUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutReviewerInput | ControlTestCreateOrConnectWithoutReviewerInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutReviewerInput | ControlTestUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: ControlTestCreateManyReviewerInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutReviewerInput | ControlTestUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutReviewerInput | ControlTestUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput> | ControlTestCreateWithoutCreatedByInput[] | ControlTestUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutCreatedByInput | ControlTestCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutCreatedByInput | ControlTestUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ControlTestCreateManyCreatedByInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutCreatedByInput | ControlTestUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutCreatedByInput | ControlTestUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput> | ControlTestCreateWithoutUpdatedByInput[] | ControlTestUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutUpdatedByInput | ControlTestCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutUpdatedByInput | ControlTestUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ControlTestCreateManyUpdatedByInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutUpdatedByInput | ControlTestUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutUpdatedByInput | ControlTestUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput> | ActionPlanCreateWithoutResponsibleOwnerInput[] | ActionPlanUncheckedCreateWithoutResponsibleOwnerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutResponsibleOwnerInput | ActionPlanCreateOrConnectWithoutResponsibleOwnerInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutResponsibleOwnerInput | ActionPlanUpsertWithWhereUniqueWithoutResponsibleOwnerInput[]
+    createMany?: ActionPlanCreateManyResponsibleOwnerInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutResponsibleOwnerInput | ActionPlanUpdateWithWhereUniqueWithoutResponsibleOwnerInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutResponsibleOwnerInput | ActionPlanUpdateManyWithWhereWithoutResponsibleOwnerInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput> | ActionPlanCreateWithoutReviewerInput[] | ActionPlanUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutReviewerInput | ActionPlanCreateOrConnectWithoutReviewerInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutReviewerInput | ActionPlanUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: ActionPlanCreateManyReviewerInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutReviewerInput | ActionPlanUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutReviewerInput | ActionPlanUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput> | ActionPlanCreateWithoutCreatedByInput[] | ActionPlanUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutCreatedByInput | ActionPlanCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutCreatedByInput | ActionPlanUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ActionPlanCreateManyCreatedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutCreatedByInput | ActionPlanUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutCreatedByInput | ActionPlanUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput> | ActionPlanCreateWithoutUpdatedByInput[] | ActionPlanUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatedByInput | ActionPlanCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ActionPlanCreateManyUpdatedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutUpdatedByInput | ActionPlanUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput> | ActionPlanCreateWithoutVerifiedByInput[] | ActionPlanUncheckedCreateWithoutVerifiedByInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutVerifiedByInput | ActionPlanCreateOrConnectWithoutVerifiedByInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutVerifiedByInput | ActionPlanUpsertWithWhereUniqueWithoutVerifiedByInput[]
+    createMany?: ActionPlanCreateManyVerifiedByInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutVerifiedByInput | ActionPlanUpdateWithWhereUniqueWithoutVerifiedByInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutVerifiedByInput | ActionPlanUpdateManyWithWhereWithoutVerifiedByInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput> | ActionPlanUpdateCreateWithoutUpdatedByInput[] | ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput | ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ActionPlanUpdateUpsertWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ActionPlanUpdateCreateManyUpdatedByInputEnvelope
+    set?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    disconnect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    delete?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    update?: ActionPlanUpdateUpdateWithWhereUniqueWithoutUpdatedByInput | ActionPlanUpdateUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ActionPlanUpdateUpdateManyWithWhereWithoutUpdatedByInput | ActionPlanUpdateUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+  }
+
   export type UserRoleCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
@@ -23003,6 +29822,20 @@ export namespace Prisma {
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
+  export type ControlTestCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput> | ControlTestCreateWithoutAuditEntityInput[] | ControlTestUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutAuditEntityInput | ControlTestCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: ControlTestCreateManyAuditEntityInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput> | ActionPlanCreateWithoutAuditEntityInput[] | ActionPlanUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutAuditEntityInput | ActionPlanCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: ActionPlanCreateManyAuditEntityInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
   export type AuditUniverseUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -23036,6 +29869,20 @@ export namespace Prisma {
     connectOrCreate?: FindingCreateOrConnectWithoutAuditEntityInput | FindingCreateOrConnectWithoutAuditEntityInput[]
     createMany?: FindingCreateManyAuditEntityInputEnvelope
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput> | ControlTestCreateWithoutAuditEntityInput[] | ControlTestUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutAuditEntityInput | ControlTestCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: ControlTestCreateManyAuditEntityInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput> | ActionPlanCreateWithoutAuditEntityInput[] | ActionPlanUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutAuditEntityInput | ActionPlanCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: ActionPlanCreateManyAuditEntityInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
   export type EnumAuditEntityTypeFieldUpdateOperationsInput = {
@@ -23156,6 +30003,34 @@ export namespace Prisma {
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
+  export type ControlTestUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput> | ControlTestCreateWithoutAuditEntityInput[] | ControlTestUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutAuditEntityInput | ControlTestCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutAuditEntityInput | ControlTestUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: ControlTestCreateManyAuditEntityInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutAuditEntityInput | ControlTestUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutAuditEntityInput | ControlTestUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput> | ActionPlanCreateWithoutAuditEntityInput[] | ActionPlanUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutAuditEntityInput | ActionPlanCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutAuditEntityInput | ActionPlanUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: ActionPlanCreateManyAuditEntityInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput | ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutAuditEntityInput | ActionPlanUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
   export type AuditUniverseUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -23226,6 +30101,34 @@ export namespace Prisma {
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
+  export type ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput> | ControlTestCreateWithoutAuditEntityInput[] | ControlTestUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutAuditEntityInput | ControlTestCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutAuditEntityInput | ControlTestUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: ControlTestCreateManyAuditEntityInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutAuditEntityInput | ControlTestUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutAuditEntityInput | ControlTestUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput> | ActionPlanCreateWithoutAuditEntityInput[] | ActionPlanUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutAuditEntityInput | ActionPlanCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutAuditEntityInput | ActionPlanUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: ActionPlanCreateManyAuditEntityInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput | ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutAuditEntityInput | ActionPlanUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
   export type AuditUniverseCreateNestedOneWithoutRisksInput = {
     create?: XOR<AuditUniverseCreateWithoutRisksInput, AuditUniverseUncheckedCreateWithoutRisksInput>
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutRisksInput
@@ -23271,6 +30174,13 @@ export namespace Prisma {
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
   }
 
+  export type ControlTestCreateNestedManyWithoutRiskInput = {
+    create?: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput> | ControlTestCreateWithoutRiskInput[] | ControlTestUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutRiskInput | ControlTestCreateOrConnectWithoutRiskInput[]
+    createMany?: ControlTestCreateManyRiskInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
   export type RiskActionUncheckedCreateNestedManyWithoutRiskInput = {
     create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
     connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
@@ -23290,6 +30200,13 @@ export namespace Prisma {
     connectOrCreate?: EngagementCreateOrConnectWithoutRiskInput | EngagementCreateOrConnectWithoutRiskInput[]
     createMany?: EngagementCreateManyRiskInputEnvelope
     connect?: EngagementWhereUniqueInput | EngagementWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutRiskInput = {
+    create?: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput> | ControlTestCreateWithoutRiskInput[] | ControlTestUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutRiskInput | ControlTestCreateOrConnectWithoutRiskInput[]
+    createMany?: ControlTestCreateManyRiskInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -23388,6 +30305,20 @@ export namespace Prisma {
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
   }
 
+  export type ControlTestUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput> | ControlTestCreateWithoutRiskInput[] | ControlTestUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutRiskInput | ControlTestCreateOrConnectWithoutRiskInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutRiskInput | ControlTestUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: ControlTestCreateManyRiskInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutRiskInput | ControlTestUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutRiskInput | ControlTestUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
   export type RiskActionUncheckedUpdateManyWithoutRiskNestedInput = {
     create?: XOR<RiskActionCreateWithoutRiskInput, RiskActionUncheckedCreateWithoutRiskInput> | RiskActionCreateWithoutRiskInput[] | RiskActionUncheckedCreateWithoutRiskInput[]
     connectOrCreate?: RiskActionCreateOrConnectWithoutRiskInput | RiskActionCreateOrConnectWithoutRiskInput[]
@@ -23428,6 +30359,20 @@ export namespace Prisma {
     update?: EngagementUpdateWithWhereUniqueWithoutRiskInput | EngagementUpdateWithWhereUniqueWithoutRiskInput[]
     updateMany?: EngagementUpdateManyWithWhereWithoutRiskInput | EngagementUpdateManyWithWhereWithoutRiskInput[]
     deleteMany?: EngagementScalarWhereInput | EngagementScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutRiskNestedInput = {
+    create?: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput> | ControlTestCreateWithoutRiskInput[] | ControlTestUncheckedCreateWithoutRiskInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutRiskInput | ControlTestCreateOrConnectWithoutRiskInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutRiskInput | ControlTestUpsertWithWhereUniqueWithoutRiskInput[]
+    createMany?: ControlTestCreateManyRiskInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutRiskInput | ControlTestUpdateWithWhereUniqueWithoutRiskInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutRiskInput | ControlTestUpdateManyWithWhereWithoutRiskInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
   }
 
   export type RiskCreateNestedOneWithoutActionsInput = {
@@ -23664,6 +30609,20 @@ export namespace Prisma {
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
   }
 
+  export type ControlTestCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput> | ControlTestCreateWithoutEngagementInput[] | ControlTestUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEngagementInput | ControlTestCreateOrConnectWithoutEngagementInput[]
+    createMany?: ControlTestCreateManyEngagementInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput> | ActionPlanCreateWithoutEngagementInput[] | ActionPlanUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEngagementInput | ActionPlanCreateOrConnectWithoutEngagementInput[]
+    createMany?: ActionPlanCreateManyEngagementInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
   export type EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
@@ -23676,6 +30635,20 @@ export namespace Prisma {
     connectOrCreate?: FindingCreateOrConnectWithoutEngagementInput | FindingCreateOrConnectWithoutEngagementInput[]
     createMany?: FindingCreateManyEngagementInputEnvelope
     connect?: FindingWhereUniqueInput | FindingWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput> | ControlTestCreateWithoutEngagementInput[] | ControlTestUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEngagementInput | ControlTestCreateOrConnectWithoutEngagementInput[]
+    createMany?: ControlTestCreateManyEngagementInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput> | ActionPlanCreateWithoutEngagementInput[] | ActionPlanUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEngagementInput | ActionPlanCreateOrConnectWithoutEngagementInput[]
+    createMany?: ActionPlanCreateManyEngagementInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
   export type EnumEngagementTypeFieldUpdateOperationsInput = {
@@ -23782,6 +30755,34 @@ export namespace Prisma {
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
   }
 
+  export type ControlTestUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput> | ControlTestCreateWithoutEngagementInput[] | ControlTestUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEngagementInput | ControlTestCreateOrConnectWithoutEngagementInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutEngagementInput | ControlTestUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: ControlTestCreateManyEngagementInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutEngagementInput | ControlTestUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutEngagementInput | ControlTestUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput> | ActionPlanCreateWithoutEngagementInput[] | ActionPlanUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEngagementInput | ActionPlanCreateOrConnectWithoutEngagementInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutEngagementInput | ActionPlanUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: ActionPlanCreateManyEngagementInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutEngagementInput | ActionPlanUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutEngagementInput | ActionPlanUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
   export type EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
@@ -23808,6 +30809,34 @@ export namespace Prisma {
     update?: FindingUpdateWithWhereUniqueWithoutEngagementInput | FindingUpdateWithWhereUniqueWithoutEngagementInput[]
     updateMany?: FindingUpdateManyWithWhereWithoutEngagementInput | FindingUpdateManyWithWhereWithoutEngagementInput[]
     deleteMany?: FindingScalarWhereInput | FindingScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput> | ControlTestCreateWithoutEngagementInput[] | ControlTestUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEngagementInput | ControlTestCreateOrConnectWithoutEngagementInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutEngagementInput | ControlTestUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: ControlTestCreateManyEngagementInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutEngagementInput | ControlTestUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutEngagementInput | ControlTestUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput> | ActionPlanCreateWithoutEngagementInput[] | ActionPlanUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEngagementInput | ActionPlanCreateOrConnectWithoutEngagementInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutEngagementInput | ActionPlanUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: ActionPlanCreateManyEngagementInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutEngagementInput | ActionPlanUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutEngagementInput | ActionPlanUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
   }
 
   export type EngagementCreateNestedOneWithoutTeamMembersInput = {
@@ -23882,6 +30911,34 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
     connectOrCreate?: UserCreateOrConnectWithoutUpdatedFindingsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type ControlTestCreateNestedManyWithoutFindingInput = {
+    create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
+    createMany?: ControlTestCreateManyFindingInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanCreateNestedManyWithoutFindingInput = {
+    create?: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput> | ActionPlanCreateWithoutFindingInput[] | ActionPlanUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutFindingInput | ActionPlanCreateOrConnectWithoutFindingInput[]
+    createMany?: ActionPlanCreateManyFindingInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ControlTestUncheckedCreateNestedManyWithoutFindingInput = {
+    create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
+    createMany?: ControlTestCreateManyFindingInputEnvelope
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutFindingInput = {
+    create?: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput> | ActionPlanCreateWithoutFindingInput[] | ActionPlanUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutFindingInput | ActionPlanCreateOrConnectWithoutFindingInput[]
+    createMany?: ActionPlanCreateManyFindingInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
   export type EnumFindingCategoryFieldUpdateOperationsInput = {
@@ -23962,6 +31019,472 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedFindingsInput, UserUpdateWithoutUpdatedFindingsInput>, UserUncheckedUpdateWithoutUpdatedFindingsInput>
+  }
+
+  export type ControlTestUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutFindingInput | ControlTestUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: ControlTestCreateManyFindingInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutFindingInput | ControlTestUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutFindingInput | ControlTestUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput> | ActionPlanCreateWithoutFindingInput[] | ActionPlanUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutFindingInput | ActionPlanCreateOrConnectWithoutFindingInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutFindingInput | ActionPlanUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: ActionPlanCreateManyFindingInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutFindingInput | ActionPlanUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutFindingInput | ActionPlanUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
+    upsert?: ControlTestUpsertWithWhereUniqueWithoutFindingInput | ControlTestUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: ControlTestCreateManyFindingInputEnvelope
+    set?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    disconnect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    delete?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    connect?: ControlTestWhereUniqueInput | ControlTestWhereUniqueInput[]
+    update?: ControlTestUpdateWithWhereUniqueWithoutFindingInput | ControlTestUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: ControlTestUpdateManyWithWhereWithoutFindingInput | ControlTestUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput> | ActionPlanCreateWithoutFindingInput[] | ActionPlanUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutFindingInput | ActionPlanCreateOrConnectWithoutFindingInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutFindingInput | ActionPlanUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: ActionPlanCreateManyFindingInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutFindingInput | ActionPlanUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutFindingInput | ActionPlanUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type EngagementCreateNestedOneWithoutControlTestsInput = {
+    create?: XOR<EngagementCreateWithoutControlTestsInput, EngagementUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutControlTestsInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutControlTestsInput = {
+    create?: XOR<AuditUniverseCreateWithoutControlTestsInput, AuditUniverseUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutControlTestsInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type RiskCreateNestedOneWithoutControlTestsInput = {
+    create?: XOR<RiskCreateWithoutControlTestsInput, RiskUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutControlTestsInput
+    connect?: RiskWhereUniqueInput
+  }
+
+  export type FindingCreateNestedOneWithoutControlTestsInput = {
+    create?: XOR<FindingCreateWithoutControlTestsInput, FindingUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutControlTestsInput
+    connect?: FindingWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutTestedControlTestsInput = {
+    create?: XOR<UserCreateWithoutTestedControlTestsInput, UserUncheckedCreateWithoutTestedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTestedControlTestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewedControlTestsInput = {
+    create?: XOR<UserCreateWithoutReviewedControlTestsInput, UserUncheckedCreateWithoutReviewedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedControlTestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedControlTestsInput = {
+    create?: XOR<UserCreateWithoutCreatedControlTestsInput, UserUncheckedCreateWithoutCreatedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedControlTestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedControlTestsInput = {
+    create?: XOR<UserCreateWithoutUpdatedControlTestsInput, UserUncheckedCreateWithoutUpdatedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedControlTestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActionPlanCreateNestedManyWithoutControlTestInput = {
+    create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
+    createMany?: ActionPlanCreateManyControlTestInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type ActionPlanUncheckedCreateNestedManyWithoutControlTestInput = {
+    create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
+    createMany?: ActionPlanCreateManyControlTestInputEnvelope
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type EnumControlTestStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ControlTestStatus
+  }
+
+  export type NullableEnumControlTestOutcomeFieldUpdateOperationsInput = {
+    set?: $Enums.ControlTestOutcome | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EngagementUpdateOneWithoutControlTestsNestedInput = {
+    create?: XOR<EngagementCreateWithoutControlTestsInput, EngagementUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutControlTestsInput
+    upsert?: EngagementUpsertWithoutControlTestsInput
+    disconnect?: EngagementWhereInput | boolean
+    delete?: EngagementWhereInput | boolean
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutControlTestsInput, EngagementUpdateWithoutControlTestsInput>, EngagementUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type AuditUniverseUpdateOneWithoutControlTestsNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutControlTestsInput, AuditUniverseUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutControlTestsInput
+    upsert?: AuditUniverseUpsertWithoutControlTestsInput
+    disconnect?: AuditUniverseWhereInput | boolean
+    delete?: AuditUniverseWhereInput | boolean
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutControlTestsInput, AuditUniverseUpdateWithoutControlTestsInput>, AuditUniverseUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type RiskUpdateOneWithoutControlTestsNestedInput = {
+    create?: XOR<RiskCreateWithoutControlTestsInput, RiskUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: RiskCreateOrConnectWithoutControlTestsInput
+    upsert?: RiskUpsertWithoutControlTestsInput
+    disconnect?: RiskWhereInput | boolean
+    delete?: RiskWhereInput | boolean
+    connect?: RiskWhereUniqueInput
+    update?: XOR<XOR<RiskUpdateToOneWithWhereWithoutControlTestsInput, RiskUpdateWithoutControlTestsInput>, RiskUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type FindingUpdateOneWithoutControlTestsNestedInput = {
+    create?: XOR<FindingCreateWithoutControlTestsInput, FindingUncheckedCreateWithoutControlTestsInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutControlTestsInput
+    upsert?: FindingUpsertWithoutControlTestsInput
+    disconnect?: FindingWhereInput | boolean
+    delete?: FindingWhereInput | boolean
+    connect?: FindingWhereUniqueInput
+    update?: XOR<XOR<FindingUpdateToOneWithWhereWithoutControlTestsInput, FindingUpdateWithoutControlTestsInput>, FindingUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type UserUpdateOneWithoutTestedControlTestsNestedInput = {
+    create?: XOR<UserCreateWithoutTestedControlTestsInput, UserUncheckedCreateWithoutTestedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTestedControlTestsInput
+    upsert?: UserUpsertWithoutTestedControlTestsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTestedControlTestsInput, UserUpdateWithoutTestedControlTestsInput>, UserUncheckedUpdateWithoutTestedControlTestsInput>
+  }
+
+  export type UserUpdateOneWithoutReviewedControlTestsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedControlTestsInput, UserUncheckedCreateWithoutReviewedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedControlTestsInput
+    upsert?: UserUpsertWithoutReviewedControlTestsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedControlTestsInput, UserUpdateWithoutReviewedControlTestsInput>, UserUncheckedUpdateWithoutReviewedControlTestsInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedControlTestsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedControlTestsInput, UserUncheckedCreateWithoutCreatedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedControlTestsInput
+    upsert?: UserUpsertWithoutCreatedControlTestsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedControlTestsInput, UserUpdateWithoutCreatedControlTestsInput>, UserUncheckedUpdateWithoutCreatedControlTestsInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedControlTestsNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedControlTestsInput, UserUncheckedCreateWithoutUpdatedControlTestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedControlTestsInput
+    upsert?: UserUpsertWithoutUpdatedControlTestsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedControlTestsInput, UserUpdateWithoutUpdatedControlTestsInput>, UserUncheckedUpdateWithoutUpdatedControlTestsInput>
+  }
+
+  export type ActionPlanUpdateManyWithoutControlTestNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutControlTestInput | ActionPlanUpsertWithWhereUniqueWithoutControlTestInput[]
+    createMany?: ActionPlanCreateManyControlTestInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutControlTestInput | ActionPlanUpdateWithWhereUniqueWithoutControlTestInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutControlTestInput | ActionPlanUpdateManyWithWhereWithoutControlTestInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
+    upsert?: ActionPlanUpsertWithWhereUniqueWithoutControlTestInput | ActionPlanUpsertWithWhereUniqueWithoutControlTestInput[]
+    createMany?: ActionPlanCreateManyControlTestInputEnvelope
+    set?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    disconnect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    delete?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+    update?: ActionPlanUpdateWithWhereUniqueWithoutControlTestInput | ActionPlanUpdateWithWhereUniqueWithoutControlTestInput[]
+    updateMany?: ActionPlanUpdateManyWithWhereWithoutControlTestInput | ActionPlanUpdateManyWithWhereWithoutControlTestInput[]
+    deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type FindingCreateNestedOneWithoutActionPlansInput = {
+    create?: XOR<FindingCreateWithoutActionPlansInput, FindingUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutActionPlansInput
+    connect?: FindingWhereUniqueInput
+  }
+
+  export type ControlTestCreateNestedOneWithoutActionPlansInput = {
+    create?: XOR<ControlTestCreateWithoutActionPlansInput, ControlTestUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: ControlTestCreateOrConnectWithoutActionPlansInput
+    connect?: ControlTestWhereUniqueInput
+  }
+
+  export type EngagementCreateNestedOneWithoutActionPlansInput = {
+    create?: XOR<EngagementCreateWithoutActionPlansInput, EngagementUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutActionPlansInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutActionPlansInput = {
+    create?: XOR<AuditUniverseCreateWithoutActionPlansInput, AuditUniverseUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutActionPlansInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutResponsibleActionPlansInput = {
+    create?: XOR<UserCreateWithoutResponsibleActionPlansInput, UserUncheckedCreateWithoutResponsibleActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResponsibleActionPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewerActionPlansInput = {
+    create?: XOR<UserCreateWithoutReviewerActionPlansInput, UserUncheckedCreateWithoutReviewerActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewerActionPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutVerifiedActionPlansInput = {
+    create?: XOR<UserCreateWithoutVerifiedActionPlansInput, UserUncheckedCreateWithoutVerifiedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerifiedActionPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedActionPlansInput = {
+    create?: XOR<UserCreateWithoutCreatedActionPlansInput, UserUncheckedCreateWithoutCreatedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedActionPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedActionPlansInput = {
+    create?: XOR<UserCreateWithoutUpdatedActionPlansInput, UserUncheckedCreateWithoutUpdatedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedActionPlansInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActionPlanUpdateCreateNestedManyWithoutActionPlanInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
+    createMany?: ActionPlanUpdateCreateManyActionPlanInputEnvelope
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+  }
+
+  export type ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
+    createMany?: ActionPlanUpdateCreateManyActionPlanInputEnvelope
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+  }
+
+  export type EnumActionPlanPriorityFieldUpdateOperationsInput = {
+    set?: $Enums.ActionPlanPriority
+  }
+
+  export type EnumActionPlanStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ActionPlanStatus
+  }
+
+  export type FindingUpdateOneWithoutActionPlansNestedInput = {
+    create?: XOR<FindingCreateWithoutActionPlansInput, FindingUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutActionPlansInput
+    upsert?: FindingUpsertWithoutActionPlansInput
+    disconnect?: FindingWhereInput | boolean
+    delete?: FindingWhereInput | boolean
+    connect?: FindingWhereUniqueInput
+    update?: XOR<XOR<FindingUpdateToOneWithWhereWithoutActionPlansInput, FindingUpdateWithoutActionPlansInput>, FindingUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type ControlTestUpdateOneWithoutActionPlansNestedInput = {
+    create?: XOR<ControlTestCreateWithoutActionPlansInput, ControlTestUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: ControlTestCreateOrConnectWithoutActionPlansInput
+    upsert?: ControlTestUpsertWithoutActionPlansInput
+    disconnect?: ControlTestWhereInput | boolean
+    delete?: ControlTestWhereInput | boolean
+    connect?: ControlTestWhereUniqueInput
+    update?: XOR<XOR<ControlTestUpdateToOneWithWhereWithoutActionPlansInput, ControlTestUpdateWithoutActionPlansInput>, ControlTestUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type EngagementUpdateOneWithoutActionPlansNestedInput = {
+    create?: XOR<EngagementCreateWithoutActionPlansInput, EngagementUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutActionPlansInput
+    upsert?: EngagementUpsertWithoutActionPlansInput
+    disconnect?: EngagementWhereInput | boolean
+    delete?: EngagementWhereInput | boolean
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutActionPlansInput, EngagementUpdateWithoutActionPlansInput>, EngagementUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type AuditUniverseUpdateOneWithoutActionPlansNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutActionPlansInput, AuditUniverseUncheckedCreateWithoutActionPlansInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutActionPlansInput
+    upsert?: AuditUniverseUpsertWithoutActionPlansInput
+    disconnect?: AuditUniverseWhereInput | boolean
+    delete?: AuditUniverseWhereInput | boolean
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutActionPlansInput, AuditUniverseUpdateWithoutActionPlansInput>, AuditUniverseUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutResponsibleActionPlansNestedInput = {
+    create?: XOR<UserCreateWithoutResponsibleActionPlansInput, UserUncheckedCreateWithoutResponsibleActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResponsibleActionPlansInput
+    upsert?: UserUpsertWithoutResponsibleActionPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResponsibleActionPlansInput, UserUpdateWithoutResponsibleActionPlansInput>, UserUncheckedUpdateWithoutResponsibleActionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutReviewerActionPlansNestedInput = {
+    create?: XOR<UserCreateWithoutReviewerActionPlansInput, UserUncheckedCreateWithoutReviewerActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewerActionPlansInput
+    upsert?: UserUpsertWithoutReviewerActionPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewerActionPlansInput, UserUpdateWithoutReviewerActionPlansInput>, UserUncheckedUpdateWithoutReviewerActionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutVerifiedActionPlansNestedInput = {
+    create?: XOR<UserCreateWithoutVerifiedActionPlansInput, UserUncheckedCreateWithoutVerifiedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerifiedActionPlansInput
+    upsert?: UserUpsertWithoutVerifiedActionPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVerifiedActionPlansInput, UserUpdateWithoutVerifiedActionPlansInput>, UserUncheckedUpdateWithoutVerifiedActionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedActionPlansNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedActionPlansInput, UserUncheckedCreateWithoutCreatedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedActionPlansInput
+    upsert?: UserUpsertWithoutCreatedActionPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedActionPlansInput, UserUpdateWithoutCreatedActionPlansInput>, UserUncheckedUpdateWithoutCreatedActionPlansInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedActionPlansNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedActionPlansInput, UserUncheckedCreateWithoutUpdatedActionPlansInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedActionPlansInput
+    upsert?: UserUpsertWithoutUpdatedActionPlansInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedActionPlansInput, UserUpdateWithoutUpdatedActionPlansInput>, UserUncheckedUpdateWithoutUpdatedActionPlansInput>
+  }
+
+  export type ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
+    upsert?: ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput | ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput[]
+    createMany?: ActionPlanUpdateCreateManyActionPlanInputEnvelope
+    set?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    disconnect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    delete?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    update?: ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput | ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput[]
+    updateMany?: ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput | ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput[]
+    deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput = {
+    create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
+    upsert?: ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput | ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput[]
+    createMany?: ActionPlanUpdateCreateManyActionPlanInputEnvelope
+    set?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    disconnect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    delete?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+    update?: ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput | ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput[]
+    updateMany?: ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput | ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput[]
+    deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+  }
+
+  export type ActionPlanCreateNestedOneWithoutUpdatesInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatesInput, ActionPlanUncheckedCreateWithoutUpdatesInput>
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatesInput
+    connect?: ActionPlanWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutActionPlanUpdatesInput = {
+    create?: XOR<UserCreateWithoutActionPlanUpdatesInput, UserUncheckedCreateWithoutActionPlanUpdatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActionPlanUpdatesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ActionPlanUpdateOneRequiredWithoutUpdatesNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutUpdatesInput, ActionPlanUncheckedCreateWithoutUpdatesInput>
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutUpdatesInput
+    upsert?: ActionPlanUpsertWithoutUpdatesInput
+    connect?: ActionPlanWhereUniqueInput
+    update?: XOR<XOR<ActionPlanUpdateToOneWithWhereWithoutUpdatesInput, ActionPlanUpdateWithoutUpdatesInput>, ActionPlanUncheckedUpdateWithoutUpdatesInput>
+  }
+
+  export type UserUpdateOneWithoutActionPlanUpdatesNestedInput = {
+    create?: XOR<UserCreateWithoutActionPlanUpdatesInput, UserUncheckedCreateWithoutActionPlanUpdatesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutActionPlanUpdatesInput
+    upsert?: UserUpsertWithoutActionPlanUpdatesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActionPlanUpdatesInput, UserUpdateWithoutActionPlanUpdatesInput>, UserUncheckedUpdateWithoutActionPlanUpdatesInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -24431,6 +31954,101 @@ export namespace Prisma {
     _max?: NestedEnumFindingStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumControlTestStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestStatus | EnumControlTestStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumControlTestStatusFilter<$PrismaModel> | $Enums.ControlTestStatus
+  }
+
+  export type NestedEnumControlTestOutcomeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestOutcome | EnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel> | $Enums.ControlTestOutcome | null
+  }
+
+  export type NestedEnumControlTestStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestStatus | EnumControlTestStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ControlTestStatus[] | ListEnumControlTestStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumControlTestStatusWithAggregatesFilter<$PrismaModel> | $Enums.ControlTestStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumControlTestStatusFilter<$PrismaModel>
+    _max?: NestedEnumControlTestStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumControlTestOutcomeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ControlTestOutcome | EnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ControlTestOutcome[] | ListEnumControlTestOutcomeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumControlTestOutcomeNullableWithAggregatesFilter<$PrismaModel> | $Enums.ControlTestOutcome | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel>
+    _max?: NestedEnumControlTestOutcomeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumActionPlanPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanPriority | EnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanPriorityFilter<$PrismaModel> | $Enums.ActionPlanPriority
+  }
+
+  export type NestedEnumActionPlanStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanStatus | EnumActionPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanStatusFilter<$PrismaModel> | $Enums.ActionPlanStatus
+  }
+
+  export type NestedEnumActionPlanPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanPriority | EnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanPriority[] | ListEnumActionPlanPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanPriorityWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanPriorityFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanPriorityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumActionPlanStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ActionPlanStatus | EnumActionPlanStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ActionPlanStatus[] | ListEnumActionPlanStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumActionPlanStatusWithAggregatesFilter<$PrismaModel> | $Enums.ActionPlanStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumActionPlanStatusFilter<$PrismaModel>
+    _max?: NestedEnumActionPlanStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     assignedAt?: Date | string
     role: RoleCreateNestedOneWithoutUserRolesInput
@@ -24472,6 +32090,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutOwnerInput = {
@@ -24495,6 +32115,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutOwnerInput = {
@@ -24528,6 +32150,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutCreatedByInput = {
@@ -24551,6 +32175,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutCreatedByInput = {
@@ -24584,6 +32210,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutUpdatedByInput = {
@@ -24607,6 +32235,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutUpdatedByInput = {
@@ -24642,6 +32272,7 @@ export namespace Prisma {
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutOwnerInput = {
@@ -24667,6 +32298,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutOwnerInput = {
@@ -24702,6 +32334,7 @@ export namespace Prisma {
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutCreatedByInput = {
@@ -24727,6 +32360,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutCreatedByInput = {
@@ -24762,6 +32396,7 @@ export namespace Prisma {
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutUpdatedByInput = {
@@ -24787,6 +32422,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutUpdatedByInput = {
@@ -25099,6 +32735,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutLeadAuditorInput = {
@@ -25127,6 +32765,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutLeadAuditorInput = {
@@ -25165,6 +32805,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutCreatedByInput = {
@@ -25193,6 +32835,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutCreatedByInput = {
@@ -25231,6 +32875,8 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutUpdatedByInput = {
@@ -25259,6 +32905,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutUpdatedByInput = {
@@ -25297,6 +32945,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutClosedByInput = {
@@ -25325,6 +32975,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutClosedByInput = {
@@ -25385,6 +33037,8 @@ export namespace Prisma {
     managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutCreatedByInput = {
@@ -25413,6 +33067,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutCreatedByInput = {
@@ -25451,6 +33107,8 @@ export namespace Prisma {
     managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutUpdatedByInput = {
@@ -25479,6 +33137,8 @@ export namespace Prisma {
     createdById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutUpdatedByInput = {
@@ -25517,6 +33177,8 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutResponsibleOwnerInput = {
@@ -25545,6 +33207,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutResponsibleOwnerInput = {
@@ -25583,6 +33247,8 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutManagementRespondedByInput = {
@@ -25611,6 +33277,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutManagementRespondedByInput = {
@@ -25649,6 +33317,8 @@ export namespace Prisma {
     managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutVerifiedByInput = {
@@ -25677,6 +33347,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutVerifiedByInput = {
@@ -25686,6 +33358,666 @@ export namespace Prisma {
 
   export type FindingCreateManyVerifiedByInputEnvelope = {
     data: FindingCreateManyVerifiedByInput | FindingCreateManyVerifiedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutTesterInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutTesterInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutTesterInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput>
+  }
+
+  export type ControlTestCreateManyTesterInputEnvelope = {
+    data: ControlTestCreateManyTesterInput | ControlTestCreateManyTesterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutReviewerInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type ControlTestCreateManyReviewerInputEnvelope = {
+    data: ControlTestCreateManyReviewerInput | ControlTestCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutCreatedByInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ControlTestCreateManyCreatedByInputEnvelope = {
+    data: ControlTestCreateManyCreatedByInput | ControlTestCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutUpdatedByInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ControlTestCreateManyUpdatedByInputEnvelope = {
+    data: ControlTestCreateManyUpdatedByInput | ControlTestCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutResponsibleOwnerInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput>
+  }
+
+  export type ActionPlanCreateManyResponsibleOwnerInputEnvelope = {
+    data: ActionPlanCreateManyResponsibleOwnerInput | ActionPlanCreateManyResponsibleOwnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutReviewerInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type ActionPlanCreateManyReviewerInputEnvelope = {
+    data: ActionPlanCreateManyReviewerInput | ActionPlanCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutCreatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ActionPlanCreateManyCreatedByInputEnvelope = {
+    data: ActionPlanCreateManyCreatedByInput | ActionPlanCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutUpdatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanCreateManyUpdatedByInputEnvelope = {
+    data: ActionPlanCreateManyUpdatedByInput | ActionPlanCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutVerifiedByInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type ActionPlanCreateManyVerifiedByInputEnvelope = {
+    data: ActionPlanCreateManyVerifiedByInput | ActionPlanCreateManyVerifiedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanUpdateCreateWithoutUpdatedByInput = {
+    id?: string
+    note: string
+    progressPct?: number
+    createdAt?: Date | string
+    actionPlan: ActionPlanCreateNestedOneWithoutUpdatesInput
+  }
+
+  export type ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    actionPlanId: string
+    note: string
+    progressPct?: number
+    createdAt?: Date | string
+  }
+
+  export type ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    create: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateCreateManyUpdatedByInputEnvelope = {
+    data: ActionPlanUpdateCreateManyUpdatedByInput | ActionPlanUpdateCreateManyUpdatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -26214,6 +34546,245 @@ export namespace Prisma {
     data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutVerifiedByInput>
   }
 
+  export type ControlTestUpsertWithWhereUniqueWithoutTesterInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutTesterInput, ControlTestUncheckedUpdateWithoutTesterInput>
+    create: XOR<ControlTestCreateWithoutTesterInput, ControlTestUncheckedCreateWithoutTesterInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutTesterInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutTesterInput, ControlTestUncheckedUpdateWithoutTesterInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutTesterInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutTesterInput>
+  }
+
+  export type ControlTestScalarWhereInput = {
+    AND?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+    OR?: ControlTestScalarWhereInput[]
+    NOT?: ControlTestScalarWhereInput | ControlTestScalarWhereInput[]
+    id?: UuidFilter<"ControlTest"> | string
+    reference?: StringFilter<"ControlTest"> | string
+    title?: StringFilter<"ControlTest"> | string
+    engagementId?: UuidNullableFilter<"ControlTest"> | string | null
+    auditEntityId?: UuidNullableFilter<"ControlTest"> | string | null
+    riskId?: UuidNullableFilter<"ControlTest"> | string | null
+    controlReference?: StringNullableFilter<"ControlTest"> | string | null
+    status?: EnumControlTestStatusFilter<"ControlTest"> | $Enums.ControlTestStatus
+    outcome?: EnumControlTestOutcomeNullableFilter<"ControlTest"> | $Enums.ControlTestOutcome | null
+    objective?: StringFilter<"ControlTest"> | string
+    procedures?: StringFilter<"ControlTest"> | string
+    criteria?: StringNullableFilter<"ControlTest"> | string | null
+    sampleDescription?: StringNullableFilter<"ControlTest"> | string | null
+    sampleSize?: IntNullableFilter<"ControlTest"> | number | null
+    expectedResult?: StringNullableFilter<"ControlTest"> | string | null
+    actualResult?: StringNullableFilter<"ControlTest"> | string | null
+    exceptions?: StringNullableFilter<"ControlTest"> | string | null
+    conclusion?: StringNullableFilter<"ControlTest"> | string | null
+    evidenceReference?: StringNullableFilter<"ControlTest"> | string | null
+    testerId?: UuidNullableFilter<"ControlTest"> | string | null
+    testedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    testerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    reviewerId?: UuidNullableFilter<"ControlTest"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"ControlTest"> | Date | string | null
+    reviewerNotes?: StringNullableFilter<"ControlTest"> | string | null
+    findingId?: UuidNullableFilter<"ControlTest"> | string | null
+    createdById?: UuidNullableFilter<"ControlTest"> | string | null
+    updatedById?: UuidNullableFilter<"ControlTest"> | string | null
+    createdAt?: DateTimeFilter<"ControlTest"> | Date | string
+    updatedAt?: DateTimeFilter<"ControlTest"> | Date | string
+  }
+
+  export type ControlTestUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutReviewerInput, ControlTestUncheckedUpdateWithoutReviewerInput>
+    create: XOR<ControlTestCreateWithoutReviewerInput, ControlTestUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutReviewerInput, ControlTestUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutReviewerInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutReviewerInput>
+  }
+
+  export type ControlTestUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutCreatedByInput, ControlTestUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ControlTestCreateWithoutCreatedByInput, ControlTestUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutCreatedByInput, ControlTestUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ControlTestUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutUpdatedByInput, ControlTestUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<ControlTestCreateWithoutUpdatedByInput, ControlTestUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutUpdatedByInput, ControlTestUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutResponsibleOwnerInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutResponsibleOwnerInput, ActionPlanUncheckedUpdateWithoutResponsibleOwnerInput>
+    create: XOR<ActionPlanCreateWithoutResponsibleOwnerInput, ActionPlanUncheckedCreateWithoutResponsibleOwnerInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutResponsibleOwnerInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutResponsibleOwnerInput, ActionPlanUncheckedUpdateWithoutResponsibleOwnerInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutResponsibleOwnerInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerInput>
+  }
+
+  export type ActionPlanScalarWhereInput = {
+    AND?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+    OR?: ActionPlanScalarWhereInput[]
+    NOT?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+    id?: UuidFilter<"ActionPlan"> | string
+    reference?: StringFilter<"ActionPlan"> | string
+    title?: StringFilter<"ActionPlan"> | string
+    description?: StringFilter<"ActionPlan"> | string
+    findingId?: UuidNullableFilter<"ActionPlan"> | string | null
+    controlTestId?: UuidNullableFilter<"ActionPlan"> | string | null
+    engagementId?: UuidNullableFilter<"ActionPlan"> | string | null
+    auditEntityId?: UuidNullableFilter<"ActionPlan"> | string | null
+    priority?: EnumActionPlanPriorityFilter<"ActionPlan"> | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFilter<"ActionPlan"> | $Enums.ActionPlanStatus
+    responsibleOwnerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    reviewerId?: UuidNullableFilter<"ActionPlan"> | string | null
+    targetDate?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedAt?: DateTimeNullableFilter<"ActionPlan"> | Date | string | null
+    verifiedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    managementJustification?: StringNullableFilter<"ActionPlan"> | string | null
+    proposedRectification?: StringNullableFilter<"ActionPlan"> | string | null
+    completionEvidence?: StringNullableFilter<"ActionPlan"> | string | null
+    verificationNotes?: StringNullableFilter<"ActionPlan"> | string | null
+    progressPct?: IntFilter<"ActionPlan"> | number
+    createdById?: UuidNullableFilter<"ActionPlan"> | string | null
+    updatedById?: UuidNullableFilter<"ActionPlan"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"ActionPlan"> | Date | string
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutReviewerInput, ActionPlanUncheckedUpdateWithoutReviewerInput>
+    create: XOR<ActionPlanCreateWithoutReviewerInput, ActionPlanUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutReviewerInput, ActionPlanUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutReviewerInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutReviewerInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutCreatedByInput, ActionPlanUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ActionPlanCreateWithoutCreatedByInput, ActionPlanUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutCreatedByInput, ActionPlanUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutUpdatedByInput, ActionPlanUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<ActionPlanCreateWithoutUpdatedByInput, ActionPlanUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutUpdatedByInput, ActionPlanUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutVerifiedByInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutVerifiedByInput, ActionPlanUncheckedUpdateWithoutVerifiedByInput>
+    create: XOR<ActionPlanCreateWithoutVerifiedByInput, ActionPlanUncheckedCreateWithoutVerifiedByInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutVerifiedByInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutVerifiedByInput, ActionPlanUncheckedUpdateWithoutVerifiedByInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutVerifiedByInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutVerifiedByInput>
+  }
+
+  export type ActionPlanUpdateUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    update: XOR<ActionPlanUpdateUpdateWithoutUpdatedByInput, ActionPlanUpdateUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<ActionPlanUpdateCreateWithoutUpdatedByInput, ActionPlanUpdateUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    data: XOR<ActionPlanUpdateUpdateWithoutUpdatedByInput, ActionPlanUpdateUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: ActionPlanUpdateScalarWhereInput
+    data: XOR<ActionPlanUpdateUpdateManyMutationInput, ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type ActionPlanUpdateScalarWhereInput = {
+    AND?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+    OR?: ActionPlanUpdateScalarWhereInput[]
+    NOT?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+    id?: UuidFilter<"ActionPlanUpdate"> | string
+    actionPlanId?: UuidFilter<"ActionPlanUpdate"> | string
+    note?: StringFilter<"ActionPlanUpdate"> | string
+    progressPct?: IntFilter<"ActionPlanUpdate"> | number
+    updatedById?: UuidNullableFilter<"ActionPlanUpdate"> | string | null
+    createdAt?: DateTimeFilter<"ActionPlanUpdate"> | Date | string
+  }
+
   export type UserRoleCreateWithoutRoleInput = {
     assignedAt?: Date | string
     user: UserCreateNestedOneWithoutUserRolesInput
@@ -26362,6 +34933,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -26395,6 +34976,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -26467,6 +35058,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -26500,6 +35101,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -26652,6 +35263,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutChildrenInput = {
@@ -26675,6 +35288,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutChildrenInput = {
@@ -26703,6 +35318,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutParentInput = {
@@ -26726,6 +35343,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutParentInput = {
@@ -26769,6 +35388,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedAuditEntitiesInput = {
@@ -26802,6 +35431,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedAuditEntitiesInput = {
@@ -26840,6 +35479,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditEntitiesInput = {
@@ -26873,6 +35522,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditEntitiesInput = {
@@ -26911,6 +35570,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditEntitiesInput = {
@@ -26944,6 +35613,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditEntitiesInput = {
@@ -26974,6 +35653,7 @@ export namespace Prisma {
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutAuditEntityInput = {
@@ -26999,6 +35679,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutAuditEntityInput = {
@@ -27097,6 +35778,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditEntityInput = {
@@ -27125,6 +35808,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditEntityInput = {
@@ -27163,6 +35848,8 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutAuditEntityInput = {
@@ -27191,6 +35878,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutAuditEntityInput = {
@@ -27200,6 +35889,148 @@ export namespace Prisma {
 
   export type FindingCreateManyAuditEntityInputEnvelope = {
     data: FindingCreateManyAuditEntityInput | FindingCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutAuditEntityInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type ControlTestCreateManyAuditEntityInputEnvelope = {
+    data: ControlTestCreateManyAuditEntityInput | ControlTestCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutAuditEntityInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type ActionPlanCreateManyAuditEntityInputEnvelope = {
+    data: ActionPlanCreateManyAuditEntityInput | ActionPlanCreateManyAuditEntityInput[]
     skipDuplicates?: boolean
   }
 
@@ -27235,6 +36066,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutChildrenInput = {
@@ -27258,6 +36091,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUpsertWithWhereUniqueWithoutParentInput = {
@@ -27318,6 +36153,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedAuditEntitiesInput = {
@@ -27351,6 +36196,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditEntitiesInput = {
@@ -27395,6 +36250,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditEntitiesInput = {
@@ -27428,6 +36293,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditEntitiesInput = {
@@ -27472,6 +36347,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput = {
@@ -27505,6 +36390,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RiskUpsertWithWhereUniqueWithoutAuditEntityInput = {
@@ -27571,6 +36466,38 @@ export namespace Prisma {
     data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutAuditEntityInput>
   }
 
+  export type ControlTestUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutAuditEntityInput, ControlTestUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<ControlTestCreateWithoutAuditEntityInput, ControlTestUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutAuditEntityInput, ControlTestUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutAuditEntityInput, ActionPlanUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<ActionPlanCreateWithoutAuditEntityInput, ActionPlanUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutAuditEntityInput, ActionPlanUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
   export type AuditUniverseCreateWithoutRisksInput = {
     id?: string
     code: string
@@ -27592,6 +36519,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutRisksInput = {
@@ -27615,6 +36544,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutRisksInput = {
@@ -27653,6 +36584,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedRisksInput = {
@@ -27686,6 +36627,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedRisksInput = {
@@ -27724,6 +36675,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedRisksInput = {
@@ -27757,6 +36718,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedRisksInput = {
@@ -27795,6 +36766,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedRisksInput = {
@@ -27828,6 +36809,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedRisksInput = {
@@ -27955,6 +36946,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutRiskInput = {
@@ -27983,6 +36976,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutRiskInput = {
@@ -27992,6 +36987,82 @@ export namespace Prisma {
 
   export type EngagementCreateManyRiskInputEnvelope = {
     data: EngagementCreateManyRiskInput | EngagementCreateManyRiskInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutRiskInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput>
+  }
+
+  export type ControlTestCreateManyRiskInputEnvelope = {
+    data: ControlTestCreateManyRiskInput | ControlTestCreateManyRiskInput[]
     skipDuplicates?: boolean
   }
 
@@ -28027,6 +37098,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutRisksInput = {
@@ -28050,6 +37123,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutOwnedRisksInput = {
@@ -28094,6 +37169,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedRisksInput = {
@@ -28127,6 +37212,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedRisksInput = {
@@ -28171,6 +37266,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedRisksInput = {
@@ -28204,6 +37309,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedRisksInput = {
@@ -28248,6 +37363,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedRisksInput = {
@@ -28281,6 +37406,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RiskActionUpsertWithWhereUniqueWithoutRiskInput = {
@@ -28331,6 +37466,22 @@ export namespace Prisma {
     data: XOR<EngagementUpdateManyMutationInput, EngagementUncheckedUpdateManyWithoutRiskInput>
   }
 
+  export type ControlTestUpsertWithWhereUniqueWithoutRiskInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutRiskInput, ControlTestUncheckedUpdateWithoutRiskInput>
+    create: XOR<ControlTestCreateWithoutRiskInput, ControlTestUncheckedCreateWithoutRiskInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutRiskInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutRiskInput, ControlTestUncheckedUpdateWithoutRiskInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutRiskInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutRiskInput>
+  }
+
   export type RiskCreateWithoutActionsInput = {
     id?: string
     title: string
@@ -28354,6 +37505,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutActionsInput = {
@@ -28379,6 +37531,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutActionsInput = {
@@ -28417,6 +37570,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedActionsInput = {
@@ -28450,6 +37613,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedActionsInput = {
@@ -28491,6 +37664,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutActionsInput = {
@@ -28516,6 +37690,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type UserUpsertWithoutAssignedActionsInput = {
@@ -28560,6 +37735,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedActionsInput = {
@@ -28593,6 +37778,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type AuditUniverseCreateWithoutAuditPlansInput = {
@@ -28616,6 +37811,8 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutAuditPlansInput = {
@@ -28639,6 +37836,8 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutAuditPlansInput = {
@@ -28669,6 +37868,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     engagements?: EngagementCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutAuditPlansInput = {
@@ -28694,6 +37894,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutAuditPlansInput = {
@@ -28732,6 +37933,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedAuditPlansInput = {
@@ -28765,6 +37976,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedAuditPlansInput = {
@@ -28803,6 +38024,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadAuditPlansInput = {
@@ -28836,6 +38067,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadAuditPlansInput = {
@@ -28874,6 +38115,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditPlansInput = {
@@ -28907,6 +38158,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditPlansInput = {
@@ -28945,6 +38206,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditPlansInput = {
@@ -28978,6 +38249,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditPlansInput = {
@@ -29011,6 +38292,8 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditPlanInput = {
@@ -29039,6 +38322,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditPlanInput = {
@@ -29083,6 +38368,8 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutAuditPlansInput = {
@@ -29106,6 +38393,8 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutAuditPlansInput = {
@@ -29142,6 +38431,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutAuditPlansInput = {
@@ -29167,6 +38457,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type UserUpsertWithoutApprovedAuditPlansInput = {
@@ -29211,6 +38502,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedAuditPlansInput = {
@@ -29244,6 +38545,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutLeadAuditPlansInput = {
@@ -29288,6 +38599,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadAuditPlansInput = {
@@ -29321,6 +38642,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditPlansInput = {
@@ -29365,6 +38696,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditPlansInput = {
@@ -29398,6 +38739,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditPlansInput = {
@@ -29442,6 +38793,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditPlansInput = {
@@ -29475,6 +38836,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementUpsertWithWhereUniqueWithoutAuditPlanInput = {
@@ -29569,6 +38940,8 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutEngagementsInput = {
@@ -29592,6 +38965,8 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutEngagementsInput = {
@@ -29622,6 +38997,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
     actions?: RiskActionCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestCreateNestedManyWithoutRiskInput
   }
 
   export type RiskUncheckedCreateWithoutEngagementsInput = {
@@ -29647,6 +39023,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutRiskInput
   }
 
   export type RiskCreateOrConnectWithoutEngagementsInput = {
@@ -29685,6 +39062,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadEngagementsInput = {
@@ -29718,6 +39105,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadEngagementsInput = {
@@ -29756,6 +39153,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedEngagementsInput = {
@@ -29789,6 +39196,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedEngagementsInput = {
@@ -29827,6 +39244,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedEngagementsInput = {
@@ -29860,6 +39287,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedEngagementsInput = {
@@ -29898,6 +39335,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedEngagementsInput = {
@@ -29931,6 +39378,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedEngagementsInput = {
@@ -29986,6 +39443,8 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutEngagementInput = {
@@ -30014,6 +39473,8 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutEngagementInput = {
@@ -30023,6 +39484,148 @@ export namespace Prisma {
 
   export type FindingCreateManyEngagementInputEnvelope = {
     data: FindingCreateManyEngagementInput | FindingCreateManyEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ControlTestCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutEngagementInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type ControlTestCreateManyEngagementInputEnvelope = {
+    data: ControlTestCreateManyEngagementInput | ControlTestCreateManyEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutEngagementInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type ActionPlanCreateManyEngagementInputEnvelope = {
+    data: ActionPlanCreateManyEngagementInput | ActionPlanCreateManyEngagementInput[]
     skipDuplicates?: boolean
   }
 
@@ -30119,6 +39722,8 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutEngagementsInput = {
@@ -30142,6 +39747,8 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutEngagementsInput = {
@@ -30178,6 +39785,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutEngagementsInput = {
@@ -30203,6 +39811,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type UserUpsertWithoutLeadEngagementsInput = {
@@ -30247,6 +39856,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadEngagementsInput = {
@@ -30280,6 +39899,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutClosedEngagementsInput = {
@@ -30324,6 +39953,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedEngagementsInput = {
@@ -30357,6 +39996,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedEngagementsInput = {
@@ -30401,6 +40050,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedEngagementsInput = {
@@ -30434,6 +40093,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedEngagementsInput = {
@@ -30478,6 +40147,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedEngagementsInput = {
@@ -30511,6 +40190,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput = {
@@ -30545,6 +40234,38 @@ export namespace Prisma {
     data: XOR<FindingUpdateManyMutationInput, FindingUncheckedUpdateManyWithoutEngagementInput>
   }
 
+  export type ControlTestUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutEngagementInput, ControlTestUncheckedUpdateWithoutEngagementInput>
+    create: XOR<ControlTestCreateWithoutEngagementInput, ControlTestUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutEngagementInput, ControlTestUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutEngagementInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutEngagementInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutEngagementInput, ActionPlanUncheckedUpdateWithoutEngagementInput>
+    create: XOR<ActionPlanCreateWithoutEngagementInput, ActionPlanUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutEngagementInput, ActionPlanUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutEngagementInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutEngagementInput>
+  }
+
   export type EngagementCreateWithoutTeamMembersInput = {
     id?: string
     reference: string
@@ -30571,6 +40292,8 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutTeamMembersInput = {
@@ -30599,6 +40322,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutTeamMembersInput = {
@@ -30637,6 +40362,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutEngagementMembershipsInput = {
@@ -30670,6 +40405,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutEngagementMembershipsInput = {
@@ -30714,6 +40459,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutTeamMembersInput = {
@@ -30742,6 +40489,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type UserUpsertWithoutEngagementMembershipsInput = {
@@ -30786,6 +40535,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEngagementMembershipsInput = {
@@ -30819,6 +40578,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementCreateWithoutFindingsInput = {
@@ -30847,6 +40616,8 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutFindingsInput = {
@@ -30875,6 +40646,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutFindingsInput = {
@@ -30903,6 +40676,8 @@ export namespace Prisma {
     risks?: RiskCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutFindingsInput = {
@@ -30926,6 +40701,8 @@ export namespace Prisma {
     risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
     auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutFindingsInput = {
@@ -30964,6 +40741,16 @@ export namespace Prisma {
     updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutResponsibleFindingsInput = {
@@ -30997,6 +40784,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutResponsibleFindingsInput = {
@@ -31035,6 +40832,16 @@ export namespace Prisma {
     updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutManagementResponseFindingsInput = {
@@ -31068,6 +40875,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutManagementResponseFindingsInput = {
@@ -31106,6 +40923,16 @@ export namespace Prisma {
     updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedFindingsInput = {
@@ -31139,6 +40966,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedFindingsInput = {
@@ -31177,6 +41014,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedFindingsInput = {
@@ -31210,6 +41057,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedFindingsInput = {
@@ -31248,6 +41105,16 @@ export namespace Prisma {
     responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedFindingsInput = {
@@ -31281,11 +41148,163 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
     managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
     verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedFindingsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutUpdatedFindingsInput, UserUncheckedCreateWithoutUpdatedFindingsInput>
+  }
+
+  export type ControlTestCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutFindingInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput>
+  }
+
+  export type ControlTestCreateManyFindingInputEnvelope = {
+    data: ControlTestCreateManyFindingInput | ControlTestCreateManyFindingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ActionPlanCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutFindingInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput>
+  }
+
+  export type ActionPlanCreateManyFindingInputEnvelope = {
+    data: ActionPlanCreateManyFindingInput | ActionPlanCreateManyFindingInput[]
+    skipDuplicates?: boolean
   }
 
   export type EngagementUpsertWithoutFindingsInput = {
@@ -31325,6 +41344,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutFindingsInput = {
@@ -31353,6 +41374,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type AuditUniverseUpsertWithoutFindingsInput = {
@@ -31387,6 +41410,8 @@ export namespace Prisma {
     risks?: RiskUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutFindingsInput = {
@@ -31410,6 +41435,8 @@ export namespace Prisma {
     risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutResponsibleFindingsInput = {
@@ -31454,6 +41481,16 @@ export namespace Prisma {
     updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResponsibleFindingsInput = {
@@ -31487,6 +41524,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutManagementResponseFindingsInput = {
@@ -31531,6 +41578,16 @@ export namespace Prisma {
     updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutManagementResponseFindingsInput = {
@@ -31564,6 +41621,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedFindingsInput = {
@@ -31608,6 +41675,16 @@ export namespace Prisma {
     updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedFindingsInput = {
@@ -31641,6 +41718,16 @@ export namespace Prisma {
     updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedFindingsInput = {
@@ -31685,6 +41772,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedFindingsInput = {
@@ -31718,6 +41815,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedFindingsInput = {
@@ -31762,6 +41869,16 @@ export namespace Prisma {
     responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedFindingsInput = {
@@ -31795,6 +41912,3224 @@ export namespace Prisma {
     responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
     managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
     verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type ControlTestUpsertWithWhereUniqueWithoutFindingInput = {
+    where: ControlTestWhereUniqueInput
+    update: XOR<ControlTestUpdateWithoutFindingInput, ControlTestUncheckedUpdateWithoutFindingInput>
+    create: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput>
+  }
+
+  export type ControlTestUpdateWithWhereUniqueWithoutFindingInput = {
+    where: ControlTestWhereUniqueInput
+    data: XOR<ControlTestUpdateWithoutFindingInput, ControlTestUncheckedUpdateWithoutFindingInput>
+  }
+
+  export type ControlTestUpdateManyWithWhereWithoutFindingInput = {
+    where: ControlTestScalarWhereInput
+    data: XOR<ControlTestUpdateManyMutationInput, ControlTestUncheckedUpdateManyWithoutFindingInput>
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutFindingInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutFindingInput, ActionPlanUncheckedUpdateWithoutFindingInput>
+    create: XOR<ActionPlanCreateWithoutFindingInput, ActionPlanUncheckedCreateWithoutFindingInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutFindingInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutFindingInput, ActionPlanUncheckedUpdateWithoutFindingInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutFindingInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutFindingInput>
+  }
+
+  export type EngagementCreateWithoutControlTestsInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutControlTestsInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutControlTestsInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutControlTestsInput, EngagementUncheckedCreateWithoutControlTestsInput>
+  }
+
+  export type AuditUniverseCreateWithoutControlTestsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutControlTestsInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutControlTestsInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutControlTestsInput, AuditUniverseUncheckedCreateWithoutControlTestsInput>
+  }
+
+  export type RiskCreateWithoutControlTestsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditEntity: AuditUniverseCreateNestedOneWithoutRisksInput
+    owner?: UserCreateNestedOneWithoutOwnedRisksInput
+    createdBy?: UserCreateNestedOneWithoutCreatedRisksInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedRisksInput
+    actions?: RiskActionCreateNestedManyWithoutRiskInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutRiskInput
+    engagements?: EngagementCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskUncheckedCreateWithoutControlTestsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    auditEntityId: string
+    inherentLikelihood?: number
+    inherentImpact?: number
+    inherentScore?: number
+    inherentLevel?: $Enums.RiskLevel
+    existingControls?: string | null
+    controlEffectiveness?: number
+    residualScore?: number
+    residualLevel?: $Enums.RiskLevel
+    status?: $Enums.RiskStatus
+    riskCategory?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actions?: RiskActionUncheckedCreateNestedManyWithoutRiskInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutRiskInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutRiskInput
+  }
+
+  export type RiskCreateOrConnectWithoutControlTestsInput = {
+    where: RiskWhereUniqueInput
+    create: XOR<RiskCreateWithoutControlTestsInput, RiskUncheckedCreateWithoutControlTestsInput>
+  }
+
+  export type FindingCreateWithoutControlTestsInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingUncheckedCreateWithoutControlTestsInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingCreateOrConnectWithoutControlTestsInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutControlTestsInput, FindingUncheckedCreateWithoutControlTestsInput>
+  }
+
+  export type UserCreateWithoutTestedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutTestedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutTestedControlTestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTestedControlTestsInput, UserUncheckedCreateWithoutTestedControlTestsInput>
+  }
+
+  export type UserCreateWithoutReviewedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedControlTestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedControlTestsInput, UserUncheckedCreateWithoutReviewedControlTestsInput>
+  }
+
+  export type UserCreateWithoutCreatedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedControlTestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedControlTestsInput, UserUncheckedCreateWithoutCreatedControlTestsInput>
+  }
+
+  export type UserCreateWithoutUpdatedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedControlTestsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedControlTestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedControlTestsInput, UserUncheckedCreateWithoutUpdatedControlTestsInput>
+  }
+
+  export type ActionPlanCreateWithoutControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutControlTestInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput>
+  }
+
+  export type ActionPlanCreateManyControlTestInputEnvelope = {
+    data: ActionPlanCreateManyControlTestInput | ActionPlanCreateManyControlTestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EngagementUpsertWithoutControlTestsInput = {
+    update: XOR<EngagementUpdateWithoutControlTestsInput, EngagementUncheckedUpdateWithoutControlTestsInput>
+    create: XOR<EngagementCreateWithoutControlTestsInput, EngagementUncheckedCreateWithoutControlTestsInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutControlTestsInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutControlTestsInput, EngagementUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type EngagementUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type AuditUniverseUpsertWithoutControlTestsInput = {
+    update: XOR<AuditUniverseUpdateWithoutControlTestsInput, AuditUniverseUncheckedUpdateWithoutControlTestsInput>
+    create: XOR<AuditUniverseCreateWithoutControlTestsInput, AuditUniverseUncheckedCreateWithoutControlTestsInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutControlTestsInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutControlTestsInput, AuditUniverseUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type AuditUniverseUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type RiskUpsertWithoutControlTestsInput = {
+    update: XOR<RiskUpdateWithoutControlTestsInput, RiskUncheckedUpdateWithoutControlTestsInput>
+    create: XOR<RiskCreateWithoutControlTestsInput, RiskUncheckedCreateWithoutControlTestsInput>
+    where?: RiskWhereInput
+  }
+
+  export type RiskUpdateToOneWithWhereWithoutControlTestsInput = {
+    where?: RiskWhereInput
+    data: XOR<RiskUpdateWithoutControlTestsInput, RiskUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type RiskUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutRisksNestedInput
+    owner?: UserUpdateOneWithoutOwnedRisksNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedRisksNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedRisksNestedInput
+    actions?: RiskActionUpdateManyWithoutRiskNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUpdateManyWithoutRiskNestedInput
+  }
+
+  export type RiskUncheckedUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    inherentLikelihood?: IntFieldUpdateOperationsInput | number
+    inherentImpact?: IntFieldUpdateOperationsInput | number
+    inherentScore?: IntFieldUpdateOperationsInput | number
+    inherentLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    existingControls?: NullableStringFieldUpdateOperationsInput | string | null
+    controlEffectiveness?: IntFieldUpdateOperationsInput | number
+    residualScore?: IntFieldUpdateOperationsInput | number
+    residualLevel?: EnumRiskLevelFieldUpdateOperationsInput | $Enums.RiskLevel
+    status?: EnumRiskStatusFieldUpdateOperationsInput | $Enums.RiskStatus
+    riskCategory?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+  }
+
+  export type FindingUpsertWithoutControlTestsInput = {
+    update: XOR<FindingUpdateWithoutControlTestsInput, FindingUncheckedUpdateWithoutControlTestsInput>
+    create: XOR<FindingCreateWithoutControlTestsInput, FindingUncheckedCreateWithoutControlTestsInput>
+    where?: FindingWhereInput
+  }
+
+  export type FindingUpdateToOneWithWhereWithoutControlTestsInput = {
+    where?: FindingWhereInput
+    data: XOR<FindingUpdateWithoutControlTestsInput, FindingUncheckedUpdateWithoutControlTestsInput>
+  }
+
+  export type FindingUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+  }
+
+  export type UserUpsertWithoutTestedControlTestsInput = {
+    update: XOR<UserUpdateWithoutTestedControlTestsInput, UserUncheckedUpdateWithoutTestedControlTestsInput>
+    create: XOR<UserCreateWithoutTestedControlTestsInput, UserUncheckedCreateWithoutTestedControlTestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTestedControlTestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTestedControlTestsInput, UserUncheckedUpdateWithoutTestedControlTestsInput>
+  }
+
+  export type UserUpdateWithoutTestedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTestedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutReviewedControlTestsInput = {
+    update: XOR<UserUpdateWithoutReviewedControlTestsInput, UserUncheckedUpdateWithoutReviewedControlTestsInput>
+    create: XOR<UserCreateWithoutReviewedControlTestsInput, UserUncheckedCreateWithoutReviewedControlTestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedControlTestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedControlTestsInput, UserUncheckedUpdateWithoutReviewedControlTestsInput>
+  }
+
+  export type UserUpdateWithoutReviewedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedControlTestsInput = {
+    update: XOR<UserUpdateWithoutCreatedControlTestsInput, UserUncheckedUpdateWithoutCreatedControlTestsInput>
+    create: XOR<UserCreateWithoutCreatedControlTestsInput, UserUncheckedCreateWithoutCreatedControlTestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedControlTestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedControlTestsInput, UserUncheckedUpdateWithoutCreatedControlTestsInput>
+  }
+
+  export type UserUpdateWithoutCreatedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedControlTestsInput = {
+    update: XOR<UserUpdateWithoutUpdatedControlTestsInput, UserUncheckedUpdateWithoutUpdatedControlTestsInput>
+    create: XOR<UserCreateWithoutUpdatedControlTestsInput, UserUncheckedCreateWithoutUpdatedControlTestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedControlTestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedControlTestsInput, UserUncheckedUpdateWithoutUpdatedControlTestsInput>
+  }
+
+  export type UserUpdateWithoutUpdatedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedControlTestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type ActionPlanUpsertWithWhereUniqueWithoutControlTestInput = {
+    where: ActionPlanWhereUniqueInput
+    update: XOR<ActionPlanUpdateWithoutControlTestInput, ActionPlanUncheckedUpdateWithoutControlTestInput>
+    create: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput>
+  }
+
+  export type ActionPlanUpdateWithWhereUniqueWithoutControlTestInput = {
+    where: ActionPlanWhereUniqueInput
+    data: XOR<ActionPlanUpdateWithoutControlTestInput, ActionPlanUncheckedUpdateWithoutControlTestInput>
+  }
+
+  export type ActionPlanUpdateManyWithWhereWithoutControlTestInput = {
+    where: ActionPlanScalarWhereInput
+    data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutControlTestInput>
+  }
+
+  export type FindingCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingUncheckedCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingCreateOrConnectWithoutActionPlansInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutActionPlansInput, FindingUncheckedCreateWithoutActionPlansInput>
+  }
+
+  export type ControlTestCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestCreateOrConnectWithoutActionPlansInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutActionPlansInput, ControlTestUncheckedCreateWithoutActionPlansInput>
+  }
+
+  export type EngagementCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutActionPlansInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutActionPlansInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutActionPlansInput, EngagementUncheckedCreateWithoutActionPlansInput>
+  }
+
+  export type AuditUniverseCreateWithoutActionPlansInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutActionPlansInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutActionPlansInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutActionPlansInput, AuditUniverseUncheckedCreateWithoutActionPlansInput>
+  }
+
+  export type UserCreateWithoutResponsibleActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutResponsibleActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutResponsibleActionPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutResponsibleActionPlansInput, UserUncheckedCreateWithoutResponsibleActionPlansInput>
+  }
+
+  export type UserCreateWithoutReviewerActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewerActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewerActionPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewerActionPlansInput, UserUncheckedCreateWithoutReviewerActionPlansInput>
+  }
+
+  export type UserCreateWithoutVerifiedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutVerifiedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutVerifiedActionPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVerifiedActionPlansInput, UserUncheckedCreateWithoutVerifiedActionPlansInput>
+  }
+
+  export type UserCreateWithoutCreatedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedActionPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedActionPlansInput, UserUncheckedCreateWithoutCreatedActionPlansInput>
+  }
+
+  export type UserCreateWithoutUpdatedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedActionPlansInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedActionPlansInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedActionPlansInput, UserUncheckedCreateWithoutUpdatedActionPlansInput>
+  }
+
+  export type ActionPlanUpdateCreateWithoutActionPlanInput = {
+    id?: string
+    note: string
+    progressPct?: number
+    createdAt?: Date | string
+    updatedBy?: UserCreateNestedOneWithoutActionPlanUpdatesInput
+  }
+
+  export type ActionPlanUpdateUncheckedCreateWithoutActionPlanInput = {
+    id?: string
+    note: string
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ActionPlanUpdateCreateOrConnectWithoutActionPlanInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    create: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput>
+  }
+
+  export type ActionPlanUpdateCreateManyActionPlanInputEnvelope = {
+    data: ActionPlanUpdateCreateManyActionPlanInput | ActionPlanUpdateCreateManyActionPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FindingUpsertWithoutActionPlansInput = {
+    update: XOR<FindingUpdateWithoutActionPlansInput, FindingUncheckedUpdateWithoutActionPlansInput>
+    create: XOR<FindingCreateWithoutActionPlansInput, FindingUncheckedCreateWithoutActionPlansInput>
+    where?: FindingWhereInput
+  }
+
+  export type FindingUpdateToOneWithWhereWithoutActionPlansInput = {
+    where?: FindingWhereInput
+    data: XOR<FindingUpdateWithoutActionPlansInput, FindingUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type FindingUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+  }
+
+  export type ControlTestUpsertWithoutActionPlansInput = {
+    update: XOR<ControlTestUpdateWithoutActionPlansInput, ControlTestUncheckedUpdateWithoutActionPlansInput>
+    create: XOR<ControlTestCreateWithoutActionPlansInput, ControlTestUncheckedCreateWithoutActionPlansInput>
+    where?: ControlTestWhereInput
+  }
+
+  export type ControlTestUpdateToOneWithWhereWithoutActionPlansInput = {
+    where?: ControlTestWhereInput
+    data: XOR<ControlTestUpdateWithoutActionPlansInput, ControlTestUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type ControlTestUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EngagementUpsertWithoutActionPlansInput = {
+    update: XOR<EngagementUpdateWithoutActionPlansInput, EngagementUncheckedUpdateWithoutActionPlansInput>
+    create: XOR<EngagementCreateWithoutActionPlansInput, EngagementUncheckedCreateWithoutActionPlansInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutActionPlansInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutActionPlansInput, EngagementUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type EngagementUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type AuditUniverseUpsertWithoutActionPlansInput = {
+    update: XOR<AuditUniverseUpdateWithoutActionPlansInput, AuditUniverseUncheckedUpdateWithoutActionPlansInput>
+    create: XOR<AuditUniverseCreateWithoutActionPlansInput, AuditUniverseUncheckedCreateWithoutActionPlansInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutActionPlansInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutActionPlansInput, AuditUniverseUncheckedUpdateWithoutActionPlansInput>
+  }
+
+  export type AuditUniverseUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type UserUpsertWithoutResponsibleActionPlansInput = {
+    update: XOR<UserUpdateWithoutResponsibleActionPlansInput, UserUncheckedUpdateWithoutResponsibleActionPlansInput>
+    create: XOR<UserCreateWithoutResponsibleActionPlansInput, UserUncheckedCreateWithoutResponsibleActionPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutResponsibleActionPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutResponsibleActionPlansInput, UserUncheckedUpdateWithoutResponsibleActionPlansInput>
+  }
+
+  export type UserUpdateWithoutResponsibleActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutResponsibleActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutReviewerActionPlansInput = {
+    update: XOR<UserUpdateWithoutReviewerActionPlansInput, UserUncheckedUpdateWithoutReviewerActionPlansInput>
+    create: XOR<UserCreateWithoutReviewerActionPlansInput, UserUncheckedCreateWithoutReviewerActionPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewerActionPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewerActionPlansInput, UserUncheckedUpdateWithoutReviewerActionPlansInput>
+  }
+
+  export type UserUpdateWithoutReviewerActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewerActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutVerifiedActionPlansInput = {
+    update: XOR<UserUpdateWithoutVerifiedActionPlansInput, UserUncheckedUpdateWithoutVerifiedActionPlansInput>
+    create: XOR<UserCreateWithoutVerifiedActionPlansInput, UserUncheckedCreateWithoutVerifiedActionPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVerifiedActionPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVerifiedActionPlansInput, UserUncheckedUpdateWithoutVerifiedActionPlansInput>
+  }
+
+  export type UserUpdateWithoutVerifiedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVerifiedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedActionPlansInput = {
+    update: XOR<UserUpdateWithoutCreatedActionPlansInput, UserUncheckedUpdateWithoutCreatedActionPlansInput>
+    create: XOR<UserCreateWithoutCreatedActionPlansInput, UserUncheckedCreateWithoutCreatedActionPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedActionPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedActionPlansInput, UserUncheckedUpdateWithoutCreatedActionPlansInput>
+  }
+
+  export type UserUpdateWithoutCreatedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedActionPlansInput = {
+    update: XOR<UserUpdateWithoutUpdatedActionPlansInput, UserUncheckedUpdateWithoutUpdatedActionPlansInput>
+    create: XOR<UserCreateWithoutUpdatedActionPlansInput, UserUncheckedCreateWithoutUpdatedActionPlansInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedActionPlansInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedActionPlansInput, UserUncheckedUpdateWithoutUpdatedActionPlansInput>
+  }
+
+  export type UserUpdateWithoutUpdatedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedActionPlansInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    update: XOR<ActionPlanUpdateUpdateWithoutActionPlanInput, ActionPlanUpdateUncheckedUpdateWithoutActionPlanInput>
+    create: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput>
+  }
+
+  export type ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput = {
+    where: ActionPlanUpdateWhereUniqueInput
+    data: XOR<ActionPlanUpdateUpdateWithoutActionPlanInput, ActionPlanUpdateUncheckedUpdateWithoutActionPlanInput>
+  }
+
+  export type ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput = {
+    where: ActionPlanUpdateScalarWhereInput
+    data: XOR<ActionPlanUpdateUpdateManyMutationInput, ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanInput>
+  }
+
+  export type ActionPlanCreateWithoutUpdatesInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutUpdatesInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateOrConnectWithoutUpdatesInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutUpdatesInput, ActionPlanUncheckedCreateWithoutUpdatesInput>
+  }
+
+  export type UserCreateWithoutActionPlanUpdatesInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserUncheckedCreateWithoutActionPlanUpdatesInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+  }
+
+  export type UserCreateOrConnectWithoutActionPlanUpdatesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutActionPlanUpdatesInput, UserUncheckedCreateWithoutActionPlanUpdatesInput>
+  }
+
+  export type ActionPlanUpsertWithoutUpdatesInput = {
+    update: XOR<ActionPlanUpdateWithoutUpdatesInput, ActionPlanUncheckedUpdateWithoutUpdatesInput>
+    create: XOR<ActionPlanCreateWithoutUpdatesInput, ActionPlanUncheckedCreateWithoutUpdatesInput>
+    where?: ActionPlanWhereInput
+  }
+
+  export type ActionPlanUpdateToOneWithWhereWithoutUpdatesInput = {
+    where?: ActionPlanWhereInput
+    data: XOR<ActionPlanUpdateWithoutUpdatesInput, ActionPlanUncheckedUpdateWithoutUpdatesInput>
+  }
+
+  export type ActionPlanUpdateWithoutUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutActionPlanUpdatesInput = {
+    update: XOR<UserUpdateWithoutActionPlanUpdatesInput, UserUncheckedUpdateWithoutActionPlanUpdatesInput>
+    create: XOR<UserCreateWithoutActionPlanUpdatesInput, UserUncheckedCreateWithoutActionPlanUpdatesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutActionPlanUpdatesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutActionPlanUpdatesInput, UserUncheckedUpdateWithoutActionPlanUpdatesInput>
+  }
+
+  export type UserUpdateWithoutActionPlanUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutActionPlanUpdatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -32280,6 +45615,277 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ControlTestCreateManyTesterInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestCreateManyReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestCreateManyCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestCreateManyUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyResponsibleOwnerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyVerifiedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanUpdateCreateManyUpdatedByInput = {
+    id?: string
+    actionPlanId: string
+    note: string
+    progressPct?: number
+    createdAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
@@ -32316,6 +45922,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutOwnerInput = {
@@ -32339,6 +45947,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutOwnerInput = {
@@ -32380,6 +45990,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutCreatedByInput = {
@@ -32403,6 +46015,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -32444,6 +46058,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutUpdatedByInput = {
@@ -32467,6 +46083,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -32510,6 +46128,7 @@ export namespace Prisma {
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutOwnerInput = {
@@ -32535,6 +46154,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutOwnerInput = {
@@ -32582,6 +46202,7 @@ export namespace Prisma {
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutCreatedByInput = {
@@ -32607,6 +46228,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutCreatedByInput = {
@@ -32654,6 +46276,7 @@ export namespace Prisma {
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutUpdatedByInput = {
@@ -32679,6 +46302,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -33061,6 +46685,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutLeadAuditorInput = {
@@ -33089,6 +46715,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutLeadAuditorInput = {
@@ -33143,6 +46771,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutCreatedByInput = {
@@ -33171,6 +46801,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutCreatedByInput = {
@@ -33225,6 +46857,8 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutUpdatedByInput = {
@@ -33253,6 +46887,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -33307,6 +46943,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutClosedByInput = {
@@ -33335,6 +46973,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutClosedByInput = {
@@ -33407,6 +47047,8 @@ export namespace Prisma {
     managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutCreatedByInput = {
@@ -33435,6 +47077,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutCreatedByInput = {
@@ -33491,6 +47135,8 @@ export namespace Prisma {
     managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutUpdatedByInput = {
@@ -33519,6 +47165,8 @@ export namespace Prisma {
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -33575,6 +47223,8 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutResponsibleOwnerInput = {
@@ -33603,6 +47253,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutResponsibleOwnerInput = {
@@ -33659,6 +47311,8 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutManagementRespondedByInput = {
@@ -33687,6 +47341,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutManagementRespondedByInput = {
@@ -33743,6 +47399,8 @@ export namespace Prisma {
     managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutVerifiedByInput = {
@@ -33771,6 +47429,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutVerifiedByInput = {
@@ -33799,6 +47459,837 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutTesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutTesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutTesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutVerifiedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlan?: ActionPlanUpdateOneRequiredWithoutUpdatesNestedInput
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionPlanId?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actionPlanId?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateManyRoleInput = {
@@ -33979,6 +48470,65 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ControlTestCreateManyAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AuditUniverseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -34000,6 +48550,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutParentInput = {
@@ -34023,6 +48575,8 @@ export namespace Prisma {
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutParentInput = {
@@ -34066,6 +48620,7 @@ export namespace Prisma {
     actions?: RiskActionUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateWithoutAuditEntityInput = {
@@ -34091,6 +48646,7 @@ export namespace Prisma {
     actions?: RiskActionUncheckedUpdateManyWithoutRiskNestedInput
     auditPlans?: AuditPlanUncheckedUpdateManyWithoutRiskNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutRiskNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutRiskNestedInput
   }
 
   export type RiskUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -34215,6 +48771,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditEntityInput = {
@@ -34243,6 +48801,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -34297,6 +48857,8 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutAuditEntityInput = {
@@ -34325,6 +48887,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -34349,6 +48913,187 @@ export namespace Prisma {
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
     verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34411,6 +49156,38 @@ export namespace Prisma {
     closedAt?: Date | string | null
     closedById?: string | null
     closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestCreateManyRiskInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
     createdById?: string | null
     updatedById?: string | null
     createdAt?: Date | string
@@ -34553,6 +49330,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutRiskInput = {
@@ -34581,6 +49360,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutRiskInput = {
@@ -34603,6 +49384,104 @@ export namespace Prisma {
     closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closedById?: NullableStringFieldUpdateOperationsInput | string | null
     closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutRiskInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34661,6 +49540,8 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditPlanInput = {
@@ -34689,6 +49570,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditPlanInput = {
@@ -34751,6 +49634,65 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ControlTestCreateManyEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EngagementTeamMemberUpdateWithoutEngagementInput = {
     role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34795,6 +49737,8 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutEngagementInput = {
@@ -34823,6 +49767,8 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutEngagementInput = {
@@ -34851,6 +49797,569 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ControlTestCreateManyFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanCreateManyFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ControlTestUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateManyWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanCreateManyControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ActionPlanUpdateWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateManyWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateCreateManyActionPlanInput = {
+    id?: string
+    note: string
+    progressPct?: number
+    updatedById?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ActionPlanUpdateUpdateWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: UserUpdateOneWithoutActionPlanUpdatesNestedInput
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    note?: StringFieldUpdateOperationsInput | string
+    progressPct?: IntFieldUpdateOperationsInput | number
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -34886,6 +50395,18 @@ export namespace Prisma {
      * @deprecated Use EngagementCountOutputTypeDefaultArgs instead
      */
     export type EngagementCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EngagementCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use FindingCountOutputTypeDefaultArgs instead
+     */
+    export type FindingCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FindingCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ControlTestCountOutputTypeDefaultArgs instead
+     */
+    export type ControlTestCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ControlTestCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ActionPlanCountOutputTypeDefaultArgs instead
+     */
+    export type ActionPlanCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ActionPlanCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -34938,6 +50459,14 @@ export namespace Prisma {
      * @deprecated Use FindingDefaultArgs instead
      */
     export type FindingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FindingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ControlTestDefaultArgs instead
+     */
+    export type ControlTestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ControlTestDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ActionPlanDefaultArgs instead
+     */
+    export type ActionPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ActionPlanDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
