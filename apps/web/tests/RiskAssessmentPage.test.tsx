@@ -3,9 +3,10 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuditRiskAssessmentPage } from '../src/pages/AuditRiskAssessment';
-import { AuthContext, type AuthContextValue } from '../src/context/AuthContext';
+import { AuthContext } from '../src/context/AuthContext';
 import { ToastProvider } from '../src/context/ToastContext';
 import type { UserDto } from '@iams/shared';
+import '@testing-library/jest-dom/vitest';
 
 vi.mock('../src/hooks/useRisks', () => ({
   useRiskList: () => ({
@@ -58,7 +59,7 @@ function renderPage() {
     defaultOptions: { queries: { retry: false, staleTime: 0 } },
   });
 
-  const authValue: AuthContextValue = {
+  const authValue = {
     user: mockUser,
     loading: false,
     login: vi.fn(),
