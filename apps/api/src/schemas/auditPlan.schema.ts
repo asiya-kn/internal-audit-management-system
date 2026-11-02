@@ -17,6 +17,8 @@ export const createAuditPlanSchema = z.object({
   priority: auditPrioritySchema.optional(),
   proposedStartDate: z.string().datetime().nullable().optional(),
   proposedEndDate: z.string().datetime().nullable().optional(),
+  estimatedResources: z.string().max(2000).nullable().optional(),
+  planningRationale: z.string().max(5000).nullable().optional(),
   leadAuditorId: z.string().uuid().nullable().optional(),
   notes: z.string().max(5000).optional(),
 });
@@ -33,6 +35,8 @@ export const updateAuditPlanSchema = z.object({
   priority: auditPrioritySchema.optional(),
   proposedStartDate: z.string().datetime().nullable().optional(),
   proposedEndDate: z.string().datetime().nullable().optional(),
+  estimatedResources: z.string().max(2000).nullable().optional(),
+  planningRationale: z.string().max(5000).nullable().optional(),
   leadAuditorId: z.string().uuid().nullable().optional(),
   notes: z.string().max(5000).nullable().optional(),
 });

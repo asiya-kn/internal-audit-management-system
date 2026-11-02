@@ -12346,6 +12346,8 @@ export namespace Prisma {
     scope: string | null
     priority: $Enums.AuditPriority | null
     status: $Enums.AuditPlanStatus | null
+    estimatedResources: string | null
+    planningRationale: string | null
     proposedStartDate: Date | null
     proposedEndDate: Date | null
     approvedAt: Date | null
@@ -12369,6 +12371,8 @@ export namespace Prisma {
     scope: string | null
     priority: $Enums.AuditPriority | null
     status: $Enums.AuditPlanStatus | null
+    estimatedResources: string | null
+    planningRationale: string | null
     proposedStartDate: Date | null
     proposedEndDate: Date | null
     approvedAt: Date | null
@@ -12392,6 +12396,8 @@ export namespace Prisma {
     scope: number
     priority: number
     status: number
+    estimatedResources: number
+    planningRationale: number
     proposedStartDate: number
     proposedEndDate: number
     approvedAt: number
@@ -12425,6 +12431,8 @@ export namespace Prisma {
     scope?: true
     priority?: true
     status?: true
+    estimatedResources?: true
+    planningRationale?: true
     proposedStartDate?: true
     proposedEndDate?: true
     approvedAt?: true
@@ -12448,6 +12456,8 @@ export namespace Prisma {
     scope?: true
     priority?: true
     status?: true
+    estimatedResources?: true
+    planningRationale?: true
     proposedStartDate?: true
     proposedEndDate?: true
     approvedAt?: true
@@ -12471,6 +12481,8 @@ export namespace Prisma {
     scope?: true
     priority?: true
     status?: true
+    estimatedResources?: true
+    planningRationale?: true
     proposedStartDate?: true
     proposedEndDate?: true
     approvedAt?: true
@@ -12581,6 +12593,8 @@ export namespace Prisma {
     scope: string
     priority: $Enums.AuditPriority
     status: $Enums.AuditPlanStatus
+    estimatedResources: string | null
+    planningRationale: string | null
     proposedStartDate: Date | null
     proposedEndDate: Date | null
     approvedAt: Date | null
@@ -12623,6 +12637,8 @@ export namespace Prisma {
     scope?: boolean
     priority?: boolean
     status?: boolean
+    estimatedResources?: boolean
+    planningRationale?: boolean
     proposedStartDate?: boolean
     proposedEndDate?: boolean
     approvedAt?: boolean
@@ -12654,6 +12670,8 @@ export namespace Prisma {
     scope?: boolean
     priority?: boolean
     status?: boolean
+    estimatedResources?: boolean
+    planningRationale?: boolean
     proposedStartDate?: boolean
     proposedEndDate?: boolean
     approvedAt?: boolean
@@ -12683,6 +12701,8 @@ export namespace Prisma {
     scope?: boolean
     priority?: boolean
     status?: boolean
+    estimatedResources?: boolean
+    planningRationale?: boolean
     proposedStartDate?: boolean
     proposedEndDate?: boolean
     approvedAt?: boolean
@@ -12736,6 +12756,8 @@ export namespace Prisma {
       scope: string
       priority: $Enums.AuditPriority
       status: $Enums.AuditPlanStatus
+      estimatedResources: string | null
+      planningRationale: string | null
       proposedStartDate: Date | null
       proposedEndDate: Date | null
       approvedAt: Date | null
@@ -13156,6 +13178,8 @@ export namespace Prisma {
     readonly scope: FieldRef<"AuditPlan", 'String'>
     readonly priority: FieldRef<"AuditPlan", 'AuditPriority'>
     readonly status: FieldRef<"AuditPlan", 'AuditPlanStatus'>
+    readonly estimatedResources: FieldRef<"AuditPlan", 'String'>
+    readonly planningRationale: FieldRef<"AuditPlan", 'String'>
     readonly proposedStartDate: FieldRef<"AuditPlan", 'DateTime'>
     readonly proposedEndDate: FieldRef<"AuditPlan", 'DateTime'>
     readonly approvedAt: FieldRef<"AuditPlan", 'DateTime'>
@@ -13615,6 +13639,7 @@ export namespace Prisma {
     objectives: string | null
     scope: string | null
     methodology: string | null
+    estimatedResources: string | null
     leadAuditorId: string | null
     startDate: Date | null
     endDate: Date | null
@@ -13641,6 +13666,7 @@ export namespace Prisma {
     objectives: string | null
     scope: string | null
     methodology: string | null
+    estimatedResources: string | null
     leadAuditorId: string | null
     startDate: Date | null
     endDate: Date | null
@@ -13667,6 +13693,7 @@ export namespace Prisma {
     objectives: number
     scope: number
     methodology: number
+    estimatedResources: number
     leadAuditorId: number
     startDate: number
     endDate: number
@@ -13695,6 +13722,7 @@ export namespace Prisma {
     objectives?: true
     scope?: true
     methodology?: true
+    estimatedResources?: true
     leadAuditorId?: true
     startDate?: true
     endDate?: true
@@ -13721,6 +13749,7 @@ export namespace Prisma {
     objectives?: true
     scope?: true
     methodology?: true
+    estimatedResources?: true
     leadAuditorId?: true
     startDate?: true
     endDate?: true
@@ -13747,6 +13776,7 @@ export namespace Prisma {
     objectives?: true
     scope?: true
     methodology?: true
+    estimatedResources?: true
     leadAuditorId?: true
     startDate?: true
     endDate?: true
@@ -13846,6 +13876,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology: string | null
+    estimatedResources: string | null
     leadAuditorId: string | null
     startDate: Date | null
     endDate: Date | null
@@ -13889,6 +13920,7 @@ export namespace Prisma {
     objectives?: boolean
     scope?: boolean
     methodology?: boolean
+    estimatedResources?: boolean
     leadAuditorId?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -13925,6 +13957,7 @@ export namespace Prisma {
     objectives?: boolean
     scope?: boolean
     methodology?: boolean
+    estimatedResources?: boolean
     leadAuditorId?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -13958,6 +13991,7 @@ export namespace Prisma {
     objectives?: boolean
     scope?: boolean
     methodology?: boolean
+    estimatedResources?: boolean
     leadAuditorId?: boolean
     startDate?: boolean
     endDate?: boolean
@@ -14019,6 +14053,7 @@ export namespace Prisma {
       objectives: string
       scope: string
       methodology: string | null
+      estimatedResources: string | null
       leadAuditorId: string | null
       startDate: Date | null
       endDate: Date | null
@@ -14444,6 +14479,7 @@ export namespace Prisma {
     readonly objectives: FieldRef<"Engagement", 'String'>
     readonly scope: FieldRef<"Engagement", 'String'>
     readonly methodology: FieldRef<"Engagement", 'String'>
+    readonly estimatedResources: FieldRef<"Engagement", 'String'>
     readonly leadAuditorId: FieldRef<"Engagement", 'String'>
     readonly startDate: FieldRef<"Engagement", 'DateTime'>
     readonly endDate: FieldRef<"Engagement", 'DateTime'>
@@ -17315,6 +17351,8 @@ export namespace Prisma {
     scope: 'scope',
     priority: 'priority',
     status: 'status',
+    estimatedResources: 'estimatedResources',
+    planningRationale: 'planningRationale',
     proposedStartDate: 'proposedStartDate',
     proposedEndDate: 'proposedEndDate',
     approvedAt: 'approvedAt',
@@ -17342,6 +17380,7 @@ export namespace Prisma {
     objectives: 'objectives',
     scope: 'scope',
     methodology: 'methodology',
+    estimatedResources: 'estimatedResources',
     leadAuditorId: 'leadAuditorId',
     startDate: 'startDate',
     endDate: 'endDate',
@@ -18504,6 +18543,8 @@ export namespace Prisma {
     scope?: StringFilter<"AuditPlan"> | string
     priority?: EnumAuditPriorityFilter<"AuditPlan"> | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFilter<"AuditPlan"> | $Enums.AuditPlanStatus
+    estimatedResources?: StringNullableFilter<"AuditPlan"> | string | null
+    planningRationale?: StringNullableFilter<"AuditPlan"> | string | null
     proposedStartDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     proposedEndDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     approvedAt?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
@@ -18534,6 +18575,8 @@ export namespace Prisma {
     scope?: SortOrder
     priority?: SortOrder
     status?: SortOrder
+    estimatedResources?: SortOrderInput | SortOrder
+    planningRationale?: SortOrderInput | SortOrder
     proposedStartDate?: SortOrderInput | SortOrder
     proposedEndDate?: SortOrderInput | SortOrder
     approvedAt?: SortOrderInput | SortOrder
@@ -18567,6 +18610,8 @@ export namespace Prisma {
     scope?: StringFilter<"AuditPlan"> | string
     priority?: EnumAuditPriorityFilter<"AuditPlan"> | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFilter<"AuditPlan"> | $Enums.AuditPlanStatus
+    estimatedResources?: StringNullableFilter<"AuditPlan"> | string | null
+    planningRationale?: StringNullableFilter<"AuditPlan"> | string | null
     proposedStartDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     proposedEndDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     approvedAt?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
@@ -18597,6 +18642,8 @@ export namespace Prisma {
     scope?: SortOrder
     priority?: SortOrder
     status?: SortOrder
+    estimatedResources?: SortOrderInput | SortOrder
+    planningRationale?: SortOrderInput | SortOrder
     proposedStartDate?: SortOrderInput | SortOrder
     proposedEndDate?: SortOrderInput | SortOrder
     approvedAt?: SortOrderInput | SortOrder
@@ -18628,6 +18675,8 @@ export namespace Prisma {
     scope?: StringWithAggregatesFilter<"AuditPlan"> | string
     priority?: EnumAuditPriorityWithAggregatesFilter<"AuditPlan"> | $Enums.AuditPriority
     status?: EnumAuditPlanStatusWithAggregatesFilter<"AuditPlan"> | $Enums.AuditPlanStatus
+    estimatedResources?: StringNullableWithAggregatesFilter<"AuditPlan"> | string | null
+    planningRationale?: StringNullableWithAggregatesFilter<"AuditPlan"> | string | null
     proposedStartDate?: DateTimeNullableWithAggregatesFilter<"AuditPlan"> | Date | string | null
     proposedEndDate?: DateTimeNullableWithAggregatesFilter<"AuditPlan"> | Date | string | null
     approvedAt?: DateTimeNullableWithAggregatesFilter<"AuditPlan"> | Date | string | null
@@ -18655,6 +18704,7 @@ export namespace Prisma {
     objectives?: StringFilter<"Engagement"> | string
     scope?: StringFilter<"Engagement"> | string
     methodology?: StringNullableFilter<"Engagement"> | string | null
+    estimatedResources?: StringNullableFilter<"Engagement"> | string | null
     leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
     startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
@@ -18690,6 +18740,7 @@ export namespace Prisma {
     objectives?: SortOrder
     scope?: SortOrder
     methodology?: SortOrderInput | SortOrder
+    estimatedResources?: SortOrderInput | SortOrder
     leadAuditorId?: SortOrderInput | SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
@@ -18728,6 +18779,7 @@ export namespace Prisma {
     objectives?: StringFilter<"Engagement"> | string
     scope?: StringFilter<"Engagement"> | string
     methodology?: StringNullableFilter<"Engagement"> | string | null
+    estimatedResources?: StringNullableFilter<"Engagement"> | string | null
     leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
     startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
@@ -18763,6 +18815,7 @@ export namespace Prisma {
     objectives?: SortOrder
     scope?: SortOrder
     methodology?: SortOrderInput | SortOrder
+    estimatedResources?: SortOrderInput | SortOrder
     leadAuditorId?: SortOrderInput | SortOrder
     startDate?: SortOrderInput | SortOrder
     endDate?: SortOrderInput | SortOrder
@@ -18795,6 +18848,7 @@ export namespace Prisma {
     objectives?: StringWithAggregatesFilter<"Engagement"> | string
     scope?: StringWithAggregatesFilter<"Engagement"> | string
     methodology?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
+    estimatedResources?: StringNullableWithAggregatesFilter<"Engagement"> | string | null
     leadAuditorId?: UuidNullableWithAggregatesFilter<"Engagement"> | string | null
     startDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
     endDate?: DateTimeNullableWithAggregatesFilter<"Engagement"> | Date | string | null
@@ -19917,6 +19971,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -19943,6 +19999,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -19965,6 +20023,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19991,6 +20051,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20015,6 +20077,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -20036,6 +20100,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20055,6 +20121,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20076,6 +20144,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -20107,6 +20176,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -20132,6 +20202,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20163,6 +20234,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20191,6 +20263,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -20214,6 +20287,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20236,6 +20310,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21340,6 +21415,8 @@ export namespace Prisma {
     scope?: SortOrder
     priority?: SortOrder
     status?: SortOrder
+    estimatedResources?: SortOrder
+    planningRationale?: SortOrder
     proposedStartDate?: SortOrder
     proposedEndDate?: SortOrder
     approvedAt?: SortOrder
@@ -21367,6 +21444,8 @@ export namespace Prisma {
     scope?: SortOrder
     priority?: SortOrder
     status?: SortOrder
+    estimatedResources?: SortOrder
+    planningRationale?: SortOrder
     proposedStartDate?: SortOrder
     proposedEndDate?: SortOrder
     approvedAt?: SortOrder
@@ -21390,6 +21469,8 @@ export namespace Prisma {
     scope?: SortOrder
     priority?: SortOrder
     status?: SortOrder
+    estimatedResources?: SortOrder
+    planningRationale?: SortOrder
     proposedStartDate?: SortOrder
     proposedEndDate?: SortOrder
     approvedAt?: SortOrder
@@ -21457,6 +21538,7 @@ export namespace Prisma {
     objectives?: SortOrder
     scope?: SortOrder
     methodology?: SortOrder
+    estimatedResources?: SortOrder
     leadAuditorId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -21483,6 +21565,7 @@ export namespace Prisma {
     objectives?: SortOrder
     scope?: SortOrder
     methodology?: SortOrder
+    estimatedResources?: SortOrder
     leadAuditorId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -21509,6 +21592,7 @@ export namespace Prisma {
     objectives?: SortOrder
     scope?: SortOrder
     methodology?: SortOrder
+    estimatedResources?: SortOrder
     leadAuditorId?: SortOrder
     startDate?: SortOrder
     endDate?: SortOrder
@@ -24758,6 +24842,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24783,6 +24869,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24814,6 +24902,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24839,6 +24929,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24870,6 +24962,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24895,6 +24989,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24926,6 +25022,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24951,6 +25049,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -24982,6 +25082,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -25012,6 +25113,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -25046,6 +25148,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -25076,6 +25179,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -25110,6 +25214,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -25140,6 +25245,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -25174,6 +25280,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -25204,6 +25311,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -25812,6 +25920,8 @@ export namespace Prisma {
     scope?: StringFilter<"AuditPlan"> | string
     priority?: EnumAuditPriorityFilter<"AuditPlan"> | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFilter<"AuditPlan"> | $Enums.AuditPlanStatus
+    estimatedResources?: StringNullableFilter<"AuditPlan"> | string | null
+    planningRationale?: StringNullableFilter<"AuditPlan"> | string | null
     proposedStartDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     proposedEndDate?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
     approvedAt?: DateTimeNullableFilter<"AuditPlan"> | Date | string | null
@@ -25903,6 +26013,7 @@ export namespace Prisma {
     objectives?: StringFilter<"Engagement"> | string
     scope?: StringFilter<"Engagement"> | string
     methodology?: StringNullableFilter<"Engagement"> | string | null
+    estimatedResources?: StringNullableFilter<"Engagement"> | string | null
     leadAuditorId?: UuidNullableFilter<"Engagement"> | string | null
     startDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
     endDate?: DateTimeNullableFilter<"Engagement"> | Date | string | null
@@ -26909,6 +27020,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -26933,6 +27046,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -26965,6 +27080,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -26994,6 +27110,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -27761,6 +27878,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -27785,6 +27904,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -27817,6 +27938,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -27846,6 +27968,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -28871,6 +28994,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -28900,6 +29024,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -29377,6 +29502,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -29402,6 +29529,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -29917,6 +30046,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29942,6 +30073,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30421,6 +30554,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -30451,6 +30585,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -30562,6 +30697,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30592,6 +30728,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30693,6 +30830,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -30723,6 +30861,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -31169,6 +31308,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31199,6 +31339,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31804,6 +31945,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -31826,6 +31969,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -31848,6 +31993,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -31870,6 +32017,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -31893,6 +32042,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
     actualStartDate?: Date | string | null
@@ -31918,6 +32068,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -31943,6 +32094,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -31968,6 +32120,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -32595,6 +32748,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32620,6 +32775,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32643,6 +32800,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32663,6 +32822,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32688,6 +32849,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32711,6 +32874,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32731,6 +32896,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32756,6 +32923,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32779,6 +32948,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32799,6 +32970,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32824,6 +32997,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32847,6 +33022,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32867,6 +33044,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32897,6 +33075,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32924,6 +33103,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32946,6 +33126,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32976,6 +33157,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33003,6 +33185,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33025,6 +33208,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33055,6 +33239,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33082,6 +33267,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33104,6 +33290,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33134,6 +33321,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33161,6 +33349,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33722,6 +33911,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -33745,6 +33936,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -33932,6 +34124,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33956,6 +34150,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33979,6 +34175,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34000,6 +34198,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34029,6 +34228,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34056,6 +34256,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34176,6 +34377,8 @@ export namespace Prisma {
     scope: string
     priority?: $Enums.AuditPriority
     status?: $Enums.AuditPlanStatus
+    estimatedResources?: string | null
+    planningRationale?: string | null
     proposedStartDate?: Date | string | null
     proposedEndDate?: Date | string | null
     approvedAt?: Date | string | null
@@ -34199,6 +34402,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -34258,6 +34462,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34282,6 +34488,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34305,6 +34513,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     priority?: EnumAuditPriorityFieldUpdateOperationsInput | $Enums.AuditPriority
     status?: EnumAuditPlanStatusFieldUpdateOperationsInput | $Enums.AuditPlanStatus
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    planningRationale?: NullableStringFieldUpdateOperationsInput | string | null
     proposedStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     proposedEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34326,6 +34536,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34355,6 +34566,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34382,6 +34594,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34407,6 +34620,7 @@ export namespace Prisma {
     objectives: string
     scope: string
     methodology?: string | null
+    estimatedResources?: string | null
     leadAuditorId?: string | null
     startDate?: Date | string | null
     endDate?: Date | string | null
@@ -34430,6 +34644,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34459,6 +34674,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34486,6 +34702,7 @@ export namespace Prisma {
     objectives?: StringFieldUpdateOperationsInput | string
     scope?: StringFieldUpdateOperationsInput | string
     methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
     leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

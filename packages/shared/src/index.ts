@@ -467,6 +467,8 @@ export interface AuditPlanSummaryDto {
 export interface AuditPlanDetailDto extends AuditPlanSummaryDto {
   objectives: string;
   scope: string;
+  estimatedResources: string | null;
+  planningRationale: string | null;
   notes: string | null;
   riskInherentLevel: string | null;
   riskResidualLevel: string | null;
@@ -483,6 +485,8 @@ export interface CreateAuditPlanRequest {
   priority?: AuditPriority;
   proposedStartDate?: string | null;
   proposedEndDate?: string | null;
+  estimatedResources?: string | null;
+  planningRationale?: string | null;
   leadAuditorId?: string | null;
   notes?: string;
 }
@@ -498,6 +502,8 @@ export interface UpdateAuditPlanRequest {
   priority?: AuditPriority;
   proposedStartDate?: string | null;
   proposedEndDate?: string | null;
+  estimatedResources?: string | null;
+  planningRationale?: string | null;
   leadAuditorId?: string | null;
   notes?: string | null;
 }
@@ -654,6 +660,7 @@ export interface EngagementDetailDto extends EngagementSummaryDto {
   objectives: string;
   scope: string;
   methodology: string | null;
+  estimatedResources: string | null;
   closedAt: string | null;
   closedById: string | null;
   closedByName: string | null;
@@ -673,6 +680,7 @@ export interface CreateEngagementRequest {
   objectives: string;
   scope: string;
   methodology?: string;
+  estimatedResources?: string | null;
   leadAuditorId?: string | null;
   startDate?: string | null;
   endDate?: string | null;
@@ -689,6 +697,7 @@ export interface UpdateEngagementRequest {
   objectives?: string;
   scope?: string;
   methodology?: string | null;
+  estimatedResources?: string | null;
   leadAuditorId?: string | null;
   startDate?: string | null;
   endDate?: string | null;

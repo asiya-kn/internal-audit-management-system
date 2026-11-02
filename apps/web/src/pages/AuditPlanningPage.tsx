@@ -103,12 +103,12 @@ export function AuditPlanningPage() {
   function handleSubmitPlan(values: CreateAuditPlanRequest) {
     if (formMode === 'create') {
       createMutation.mutate(values, {
-        onSuccess: () => { toast('Audit engagement created successfully', 'success'); setFormOpen(false); },
+        onSuccess: () => { toast('Plan item created successfully', 'success'); setFormOpen(false); },
         onError: (e) => toast(e.message, 'error'),
       });
     } else if (editingId) {
       updateMutation.mutate(values, {
-        onSuccess: () => { toast('Audit engagement updated successfully', 'success'); setFormOpen(false); },
+        onSuccess: () => { toast('Plan item updated successfully', 'success'); setFormOpen(false); },
         onError: (e) => toast(e.message, 'error'),
       });
     }
@@ -117,7 +117,7 @@ export function AuditPlanningPage() {
   function handleDeleteConfirm() {
     if (!deleteId) return;
     deleteMutation.mutate(deleteId, {
-      onSuccess: () => { toast('Audit engagement deleted', 'success'); setDeleteId(null); },
+      onSuccess: () => { toast('Plan item deleted', 'success'); setDeleteId(null); },
       onError: (e) => toast(e.message, 'error'),
     });
   }
@@ -136,12 +136,12 @@ export function AuditPlanningPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-neutral-900">Annual Audit Plan</h1>
-          <p className="mt-1 text-sm text-neutral-500">Risk-based audit planning and engagement management</p>
+          <p className="mt-1 text-sm text-neutral-500">Risk-based annual audit planning</p>
         </div>
         {canCreate && (
           <Button onClick={handleCreate}>
             <Plus className="h-4 w-4" />
-            Add Engagement
+            Add Plan Item
           </Button>
         )}
       </div>
@@ -202,7 +202,7 @@ export function AuditPlanningPage() {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') applySearch(); }}
-              placeholder="Search engagements, references, entities…"
+              placeholder="Search plan items, references, entities…"
             />
           </div>
           <FilterSelect label="Status" value={filters.status ?? ''} onChange={(v) => setFilters((f) => ({ ...f, status: (v || undefined) as AuditPlanStatus | undefined, page: 1 }))} options={AUDIT_PLAN_STATUSES} />
@@ -224,7 +224,7 @@ export function AuditPlanningPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-neutral-200 bg-neutral-50">
-                <th className="px-4 py-3 text-left font-semibold text-neutral-700">Engagement</th>
+                <th className="px-4 py-3 text-left font-semibold text-neutral-700">Plan Item</th>
                 <th className="px-4 py-3 text-left font-semibold text-neutral-700">Audit Entity</th>
                 <th className="px-4 py-3 text-left font-semibold text-neutral-700">Linked Risk</th>
                 <th className="px-4 py-3 text-left font-semibold text-neutral-700">Priority</th>
@@ -290,9 +290,9 @@ export function AuditPlanningPage() {
       ) : (
         <EmptyState
           icon={<CalendarCheck className="h-12 w-12" />}
-          title="No audit engagements found"
-          description="Create your first audit engagement to start building the annual audit plan."
-          action={canCreate ? <Button onClick={handleCreate}><Plus className="h-4 w-4" />Add Engagement</Button> : undefined}
+          title="No plan items found"
+          description="Create your first plan item to start building the annual audit plan."
+          action={canCreate ? <Button onClick={handleCreate}><Plus className="h-4 w-4" />Add Plan Item</Button> : undefined}
         />
       )}
 
@@ -338,8 +338,8 @@ export function AuditPlanningPage() {
       {/* Delete confirm */}
       <ConfirmDialog
         open={Boolean(deleteId)}
-        title="Delete Audit Engagement"
-        message="Are you sure you want to delete this audit engagement? Only draft or cancelled plans can be deleted."
+        title="Delete Plan Item"
+        message="Are you sure you want to delete this plan item? Only draft or cancelled plans can be deleted."
         confirmLabel="Delete"
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteId(null)}
@@ -399,7 +399,7 @@ function DetailModal({
   transitioning: boolean;
 }) {
   return (
-    <Modal open={open} onClose={onClose} title="Engagement Details" size="lg">
+    <Modal open={open} onClose={onClose} title="Plan Item Details" size="lg">
       {loading ? (
         <div className="flex items-center justify-center py-12"><Spinner /></div>
       ) : plan ? (
@@ -497,7 +497,7 @@ function DetailModal({
           </div>
         </div>
       ) : (
-        <div className="py-12 text-center text-sm text-neutral-500">Engagement details could not be loaded.</div>
+        <div className="py-12 text-center text-sm text-neutral-500">Plan item details could not be loaded.</div>
       )}
     </Modal>
   );

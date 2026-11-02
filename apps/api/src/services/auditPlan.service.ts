@@ -122,6 +122,8 @@ export class AuditPlanService {
       priority: (input.priority ?? 'MEDIUM') as AuditPriority,
       proposedStartDate: input.proposedStartDate ? new Date(input.proposedStartDate) : undefined,
       proposedEndDate: input.proposedEndDate ? new Date(input.proposedEndDate) : undefined,
+      estimatedResources: input.estimatedResources ?? null,
+      planningRationale: input.planningRationale ?? null,
       leadAuditor: input.leadAuditorId ? { connect: { id: input.leadAuditorId } } : undefined,
       notes: input.notes,
       createdBy: { connect: { id: userId } },
@@ -183,6 +185,8 @@ export class AuditPlanService {
     if (input.priority !== undefined) data.priority = input.priority as AuditPriority;
     if (input.proposedStartDate !== undefined) data.proposedStartDate = input.proposedStartDate ? new Date(input.proposedStartDate) : null;
     if (input.proposedEndDate !== undefined) data.proposedEndDate = input.proposedEndDate ? new Date(input.proposedEndDate) : null;
+    if (input.estimatedResources !== undefined) data.estimatedResources = input.estimatedResources;
+    if (input.planningRationale !== undefined) data.planningRationale = input.planningRationale;
     if (input.leadAuditorId !== undefined) data.leadAuditor = input.leadAuditorId ? { connect: { id: input.leadAuditorId } } : { disconnect: true };
     if (input.notes !== undefined) data.notes = input.notes;
 

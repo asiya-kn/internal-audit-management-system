@@ -7,6 +7,7 @@ interface ModalProps {
   title?: string;
   children: ReactNode;
   size?: 'sm' | 'md' | 'lg';
+  footer?: ReactNode;
 }
 
 const sizeClasses = {
@@ -15,7 +16,7 @@ const sizeClasses = {
   lg: 'max-w-2xl',
 };
 
-export function Modal({ open, onClose, title, children, size = 'md' }: ModalProps) {
+export function Modal({ open, onClose, title, children, size = 'md', footer }: ModalProps) {
   useEffect(() => {
     function handleEsc(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
@@ -33,19 +34,19 @@ export function Modal({ open, onClose, title, children, size = 'md' }: ModalProp
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div
         className="fixed inset-0 bg-neutral-900/50"
         onClick={onClose}
         aria-hidden="true"
       />
       <div
-        className={`relative z-10 w-full ${sizeClasses[size]} rounded-xl bg-white shadow-xl`}
+        className={`relative z-10 flex max-h-[calc(100vh-2rem)] w-full ${sizeClasses[size]} flex-col overflow-hidden rounded-xl bg-white shadow-xl`}
         role="dialog"
         aria-modal="true"
       >
         {title && (
-          <div className="flex items-center justify-between border-b border-neutral-200 px-5 py-4">
+          <div className="flex shrink-0 items-center justify-between border-b border-neutral-200 px-5 py-4">
             <h2 className="text-lg font-semibold text-neutral-900">{title}</h2>
             <button
               onClick={onClose}
@@ -56,7 +57,12 @@ export function Modal({ open, onClose, title, children, size = 'md' }: ModalProp
             </button>
           </div>
         )}
-        <div className="px-5 py-4">{children}</div>
+        <div className="grow overflow-y-auto px-5 py-4">{children}</div>
+        {footer && (
+          <div className="shrink-0 border-t border-neutral-200 bg-neutral-50 px-5 py-3">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

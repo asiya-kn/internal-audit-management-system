@@ -49,6 +49,7 @@ export function mapEngagementToDetail(eng: EngagementWithRelations): EngagementD
     objectives: eng.objectives,
     scope: eng.scope,
     methodology: eng.methodology,
+    estimatedResources: eng.estimatedResources,
     closedAt: eng.closedAt?.toISOString() ?? null,
     closedById: eng.closedById,
     closedByName: userName(eng.closedBy),

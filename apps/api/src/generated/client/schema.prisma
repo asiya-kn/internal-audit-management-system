@@ -309,6 +309,9 @@ model AuditPlan {
   priority   AuditPriority   @default(MEDIUM)
   status     AuditPlanStatus @default(DRAFT)
 
+  estimatedResources String?
+  planningRationale  String?
+
   proposedStartDate DateTime?
   proposedEndDate   DateTime?
   approvedAt        DateTime?
@@ -378,6 +381,8 @@ model Engagement {
   objectives  String
   scope       String
   methodology String?
+
+  estimatedResources String?
 
   leadAuditorId   String?   @db.Uuid
   startDate       DateTime?

@@ -35,6 +35,8 @@ interface FormState {
   priority: AuditPriority;
   proposedStartDate: string;
   proposedEndDate: string;
+  estimatedResources: string;
+  planningRationale: string;
   leadAuditorId: string;
   notes: string;
 }
@@ -51,6 +53,8 @@ function buildInitial(values: Partial<AuditPlanDetailDto> | undefined): FormStat
     priority: (values?.priority as AuditPriority) ?? 'MEDIUM',
     proposedStartDate: values?.proposedStartDate ? values.proposedStartDate.slice(0, 10) : '',
     proposedEndDate: values?.proposedEndDate ? values.proposedEndDate.slice(0, 10) : '',
+    estimatedResources: values?.estimatedResources ?? '',
+    planningRationale: values?.planningRationale ?? '',
     leadAuditorId: values?.leadAuditorId ?? '',
     notes: values?.notes ?? '',
   };
@@ -113,6 +117,8 @@ export function AuditPlanForm({
       priority: state.priority,
       proposedStartDate: state.proposedStartDate ? new Date(state.proposedStartDate).toISOString() : null,
       proposedEndDate: state.proposedEndDate ? new Date(state.proposedEndDate).toISOString() : null,
+      estimatedResources: state.estimatedResources.trim() || null,
+      planningRationale: state.planningRationale.trim() || null,
       leadAuditorId: state.leadAuditorId || null,
       notes: state.notes.trim() || undefined,
     };
@@ -120,8 +126,24 @@ export function AuditPlanForm({
   }
 
   return (
-    <Modal open={open} onClose={onCancel} title={mode === 'create' ? 'Add Audit Engagement' : 'Edit Audit Engagement'} size="lg">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <Modal
+      open={open}
+      onClose={onCancel}
+      title={mode === 'create' ? 'Add Plan Item' : 'Edit Plan Item'}
+      size="lg"
+      footer={
+        <div className="flex items-center justify-between gap-3">
+          {serverError && <span className="text-xs text-error-600">{serverError}</span>}
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
+            <Button type="submit" form="audit-plan-form" loading={loading}>
+              {mode === 'create' ? 'Create Plan Item' : 'Save Changes'}
+            </Button>
+          </div>
+        </div>
+      }
+    >
+      <form id="audit-plan-form" onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input
             label="Reference"
@@ -261,6 +283,30 @@ export function AuditPlanForm({
         />
 
         <div>
+          <label htmlFor="ap-estimatedResources" className="label">Estimated Resources (optional)</label>
+          <input
+            id="ap-estimatedResources"
+            className="input"
+            value={state.estimatedResources}
+            onChange={(e) => update('estimatedResources', e.target.value)}
+            maxLength={2000}
+            placeholder="e.g. 2 auditors, 3 weeks"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="ap-planningRationale" className="label">Planning Rationale (optional)</label>
+          <textarea
+            id="ap-planningRationale"
+            className="input min-h-[60px]"
+            value={state.planningRationale}
+            onChange={(e) => update('planningRationale', e.target.value)}
+            maxLength={5000}
+            placeholder="Why this audit is included in the plan…"
+          />
+        </div>
+
+        <div>
           <label htmlFor="ap-notes" className="label">Notes</label>
           <textarea
             id="ap-notes"
@@ -271,18 +317,6 @@ export function AuditPlanForm({
           />
         </div>
 
-        {serverError && (
-          <div className="rounded-lg border border-error-200 bg-error-50 px-4 py-3 text-sm text-error-700">
-            {serverError}
-          </div>
-        )}
-
-        <div className="flex justify-end gap-3 pt-2">
-          <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
-          <Button type="submit" loading={loading}>
-            {mode === 'create' ? 'Create Engagement' : 'Save Changes'}
-          </Button>
-        </div>
       </form>
     </Modal>
   );

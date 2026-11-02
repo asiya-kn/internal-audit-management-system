@@ -10,6 +10,7 @@ import {
   type AuditUniverseSummaryDto,
   type RiskSummaryDto,
   type AuditPlanSummaryDto,
+  type AuditPlanDetailDto,
   type EngagementDetailDto,
 } from '@iams/shared';
 
@@ -20,6 +21,8 @@ interface EngagementFormProps {
   auditEntities: AuditUniverseSummaryDto[];
   risks: RiskSummaryDto[];
   auditPlans: AuditPlanSummaryDto[];
+  planDetail?: AuditPlanDetailDto | null;
+  onPlanChange?: (planId: string | null) => void;
   onSubmit: (values: CreateEngagementRequest) => void;
   onCancel: () => void;
   loading?: boolean;
@@ -36,6 +39,7 @@ interface FormState {
   objectives: string;
   scope: string;
   methodology: string;
+  estimatedResources: string;
   leadAuditorId: string;
   startDate: string;
   endDate: string;
@@ -52,6 +56,7 @@ function buildInitial(values: Partial<EngagementDetailDto> | undefined): FormSta
     objectives: values?.objectives ?? '',
     scope: values?.scope ?? '',
     methodology: values?.methodology ?? '',
+    estimatedResources: values?.estimatedResources ?? '',
     leadAuditorId: values?.leadAuditorId ?? '',
     startDate: values?.startDate ? values.startDate.slice(0, 10) : '',
     endDate: values?.endDate ? values.endDate.slice(0, 10) : '',
@@ -70,7 +75,7 @@ const typeLabels: Record<EngagementType, string> = {
 };
 
 export function EngagementForm({
-  open, mode, initialValues, auditEntities, risks, auditPlans,
+  open, mode, initialValues, auditEntities, risks, auditPlans, planDetail, onPlanChange,
   onSubmit, onCancel, loading, serverError,
 }: EngagementFormProps) {
   const [state, setState] = useState<FormState>(() => buildInitial(initialValues));
@@ -97,6 +102,25 @@ export function EngagementForm({
     ? risks.filter((r) => r.auditEntityId === state.auditEntityId)
     : risks;
 
+  function applyPlan(planId: string) {
+    update('auditPlanId', planId);
+    onPlanChange?.(planId || null);
+    const summary = auditPlans.find((p) => p.id === planId);
+    if (!summary) return;
+    update('auditEntityId', summary.auditEntityId);
+    if (summary.riskId) update('riskId', summary.riskId);
+    else update('riskId', '');
+    if (summary.leadAuditorId) update('leadAuditorId', summary.leadAuditorId);
+    if (summary.proposedStartDate) update('startDate', summary.proposedStartDate.slice(0, 10));
+    if (summary.proposedEndDate) update('endDate', summary.proposedEndDate.slice(0, 10));
+    if (summary.title && !state.title.trim()) update('title', summary.title);
+    if (planDetail?.id === planId) {
+      if (planDetail.objectives) update('objectives', planDetail.objectives);
+      if (planDetail.scope) update('scope', planDetail.scope);
+      if (planDetail.estimatedResources) update('estimatedResources', planDetail.estimatedResources);
+    }
+  }
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const payload: CreateEngagementRequest = {
@@ -109,6 +133,7 @@ export function EngagementForm({
       objectives: state.objectives.trim(),
       scope: state.scope.trim(),
       methodology: state.methodology.trim() || undefined,
+      estimatedResources: state.estimatedResources.trim() || null,
       leadAuditorId: state.leadAuditorId || null,
       startDate: state.startDate ? new Date(state.startDate).toISOString() : null,
       endDate: state.endDate ? new Date(state.endDate).toISOString() : null,
@@ -117,8 +142,24 @@ export function EngagementForm({
   }
 
   return (
-    <Modal open={open} onClose={onCancel} title={mode === 'create' ? 'Create Audit Engagement' : 'Edit Audit Engagement'} size="lg">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <Modal
+      open={open}
+      onClose={onCancel}
+      title={mode === 'create' ? 'Create Audit Engagement' : 'Edit Audit Engagement'}
+      size="lg"
+      footer={
+        <div className="flex items-center justify-between gap-3">
+          {serverError && <span className="text-xs text-error-600">{serverError}</span>}
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
+            <Button type="submit" form="engagement-form" loading={loading}>
+              {mode === 'create' ? 'Create Engagement' : 'Save Changes'}
+            </Button>
+          </div>
+        </div>
+      }
+    >
+      <form id="engagement-form" onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Input
             label="Reference"
@@ -165,21 +206,19 @@ export function EngagementForm({
                 id="eng-auditPlan"
                 className="input appearance-none pr-9"
                 value={state.auditPlanId}
-                onChange={(e) => {
-                  const planId = e.target.value;
-                  update('auditPlanId', planId);
-                  const plan = auditPlans.find((p) => p.id === planId);
-                  if (plan) {
-                    update('auditEntityId', plan.auditEntityId);
-                  }
-                }}
+                onChange={(e) => applyPlan(e.target.value)}
+                disabled={mode === 'edit'}
               >
                 <option value="">None</option>
                 {auditPlans.map((p) => (
                   <option key={p.id} value={p.id}>{p.reference} — {p.title}</option>
                 ))}
               </select>
-              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+              {state.auditPlanId && (
+                <p className="mt-1 text-xs text-primary-600">
+                  Inheriting data from selected plan item. Fields are editable.
+                </p>
+              )}
             </div>
           </div>
           <div>
@@ -258,6 +297,18 @@ export function EngagementForm({
           />
         </div>
 
+        <div>
+          <label htmlFor="eng-estimatedResources" className="label">Estimated Resources (optional)</label>
+          <input
+            id="eng-estimatedResources"
+            className="input"
+            value={state.estimatedResources}
+            onChange={(e) => update('estimatedResources', e.target.value)}
+            maxLength={2000}
+            placeholder="e.g. 2 auditors, 3 weeks"
+          />
+        </div>
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Input
             label="Lead Auditor (User UUID)"
@@ -282,18 +333,6 @@ export function EngagementForm({
           />
         </div>
 
-        {serverError && (
-          <div className="rounded-lg border border-error-200 bg-error-50 px-4 py-3 text-sm text-error-700">
-            {serverError}
-          </div>
-        )}
-
-        <div className="flex justify-end gap-3 pt-2">
-          <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
-          <Button type="submit" loading={loading}>
-            {mode === 'create' ? 'Create Engagement' : 'Save Changes'}
-          </Button>
-        </div>
       </form>
     </Modal>
   );

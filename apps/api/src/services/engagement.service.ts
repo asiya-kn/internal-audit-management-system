@@ -125,6 +125,7 @@ export class EngagementService {
       objectives: input.objectives,
       scope: input.scope,
       methodology: input.methodology,
+      estimatedResources: input.estimatedResources ?? null,
       leadAuditor: input.leadAuditorId ? { connect: { id: input.leadAuditorId } } : undefined,
       startDate: input.startDate ? new Date(input.startDate) : undefined,
       endDate: input.endDate ? new Date(input.endDate) : undefined,
@@ -201,6 +202,7 @@ export class EngagementService {
     if (input.objectives !== undefined) data.objectives = input.objectives;
     if (input.scope !== undefined) data.scope = input.scope;
     if (input.methodology !== undefined) data.methodology = input.methodology;
+    if (input.estimatedResources !== undefined) data.estimatedResources = input.estimatedResources;
     if (input.leadAuditorId !== undefined) data.leadAuditor = input.leadAuditorId ? { connect: { id: input.leadAuditorId } } : { disconnect: true };
     if (input.startDate !== undefined) data.startDate = input.startDate ? new Date(input.startDate) : null;
     if (input.endDate !== undefined) data.endDate = input.endDate ? new Date(input.endDate) : null;

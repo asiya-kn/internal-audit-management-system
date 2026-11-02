@@ -36,6 +36,8 @@ export function mapPlanToDetail(plan: AuditPlanWithRelations): AuditPlanDetailDt
     ...mapPlanToSummary(plan),
     objectives: plan.objectives,
     scope: plan.scope,
+    estimatedResources: plan.estimatedResources,
+    planningRationale: plan.planningRationale,
     notes: plan.notes,
     riskInherentLevel: plan.risk?.inherentLevel ?? null,
     riskResidualLevel: plan.risk?.residualLevel ?? null,

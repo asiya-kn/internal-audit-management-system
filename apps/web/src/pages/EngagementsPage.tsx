@@ -16,7 +16,7 @@ import {
 } from '../hooks/useEngagements';
 import { useAuditUniverseList } from '../hooks/useAuditUniverse';
 import { useRiskList } from '../hooks/useRisks';
-import { useAuditPlanList } from '../hooks/useAuditPlans';
+import { useAuditPlanList, useAuditPlanDetail } from '../hooks/useAuditPlans';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Modal } from '../components/ui/Modal';
@@ -64,6 +64,7 @@ export function EngagementsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [formPlanId, setFormPlanId] = useState<string | null>(null);
 
   const listQuery = useEngagementList(filters);
   const dashboardQuery = useEngagementDashboard();
@@ -71,6 +72,7 @@ export function EngagementsPage() {
   const auditEntitiesQuery = useAuditUniverseList({ pageSize: 100 });
   const risksQuery = useRiskList({ pageSize: 100 });
   const auditPlansQuery = useAuditPlanList({ pageSize: 100, status: 'APPROVED' });
+  const planDetailQuery = useAuditPlanDetail(formPlanId);
   const createMutation = useCreateEngagement();
   const updateMutation = useUpdateEngagement(editingId ?? '');
   const deleteMutation = useDeleteEngagement();
@@ -88,12 +90,14 @@ export function EngagementsPage() {
   function handleCreate() {
     setFormMode('create');
     setEditingId(null);
+    setFormPlanId(null);
     setFormOpen(true);
   }
 
   function handleEdit(eng: EngagementSummaryDto) {
     setFormMode('edit');
     setEditingId(eng.id);
+    setFormPlanId(eng.auditPlanId);
     setDetailId(null);
     setFormOpen(true);
   }
@@ -289,8 +293,10 @@ export function EngagementsPage() {
         auditEntities={auditEntities}
         risks={risks}
         auditPlans={auditPlans}
+        planDetail={formMode === 'create' ? planDetailQuery.data ?? null : null}
+        onPlanChange={(planId) => setFormPlanId(planId)}
         onSubmit={handleSubmit}
-        onCancel={() => setFormOpen(false)}
+        onCancel={() => { setFormOpen(false); setFormPlanId(null); }}
         loading={isFormLoading}
         serverError={formMode === 'create' ? createMutation.error?.message : updateMutation.error?.message}
       />

@@ -120,8 +120,24 @@ export function RiskForm({
   }
 
   return (
-    <Modal open={open} onClose={onCancel} title={mode === 'create' ? 'Add Risk' : 'Edit Risk'} size="lg">
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <Modal
+      open={open}
+      onClose={onCancel}
+      title={mode === 'create' ? 'Add Risk' : 'Edit Risk'}
+      size="lg"
+      footer={
+        <div className="flex items-center justify-between gap-3">
+          {serverError && <span className="text-xs text-error-600">{serverError}</span>}
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
+            <Button type="submit" form="risk-form" loading={loading}>
+              {mode === 'create' ? 'Create Risk' : 'Save Changes'}
+            </Button>
+          </div>
+        </div>
+      }
+    >
+      <form id="risk-form" onSubmit={handleSubmit} className="space-y-4">
         <Input
           label="Risk Title"
           name="title"
@@ -294,18 +310,6 @@ export function RiskForm({
           />
         </div>
 
-        {serverError && (
-          <div className="rounded-lg border border-error-200 bg-error-50 px-4 py-3 text-sm text-error-700">
-            {serverError}
-          </div>
-        )}
-
-        <div className="flex justify-end gap-3 pt-2">
-          <Button variant="secondary" type="button" onClick={onCancel}>Cancel</Button>
-          <Button type="submit" loading={loading}>
-            {mode === 'create' ? 'Create Risk' : 'Save Changes'}
-          </Button>
-        </div>
       </form>
     </Modal>
   );
