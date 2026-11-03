@@ -387,6 +387,33 @@ exports.Prisma.ActionPlanUpdateScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.EvidenceScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  title: 'title',
+  description: 'description',
+  evidenceType: 'evidenceType',
+  source: 'source',
+  engagementId: 'engagementId',
+  controlTestId: 'controlTestId',
+  findingId: 'findingId',
+  actionPlanId: 'actionPlanId',
+  auditEntityId: 'auditEntityId',
+  collectionDate: 'collectionDate',
+  submittedById: 'submittedById',
+  reviewerId: 'reviewerId',
+  reviewStatus: 'reviewStatus',
+  reviewComments: 'reviewComments',
+  reviewedAt: 'reviewedAt',
+  documentReference: 'documentReference',
+  documentMetadata: 'documentMetadata',
+  notes: 'notes',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -561,6 +588,26 @@ exports.ActionPlanStatus = exports.$Enums.ActionPlanStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.EvidenceType = exports.$Enums.EvidenceType = {
+  WORKING_PAPER: 'WORKING_PAPER',
+  DOCUMENT: 'DOCUMENT',
+  EMAIL: 'EMAIL',
+  SCREENSHOT: 'SCREENSHOT',
+  DATA_FILE: 'DATA_FILE',
+  REPORT: 'REPORT',
+  INTERVIEW_NOTE: 'INTERVIEW_NOTE',
+  MEMO: 'MEMO',
+  OTHER: 'OTHER'
+};
+
+exports.EvidenceReviewStatus = exports.$Enums.EvidenceReviewStatus = {
+  DRAFT: 'DRAFT',
+  IN_REVIEW: 'IN_REVIEW',
+  REVISION_REQUESTED: 'REVISION_REQUESTED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -577,7 +624,8 @@ exports.Prisma.ModelName = {
   Finding: 'Finding',
   ControlTest: 'ControlTest',
   ActionPlan: 'ActionPlan',
-  ActionPlanUpdate: 'ActionPlanUpdate'
+  ActionPlanUpdate: 'ActionPlanUpdate',
+  Evidence: 'Evidence'
 };
 
 /**

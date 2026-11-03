@@ -72,6 +72,13 @@ import type {
   AssuranceProvider,
   AssuranceLevel,
   AssuranceTargetType,
+  EvidenceListResponse,
+  EvidenceDetailDto,
+  EvidenceDashboardDto,
+  EvidenceFilters,
+  CreateEvidenceRequest,
+  UpdateEvidenceRequest,
+  ReviewEvidenceRequest,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -377,4 +384,36 @@ export const api = {
     const qs = params.toString();
     return request<AssuranceMapResponse>(`/assurance-map${qs ? `?${qs}` : ''}`);
   },
+
+  // ---- Evidence Tracker ----
+
+  listEvidence: (filters: EvidenceFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.engagementId) params.set('engagementId', filters.engagementId);
+    if (filters.controlTestId) params.set('controlTestId', filters.controlTestId);
+    if (filters.findingId) params.set('findingId', filters.findingId);
+    if (filters.actionPlanId) params.set('actionPlanId', filters.actionPlanId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.evidenceType) params.set('evidenceType', filters.evidenceType);
+    if (filters.reviewStatus) params.set('reviewStatus', filters.reviewStatus);
+    if (filters.submittedById) params.set('submittedById', filters.submittedById);
+    if (filters.reviewerId) params.set('reviewerId', filters.reviewerId);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<EvidenceListResponse>(`/evidence${qs ? `?${qs}` : ''}`);
+  },
+  getEvidence: (id: string) => request<EvidenceDetailDto>(`/evidence/${id}`),
+  getEvidenceDashboard: () => request<EvidenceDashboardDto>('/evidence/dashboard'),
+  createEvidence: (data: CreateEvidenceRequest) =>
+    request<EvidenceDetailDto>('/evidence', { method: 'POST', body: JSON.stringify(data) }),
+  updateEvidence: (id: string, data: UpdateEvidenceRequest) =>
+    request<EvidenceDetailDto>(`/evidence/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  reviewEvidence: (id: string, data: ReviewEvidenceRequest) =>
+    request<EvidenceDetailDto>(`/evidence/${id}/review`, { method: 'PATCH', body: JSON.stringify(data) }),
+  deleteEvidence: (id: string) =>
+    request<{ message: string }>(`/evidence/${id}`, { method: 'DELETE' }),
 };

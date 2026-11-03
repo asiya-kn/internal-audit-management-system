@@ -1382,3 +1382,178 @@ export interface AssuranceMapFilters {
   page?: number;
   pageSize?: number;
 }
+
+// ---- Evidence Tracker ----
+
+export type EvidenceType =
+  | 'WORKING_PAPER'
+  | 'DOCUMENT'
+  | 'EMAIL'
+  | 'SCREENSHOT'
+  | 'DATA_FILE'
+  | 'REPORT'
+  | 'INTERVIEW_NOTE'
+  | 'MEMO'
+  | 'OTHER';
+
+export type EvidenceReviewStatus =
+  | 'DRAFT'
+  | 'IN_REVIEW'
+  | 'REVISION_REQUESTED'
+  | 'ACCEPTED'
+  | 'REJECTED';
+
+export const EVIDENCE_TYPES: EvidenceType[] = [
+  'WORKING_PAPER',
+  'DOCUMENT',
+  'EMAIL',
+  'SCREENSHOT',
+  'DATA_FILE',
+  'REPORT',
+  'INTERVIEW_NOTE',
+  'MEMO',
+  'OTHER',
+];
+
+export const EVIDENCE_REVIEW_STATUSES: EvidenceReviewStatus[] = [
+  'DRAFT',
+  'IN_REVIEW',
+  'REVISION_REQUESTED',
+  'ACCEPTED',
+  'REJECTED',
+];
+
+export const EVIDENCE_REVIEW_TRANSITIONS: Record<EvidenceReviewStatus, EvidenceReviewStatus[]> = {
+  DRAFT: ['IN_REVIEW', 'REJECTED'],
+  IN_REVIEW: ['ACCEPTED', 'REVISION_REQUESTED', 'REJECTED'],
+  REVISION_REQUESTED: ['IN_REVIEW', 'REJECTED'],
+  ACCEPTED: [],
+  REJECTED: ['DRAFT'],
+};
+
+export function canTransitionEvidenceReview(from: EvidenceReviewStatus, to: EvidenceReviewStatus): boolean {
+  return EVIDENCE_REVIEW_TRANSITIONS[from]?.includes(to) ?? false;
+}
+
+export interface EvidenceSummaryDto {
+  id: string;
+  reference: string;
+  title: string;
+  evidenceType: EvidenceType;
+  source: string | null;
+  engagementId: string | null;
+  engagementReference: string | null;
+  controlTestId: string | null;
+  controlTestReference: string | null;
+  findingId: string | null;
+  findingReference: string | null;
+  actionPlanId: string | null;
+  actionPlanReference: string | null;
+  auditEntityId: string | null;
+  auditEntityCode: string | null;
+  auditEntityName: string | null;
+  submittedById: string | null;
+  submittedByName: string | null;
+  reviewerId: string | null;
+  reviewerName: string | null;
+  reviewStatus: EvidenceReviewStatus;
+  reviewComments: string | null;
+  reviewedAt: string | null;
+  collectionDate: string | null;
+  documentReference: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface EvidenceDetailDto extends EvidenceSummaryDto {
+  description: string | null;
+  documentMetadata: Record<string, unknown> | null;
+  notes: string | null;
+  createdById: string | null;
+  createdByName: string | null;
+}
+
+export interface CreateEvidenceRequest {
+  reference: string;
+  title: string;
+  description?: string;
+  evidenceType?: EvidenceType;
+  source?: string;
+  engagementId?: string | null;
+  controlTestId?: string | null;
+  findingId?: string | null;
+  actionPlanId?: string | null;
+  auditEntityId?: string | null;
+  collectionDate?: string | null;
+  submittedById?: string | null;
+  reviewerId?: string | null;
+  documentReference?: string;
+  notes?: string;
+}
+
+export interface UpdateEvidenceRequest {
+  title?: string;
+  description?: string | null;
+  evidenceType?: EvidenceType;
+  source?: string | null;
+  engagementId?: string | null;
+  controlTestId?: string | null;
+  findingId?: string | null;
+  actionPlanId?: string | null;
+  auditEntityId?: string | null;
+  collectionDate?: string | null;
+  submittedById?: string | null;
+  reviewerId?: string | null;
+  documentReference?: string | null;
+  notes?: string | null;
+}
+
+export interface ReviewEvidenceRequest {
+  reviewStatus: EvidenceReviewStatus;
+  reviewComments?: string;
+}
+
+export interface EvidenceFilters {
+  search?: string;
+  engagementId?: string;
+  controlTestId?: string;
+  findingId?: string;
+  actionPlanId?: string;
+  auditEntityId?: string;
+  evidenceType?: EvidenceType;
+  reviewStatus?: EvidenceReviewStatus;
+  submittedById?: string;
+  reviewerId?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface EvidenceListResponse {
+  items: EvidenceSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface EvidenceDashboardDto {
+  totalEvidence: number;
+  byReviewStatus: Record<EvidenceReviewStatus, number>;
+  byEvidenceType: Partial<Record<EvidenceType, number>>;
+  draftCount: number;
+  inReviewCount: number;
+  acceptedCount: number;
+  rejectedCount: number;
+  revisionRequestedCount: number;
+  linkedToEngagement: number;
+  linkedToControlTest: number;
+  linkedToFinding: number;
+  linkedToActionPlan: number;
+  pendingReviewCount: number;
+  recentEvidence: EvidenceSummaryDto[];
+}
+
+export type CreateEvidenceInput = CreateEvidenceRequest;
+export type UpdateEvidenceInput = UpdateEvidenceRequest;
+export type ListEvidenceInput = EvidenceFilters;

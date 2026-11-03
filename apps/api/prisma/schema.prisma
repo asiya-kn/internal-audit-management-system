@@ -65,6 +65,11 @@ model User {
   verifiedActionPlans    ActionPlan[] @relation("ActionPlanVerifier")
   actionPlanUpdates      ActionPlanUpdate[] @relation("ActionPlanUpdateAuthor")
 
+  submittedEvidence      Evidence[] @relation("EvidenceSubmittedBy")
+  reviewedEvidence       Evidence[] @relation("EvidenceReviewer")
+  createdEvidence        Evidence[] @relation("EvidenceCreator")
+  updatedEvidence        Evidence[] @relation("EvidenceUpdater")
+
   @@index([email])
   @@index([isActive])
 }
@@ -189,6 +194,7 @@ model AuditUniverse {
   findings        Finding[]
   controlTests    ControlTest[]
   actionPlans     ActionPlan[]
+  evidence        Evidence[]
 
   @@index([parentId])
   @@index([entityType])
@@ -426,6 +432,7 @@ model Engagement {
   findings        Finding[]
   controlTests    ControlTest[]
   actionPlans     ActionPlan[]
+  evidence        Evidence[]
 
   @@index([auditPlanId])
   @@index([auditEntityId])
@@ -533,6 +540,7 @@ model Finding {
 
   controlTests    ControlTest[] @relation("ControlTestFinding")
   actionPlans     ActionPlan[]
+  evidence        Evidence[]
 
   @@index([engagementId])
   @@index([auditEntityId])
@@ -611,6 +619,7 @@ model ControlTest {
   createdBy       User?         @relation("ControlTestCreator", fields: [createdById], references: [id], onDelete: SetNull)
   updatedBy       User?         @relation("ControlTestUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
   actionPlans     ActionPlan[]
+  evidence        Evidence[]
 
   @@index([engagementId])
   @@index([auditEntityId])
@@ -687,6 +696,7 @@ model ActionPlan {
   updatedBy        User?          @relation("ActionPlanUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
 
   updates          ActionPlanUpdate[]
+  evidence        Evidence[]
 
   @@index([findingId])
   @@index([controlTestId])
@@ -711,5 +721,84 @@ model ActionPlanUpdate {
   updatedBy     User?      @relation("ActionPlanUpdateAuthor", fields: [updatedById], references: [id], onDelete: SetNull)
 
   @@index([actionPlanId])
+  @@index([updatedById])
+}
+
+// ---- Evidence Tracker ----
+
+enum EvidenceType {
+  WORKING_PAPER
+  DOCUMENT
+  EMAIL
+  SCREENSHOT
+  DATA_FILE
+  REPORT
+  INTERVIEW_NOTE
+  MEMO
+  OTHER
+}
+
+enum EvidenceReviewStatus {
+  DRAFT
+  IN_REVIEW
+  REVISION_REQUESTED
+  ACCEPTED
+  REJECTED
+}
+
+model Evidence {
+  id              String   @id @default(uuid()) @db.Uuid
+  reference        String   @unique
+  title            String
+  description      String?
+  evidenceType     EvidenceType @default(WORKING_PAPER)
+  source          String?
+
+  engagementId    String?  @db.Uuid
+  controlTestId   String?  @db.Uuid
+  findingId       String?  @db.Uuid
+  actionPlanId    String?  @db.Uuid
+  auditEntityId   String?  @db.Uuid
+
+  collectionDate  DateTime?
+
+  submittedById   String?  @db.Uuid
+  reviewerId      String?  @db.Uuid
+  reviewStatus    EvidenceReviewStatus @default(DRAFT)
+  reviewComments  String?
+  reviewedAt      DateTime?
+
+  documentReference String?
+  documentMetadata Json?
+
+  notes           String?
+
+  createdById     String?  @db.Uuid
+  updatedById     String?  @db.Uuid
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  engagement      Engagement?   @relation(fields: [engagementId], references: [id], onDelete: SetNull)
+  controlTest     ControlTest?  @relation(fields: [controlTestId], references: [id], onDelete: SetNull)
+  finding         Finding?      @relation(fields: [findingId], references: [id], onDelete: SetNull)
+  actionPlan      ActionPlan?   @relation(fields: [actionPlanId], references: [id], onDelete: SetNull)
+  auditEntity     AuditUniverse? @relation(fields: [auditEntityId], references: [id], onDelete: SetNull)
+  submittedBy     User?         @relation("EvidenceSubmittedBy", fields: [submittedById], references: [id], onDelete: SetNull)
+  reviewer        User?         @relation("EvidenceReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+  createdBy       User?         @relation("EvidenceCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?         @relation("EvidenceUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  @@index([engagementId])
+  @@index([controlTestId])
+  @@index([findingId])
+  @@index([actionPlanId])
+  @@index([auditEntityId])
+  @@index([reviewStatus])
+  @@index([evidenceType])
+  @@index([submittedById])
+  @@index([reviewerId])
+  @@index([title])
+  @@index([createdById])
   @@index([updatedById])
 }
