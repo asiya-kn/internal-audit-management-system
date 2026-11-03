@@ -93,6 +93,11 @@ export type ActionPlan = $Result.DefaultSelection<Prisma.$ActionPlanPayload>
  * 
  */
 export type ActionPlanUpdate = $Result.DefaultSelection<Prisma.$ActionPlanUpdatePayload>
+/**
+ * Model Evidence
+ * 
+ */
+export type Evidence = $Result.DefaultSelection<Prisma.$EvidencePayload>
 
 /**
  * Enums
@@ -297,6 +302,32 @@ export const ActionPlanStatus: {
 
 export type ActionPlanStatus = (typeof ActionPlanStatus)[keyof typeof ActionPlanStatus]
 
+
+export const EvidenceType: {
+  WORKING_PAPER: 'WORKING_PAPER',
+  DOCUMENT: 'DOCUMENT',
+  EMAIL: 'EMAIL',
+  SCREENSHOT: 'SCREENSHOT',
+  DATA_FILE: 'DATA_FILE',
+  REPORT: 'REPORT',
+  INTERVIEW_NOTE: 'INTERVIEW_NOTE',
+  MEMO: 'MEMO',
+  OTHER: 'OTHER'
+};
+
+export type EvidenceType = (typeof EvidenceType)[keyof typeof EvidenceType]
+
+
+export const EvidenceReviewStatus: {
+  DRAFT: 'DRAFT',
+  IN_REVIEW: 'IN_REVIEW',
+  REVISION_REQUESTED: 'REVISION_REQUESTED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+};
+
+export type EvidenceReviewStatus = (typeof EvidenceReviewStatus)[keyof typeof EvidenceReviewStatus]
+
 }
 
 export type AuditEntityType = $Enums.AuditEntityType
@@ -366,6 +397,14 @@ export const ActionPlanPriority: typeof $Enums.ActionPlanPriority
 export type ActionPlanStatus = $Enums.ActionPlanStatus
 
 export const ActionPlanStatus: typeof $Enums.ActionPlanStatus
+
+export type EvidenceType = $Enums.EvidenceType
+
+export const EvidenceType: typeof $Enums.EvidenceType
+
+export type EvidenceReviewStatus = $Enums.EvidenceReviewStatus
+
+export const EvidenceReviewStatus: typeof $Enums.EvidenceReviewStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -649,6 +688,16 @@ export class PrismaClient<
     * ```
     */
   get actionPlanUpdate(): Prisma.ActionPlanUpdateDelegate<ExtArgs>;
+
+  /**
+   * `prisma.evidence`: Exposes CRUD operations for the **Evidence** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Evidences
+    * const evidences = await prisma.evidence.findMany()
+    * ```
+    */
+  get evidence(): Prisma.EvidenceDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -1105,7 +1154,8 @@ export namespace Prisma {
     Finding: 'Finding',
     ControlTest: 'ControlTest',
     ActionPlan: 'ActionPlan',
-    ActionPlanUpdate: 'ActionPlanUpdate'
+    ActionPlanUpdate: 'ActionPlanUpdate',
+    Evidence: 'Evidence'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1121,7 +1171,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember" | "finding" | "controlTest" | "actionPlan" | "actionPlanUpdate"
+      modelProps: "user" | "role" | "permission" | "userRole" | "rolePermission" | "auditLog" | "auditUniverse" | "risk" | "riskAction" | "auditPlan" | "engagement" | "engagementTeamMember" | "finding" | "controlTest" | "actionPlan" | "actionPlanUpdate" | "evidence"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2245,6 +2295,76 @@ export namespace Prisma {
           }
         }
       }
+      Evidence: {
+        payload: Prisma.$EvidencePayload<ExtArgs>
+        fields: Prisma.EvidenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EvidenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EvidenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          findFirst: {
+            args: Prisma.EvidenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EvidenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          findMany: {
+            args: Prisma.EvidenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>[]
+          }
+          create: {
+            args: Prisma.EvidenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          createMany: {
+            args: Prisma.EvidenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EvidenceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>[]
+          }
+          delete: {
+            args: Prisma.EvidenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          update: {
+            args: Prisma.EvidenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          deleteMany: {
+            args: Prisma.EvidenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EvidenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EvidenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EvidencePayload>
+          }
+          aggregate: {
+            args: Prisma.EvidenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEvidence>
+          }
+          groupBy: {
+            args: Prisma.EvidenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EvidenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EvidenceCountArgs<ExtArgs>
+            result: $Utils.Optional<EvidenceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2438,6 +2558,10 @@ export namespace Prisma {
     updatedActionPlans: number
     verifiedActionPlans: number
     actionPlanUpdates: number
+    submittedEvidence: number
+    reviewedEvidence: number
+    createdEvidence: number
+    updatedEvidence: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2473,6 +2597,10 @@ export namespace Prisma {
     updatedActionPlans?: boolean | UserCountOutputTypeCountUpdatedActionPlansArgs
     verifiedActionPlans?: boolean | UserCountOutputTypeCountVerifiedActionPlansArgs
     actionPlanUpdates?: boolean | UserCountOutputTypeCountActionPlanUpdatesArgs
+    submittedEvidence?: boolean | UserCountOutputTypeCountSubmittedEvidenceArgs
+    reviewedEvidence?: boolean | UserCountOutputTypeCountReviewedEvidenceArgs
+    createdEvidence?: boolean | UserCountOutputTypeCountCreatedEvidenceArgs
+    updatedEvidence?: boolean | UserCountOutputTypeCountUpdatedEvidenceArgs
   }
 
   // Custom InputTypes
@@ -2710,6 +2838,34 @@ export namespace Prisma {
     where?: ActionPlanUpdateWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSubmittedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUpdatedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
 
   /**
    * Count Type RoleCountOutputType
@@ -2794,6 +2950,7 @@ export namespace Prisma {
     findings: number
     controlTests: number
     actionPlans: number
+    evidence: number
   }
 
   export type AuditUniverseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2804,6 +2961,7 @@ export namespace Prisma {
     findings?: boolean | AuditUniverseCountOutputTypeCountFindingsArgs
     controlTests?: boolean | AuditUniverseCountOutputTypeCountControlTestsArgs
     actionPlans?: boolean | AuditUniverseCountOutputTypeCountActionPlansArgs
+    evidence?: boolean | AuditUniverseCountOutputTypeCountEvidenceArgs
   }
 
   // Custom InputTypes
@@ -2864,6 +3022,13 @@ export namespace Prisma {
    */
   export type AuditUniverseCountOutputTypeCountActionPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActionPlanWhereInput
+  }
+
+  /**
+   * AuditUniverseCountOutputType without action
+   */
+  export type AuditUniverseCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
   }
 
 
@@ -2965,6 +3130,7 @@ export namespace Prisma {
     findings: number
     controlTests: number
     actionPlans: number
+    evidence: number
   }
 
   export type EngagementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2972,6 +3138,7 @@ export namespace Prisma {
     findings?: boolean | EngagementCountOutputTypeCountFindingsArgs
     controlTests?: boolean | EngagementCountOutputTypeCountControlTestsArgs
     actionPlans?: boolean | EngagementCountOutputTypeCountActionPlansArgs
+    evidence?: boolean | EngagementCountOutputTypeCountEvidenceArgs
   }
 
   // Custom InputTypes
@@ -3013,6 +3180,13 @@ export namespace Prisma {
     where?: ActionPlanWhereInput
   }
 
+  /**
+   * EngagementCountOutputType without action
+   */
+  export type EngagementCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
 
   /**
    * Count Type FindingCountOutputType
@@ -3021,11 +3195,13 @@ export namespace Prisma {
   export type FindingCountOutputType = {
     controlTests: number
     actionPlans: number
+    evidence: number
   }
 
   export type FindingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     controlTests?: boolean | FindingCountOutputTypeCountControlTestsArgs
     actionPlans?: boolean | FindingCountOutputTypeCountActionPlansArgs
+    evidence?: boolean | FindingCountOutputTypeCountEvidenceArgs
   }
 
   // Custom InputTypes
@@ -3053,6 +3229,13 @@ export namespace Prisma {
     where?: ActionPlanWhereInput
   }
 
+  /**
+   * FindingCountOutputType without action
+   */
+  export type FindingCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
 
   /**
    * Count Type ControlTestCountOutputType
@@ -3060,10 +3243,12 @@ export namespace Prisma {
 
   export type ControlTestCountOutputType = {
     actionPlans: number
+    evidence: number
   }
 
   export type ControlTestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     actionPlans?: boolean | ControlTestCountOutputTypeCountActionPlansArgs
+    evidence?: boolean | ControlTestCountOutputTypeCountEvidenceArgs
   }
 
   // Custom InputTypes
@@ -3084,6 +3269,13 @@ export namespace Prisma {
     where?: ActionPlanWhereInput
   }
 
+  /**
+   * ControlTestCountOutputType without action
+   */
+  export type ControlTestCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+  }
+
 
   /**
    * Count Type ActionPlanCountOutputType
@@ -3091,10 +3283,12 @@ export namespace Prisma {
 
   export type ActionPlanCountOutputType = {
     updates: number
+    evidence: number
   }
 
   export type ActionPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     updates?: boolean | ActionPlanCountOutputTypeCountUpdatesArgs
+    evidence?: boolean | ActionPlanCountOutputTypeCountEvidenceArgs
   }
 
   // Custom InputTypes
@@ -3113,6 +3307,13 @@ export namespace Prisma {
    */
   export type ActionPlanCountOutputTypeCountUpdatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActionPlanUpdateWhereInput
+  }
+
+  /**
+   * ActionPlanCountOutputType without action
+   */
+  export type ActionPlanCountOutputTypeCountEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
   }
 
 
@@ -3348,6 +3549,10 @@ export namespace Prisma {
     updatedActionPlans?: boolean | User$updatedActionPlansArgs<ExtArgs>
     verifiedActionPlans?: boolean | User$verifiedActionPlansArgs<ExtArgs>
     actionPlanUpdates?: boolean | User$actionPlanUpdatesArgs<ExtArgs>
+    submittedEvidence?: boolean | User$submittedEvidenceArgs<ExtArgs>
+    reviewedEvidence?: boolean | User$reviewedEvidenceArgs<ExtArgs>
+    createdEvidence?: boolean | User$createdEvidenceArgs<ExtArgs>
+    updatedEvidence?: boolean | User$updatedEvidenceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3408,6 +3613,10 @@ export namespace Prisma {
     updatedActionPlans?: boolean | User$updatedActionPlansArgs<ExtArgs>
     verifiedActionPlans?: boolean | User$verifiedActionPlansArgs<ExtArgs>
     actionPlanUpdates?: boolean | User$actionPlanUpdatesArgs<ExtArgs>
+    submittedEvidence?: boolean | User$submittedEvidenceArgs<ExtArgs>
+    reviewedEvidence?: boolean | User$reviewedEvidenceArgs<ExtArgs>
+    createdEvidence?: boolean | User$createdEvidenceArgs<ExtArgs>
+    updatedEvidence?: boolean | User$updatedEvidenceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3447,6 +3656,10 @@ export namespace Prisma {
       updatedActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
       verifiedActionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
       actionPlanUpdates: Prisma.$ActionPlanUpdatePayload<ExtArgs>[]
+      submittedEvidence: Prisma.$EvidencePayload<ExtArgs>[]
+      reviewedEvidence: Prisma.$EvidencePayload<ExtArgs>[]
+      createdEvidence: Prisma.$EvidencePayload<ExtArgs>[]
+      updatedEvidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3854,6 +4067,10 @@ export namespace Prisma {
     updatedActionPlans<T extends User$updatedActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
     verifiedActionPlans<T extends User$verifiedActionPlansArgs<ExtArgs> = {}>(args?: Subset<T, User$verifiedActionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
     actionPlanUpdates<T extends User$actionPlanUpdatesArgs<ExtArgs> = {}>(args?: Subset<T, User$actionPlanUpdatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findMany"> | Null>
+    submittedEvidence<T extends User$submittedEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$submittedEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
+    reviewedEvidence<T extends User$reviewedEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
+    createdEvidence<T extends User$createdEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$createdEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
+    updatedEvidence<T extends User$updatedEvidenceArgs<ExtArgs> = {}>(args?: Subset<T, User$updatedEvidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4843,6 +5060,86 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * User.submittedEvidence
+   */
+  export type User$submittedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedEvidence
+   */
+  export type User$reviewedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdEvidence
+   */
+  export type User$createdEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.updatedEvidence
+   */
+  export type User$updatedEvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
   }
 
   /**
@@ -9795,6 +10092,7 @@ export namespace Prisma {
     findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
     controlTests?: boolean | AuditUniverse$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | AuditUniverse$actionPlansArgs<ExtArgs>
+    evidence?: boolean | AuditUniverse$evidenceArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditUniverse"]>
 
@@ -9852,6 +10150,7 @@ export namespace Prisma {
     findings?: boolean | AuditUniverse$findingsArgs<ExtArgs>
     controlTests?: boolean | AuditUniverse$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | AuditUniverse$actionPlansArgs<ExtArgs>
+    evidence?: boolean | AuditUniverse$evidenceArgs<ExtArgs>
     _count?: boolean | AuditUniverseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AuditUniverseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9875,6 +10174,7 @@ export namespace Prisma {
       findings: Prisma.$FindingPayload<ExtArgs>[]
       controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
       actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      evidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10268,6 +10568,7 @@ export namespace Prisma {
     findings<T extends AuditUniverse$findingsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     controlTests<T extends AuditUniverse$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
     actionPlans<T extends AuditUniverse$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    evidence<T extends AuditUniverse$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, AuditUniverse$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10828,6 +11129,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * AuditUniverse.evidence
+   */
+  export type AuditUniverse$evidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
   }
 
   /**
@@ -14812,6 +15133,7 @@ export namespace Prisma {
     findings?: boolean | Engagement$findingsArgs<ExtArgs>
     controlTests?: boolean | Engagement$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | Engagement$actionPlansArgs<ExtArgs>
+    evidence?: boolean | Engagement$evidenceArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["engagement"]>
 
@@ -14888,6 +15210,7 @@ export namespace Prisma {
     findings?: boolean | Engagement$findingsArgs<ExtArgs>
     controlTests?: boolean | Engagement$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | Engagement$actionPlansArgs<ExtArgs>
+    evidence?: boolean | Engagement$evidenceArgs<ExtArgs>
     _count?: boolean | EngagementCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EngagementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14914,6 +15237,7 @@ export namespace Prisma {
       findings: Prisma.$FindingPayload<ExtArgs>[]
       controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
       actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      evidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -15315,6 +15639,7 @@ export namespace Prisma {
     findings<T extends Engagement$findingsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$findingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findMany"> | Null>
     controlTests<T extends Engagement$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
     actionPlans<T extends Engagement$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    evidence<T extends Engagement$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, Engagement$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15853,6 +16178,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActionPlanScalarFieldEnum | ActionPlanScalarFieldEnum[]
+  }
+
+  /**
+   * Engagement.evidence
+   */
+  export type Engagement$evidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
   }
 
   /**
@@ -17138,6 +17483,7 @@ export namespace Prisma {
     updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
     controlTests?: boolean | Finding$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | Finding$actionPlansArgs<ExtArgs>
+    evidence?: boolean | Finding$evidenceArgs<ExtArgs>
     _count?: boolean | FindingCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["finding"]>
 
@@ -17216,6 +17562,7 @@ export namespace Prisma {
     updatedBy?: boolean | Finding$updatedByArgs<ExtArgs>
     controlTests?: boolean | Finding$controlTestsArgs<ExtArgs>
     actionPlans?: boolean | Finding$actionPlansArgs<ExtArgs>
+    evidence?: boolean | Finding$evidenceArgs<ExtArgs>
     _count?: boolean | FindingCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FindingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17240,6 +17587,7 @@ export namespace Prisma {
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       controlTests: Prisma.$ControlTestPayload<ExtArgs>[]
       actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      evidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17641,6 +17989,7 @@ export namespace Prisma {
     updatedBy<T extends Finding$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Finding$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     controlTests<T extends Finding$controlTestsArgs<ExtArgs> = {}>(args?: Subset<T, Finding$controlTestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findMany"> | Null>
     actionPlans<T extends Finding$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, Finding$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    evidence<T extends Finding$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, Finding$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18144,6 +18493,26 @@ export namespace Prisma {
   }
 
   /**
+   * Finding.evidence
+   */
+  export type Finding$evidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
    * Finding without action
    */
   export type FindingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18565,6 +18934,7 @@ export namespace Prisma {
     createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
     updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
     actionPlans?: boolean | ControlTest$actionPlansArgs<ExtArgs>
+    evidence?: boolean | ControlTest$evidenceArgs<ExtArgs>
     _count?: boolean | ControlTestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["controlTest"]>
 
@@ -18652,6 +19022,7 @@ export namespace Prisma {
     createdBy?: boolean | ControlTest$createdByArgs<ExtArgs>
     updatedBy?: boolean | ControlTest$updatedByArgs<ExtArgs>
     actionPlans?: boolean | ControlTest$actionPlansArgs<ExtArgs>
+    evidence?: boolean | ControlTest$evidenceArgs<ExtArgs>
     _count?: boolean | ControlTestCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ControlTestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18677,6 +19048,7 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       actionPlans: Prisma.$ActionPlanPayload<ExtArgs>[]
+      evidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19082,6 +19454,7 @@ export namespace Prisma {
     createdBy<T extends ControlTest$createdByArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends ControlTest$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     actionPlans<T extends ControlTest$actionPlansArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$actionPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findMany"> | Null>
+    evidence<T extends ControlTest$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, ControlTest$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19599,6 +19972,26 @@ export namespace Prisma {
   }
 
   /**
+   * ControlTest.evidence
+   */
+  export type ControlTest$evidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
    * ControlTest without action
    */
   export type ControlTestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19981,6 +20374,7 @@ export namespace Prisma {
     createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
     updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
     updates?: boolean | ActionPlan$updatesArgs<ExtArgs>
+    evidence?: boolean | ActionPlan$evidenceArgs<ExtArgs>
     _count?: boolean | ActionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["actionPlan"]>
 
@@ -20060,6 +20454,7 @@ export namespace Prisma {
     createdBy?: boolean | ActionPlan$createdByArgs<ExtArgs>
     updatedBy?: boolean | ActionPlan$updatedByArgs<ExtArgs>
     updates?: boolean | ActionPlan$updatesArgs<ExtArgs>
+    evidence?: boolean | ActionPlan$evidenceArgs<ExtArgs>
     _count?: boolean | ActionPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ActionPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20087,6 +20482,7 @@ export namespace Prisma {
       createdBy: Prisma.$UserPayload<ExtArgs> | null
       updatedBy: Prisma.$UserPayload<ExtArgs> | null
       updates: Prisma.$ActionPlanUpdatePayload<ExtArgs>[]
+      evidence: Prisma.$EvidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20488,6 +20884,7 @@ export namespace Prisma {
     createdBy<T extends ActionPlan$createdByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updatedBy<T extends ActionPlan$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     updates<T extends ActionPlan$updatesArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPlanUpdatePayload<ExtArgs>, T, "findMany"> | Null>
+    evidence<T extends ActionPlan$evidenceArgs<ExtArgs> = {}>(args?: Subset<T, ActionPlan$evidenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21012,6 +21409,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActionPlanUpdateScalarFieldEnum | ActionPlanUpdateScalarFieldEnum[]
+  }
+
+  /**
+   * ActionPlan.evidence
+   */
+  export type ActionPlan$evidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    cursor?: EvidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
   }
 
   /**
@@ -22030,6 +22447,1346 @@ export namespace Prisma {
 
 
   /**
+   * Model Evidence
+   */
+
+  export type AggregateEvidence = {
+    _count: EvidenceCountAggregateOutputType | null
+    _min: EvidenceMinAggregateOutputType | null
+    _max: EvidenceMaxAggregateOutputType | null
+  }
+
+  export type EvidenceMinAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    evidenceType: $Enums.EvidenceType | null
+    source: string | null
+    engagementId: string | null
+    controlTestId: string | null
+    findingId: string | null
+    actionPlanId: string | null
+    auditEntityId: string | null
+    collectionDate: Date | null
+    submittedById: string | null
+    reviewerId: string | null
+    reviewStatus: $Enums.EvidenceReviewStatus | null
+    reviewComments: string | null
+    reviewedAt: Date | null
+    documentReference: string | null
+    notes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EvidenceMaxAggregateOutputType = {
+    id: string | null
+    reference: string | null
+    title: string | null
+    description: string | null
+    evidenceType: $Enums.EvidenceType | null
+    source: string | null
+    engagementId: string | null
+    controlTestId: string | null
+    findingId: string | null
+    actionPlanId: string | null
+    auditEntityId: string | null
+    collectionDate: Date | null
+    submittedById: string | null
+    reviewerId: string | null
+    reviewStatus: $Enums.EvidenceReviewStatus | null
+    reviewComments: string | null
+    reviewedAt: Date | null
+    documentReference: string | null
+    notes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EvidenceCountAggregateOutputType = {
+    id: number
+    reference: number
+    title: number
+    description: number
+    evidenceType: number
+    source: number
+    engagementId: number
+    controlTestId: number
+    findingId: number
+    actionPlanId: number
+    auditEntityId: number
+    collectionDate: number
+    submittedById: number
+    reviewerId: number
+    reviewStatus: number
+    reviewComments: number
+    reviewedAt: number
+    documentReference: number
+    documentMetadata: number
+    notes: number
+    createdById: number
+    updatedById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EvidenceMinAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    evidenceType?: true
+    source?: true
+    engagementId?: true
+    controlTestId?: true
+    findingId?: true
+    actionPlanId?: true
+    auditEntityId?: true
+    collectionDate?: true
+    submittedById?: true
+    reviewerId?: true
+    reviewStatus?: true
+    reviewComments?: true
+    reviewedAt?: true
+    documentReference?: true
+    notes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EvidenceMaxAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    evidenceType?: true
+    source?: true
+    engagementId?: true
+    controlTestId?: true
+    findingId?: true
+    actionPlanId?: true
+    auditEntityId?: true
+    collectionDate?: true
+    submittedById?: true
+    reviewerId?: true
+    reviewStatus?: true
+    reviewComments?: true
+    reviewedAt?: true
+    documentReference?: true
+    notes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EvidenceCountAggregateInputType = {
+    id?: true
+    reference?: true
+    title?: true
+    description?: true
+    evidenceType?: true
+    source?: true
+    engagementId?: true
+    controlTestId?: true
+    findingId?: true
+    actionPlanId?: true
+    auditEntityId?: true
+    collectionDate?: true
+    submittedById?: true
+    reviewerId?: true
+    reviewStatus?: true
+    reviewComments?: true
+    reviewedAt?: true
+    documentReference?: true
+    documentMetadata?: true
+    notes?: true
+    createdById?: true
+    updatedById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EvidenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Evidence to aggregate.
+     */
+    where?: EvidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Evidences to fetch.
+     */
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EvidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Evidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Evidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Evidences
+    **/
+    _count?: true | EvidenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EvidenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EvidenceMaxAggregateInputType
+  }
+
+  export type GetEvidenceAggregateType<T extends EvidenceAggregateArgs> = {
+        [P in keyof T & keyof AggregateEvidence]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEvidence[P]>
+      : GetScalarType<T[P], AggregateEvidence[P]>
+  }
+
+
+
+
+  export type EvidenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EvidenceWhereInput
+    orderBy?: EvidenceOrderByWithAggregationInput | EvidenceOrderByWithAggregationInput[]
+    by: EvidenceScalarFieldEnum[] | EvidenceScalarFieldEnum
+    having?: EvidenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EvidenceCountAggregateInputType | true
+    _min?: EvidenceMinAggregateInputType
+    _max?: EvidenceMaxAggregateInputType
+  }
+
+  export type EvidenceGroupByOutputType = {
+    id: string
+    reference: string
+    title: string
+    description: string | null
+    evidenceType: $Enums.EvidenceType
+    source: string | null
+    engagementId: string | null
+    controlTestId: string | null
+    findingId: string | null
+    actionPlanId: string | null
+    auditEntityId: string | null
+    collectionDate: Date | null
+    submittedById: string | null
+    reviewerId: string | null
+    reviewStatus: $Enums.EvidenceReviewStatus
+    reviewComments: string | null
+    reviewedAt: Date | null
+    documentReference: string | null
+    documentMetadata: JsonValue | null
+    notes: string | null
+    createdById: string | null
+    updatedById: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EvidenceCountAggregateOutputType | null
+    _min: EvidenceMinAggregateOutputType | null
+    _max: EvidenceMaxAggregateOutputType | null
+  }
+
+  type GetEvidenceGroupByPayload<T extends EvidenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EvidenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EvidenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EvidenceGroupByOutputType[P]>
+            : GetScalarType<T[P], EvidenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EvidenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    evidenceType?: boolean
+    source?: boolean
+    engagementId?: boolean
+    controlTestId?: boolean
+    findingId?: boolean
+    actionPlanId?: boolean
+    auditEntityId?: boolean
+    collectionDate?: boolean
+    submittedById?: boolean
+    reviewerId?: boolean
+    reviewStatus?: boolean
+    reviewComments?: boolean
+    reviewedAt?: boolean
+    documentReference?: boolean
+    documentMetadata?: boolean
+    notes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | Evidence$engagementArgs<ExtArgs>
+    controlTest?: boolean | Evidence$controlTestArgs<ExtArgs>
+    finding?: boolean | Evidence$findingArgs<ExtArgs>
+    actionPlan?: boolean | Evidence$actionPlanArgs<ExtArgs>
+    auditEntity?: boolean | Evidence$auditEntityArgs<ExtArgs>
+    submittedBy?: boolean | Evidence$submittedByArgs<ExtArgs>
+    reviewer?: boolean | Evidence$reviewerArgs<ExtArgs>
+    createdBy?: boolean | Evidence$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Evidence$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["evidence"]>
+
+  export type EvidenceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    evidenceType?: boolean
+    source?: boolean
+    engagementId?: boolean
+    controlTestId?: boolean
+    findingId?: boolean
+    actionPlanId?: boolean
+    auditEntityId?: boolean
+    collectionDate?: boolean
+    submittedById?: boolean
+    reviewerId?: boolean
+    reviewStatus?: boolean
+    reviewComments?: boolean
+    reviewedAt?: boolean
+    documentReference?: boolean
+    documentMetadata?: boolean
+    notes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    engagement?: boolean | Evidence$engagementArgs<ExtArgs>
+    controlTest?: boolean | Evidence$controlTestArgs<ExtArgs>
+    finding?: boolean | Evidence$findingArgs<ExtArgs>
+    actionPlan?: boolean | Evidence$actionPlanArgs<ExtArgs>
+    auditEntity?: boolean | Evidence$auditEntityArgs<ExtArgs>
+    submittedBy?: boolean | Evidence$submittedByArgs<ExtArgs>
+    reviewer?: boolean | Evidence$reviewerArgs<ExtArgs>
+    createdBy?: boolean | Evidence$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Evidence$updatedByArgs<ExtArgs>
+  }, ExtArgs["result"]["evidence"]>
+
+  export type EvidenceSelectScalar = {
+    id?: boolean
+    reference?: boolean
+    title?: boolean
+    description?: boolean
+    evidenceType?: boolean
+    source?: boolean
+    engagementId?: boolean
+    controlTestId?: boolean
+    findingId?: boolean
+    actionPlanId?: boolean
+    auditEntityId?: boolean
+    collectionDate?: boolean
+    submittedById?: boolean
+    reviewerId?: boolean
+    reviewStatus?: boolean
+    reviewComments?: boolean
+    reviewedAt?: boolean
+    documentReference?: boolean
+    documentMetadata?: boolean
+    notes?: boolean
+    createdById?: boolean
+    updatedById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EvidenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | Evidence$engagementArgs<ExtArgs>
+    controlTest?: boolean | Evidence$controlTestArgs<ExtArgs>
+    finding?: boolean | Evidence$findingArgs<ExtArgs>
+    actionPlan?: boolean | Evidence$actionPlanArgs<ExtArgs>
+    auditEntity?: boolean | Evidence$auditEntityArgs<ExtArgs>
+    submittedBy?: boolean | Evidence$submittedByArgs<ExtArgs>
+    reviewer?: boolean | Evidence$reviewerArgs<ExtArgs>
+    createdBy?: boolean | Evidence$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Evidence$updatedByArgs<ExtArgs>
+  }
+  export type EvidenceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    engagement?: boolean | Evidence$engagementArgs<ExtArgs>
+    controlTest?: boolean | Evidence$controlTestArgs<ExtArgs>
+    finding?: boolean | Evidence$findingArgs<ExtArgs>
+    actionPlan?: boolean | Evidence$actionPlanArgs<ExtArgs>
+    auditEntity?: boolean | Evidence$auditEntityArgs<ExtArgs>
+    submittedBy?: boolean | Evidence$submittedByArgs<ExtArgs>
+    reviewer?: boolean | Evidence$reviewerArgs<ExtArgs>
+    createdBy?: boolean | Evidence$createdByArgs<ExtArgs>
+    updatedBy?: boolean | Evidence$updatedByArgs<ExtArgs>
+  }
+
+  export type $EvidencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Evidence"
+    objects: {
+      engagement: Prisma.$EngagementPayload<ExtArgs> | null
+      controlTest: Prisma.$ControlTestPayload<ExtArgs> | null
+      finding: Prisma.$FindingPayload<ExtArgs> | null
+      actionPlan: Prisma.$ActionPlanPayload<ExtArgs> | null
+      auditEntity: Prisma.$AuditUniversePayload<ExtArgs> | null
+      submittedBy: Prisma.$UserPayload<ExtArgs> | null
+      reviewer: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reference: string
+      title: string
+      description: string | null
+      evidenceType: $Enums.EvidenceType
+      source: string | null
+      engagementId: string | null
+      controlTestId: string | null
+      findingId: string | null
+      actionPlanId: string | null
+      auditEntityId: string | null
+      collectionDate: Date | null
+      submittedById: string | null
+      reviewerId: string | null
+      reviewStatus: $Enums.EvidenceReviewStatus
+      reviewComments: string | null
+      reviewedAt: Date | null
+      documentReference: string | null
+      documentMetadata: Prisma.JsonValue | null
+      notes: string | null
+      createdById: string | null
+      updatedById: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["evidence"]>
+    composites: {}
+  }
+
+  type EvidenceGetPayload<S extends boolean | null | undefined | EvidenceDefaultArgs> = $Result.GetResult<Prisma.$EvidencePayload, S>
+
+  type EvidenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EvidenceFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EvidenceCountAggregateInputType | true
+    }
+
+  export interface EvidenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Evidence'], meta: { name: 'Evidence' } }
+    /**
+     * Find zero or one Evidence that matches the filter.
+     * @param {EvidenceFindUniqueArgs} args - Arguments to find a Evidence
+     * @example
+     * // Get one Evidence
+     * const evidence = await prisma.evidence.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EvidenceFindUniqueArgs>(args: SelectSubset<T, EvidenceFindUniqueArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Evidence that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EvidenceFindUniqueOrThrowArgs} args - Arguments to find a Evidence
+     * @example
+     * // Get one Evidence
+     * const evidence = await prisma.evidence.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EvidenceFindUniqueOrThrowArgs>(args: SelectSubset<T, EvidenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Evidence that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceFindFirstArgs} args - Arguments to find a Evidence
+     * @example
+     * // Get one Evidence
+     * const evidence = await prisma.evidence.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EvidenceFindFirstArgs>(args?: SelectSubset<T, EvidenceFindFirstArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Evidence that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceFindFirstOrThrowArgs} args - Arguments to find a Evidence
+     * @example
+     * // Get one Evidence
+     * const evidence = await prisma.evidence.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EvidenceFindFirstOrThrowArgs>(args?: SelectSubset<T, EvidenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Evidences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Evidences
+     * const evidences = await prisma.evidence.findMany()
+     * 
+     * // Get first 10 Evidences
+     * const evidences = await prisma.evidence.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const evidenceWithIdOnly = await prisma.evidence.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EvidenceFindManyArgs>(args?: SelectSubset<T, EvidenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Evidence.
+     * @param {EvidenceCreateArgs} args - Arguments to create a Evidence.
+     * @example
+     * // Create one Evidence
+     * const Evidence = await prisma.evidence.create({
+     *   data: {
+     *     // ... data to create a Evidence
+     *   }
+     * })
+     * 
+     */
+    create<T extends EvidenceCreateArgs>(args: SelectSubset<T, EvidenceCreateArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Evidences.
+     * @param {EvidenceCreateManyArgs} args - Arguments to create many Evidences.
+     * @example
+     * // Create many Evidences
+     * const evidence = await prisma.evidence.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EvidenceCreateManyArgs>(args?: SelectSubset<T, EvidenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Evidences and returns the data saved in the database.
+     * @param {EvidenceCreateManyAndReturnArgs} args - Arguments to create many Evidences.
+     * @example
+     * // Create many Evidences
+     * const evidence = await prisma.evidence.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Evidences and only return the `id`
+     * const evidenceWithIdOnly = await prisma.evidence.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EvidenceCreateManyAndReturnArgs>(args?: SelectSubset<T, EvidenceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Evidence.
+     * @param {EvidenceDeleteArgs} args - Arguments to delete one Evidence.
+     * @example
+     * // Delete one Evidence
+     * const Evidence = await prisma.evidence.delete({
+     *   where: {
+     *     // ... filter to delete one Evidence
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EvidenceDeleteArgs>(args: SelectSubset<T, EvidenceDeleteArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Evidence.
+     * @param {EvidenceUpdateArgs} args - Arguments to update one Evidence.
+     * @example
+     * // Update one Evidence
+     * const evidence = await prisma.evidence.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EvidenceUpdateArgs>(args: SelectSubset<T, EvidenceUpdateArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Evidences.
+     * @param {EvidenceDeleteManyArgs} args - Arguments to filter Evidences to delete.
+     * @example
+     * // Delete a few Evidences
+     * const { count } = await prisma.evidence.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EvidenceDeleteManyArgs>(args?: SelectSubset<T, EvidenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Evidences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Evidences
+     * const evidence = await prisma.evidence.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EvidenceUpdateManyArgs>(args: SelectSubset<T, EvidenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Evidence.
+     * @param {EvidenceUpsertArgs} args - Arguments to update or create a Evidence.
+     * @example
+     * // Update or create a Evidence
+     * const evidence = await prisma.evidence.upsert({
+     *   create: {
+     *     // ... data to create a Evidence
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Evidence we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EvidenceUpsertArgs>(args: SelectSubset<T, EvidenceUpsertArgs<ExtArgs>>): Prisma__EvidenceClient<$Result.GetResult<Prisma.$EvidencePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Evidences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceCountArgs} args - Arguments to filter Evidences to count.
+     * @example
+     * // Count the number of Evidences
+     * const count = await prisma.evidence.count({
+     *   where: {
+     *     // ... the filter for the Evidences we want to count
+     *   }
+     * })
+    **/
+    count<T extends EvidenceCountArgs>(
+      args?: Subset<T, EvidenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EvidenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Evidence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EvidenceAggregateArgs>(args: Subset<T, EvidenceAggregateArgs>): Prisma.PrismaPromise<GetEvidenceAggregateType<T>>
+
+    /**
+     * Group by Evidence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EvidenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EvidenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EvidenceGroupByArgs['orderBy'] }
+        : { orderBy?: EvidenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EvidenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEvidenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Evidence model
+   */
+  readonly fields: EvidenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Evidence.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EvidenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    engagement<T extends Evidence$engagementArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$engagementArgs<ExtArgs>>): Prisma__EngagementClient<$Result.GetResult<Prisma.$EngagementPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    controlTest<T extends Evidence$controlTestArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$controlTestArgs<ExtArgs>>): Prisma__ControlTestClient<$Result.GetResult<Prisma.$ControlTestPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    finding<T extends Evidence$findingArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$findingArgs<ExtArgs>>): Prisma__FindingClient<$Result.GetResult<Prisma.$FindingPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    actionPlan<T extends Evidence$actionPlanArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$actionPlanArgs<ExtArgs>>): Prisma__ActionPlanClient<$Result.GetResult<Prisma.$ActionPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    auditEntity<T extends Evidence$auditEntityArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$auditEntityArgs<ExtArgs>>): Prisma__AuditUniverseClient<$Result.GetResult<Prisma.$AuditUniversePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    submittedBy<T extends Evidence$submittedByArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$submittedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    reviewer<T extends Evidence$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$reviewerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    createdBy<T extends Evidence$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    updatedBy<T extends Evidence$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Evidence$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Evidence model
+   */ 
+  interface EvidenceFieldRefs {
+    readonly id: FieldRef<"Evidence", 'String'>
+    readonly reference: FieldRef<"Evidence", 'String'>
+    readonly title: FieldRef<"Evidence", 'String'>
+    readonly description: FieldRef<"Evidence", 'String'>
+    readonly evidenceType: FieldRef<"Evidence", 'EvidenceType'>
+    readonly source: FieldRef<"Evidence", 'String'>
+    readonly engagementId: FieldRef<"Evidence", 'String'>
+    readonly controlTestId: FieldRef<"Evidence", 'String'>
+    readonly findingId: FieldRef<"Evidence", 'String'>
+    readonly actionPlanId: FieldRef<"Evidence", 'String'>
+    readonly auditEntityId: FieldRef<"Evidence", 'String'>
+    readonly collectionDate: FieldRef<"Evidence", 'DateTime'>
+    readonly submittedById: FieldRef<"Evidence", 'String'>
+    readonly reviewerId: FieldRef<"Evidence", 'String'>
+    readonly reviewStatus: FieldRef<"Evidence", 'EvidenceReviewStatus'>
+    readonly reviewComments: FieldRef<"Evidence", 'String'>
+    readonly reviewedAt: FieldRef<"Evidence", 'DateTime'>
+    readonly documentReference: FieldRef<"Evidence", 'String'>
+    readonly documentMetadata: FieldRef<"Evidence", 'Json'>
+    readonly notes: FieldRef<"Evidence", 'String'>
+    readonly createdById: FieldRef<"Evidence", 'String'>
+    readonly updatedById: FieldRef<"Evidence", 'String'>
+    readonly createdAt: FieldRef<"Evidence", 'DateTime'>
+    readonly updatedAt: FieldRef<"Evidence", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Evidence findUnique
+   */
+  export type EvidenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Evidence to fetch.
+     */
+    where: EvidenceWhereUniqueInput
+  }
+
+  /**
+   * Evidence findUniqueOrThrow
+   */
+  export type EvidenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Evidence to fetch.
+     */
+    where: EvidenceWhereUniqueInput
+  }
+
+  /**
+   * Evidence findFirst
+   */
+  export type EvidenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Evidence to fetch.
+     */
+    where?: EvidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Evidences to fetch.
+     */
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Evidences.
+     */
+    cursor?: EvidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Evidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Evidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Evidences.
+     */
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Evidence findFirstOrThrow
+   */
+  export type EvidenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Evidence to fetch.
+     */
+    where?: EvidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Evidences to fetch.
+     */
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Evidences.
+     */
+    cursor?: EvidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Evidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Evidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Evidences.
+     */
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Evidence findMany
+   */
+  export type EvidenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Evidences to fetch.
+     */
+    where?: EvidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Evidences to fetch.
+     */
+    orderBy?: EvidenceOrderByWithRelationInput | EvidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Evidences.
+     */
+    cursor?: EvidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Evidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Evidences.
+     */
+    skip?: number
+    distinct?: EvidenceScalarFieldEnum | EvidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Evidence create
+   */
+  export type EvidenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Evidence.
+     */
+    data: XOR<EvidenceCreateInput, EvidenceUncheckedCreateInput>
+  }
+
+  /**
+   * Evidence createMany
+   */
+  export type EvidenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Evidences.
+     */
+    data: EvidenceCreateManyInput | EvidenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Evidence createManyAndReturn
+   */
+  export type EvidenceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Evidences.
+     */
+    data: EvidenceCreateManyInput | EvidenceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Evidence update
+   */
+  export type EvidenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Evidence.
+     */
+    data: XOR<EvidenceUpdateInput, EvidenceUncheckedUpdateInput>
+    /**
+     * Choose, which Evidence to update.
+     */
+    where: EvidenceWhereUniqueInput
+  }
+
+  /**
+   * Evidence updateMany
+   */
+  export type EvidenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Evidences.
+     */
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyInput>
+    /**
+     * Filter which Evidences to update
+     */
+    where?: EvidenceWhereInput
+  }
+
+  /**
+   * Evidence upsert
+   */
+  export type EvidenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Evidence to update in case it exists.
+     */
+    where: EvidenceWhereUniqueInput
+    /**
+     * In case the Evidence found by the `where` argument doesn't exist, create a new Evidence with this data.
+     */
+    create: XOR<EvidenceCreateInput, EvidenceUncheckedCreateInput>
+    /**
+     * In case the Evidence was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EvidenceUpdateInput, EvidenceUncheckedUpdateInput>
+  }
+
+  /**
+   * Evidence delete
+   */
+  export type EvidenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+    /**
+     * Filter which Evidence to delete.
+     */
+    where: EvidenceWhereUniqueInput
+  }
+
+  /**
+   * Evidence deleteMany
+   */
+  export type EvidenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Evidences to delete
+     */
+    where?: EvidenceWhereInput
+  }
+
+  /**
+   * Evidence.engagement
+   */
+  export type Evidence$engagementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Engagement
+     */
+    select?: EngagementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EngagementInclude<ExtArgs> | null
+    where?: EngagementWhereInput
+  }
+
+  /**
+   * Evidence.controlTest
+   */
+  export type Evidence$controlTestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ControlTest
+     */
+    select?: ControlTestSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ControlTestInclude<ExtArgs> | null
+    where?: ControlTestWhereInput
+  }
+
+  /**
+   * Evidence.finding
+   */
+  export type Evidence$findingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Finding
+     */
+    select?: FindingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FindingInclude<ExtArgs> | null
+    where?: FindingWhereInput
+  }
+
+  /**
+   * Evidence.actionPlan
+   */
+  export type Evidence$actionPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ActionPlan
+     */
+    select?: ActionPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActionPlanInclude<ExtArgs> | null
+    where?: ActionPlanWhereInput
+  }
+
+  /**
+   * Evidence.auditEntity
+   */
+  export type Evidence$auditEntityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditUniverse
+     */
+    select?: AuditUniverseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditUniverseInclude<ExtArgs> | null
+    where?: AuditUniverseWhereInput
+  }
+
+  /**
+   * Evidence.submittedBy
+   */
+  export type Evidence$submittedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Evidence.reviewer
+   */
+  export type Evidence$reviewerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Evidence.createdBy
+   */
+  export type Evidence$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Evidence.updatedBy
+   */
+  export type Evidence$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Evidence without action
+   */
+  export type EvidenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Evidence
+     */
+    select?: EvidenceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EvidenceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22354,6 +24111,36 @@ export namespace Prisma {
   };
 
   export type ActionPlanUpdateScalarFieldEnum = (typeof ActionPlanUpdateScalarFieldEnum)[keyof typeof ActionPlanUpdateScalarFieldEnum]
+
+
+  export const EvidenceScalarFieldEnum: {
+    id: 'id',
+    reference: 'reference',
+    title: 'title',
+    description: 'description',
+    evidenceType: 'evidenceType',
+    source: 'source',
+    engagementId: 'engagementId',
+    controlTestId: 'controlTestId',
+    findingId: 'findingId',
+    actionPlanId: 'actionPlanId',
+    auditEntityId: 'auditEntityId',
+    collectionDate: 'collectionDate',
+    submittedById: 'submittedById',
+    reviewerId: 'reviewerId',
+    reviewStatus: 'reviewStatus',
+    reviewComments: 'reviewComments',
+    reviewedAt: 'reviewedAt',
+    documentReference: 'documentReference',
+    documentMetadata: 'documentMetadata',
+    notes: 'notes',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EvidenceScalarFieldEnum = (typeof EvidenceScalarFieldEnum)[keyof typeof EvidenceScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -22697,6 +24484,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EvidenceType'
+   */
+  export type EnumEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EvidenceType'>
+    
+
+
+  /**
+   * Reference to a field of type 'EvidenceType[]'
+   */
+  export type ListEnumEvidenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EvidenceType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'EvidenceReviewStatus'
+   */
+  export type EnumEvidenceReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EvidenceReviewStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EvidenceReviewStatus[]'
+   */
+  export type ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EvidenceReviewStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -22758,6 +24573,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanListRelationFilter
     verifiedActionPlans?: ActionPlanListRelationFilter
     actionPlanUpdates?: ActionPlanUpdateListRelationFilter
+    submittedEvidence?: EvidenceListRelationFilter
+    reviewedEvidence?: EvidenceListRelationFilter
+    createdEvidence?: EvidenceListRelationFilter
+    updatedEvidence?: EvidenceListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -22802,6 +24621,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanOrderByRelationAggregateInput
     verifiedActionPlans?: ActionPlanOrderByRelationAggregateInput
     actionPlanUpdates?: ActionPlanUpdateOrderByRelationAggregateInput
+    submittedEvidence?: EvidenceOrderByRelationAggregateInput
+    reviewedEvidence?: EvidenceOrderByRelationAggregateInput
+    createdEvidence?: EvidenceOrderByRelationAggregateInput
+    updatedEvidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -22849,6 +24672,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanListRelationFilter
     verifiedActionPlans?: ActionPlanListRelationFilter
     actionPlanUpdates?: ActionPlanUpdateListRelationFilter
+    submittedEvidence?: EvidenceListRelationFilter
+    reviewedEvidence?: EvidenceListRelationFilter
+    createdEvidence?: EvidenceListRelationFilter
+    updatedEvidence?: EvidenceListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -23195,6 +25022,7 @@ export namespace Prisma {
     findings?: FindingListRelationFilter
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }
 
   export type AuditUniverseOrderByWithRelationInput = {
@@ -23225,6 +25053,7 @@ export namespace Prisma {
     findings?: FindingOrderByRelationAggregateInput
     controlTests?: ControlTestOrderByRelationAggregateInput
     actionPlans?: ActionPlanOrderByRelationAggregateInput
+    evidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type AuditUniverseWhereUniqueInput = Prisma.AtLeast<{
@@ -23258,6 +25087,7 @@ export namespace Prisma {
     findings?: FindingListRelationFilter
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }, "id" | "code">
 
   export type AuditUniverseOrderByWithAggregationInput = {
@@ -23739,6 +25569,7 @@ export namespace Prisma {
     findings?: FindingListRelationFilter
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }
 
   export type EngagementOrderByWithRelationInput = {
@@ -23777,6 +25608,7 @@ export namespace Prisma {
     findings?: FindingOrderByRelationAggregateInput
     controlTests?: ControlTestOrderByRelationAggregateInput
     actionPlans?: ActionPlanOrderByRelationAggregateInput
+    evidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type EngagementWhereUniqueInput = Prisma.AtLeast<{
@@ -23818,6 +25650,7 @@ export namespace Prisma {
     findings?: FindingListRelationFilter
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }, "id" | "reference">
 
   export type EngagementOrderByWithAggregationInput = {
@@ -23973,6 +25806,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }
 
   export type FindingOrderByWithRelationInput = {
@@ -24011,6 +25845,7 @@ export namespace Prisma {
     updatedBy?: UserOrderByWithRelationInput
     controlTests?: ControlTestOrderByRelationAggregateInput
     actionPlans?: ActionPlanOrderByRelationAggregateInput
+    evidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type FindingWhereUniqueInput = Prisma.AtLeast<{
@@ -24052,6 +25887,7 @@ export namespace Prisma {
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     controlTests?: ControlTestListRelationFilter
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }, "id" | "reference">
 
   export type FindingOrderByWithAggregationInput = {
@@ -24161,6 +25997,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }
 
   export type ControlTestOrderByWithRelationInput = {
@@ -24203,6 +26040,7 @@ export namespace Prisma {
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
     actionPlans?: ActionPlanOrderByRelationAggregateInput
+    evidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type ControlTestWhereUniqueInput = Prisma.AtLeast<{
@@ -24248,6 +26086,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     actionPlans?: ActionPlanListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }, "id" | "reference">
 
   export type ControlTestOrderByWithAggregationInput = {
@@ -24363,6 +26202,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updates?: ActionPlanUpdateListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }
 
   export type ActionPlanOrderByWithRelationInput = {
@@ -24401,6 +26241,7 @@ export namespace Prisma {
     createdBy?: UserOrderByWithRelationInput
     updatedBy?: UserOrderByWithRelationInput
     updates?: ActionPlanUpdateOrderByRelationAggregateInput
+    evidence?: EvidenceOrderByRelationAggregateInput
   }
 
   export type ActionPlanWhereUniqueInput = Prisma.AtLeast<{
@@ -24442,6 +26283,7 @@ export namespace Prisma {
     createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     updates?: ActionPlanUpdateListRelationFilter
+    evidence?: EvidenceListRelationFilter
   }, "id" | "reference">
 
   export type ActionPlanOrderByWithAggregationInput = {
@@ -24573,6 +26415,180 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ActionPlanUpdate"> | Date | string
   }
 
+  export type EvidenceWhereInput = {
+    AND?: EvidenceWhereInput | EvidenceWhereInput[]
+    OR?: EvidenceWhereInput[]
+    NOT?: EvidenceWhereInput | EvidenceWhereInput[]
+    id?: UuidFilter<"Evidence"> | string
+    reference?: StringFilter<"Evidence"> | string
+    title?: StringFilter<"Evidence"> | string
+    description?: StringNullableFilter<"Evidence"> | string | null
+    evidenceType?: EnumEvidenceTypeFilter<"Evidence"> | $Enums.EvidenceType
+    source?: StringNullableFilter<"Evidence"> | string | null
+    engagementId?: UuidNullableFilter<"Evidence"> | string | null
+    controlTestId?: UuidNullableFilter<"Evidence"> | string | null
+    findingId?: UuidNullableFilter<"Evidence"> | string | null
+    actionPlanId?: UuidNullableFilter<"Evidence"> | string | null
+    auditEntityId?: UuidNullableFilter<"Evidence"> | string | null
+    collectionDate?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    submittedById?: UuidNullableFilter<"Evidence"> | string | null
+    reviewerId?: UuidNullableFilter<"Evidence"> | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFilter<"Evidence"> | $Enums.EvidenceReviewStatus
+    reviewComments?: StringNullableFilter<"Evidence"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    documentReference?: StringNullableFilter<"Evidence"> | string | null
+    documentMetadata?: JsonNullableFilter<"Evidence">
+    notes?: StringNullableFilter<"Evidence"> | string | null
+    createdById?: UuidNullableFilter<"Evidence"> | string | null
+    updatedById?: UuidNullableFilter<"Evidence"> | string | null
+    createdAt?: DateTimeFilter<"Evidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Evidence"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    controlTest?: XOR<ControlTestNullableRelationFilter, ControlTestWhereInput> | null
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    actionPlan?: XOR<ActionPlanNullableRelationFilter, ActionPlanWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    submittedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }
+
+  export type EvidenceOrderByWithRelationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    evidenceType?: SortOrder
+    source?: SortOrderInput | SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    controlTestId?: SortOrderInput | SortOrder
+    findingId?: SortOrderInput | SortOrder
+    actionPlanId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    collectionDate?: SortOrderInput | SortOrder
+    submittedById?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    reviewStatus?: SortOrder
+    reviewComments?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    documentReference?: SortOrderInput | SortOrder
+    documentMetadata?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    engagement?: EngagementOrderByWithRelationInput
+    controlTest?: ControlTestOrderByWithRelationInput
+    finding?: FindingOrderByWithRelationInput
+    actionPlan?: ActionPlanOrderByWithRelationInput
+    auditEntity?: AuditUniverseOrderByWithRelationInput
+    submittedBy?: UserOrderByWithRelationInput
+    reviewer?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
+  }
+
+  export type EvidenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    reference?: string
+    AND?: EvidenceWhereInput | EvidenceWhereInput[]
+    OR?: EvidenceWhereInput[]
+    NOT?: EvidenceWhereInput | EvidenceWhereInput[]
+    title?: StringFilter<"Evidence"> | string
+    description?: StringNullableFilter<"Evidence"> | string | null
+    evidenceType?: EnumEvidenceTypeFilter<"Evidence"> | $Enums.EvidenceType
+    source?: StringNullableFilter<"Evidence"> | string | null
+    engagementId?: UuidNullableFilter<"Evidence"> | string | null
+    controlTestId?: UuidNullableFilter<"Evidence"> | string | null
+    findingId?: UuidNullableFilter<"Evidence"> | string | null
+    actionPlanId?: UuidNullableFilter<"Evidence"> | string | null
+    auditEntityId?: UuidNullableFilter<"Evidence"> | string | null
+    collectionDate?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    submittedById?: UuidNullableFilter<"Evidence"> | string | null
+    reviewerId?: UuidNullableFilter<"Evidence"> | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFilter<"Evidence"> | $Enums.EvidenceReviewStatus
+    reviewComments?: StringNullableFilter<"Evidence"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    documentReference?: StringNullableFilter<"Evidence"> | string | null
+    documentMetadata?: JsonNullableFilter<"Evidence">
+    notes?: StringNullableFilter<"Evidence"> | string | null
+    createdById?: UuidNullableFilter<"Evidence"> | string | null
+    updatedById?: UuidNullableFilter<"Evidence"> | string | null
+    createdAt?: DateTimeFilter<"Evidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Evidence"> | Date | string
+    engagement?: XOR<EngagementNullableRelationFilter, EngagementWhereInput> | null
+    controlTest?: XOR<ControlTestNullableRelationFilter, ControlTestWhereInput> | null
+    finding?: XOR<FindingNullableRelationFilter, FindingWhereInput> | null
+    actionPlan?: XOR<ActionPlanNullableRelationFilter, ActionPlanWhereInput> | null
+    auditEntity?: XOR<AuditUniverseNullableRelationFilter, AuditUniverseWhereInput> | null
+    submittedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    reviewer?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+    updatedBy?: XOR<UserNullableRelationFilter, UserWhereInput> | null
+  }, "id" | "reference">
+
+  export type EvidenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    evidenceType?: SortOrder
+    source?: SortOrderInput | SortOrder
+    engagementId?: SortOrderInput | SortOrder
+    controlTestId?: SortOrderInput | SortOrder
+    findingId?: SortOrderInput | SortOrder
+    actionPlanId?: SortOrderInput | SortOrder
+    auditEntityId?: SortOrderInput | SortOrder
+    collectionDate?: SortOrderInput | SortOrder
+    submittedById?: SortOrderInput | SortOrder
+    reviewerId?: SortOrderInput | SortOrder
+    reviewStatus?: SortOrder
+    reviewComments?: SortOrderInput | SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    documentReference?: SortOrderInput | SortOrder
+    documentMetadata?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdById?: SortOrderInput | SortOrder
+    updatedById?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EvidenceCountOrderByAggregateInput
+    _max?: EvidenceMaxOrderByAggregateInput
+    _min?: EvidenceMinOrderByAggregateInput
+  }
+
+  export type EvidenceScalarWhereWithAggregatesInput = {
+    AND?: EvidenceScalarWhereWithAggregatesInput | EvidenceScalarWhereWithAggregatesInput[]
+    OR?: EvidenceScalarWhereWithAggregatesInput[]
+    NOT?: EvidenceScalarWhereWithAggregatesInput | EvidenceScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"Evidence"> | string
+    reference?: StringWithAggregatesFilter<"Evidence"> | string
+    title?: StringWithAggregatesFilter<"Evidence"> | string
+    description?: StringNullableWithAggregatesFilter<"Evidence"> | string | null
+    evidenceType?: EnumEvidenceTypeWithAggregatesFilter<"Evidence"> | $Enums.EvidenceType
+    source?: StringNullableWithAggregatesFilter<"Evidence"> | string | null
+    engagementId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    controlTestId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    findingId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    actionPlanId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    auditEntityId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    collectionDate?: DateTimeNullableWithAggregatesFilter<"Evidence"> | Date | string | null
+    submittedById?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    reviewerId?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    reviewStatus?: EnumEvidenceReviewStatusWithAggregatesFilter<"Evidence"> | $Enums.EvidenceReviewStatus
+    reviewComments?: StringNullableWithAggregatesFilter<"Evidence"> | string | null
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"Evidence"> | Date | string | null
+    documentReference?: StringNullableWithAggregatesFilter<"Evidence"> | string | null
+    documentMetadata?: JsonNullableWithAggregatesFilter<"Evidence">
+    notes?: StringNullableWithAggregatesFilter<"Evidence"> | string | null
+    createdById?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    updatedById?: UuidNullableWithAggregatesFilter<"Evidence"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Evidence"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Evidence"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     firstName: string
@@ -24615,6 +26631,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -24659,6 +26679,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUpdateInput = {
@@ -24703,6 +26727,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24747,6 +26775,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -25097,6 +27129,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateInput = {
@@ -25123,6 +27156,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUpdateInput = {
@@ -25149,6 +27183,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateInput = {
@@ -25175,6 +27210,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseCreateManyInput = {
@@ -25694,6 +27730,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateInput = {
@@ -25725,6 +27762,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUpdateInput = {
@@ -25756,6 +27794,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateInput = {
@@ -25787,6 +27826,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementCreateManyInput = {
@@ -25939,6 +27979,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateInput = {
@@ -25970,6 +28011,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUpdateInput = {
@@ -26001,6 +28043,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateInput = {
@@ -26032,6 +28075,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingCreateManyInput = {
@@ -26146,6 +28190,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateInput = {
@@ -26180,6 +28225,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUpdateInput = {
@@ -26214,6 +28260,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateInput = {
@@ -26248,6 +28295,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestCreateManyInput = {
@@ -26368,6 +28416,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateInput = {
@@ -26397,6 +28446,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUpdateInput = {
@@ -26426,6 +28476,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateInput = {
@@ -26455,6 +28506,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanCreateManyInput = {
@@ -26593,6 +28645,186 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EvidenceCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceCreateManyInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -26713,6 +28945,12 @@ export namespace Prisma {
     none?: ActionPlanUpdateWhereInput
   }
 
+  export type EvidenceListRelationFilter = {
+    every?: EvidenceWhereInput
+    some?: EvidenceWhereInput
+    none?: EvidenceWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -26759,6 +28997,10 @@ export namespace Prisma {
   }
 
   export type ActionPlanUpdateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EvidenceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -28217,6 +30459,124 @@ export namespace Prisma {
     progressPct?: SortOrder
   }
 
+  export type EnumEvidenceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceType | EnumEvidenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceTypeFilter<$PrismaModel> | $Enums.EvidenceType
+  }
+
+  export type EnumEvidenceReviewStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceReviewStatus | EnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel> | $Enums.EvidenceReviewStatus
+  }
+
+  export type ActionPlanNullableRelationFilter = {
+    is?: ActionPlanWhereInput | null
+    isNot?: ActionPlanWhereInput | null
+  }
+
+  export type EvidenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    evidenceType?: SortOrder
+    source?: SortOrder
+    engagementId?: SortOrder
+    controlTestId?: SortOrder
+    findingId?: SortOrder
+    actionPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    collectionDate?: SortOrder
+    submittedById?: SortOrder
+    reviewerId?: SortOrder
+    reviewStatus?: SortOrder
+    reviewComments?: SortOrder
+    reviewedAt?: SortOrder
+    documentReference?: SortOrder
+    documentMetadata?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EvidenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    evidenceType?: SortOrder
+    source?: SortOrder
+    engagementId?: SortOrder
+    controlTestId?: SortOrder
+    findingId?: SortOrder
+    actionPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    collectionDate?: SortOrder
+    submittedById?: SortOrder
+    reviewerId?: SortOrder
+    reviewStatus?: SortOrder
+    reviewComments?: SortOrder
+    reviewedAt?: SortOrder
+    documentReference?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EvidenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    reference?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    evidenceType?: SortOrder
+    source?: SortOrder
+    engagementId?: SortOrder
+    controlTestId?: SortOrder
+    findingId?: SortOrder
+    actionPlanId?: SortOrder
+    auditEntityId?: SortOrder
+    collectionDate?: SortOrder
+    submittedById?: SortOrder
+    reviewerId?: SortOrder
+    reviewStatus?: SortOrder
+    reviewComments?: SortOrder
+    reviewedAt?: SortOrder
+    documentReference?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumEvidenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceType | EnumEvidenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.EvidenceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEvidenceTypeFilter<$PrismaModel>
+    _max?: NestedEnumEvidenceTypeFilter<$PrismaModel>
+  }
+
+  export type EnumEvidenceReviewStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceReviewStatus | EnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceReviewStatusWithAggregatesFilter<$PrismaModel> | $Enums.EvidenceReviewStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel>
+    _max?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -28441,6 +30801,34 @@ export namespace Prisma {
     connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutSubmittedByInput = {
+    create?: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput> | EvidenceCreateWithoutSubmittedByInput[] | EvidenceUncheckedCreateWithoutSubmittedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutSubmittedByInput | EvidenceCreateOrConnectWithoutSubmittedByInput[]
+    createMany?: EvidenceCreateManySubmittedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput> | EvidenceCreateWithoutReviewerInput[] | EvidenceUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutReviewerInput | EvidenceCreateOrConnectWithoutReviewerInput[]
+    createMany?: EvidenceCreateManyReviewerInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput> | EvidenceCreateWithoutCreatedByInput[] | EvidenceUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutCreatedByInput | EvidenceCreateOrConnectWithoutCreatedByInput[]
+    createMany?: EvidenceCreateManyCreatedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput> | EvidenceCreateWithoutUpdatedByInput[] | EvidenceUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutUpdatedByInput | EvidenceCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EvidenceCreateManyUpdatedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -28663,6 +31051,34 @@ export namespace Prisma {
     connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput | ActionPlanUpdateCreateOrConnectWithoutUpdatedByInput[]
     createMany?: ActionPlanUpdateCreateManyUpdatedByInputEnvelope
     connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput = {
+    create?: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput> | EvidenceCreateWithoutSubmittedByInput[] | EvidenceUncheckedCreateWithoutSubmittedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutSubmittedByInput | EvidenceCreateOrConnectWithoutSubmittedByInput[]
+    createMany?: EvidenceCreateManySubmittedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutReviewerInput = {
+    create?: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput> | EvidenceCreateWithoutReviewerInput[] | EvidenceUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutReviewerInput | EvidenceCreateOrConnectWithoutReviewerInput[]
+    createMany?: EvidenceCreateManyReviewerInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput> | EvidenceCreateWithoutCreatedByInput[] | EvidenceUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutCreatedByInput | EvidenceCreateOrConnectWithoutCreatedByInput[]
+    createMany?: EvidenceCreateManyCreatedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput> | EvidenceCreateWithoutUpdatedByInput[] | EvidenceUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutUpdatedByInput | EvidenceCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: EvidenceCreateManyUpdatedByInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -29129,6 +31545,62 @@ export namespace Prisma {
     deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutSubmittedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput> | EvidenceCreateWithoutSubmittedByInput[] | EvidenceUncheckedCreateWithoutSubmittedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutSubmittedByInput | EvidenceCreateOrConnectWithoutSubmittedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutSubmittedByInput | EvidenceUpsertWithWhereUniqueWithoutSubmittedByInput[]
+    createMany?: EvidenceCreateManySubmittedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutSubmittedByInput | EvidenceUpdateWithWhereUniqueWithoutSubmittedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutSubmittedByInput | EvidenceUpdateManyWithWhereWithoutSubmittedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput> | EvidenceCreateWithoutReviewerInput[] | EvidenceUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutReviewerInput | EvidenceCreateOrConnectWithoutReviewerInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutReviewerInput | EvidenceUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: EvidenceCreateManyReviewerInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutReviewerInput | EvidenceUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutReviewerInput | EvidenceUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput> | EvidenceCreateWithoutCreatedByInput[] | EvidenceUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutCreatedByInput | EvidenceCreateOrConnectWithoutCreatedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutCreatedByInput | EvidenceUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: EvidenceCreateManyCreatedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutCreatedByInput | EvidenceUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutCreatedByInput | EvidenceUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput> | EvidenceCreateWithoutUpdatedByInput[] | EvidenceUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutUpdatedByInput | EvidenceCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutUpdatedByInput | EvidenceUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EvidenceCreateManyUpdatedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutUpdatedByInput | EvidenceUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutUpdatedByInput | EvidenceUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -29577,6 +32049,62 @@ export namespace Prisma {
     deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
   }
 
+  export type EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput> | EvidenceCreateWithoutSubmittedByInput[] | EvidenceUncheckedCreateWithoutSubmittedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutSubmittedByInput | EvidenceCreateOrConnectWithoutSubmittedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutSubmittedByInput | EvidenceUpsertWithWhereUniqueWithoutSubmittedByInput[]
+    createMany?: EvidenceCreateManySubmittedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutSubmittedByInput | EvidenceUpdateWithWhereUniqueWithoutSubmittedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutSubmittedByInput | EvidenceUpdateManyWithWhereWithoutSubmittedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutReviewerNestedInput = {
+    create?: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput> | EvidenceCreateWithoutReviewerInput[] | EvidenceUncheckedCreateWithoutReviewerInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutReviewerInput | EvidenceCreateOrConnectWithoutReviewerInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutReviewerInput | EvidenceUpsertWithWhereUniqueWithoutReviewerInput[]
+    createMany?: EvidenceCreateManyReviewerInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutReviewerInput | EvidenceUpdateWithWhereUniqueWithoutReviewerInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutReviewerInput | EvidenceUpdateManyWithWhereWithoutReviewerInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput> | EvidenceCreateWithoutCreatedByInput[] | EvidenceUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutCreatedByInput | EvidenceCreateOrConnectWithoutCreatedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutCreatedByInput | EvidenceUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: EvidenceCreateManyCreatedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutCreatedByInput | EvidenceUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutCreatedByInput | EvidenceUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput> | EvidenceCreateWithoutUpdatedByInput[] | EvidenceUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutUpdatedByInput | EvidenceCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutUpdatedByInput | EvidenceUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: EvidenceCreateManyUpdatedByInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutUpdatedByInput | EvidenceUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutUpdatedByInput | EvidenceUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type UserRoleCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
@@ -29836,6 +32364,13 @@ export namespace Prisma {
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput> | EvidenceCreateWithoutAuditEntityInput[] | EvidenceUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutAuditEntityInput | EvidenceCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: EvidenceCreateManyAuditEntityInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type AuditUniverseUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -29883,6 +32418,13 @@ export namespace Prisma {
     connectOrCreate?: ActionPlanCreateOrConnectWithoutAuditEntityInput | ActionPlanCreateOrConnectWithoutAuditEntityInput[]
     createMany?: ActionPlanCreateManyAuditEntityInputEnvelope
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput = {
+    create?: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput> | EvidenceCreateWithoutAuditEntityInput[] | EvidenceUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutAuditEntityInput | EvidenceCreateOrConnectWithoutAuditEntityInput[]
+    createMany?: EvidenceCreateManyAuditEntityInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type EnumAuditEntityTypeFieldUpdateOperationsInput = {
@@ -30031,6 +32573,20 @@ export namespace Prisma {
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput> | EvidenceCreateWithoutAuditEntityInput[] | EvidenceUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutAuditEntityInput | EvidenceCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutAuditEntityInput | EvidenceUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: EvidenceCreateManyAuditEntityInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutAuditEntityInput | EvidenceUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutAuditEntityInput | EvidenceUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type AuditUniverseUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<AuditUniverseCreateWithoutParentInput, AuditUniverseUncheckedCreateWithoutParentInput> | AuditUniverseCreateWithoutParentInput[] | AuditUniverseUncheckedCreateWithoutParentInput[]
     connectOrCreate?: AuditUniverseCreateOrConnectWithoutParentInput | AuditUniverseCreateOrConnectWithoutParentInput[]
@@ -30127,6 +32683,20 @@ export namespace Prisma {
     update?: ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput | ActionPlanUpdateWithWhereUniqueWithoutAuditEntityInput[]
     updateMany?: ActionPlanUpdateManyWithWhereWithoutAuditEntityInput | ActionPlanUpdateManyWithWhereWithoutAuditEntityInput[]
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput = {
+    create?: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput> | EvidenceCreateWithoutAuditEntityInput[] | EvidenceUncheckedCreateWithoutAuditEntityInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutAuditEntityInput | EvidenceCreateOrConnectWithoutAuditEntityInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutAuditEntityInput | EvidenceUpsertWithWhereUniqueWithoutAuditEntityInput[]
+    createMany?: EvidenceCreateManyAuditEntityInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutAuditEntityInput | EvidenceUpdateWithWhereUniqueWithoutAuditEntityInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutAuditEntityInput | EvidenceUpdateManyWithWhereWithoutAuditEntityInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
   }
 
   export type AuditUniverseCreateNestedOneWithoutRisksInput = {
@@ -30623,6 +33193,13 @@ export namespace Prisma {
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput> | EvidenceCreateWithoutEngagementInput[] | EvidenceUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutEngagementInput | EvidenceCreateOrConnectWithoutEngagementInput[]
+    createMany?: EvidenceCreateManyEngagementInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
@@ -30649,6 +33226,13 @@ export namespace Prisma {
     connectOrCreate?: ActionPlanCreateOrConnectWithoutEngagementInput | ActionPlanCreateOrConnectWithoutEngagementInput[]
     createMany?: ActionPlanCreateManyEngagementInputEnvelope
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutEngagementInput = {
+    create?: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput> | EvidenceCreateWithoutEngagementInput[] | EvidenceUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutEngagementInput | EvidenceCreateOrConnectWithoutEngagementInput[]
+    createMany?: EvidenceCreateManyEngagementInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type EnumEngagementTypeFieldUpdateOperationsInput = {
@@ -30783,6 +33367,20 @@ export namespace Prisma {
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput> | EvidenceCreateWithoutEngagementInput[] | EvidenceUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutEngagementInput | EvidenceCreateOrConnectWithoutEngagementInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutEngagementInput | EvidenceUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: EvidenceCreateManyEngagementInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutEngagementInput | EvidenceUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutEngagementInput | EvidenceUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput = {
     create?: XOR<EngagementTeamMemberCreateWithoutEngagementInput, EngagementTeamMemberUncheckedCreateWithoutEngagementInput> | EngagementTeamMemberCreateWithoutEngagementInput[] | EngagementTeamMemberUncheckedCreateWithoutEngagementInput[]
     connectOrCreate?: EngagementTeamMemberCreateOrConnectWithoutEngagementInput | EngagementTeamMemberCreateOrConnectWithoutEngagementInput[]
@@ -30837,6 +33435,20 @@ export namespace Prisma {
     update?: ActionPlanUpdateWithWhereUniqueWithoutEngagementInput | ActionPlanUpdateWithWhereUniqueWithoutEngagementInput[]
     updateMany?: ActionPlanUpdateManyWithWhereWithoutEngagementInput | ActionPlanUpdateManyWithWhereWithoutEngagementInput[]
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutEngagementNestedInput = {
+    create?: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput> | EvidenceCreateWithoutEngagementInput[] | EvidenceUncheckedCreateWithoutEngagementInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutEngagementInput | EvidenceCreateOrConnectWithoutEngagementInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutEngagementInput | EvidenceUpsertWithWhereUniqueWithoutEngagementInput[]
+    createMany?: EvidenceCreateManyEngagementInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutEngagementInput | EvidenceUpdateWithWhereUniqueWithoutEngagementInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutEngagementInput | EvidenceUpdateManyWithWhereWithoutEngagementInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
   }
 
   export type EngagementCreateNestedOneWithoutTeamMembersInput = {
@@ -30927,6 +33539,13 @@ export namespace Prisma {
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutFindingInput = {
+    create?: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput> | EvidenceCreateWithoutFindingInput[] | EvidenceUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutFindingInput | EvidenceCreateOrConnectWithoutFindingInput[]
+    createMany?: EvidenceCreateManyFindingInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type ControlTestUncheckedCreateNestedManyWithoutFindingInput = {
     create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
     connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
@@ -30939,6 +33558,13 @@ export namespace Prisma {
     connectOrCreate?: ActionPlanCreateOrConnectWithoutFindingInput | ActionPlanCreateOrConnectWithoutFindingInput[]
     createMany?: ActionPlanCreateManyFindingInputEnvelope
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutFindingInput = {
+    create?: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput> | EvidenceCreateWithoutFindingInput[] | EvidenceUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutFindingInput | EvidenceCreateOrConnectWithoutFindingInput[]
+    createMany?: EvidenceCreateManyFindingInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type EnumFindingCategoryFieldUpdateOperationsInput = {
@@ -31049,6 +33675,20 @@ export namespace Prisma {
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput> | EvidenceCreateWithoutFindingInput[] | EvidenceUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutFindingInput | EvidenceCreateOrConnectWithoutFindingInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutFindingInput | EvidenceUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: EvidenceCreateManyFindingInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutFindingInput | EvidenceUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutFindingInput | EvidenceUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type ControlTestUncheckedUpdateManyWithoutFindingNestedInput = {
     create?: XOR<ControlTestCreateWithoutFindingInput, ControlTestUncheckedCreateWithoutFindingInput> | ControlTestCreateWithoutFindingInput[] | ControlTestUncheckedCreateWithoutFindingInput[]
     connectOrCreate?: ControlTestCreateOrConnectWithoutFindingInput | ControlTestCreateOrConnectWithoutFindingInput[]
@@ -31075,6 +33715,20 @@ export namespace Prisma {
     update?: ActionPlanUpdateWithWhereUniqueWithoutFindingInput | ActionPlanUpdateWithWhereUniqueWithoutFindingInput[]
     updateMany?: ActionPlanUpdateManyWithWhereWithoutFindingInput | ActionPlanUpdateManyWithWhereWithoutFindingInput[]
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutFindingNestedInput = {
+    create?: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput> | EvidenceCreateWithoutFindingInput[] | EvidenceUncheckedCreateWithoutFindingInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutFindingInput | EvidenceCreateOrConnectWithoutFindingInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutFindingInput | EvidenceUpsertWithWhereUniqueWithoutFindingInput[]
+    createMany?: EvidenceCreateManyFindingInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutFindingInput | EvidenceUpdateWithWhereUniqueWithoutFindingInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutFindingInput | EvidenceUpdateManyWithWhereWithoutFindingInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
   }
 
   export type EngagementCreateNestedOneWithoutControlTestsInput = {
@@ -31132,11 +33786,25 @@ export namespace Prisma {
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutControlTestInput = {
+    create?: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput> | EvidenceCreateWithoutControlTestInput[] | EvidenceUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutControlTestInput | EvidenceCreateOrConnectWithoutControlTestInput[]
+    createMany?: EvidenceCreateManyControlTestInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type ActionPlanUncheckedCreateNestedManyWithoutControlTestInput = {
     create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
     connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
     createMany?: ActionPlanCreateManyControlTestInputEnvelope
     connect?: ActionPlanWhereUniqueInput | ActionPlanWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutControlTestInput = {
+    create?: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput> | EvidenceCreateWithoutControlTestInput[] | EvidenceUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutControlTestInput | EvidenceCreateOrConnectWithoutControlTestInput[]
+    createMany?: EvidenceCreateManyControlTestInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type EnumControlTestStatusFieldUpdateOperationsInput = {
@@ -31249,6 +33917,20 @@ export namespace Prisma {
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutControlTestNestedInput = {
+    create?: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput> | EvidenceCreateWithoutControlTestInput[] | EvidenceUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutControlTestInput | EvidenceCreateOrConnectWithoutControlTestInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutControlTestInput | EvidenceUpsertWithWhereUniqueWithoutControlTestInput[]
+    createMany?: EvidenceCreateManyControlTestInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutControlTestInput | EvidenceUpdateWithWhereUniqueWithoutControlTestInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutControlTestInput | EvidenceUpdateManyWithWhereWithoutControlTestInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput = {
     create?: XOR<ActionPlanCreateWithoutControlTestInput, ActionPlanUncheckedCreateWithoutControlTestInput> | ActionPlanCreateWithoutControlTestInput[] | ActionPlanUncheckedCreateWithoutControlTestInput[]
     connectOrCreate?: ActionPlanCreateOrConnectWithoutControlTestInput | ActionPlanCreateOrConnectWithoutControlTestInput[]
@@ -31261,6 +33943,20 @@ export namespace Prisma {
     update?: ActionPlanUpdateWithWhereUniqueWithoutControlTestInput | ActionPlanUpdateWithWhereUniqueWithoutControlTestInput[]
     updateMany?: ActionPlanUpdateManyWithWhereWithoutControlTestInput | ActionPlanUpdateManyWithWhereWithoutControlTestInput[]
     deleteMany?: ActionPlanScalarWhereInput | ActionPlanScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutControlTestNestedInput = {
+    create?: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput> | EvidenceCreateWithoutControlTestInput[] | EvidenceUncheckedCreateWithoutControlTestInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutControlTestInput | EvidenceCreateOrConnectWithoutControlTestInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutControlTestInput | EvidenceUpsertWithWhereUniqueWithoutControlTestInput[]
+    createMany?: EvidenceCreateManyControlTestInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutControlTestInput | EvidenceUpdateWithWhereUniqueWithoutControlTestInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutControlTestInput | EvidenceUpdateManyWithWhereWithoutControlTestInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
   }
 
   export type FindingCreateNestedOneWithoutActionPlansInput = {
@@ -31324,11 +34020,25 @@ export namespace Prisma {
     connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
   }
 
+  export type EvidenceCreateNestedManyWithoutActionPlanInput = {
+    create?: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput> | EvidenceCreateWithoutActionPlanInput[] | EvidenceUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutActionPlanInput | EvidenceCreateOrConnectWithoutActionPlanInput[]
+    createMany?: EvidenceCreateManyActionPlanInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+  }
+
   export type ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput = {
     create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
     connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
     createMany?: ActionPlanUpdateCreateManyActionPlanInputEnvelope
     connect?: ActionPlanUpdateWhereUniqueInput | ActionPlanUpdateWhereUniqueInput[]
+  }
+
+  export type EvidenceUncheckedCreateNestedManyWithoutActionPlanInput = {
+    create?: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput> | EvidenceCreateWithoutActionPlanInput[] | EvidenceUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutActionPlanInput | EvidenceCreateOrConnectWithoutActionPlanInput[]
+    createMany?: EvidenceCreateManyActionPlanInputEnvelope
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
   }
 
   export type EnumActionPlanPriorityFieldUpdateOperationsInput = {
@@ -31443,6 +34153,20 @@ export namespace Prisma {
     deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
   }
 
+  export type EvidenceUpdateManyWithoutActionPlanNestedInput = {
+    create?: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput> | EvidenceCreateWithoutActionPlanInput[] | EvidenceUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutActionPlanInput | EvidenceCreateOrConnectWithoutActionPlanInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutActionPlanInput | EvidenceUpsertWithWhereUniqueWithoutActionPlanInput[]
+    createMany?: EvidenceCreateManyActionPlanInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutActionPlanInput | EvidenceUpdateWithWhereUniqueWithoutActionPlanInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutActionPlanInput | EvidenceUpdateManyWithWhereWithoutActionPlanInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+  }
+
   export type ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput = {
     create?: XOR<ActionPlanUpdateCreateWithoutActionPlanInput, ActionPlanUpdateUncheckedCreateWithoutActionPlanInput> | ActionPlanUpdateCreateWithoutActionPlanInput[] | ActionPlanUpdateUncheckedCreateWithoutActionPlanInput[]
     connectOrCreate?: ActionPlanUpdateCreateOrConnectWithoutActionPlanInput | ActionPlanUpdateCreateOrConnectWithoutActionPlanInput[]
@@ -31455,6 +34179,20 @@ export namespace Prisma {
     update?: ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput | ActionPlanUpdateUpdateWithWhereUniqueWithoutActionPlanInput[]
     updateMany?: ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput | ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput[]
     deleteMany?: ActionPlanUpdateScalarWhereInput | ActionPlanUpdateScalarWhereInput[]
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput = {
+    create?: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput> | EvidenceCreateWithoutActionPlanInput[] | EvidenceUncheckedCreateWithoutActionPlanInput[]
+    connectOrCreate?: EvidenceCreateOrConnectWithoutActionPlanInput | EvidenceCreateOrConnectWithoutActionPlanInput[]
+    upsert?: EvidenceUpsertWithWhereUniqueWithoutActionPlanInput | EvidenceUpsertWithWhereUniqueWithoutActionPlanInput[]
+    createMany?: EvidenceCreateManyActionPlanInputEnvelope
+    set?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    disconnect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    delete?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    connect?: EvidenceWhereUniqueInput | EvidenceWhereUniqueInput[]
+    update?: EvidenceUpdateWithWhereUniqueWithoutActionPlanInput | EvidenceUpdateWithWhereUniqueWithoutActionPlanInput[]
+    updateMany?: EvidenceUpdateManyWithWhereWithoutActionPlanInput | EvidenceUpdateManyWithWhereWithoutActionPlanInput[]
+    deleteMany?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
   }
 
   export type ActionPlanCreateNestedOneWithoutUpdatesInput = {
@@ -31485,6 +34223,158 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActionPlanUpdatesInput, UserUpdateWithoutActionPlanUpdatesInput>, UserUncheckedUpdateWithoutActionPlanUpdatesInput>
+  }
+
+  export type EngagementCreateNestedOneWithoutEvidenceInput = {
+    create?: XOR<EngagementCreateWithoutEvidenceInput, EngagementUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutEvidenceInput
+    connect?: EngagementWhereUniqueInput
+  }
+
+  export type ControlTestCreateNestedOneWithoutEvidenceInput = {
+    create?: XOR<ControlTestCreateWithoutEvidenceInput, ControlTestUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEvidenceInput
+    connect?: ControlTestWhereUniqueInput
+  }
+
+  export type FindingCreateNestedOneWithoutEvidenceInput = {
+    create?: XOR<FindingCreateWithoutEvidenceInput, FindingUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutEvidenceInput
+    connect?: FindingWhereUniqueInput
+  }
+
+  export type ActionPlanCreateNestedOneWithoutEvidenceInput = {
+    create?: XOR<ActionPlanCreateWithoutEvidenceInput, ActionPlanUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEvidenceInput
+    connect?: ActionPlanWhereUniqueInput
+  }
+
+  export type AuditUniverseCreateNestedOneWithoutEvidenceInput = {
+    create?: XOR<AuditUniverseCreateWithoutEvidenceInput, AuditUniverseUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutEvidenceInput
+    connect?: AuditUniverseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutSubmittedEvidenceInput = {
+    create?: XOR<UserCreateWithoutSubmittedEvidenceInput, UserUncheckedCreateWithoutSubmittedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubmittedEvidenceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReviewedEvidenceInput = {
+    create?: XOR<UserCreateWithoutReviewedEvidenceInput, UserUncheckedCreateWithoutReviewedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedEvidenceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedEvidenceInput = {
+    create?: XOR<UserCreateWithoutCreatedEvidenceInput, UserUncheckedCreateWithoutCreatedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEvidenceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutUpdatedEvidenceInput = {
+    create?: XOR<UserCreateWithoutUpdatedEvidenceInput, UserUncheckedCreateWithoutUpdatedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedEvidenceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumEvidenceTypeFieldUpdateOperationsInput = {
+    set?: $Enums.EvidenceType
+  }
+
+  export type EnumEvidenceReviewStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EvidenceReviewStatus
+  }
+
+  export type EngagementUpdateOneWithoutEvidenceNestedInput = {
+    create?: XOR<EngagementCreateWithoutEvidenceInput, EngagementUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: EngagementCreateOrConnectWithoutEvidenceInput
+    upsert?: EngagementUpsertWithoutEvidenceInput
+    disconnect?: EngagementWhereInput | boolean
+    delete?: EngagementWhereInput | boolean
+    connect?: EngagementWhereUniqueInput
+    update?: XOR<XOR<EngagementUpdateToOneWithWhereWithoutEvidenceInput, EngagementUpdateWithoutEvidenceInput>, EngagementUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type ControlTestUpdateOneWithoutEvidenceNestedInput = {
+    create?: XOR<ControlTestCreateWithoutEvidenceInput, ControlTestUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: ControlTestCreateOrConnectWithoutEvidenceInput
+    upsert?: ControlTestUpsertWithoutEvidenceInput
+    disconnect?: ControlTestWhereInput | boolean
+    delete?: ControlTestWhereInput | boolean
+    connect?: ControlTestWhereUniqueInput
+    update?: XOR<XOR<ControlTestUpdateToOneWithWhereWithoutEvidenceInput, ControlTestUpdateWithoutEvidenceInput>, ControlTestUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type FindingUpdateOneWithoutEvidenceNestedInput = {
+    create?: XOR<FindingCreateWithoutEvidenceInput, FindingUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: FindingCreateOrConnectWithoutEvidenceInput
+    upsert?: FindingUpsertWithoutEvidenceInput
+    disconnect?: FindingWhereInput | boolean
+    delete?: FindingWhereInput | boolean
+    connect?: FindingWhereUniqueInput
+    update?: XOR<XOR<FindingUpdateToOneWithWhereWithoutEvidenceInput, FindingUpdateWithoutEvidenceInput>, FindingUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type ActionPlanUpdateOneWithoutEvidenceNestedInput = {
+    create?: XOR<ActionPlanCreateWithoutEvidenceInput, ActionPlanUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: ActionPlanCreateOrConnectWithoutEvidenceInput
+    upsert?: ActionPlanUpsertWithoutEvidenceInput
+    disconnect?: ActionPlanWhereInput | boolean
+    delete?: ActionPlanWhereInput | boolean
+    connect?: ActionPlanWhereUniqueInput
+    update?: XOR<XOR<ActionPlanUpdateToOneWithWhereWithoutEvidenceInput, ActionPlanUpdateWithoutEvidenceInput>, ActionPlanUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type AuditUniverseUpdateOneWithoutEvidenceNestedInput = {
+    create?: XOR<AuditUniverseCreateWithoutEvidenceInput, AuditUniverseUncheckedCreateWithoutEvidenceInput>
+    connectOrCreate?: AuditUniverseCreateOrConnectWithoutEvidenceInput
+    upsert?: AuditUniverseUpsertWithoutEvidenceInput
+    disconnect?: AuditUniverseWhereInput | boolean
+    delete?: AuditUniverseWhereInput | boolean
+    connect?: AuditUniverseWhereUniqueInput
+    update?: XOR<XOR<AuditUniverseUpdateToOneWithWhereWithoutEvidenceInput, AuditUniverseUpdateWithoutEvidenceInput>, AuditUniverseUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type UserUpdateOneWithoutSubmittedEvidenceNestedInput = {
+    create?: XOR<UserCreateWithoutSubmittedEvidenceInput, UserUncheckedCreateWithoutSubmittedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubmittedEvidenceInput
+    upsert?: UserUpsertWithoutSubmittedEvidenceInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubmittedEvidenceInput, UserUpdateWithoutSubmittedEvidenceInput>, UserUncheckedUpdateWithoutSubmittedEvidenceInput>
+  }
+
+  export type UserUpdateOneWithoutReviewedEvidenceNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedEvidenceInput, UserUncheckedCreateWithoutReviewedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedEvidenceInput
+    upsert?: UserUpsertWithoutReviewedEvidenceInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedEvidenceInput, UserUpdateWithoutReviewedEvidenceInput>, UserUncheckedUpdateWithoutReviewedEvidenceInput>
+  }
+
+  export type UserUpdateOneWithoutCreatedEvidenceNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedEvidenceInput, UserUncheckedCreateWithoutCreatedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedEvidenceInput
+    upsert?: UserUpsertWithoutCreatedEvidenceInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedEvidenceInput, UserUpdateWithoutCreatedEvidenceInput>, UserUncheckedUpdateWithoutCreatedEvidenceInput>
+  }
+
+  export type UserUpdateOneWithoutUpdatedEvidenceNestedInput = {
+    create?: XOR<UserCreateWithoutUpdatedEvidenceInput, UserUncheckedCreateWithoutUpdatedEvidenceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUpdatedEvidenceInput
+    upsert?: UserUpsertWithoutUpdatedEvidenceInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUpdatedEvidenceInput, UserUpdateWithoutUpdatedEvidenceInput>, UserUncheckedUpdateWithoutUpdatedEvidenceInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -32049,6 +34939,40 @@ export namespace Prisma {
     _max?: NestedEnumActionPlanStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumEvidenceTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceType | EnumEvidenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceTypeFilter<$PrismaModel> | $Enums.EvidenceType
+  }
+
+  export type NestedEnumEvidenceReviewStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceReviewStatus | EnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel> | $Enums.EvidenceReviewStatus
+  }
+
+  export type NestedEnumEvidenceTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceType | EnumEvidenceTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceType[] | ListEnumEvidenceTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceTypeWithAggregatesFilter<$PrismaModel> | $Enums.EvidenceType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEvidenceTypeFilter<$PrismaModel>
+    _max?: NestedEnumEvidenceTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumEvidenceReviewStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EvidenceReviewStatus | EnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EvidenceReviewStatus[] | ListEnumEvidenceReviewStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEvidenceReviewStatusWithAggregatesFilter<$PrismaModel> | $Enums.EvidenceReviewStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel>
+    _max?: NestedEnumEvidenceReviewStatusFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     assignedAt?: Date | string
     role: RoleCreateNestedOneWithoutUserRolesInput
@@ -32092,6 +35016,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutOwnerInput = {
@@ -32117,6 +35042,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutOwnerInput = {
@@ -32152,6 +35078,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutCreatedByInput = {
@@ -32177,6 +35104,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutCreatedByInput = {
@@ -32212,6 +35140,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutUpdatedByInput = {
@@ -32237,6 +35166,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutUpdatedByInput = {
@@ -32737,6 +35667,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutLeadAuditorInput = {
@@ -32767,6 +35698,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutLeadAuditorInput = {
@@ -32807,6 +35739,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutCreatedByInput = {
@@ -32837,6 +35770,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutCreatedByInput = {
@@ -32877,6 +35811,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutUpdatedByInput = {
@@ -32907,6 +35842,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutUpdatedByInput = {
@@ -32947,6 +35883,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutClosedByInput = {
@@ -32977,6 +35914,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutClosedByInput = {
@@ -33039,6 +35977,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutCreatedByInput = {
@@ -33069,6 +36008,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutCreatedByInput = {
@@ -33109,6 +36049,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutUpdatedByInput = {
@@ -33139,6 +36080,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutUpdatedByInput = {
@@ -33179,6 +36121,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutResponsibleOwnerInput = {
@@ -33209,6 +36152,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutResponsibleOwnerInput = {
@@ -33249,6 +36193,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutManagementRespondedByInput = {
@@ -33279,6 +36224,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutManagementRespondedByInput = {
@@ -33319,6 +36265,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutVerifiedByInput = {
@@ -33349,6 +36296,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutVerifiedByInput = {
@@ -33392,6 +36340,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutTesterInput = {
@@ -33425,6 +36374,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutTesterInput = {
@@ -33468,6 +36418,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutReviewerInput = {
@@ -33501,6 +36452,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutReviewerInput = {
@@ -33544,6 +36496,7 @@ export namespace Prisma {
     reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutCreatedByInput = {
@@ -33577,6 +36530,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutCreatedByInput = {
@@ -33620,6 +36574,7 @@ export namespace Prisma {
     reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutUpdatedByInput = {
@@ -33653,6 +36608,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutUpdatedByInput = {
@@ -33691,6 +36647,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutResponsibleOwnerInput = {
@@ -33719,6 +36676,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutResponsibleOwnerInput = {
@@ -33757,6 +36715,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutReviewerInput = {
@@ -33785,6 +36744,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutReviewerInput = {
@@ -33823,6 +36783,7 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutCreatedByInput = {
@@ -33851,6 +36812,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutCreatedByInput = {
@@ -33889,6 +36851,7 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutUpdatedByInput = {
@@ -33917,6 +36880,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutUpdatedByInput = {
@@ -33955,6 +36919,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutVerifiedByInput = {
@@ -33983,6 +36948,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutVerifiedByInput = {
@@ -34018,6 +36984,254 @@ export namespace Prisma {
 
   export type ActionPlanUpdateCreateManyUpdatedByInputEnvelope = {
     data: ActionPlanUpdateCreateManyUpdatedByInput | ActionPlanUpdateCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutSubmittedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutSubmittedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutSubmittedByInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput>
+  }
+
+  export type EvidenceCreateManySubmittedByInputEnvelope = {
+    data: EvidenceCreateManySubmittedByInput | EvidenceCreateManySubmittedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutReviewerInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type EvidenceCreateManyReviewerInputEnvelope = {
+    data: EvidenceCreateManyReviewerInput | EvidenceCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutCreatedByInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type EvidenceCreateManyCreatedByInputEnvelope = {
+    data: EvidenceCreateManyCreatedByInput | EvidenceCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutUpdatedByInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EvidenceCreateManyUpdatedByInputEnvelope = {
+    data: EvidenceCreateManyUpdatedByInput | EvidenceCreateManyUpdatedByInput[]
     skipDuplicates?: boolean
   }
 
@@ -34785,6 +37999,100 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ActionPlanUpdate"> | Date | string
   }
 
+  export type EvidenceUpsertWithWhereUniqueWithoutSubmittedByInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutSubmittedByInput, EvidenceUncheckedUpdateWithoutSubmittedByInput>
+    create: XOR<EvidenceCreateWithoutSubmittedByInput, EvidenceUncheckedCreateWithoutSubmittedByInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutSubmittedByInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutSubmittedByInput, EvidenceUncheckedUpdateWithoutSubmittedByInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutSubmittedByInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutSubmittedByInput>
+  }
+
+  export type EvidenceScalarWhereInput = {
+    AND?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+    OR?: EvidenceScalarWhereInput[]
+    NOT?: EvidenceScalarWhereInput | EvidenceScalarWhereInput[]
+    id?: UuidFilter<"Evidence"> | string
+    reference?: StringFilter<"Evidence"> | string
+    title?: StringFilter<"Evidence"> | string
+    description?: StringNullableFilter<"Evidence"> | string | null
+    evidenceType?: EnumEvidenceTypeFilter<"Evidence"> | $Enums.EvidenceType
+    source?: StringNullableFilter<"Evidence"> | string | null
+    engagementId?: UuidNullableFilter<"Evidence"> | string | null
+    controlTestId?: UuidNullableFilter<"Evidence"> | string | null
+    findingId?: UuidNullableFilter<"Evidence"> | string | null
+    actionPlanId?: UuidNullableFilter<"Evidence"> | string | null
+    auditEntityId?: UuidNullableFilter<"Evidence"> | string | null
+    collectionDate?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    submittedById?: UuidNullableFilter<"Evidence"> | string | null
+    reviewerId?: UuidNullableFilter<"Evidence"> | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFilter<"Evidence"> | $Enums.EvidenceReviewStatus
+    reviewComments?: StringNullableFilter<"Evidence"> | string | null
+    reviewedAt?: DateTimeNullableFilter<"Evidence"> | Date | string | null
+    documentReference?: StringNullableFilter<"Evidence"> | string | null
+    documentMetadata?: JsonNullableFilter<"Evidence">
+    notes?: StringNullableFilter<"Evidence"> | string | null
+    createdById?: UuidNullableFilter<"Evidence"> | string | null
+    updatedById?: UuidNullableFilter<"Evidence"> | string | null
+    createdAt?: DateTimeFilter<"Evidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Evidence"> | Date | string
+  }
+
+  export type EvidenceUpsertWithWhereUniqueWithoutReviewerInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutReviewerInput, EvidenceUncheckedUpdateWithoutReviewerInput>
+    create: XOR<EvidenceCreateWithoutReviewerInput, EvidenceUncheckedCreateWithoutReviewerInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutReviewerInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutReviewerInput, EvidenceUncheckedUpdateWithoutReviewerInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutReviewerInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutReviewerInput>
+  }
+
+  export type EvidenceUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutCreatedByInput, EvidenceUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<EvidenceCreateWithoutCreatedByInput, EvidenceUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutCreatedByInput, EvidenceUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutCreatedByInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type EvidenceUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutUpdatedByInput, EvidenceUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<EvidenceCreateWithoutUpdatedByInput, EvidenceUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutUpdatedByInput, EvidenceUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
   export type UserRoleCreateWithoutRoleInput = {
     assignedAt?: Date | string
     user: UserCreateNestedOneWithoutUserRolesInput
@@ -34943,6 +38251,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -34986,6 +38298,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -35068,6 +38384,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -35111,6 +38431,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -35265,6 +38589,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutChildrenInput = {
@@ -35290,6 +38615,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutChildrenInput = {
@@ -35320,6 +38646,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutParentInput = {
@@ -35345,6 +38672,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutParentInput = {
@@ -35398,6 +38726,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedAuditEntitiesInput = {
@@ -35441,6 +38773,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedAuditEntitiesInput = {
@@ -35489,6 +38825,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditEntitiesInput = {
@@ -35532,6 +38872,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditEntitiesInput = {
@@ -35580,6 +38924,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditEntitiesInput = {
@@ -35623,6 +38971,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditEntitiesInput = {
@@ -35780,6 +39132,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditEntityInput = {
@@ -35810,6 +39163,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditEntityInput = {
@@ -35850,6 +39204,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutAuditEntityInput = {
@@ -35880,6 +39235,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutAuditEntityInput = {
@@ -35923,6 +39279,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutAuditEntityInput = {
@@ -35956,6 +39313,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutAuditEntityInput = {
@@ -35994,6 +39352,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutAuditEntityInput = {
@@ -36022,6 +39381,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutAuditEntityInput = {
@@ -36031,6 +39391,68 @@ export namespace Prisma {
 
   export type ActionPlanCreateManyAuditEntityInputEnvelope = {
     data: ActionPlanCreateManyAuditEntityInput | ActionPlanCreateManyAuditEntityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutAuditEntityInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type EvidenceCreateManyAuditEntityInputEnvelope = {
+    data: EvidenceCreateManyAuditEntityInput | EvidenceCreateManyAuditEntityInput[]
     skipDuplicates?: boolean
   }
 
@@ -36068,6 +39490,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutChildrenInput = {
@@ -36093,6 +39516,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUpsertWithWhereUniqueWithoutParentInput = {
@@ -36163,6 +39587,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedAuditEntitiesInput = {
@@ -36206,6 +39634,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditEntitiesInput = {
@@ -36260,6 +39692,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditEntitiesInput = {
@@ -36303,6 +39739,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditEntitiesInput = {
@@ -36357,6 +39797,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditEntitiesInput = {
@@ -36400,6 +39844,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RiskUpsertWithWhereUniqueWithoutAuditEntityInput = {
@@ -36498,6 +39946,22 @@ export namespace Prisma {
     data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutAuditEntityInput>
   }
 
+  export type EvidenceUpsertWithWhereUniqueWithoutAuditEntityInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutAuditEntityInput, EvidenceUncheckedUpdateWithoutAuditEntityInput>
+    create: XOR<EvidenceCreateWithoutAuditEntityInput, EvidenceUncheckedCreateWithoutAuditEntityInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutAuditEntityInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutAuditEntityInput, EvidenceUncheckedUpdateWithoutAuditEntityInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutAuditEntityInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutAuditEntityInput>
+  }
+
   export type AuditUniverseCreateWithoutRisksInput = {
     id?: string
     code: string
@@ -36521,6 +39985,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutRisksInput = {
@@ -36546,6 +40011,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutRisksInput = {
@@ -36594,6 +40060,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutOwnedRisksInput = {
@@ -36637,6 +40107,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutOwnedRisksInput = {
@@ -36685,6 +40159,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedRisksInput = {
@@ -36728,6 +40206,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedRisksInput = {
@@ -36776,6 +40258,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedRisksInput = {
@@ -36819,6 +40305,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedRisksInput = {
@@ -36948,6 +40438,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutRiskInput = {
@@ -36978,6 +40469,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutRiskInput = {
@@ -37021,6 +40513,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutRiskInput = {
@@ -37054,6 +40547,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutRiskInput = {
@@ -37100,6 +40594,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutRisksInput = {
@@ -37125,6 +40620,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutOwnedRisksInput = {
@@ -37179,6 +40675,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOwnedRisksInput = {
@@ -37222,6 +40722,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedRisksInput = {
@@ -37276,6 +40780,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedRisksInput = {
@@ -37319,6 +40827,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedRisksInput = {
@@ -37373,6 +40885,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedRisksInput = {
@@ -37416,6 +40932,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type RiskActionUpsertWithWhereUniqueWithoutRiskInput = {
@@ -37580,6 +41100,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutAssignedActionsInput = {
@@ -37623,6 +41147,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutAssignedActionsInput = {
@@ -37745,6 +41273,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedActionsInput = {
@@ -37788,6 +41320,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type AuditUniverseCreateWithoutAuditPlansInput = {
@@ -37813,6 +41349,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutAuditPlansInput = {
@@ -37838,6 +41375,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutAuditPlansInput = {
@@ -37943,6 +41481,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutApprovedAuditPlansInput = {
@@ -37986,6 +41528,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutApprovedAuditPlansInput = {
@@ -38034,6 +41580,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadAuditPlansInput = {
@@ -38077,6 +41627,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadAuditPlansInput = {
@@ -38125,6 +41679,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedAuditPlansInput = {
@@ -38168,6 +41726,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedAuditPlansInput = {
@@ -38216,6 +41778,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedAuditPlansInput = {
@@ -38259,6 +41825,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedAuditPlansInput = {
@@ -38294,6 +41864,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutAuditPlanInput = {
@@ -38324,6 +41895,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutAuditPlanInput = {
@@ -38370,6 +41942,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutAuditPlansInput = {
@@ -38395,6 +41968,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutAuditPlansInput = {
@@ -38512,6 +42086,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedAuditPlansInput = {
@@ -38555,6 +42133,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutLeadAuditPlansInput = {
@@ -38609,6 +42191,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadAuditPlansInput = {
@@ -38652,6 +42238,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedAuditPlansInput = {
@@ -38706,6 +42296,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedAuditPlansInput = {
@@ -38749,6 +42343,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedAuditPlansInput = {
@@ -38803,6 +42401,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedAuditPlansInput = {
@@ -38846,6 +42448,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementUpsertWithWhereUniqueWithoutAuditPlanInput = {
@@ -38942,6 +42548,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutEngagementsInput = {
@@ -38967,6 +42574,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutEngagementsInput = {
@@ -39072,6 +42680,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutLeadEngagementsInput = {
@@ -39115,6 +42727,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutLeadEngagementsInput = {
@@ -39163,6 +42779,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutClosedEngagementsInput = {
@@ -39206,6 +42826,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutClosedEngagementsInput = {
@@ -39254,6 +42878,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedEngagementsInput = {
@@ -39297,6 +42925,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedEngagementsInput = {
@@ -39345,6 +42977,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedEngagementsInput = {
@@ -39388,6 +43024,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedEngagementsInput = {
@@ -39445,6 +43085,7 @@ export namespace Prisma {
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutEngagementInput = {
@@ -39475,6 +43116,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutEngagementInput = {
@@ -39518,6 +43160,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutEngagementInput = {
@@ -39551,6 +43194,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutEngagementInput = {
@@ -39589,6 +43233,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutEngagementInput = {
@@ -39617,6 +43262,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutEngagementInput = {
@@ -39626,6 +43272,68 @@ export namespace Prisma {
 
   export type ActionPlanCreateManyEngagementInputEnvelope = {
     data: ActionPlanCreateManyEngagementInput | ActionPlanCreateManyEngagementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutEngagementInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type EvidenceCreateManyEngagementInputEnvelope = {
+    data: EvidenceCreateManyEngagementInput | EvidenceCreateManyEngagementInput[]
     skipDuplicates?: boolean
   }
 
@@ -39724,6 +43432,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutEngagementsInput = {
@@ -39749,6 +43458,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutEngagementsInput = {
@@ -39866,6 +43576,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadEngagementsInput = {
@@ -39909,6 +43623,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutClosedEngagementsInput = {
@@ -39963,6 +43681,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedEngagementsInput = {
@@ -40006,6 +43728,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedEngagementsInput = {
@@ -40060,6 +43786,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedEngagementsInput = {
@@ -40103,6 +43833,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedEngagementsInput = {
@@ -40157,6 +43891,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedEngagementsInput = {
@@ -40200,6 +43938,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementTeamMemberUpsertWithWhereUniqueWithoutEngagementInput = {
@@ -40266,6 +44008,22 @@ export namespace Prisma {
     data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutEngagementInput>
   }
 
+  export type EvidenceUpsertWithWhereUniqueWithoutEngagementInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutEngagementInput, EvidenceUncheckedUpdateWithoutEngagementInput>
+    create: XOR<EvidenceCreateWithoutEngagementInput, EvidenceUncheckedCreateWithoutEngagementInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutEngagementInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutEngagementInput, EvidenceUncheckedUpdateWithoutEngagementInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutEngagementInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutEngagementInput>
+  }
+
   export type EngagementCreateWithoutTeamMembersInput = {
     id?: string
     reference: string
@@ -40294,6 +44052,7 @@ export namespace Prisma {
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutTeamMembersInput = {
@@ -40324,6 +44083,7 @@ export namespace Prisma {
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutTeamMembersInput = {
@@ -40372,6 +44132,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutEngagementMembershipsInput = {
@@ -40415,6 +44179,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutEngagementMembershipsInput = {
@@ -40461,6 +44229,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutTeamMembersInput = {
@@ -40491,6 +44260,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type UserUpsertWithoutEngagementMembershipsInput = {
@@ -40545,6 +44315,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEngagementMembershipsInput = {
@@ -40588,6 +44362,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type EngagementCreateWithoutFindingsInput = {
@@ -40618,6 +44396,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutFindingsInput = {
@@ -40648,6 +44427,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutFindingsInput = {
@@ -40678,6 +44458,7 @@ export namespace Prisma {
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutFindingsInput = {
@@ -40703,6 +44484,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutFindingsInput = {
@@ -40751,6 +44533,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutResponsibleFindingsInput = {
@@ -40794,6 +44580,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutResponsibleFindingsInput = {
@@ -40842,6 +44632,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutManagementResponseFindingsInput = {
@@ -40885,6 +44679,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutManagementResponseFindingsInput = {
@@ -40933,6 +44731,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedFindingsInput = {
@@ -40976,6 +44778,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedFindingsInput = {
@@ -41024,6 +44830,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedFindingsInput = {
@@ -41067,6 +44877,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedFindingsInput = {
@@ -41115,6 +44929,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedFindingsInput = {
@@ -41158,6 +44976,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedFindingsInput = {
@@ -41196,6 +45018,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutFindingInput = {
@@ -41229,6 +45052,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutFindingInput = {
@@ -41267,6 +45091,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutFindingInput = {
@@ -41295,6 +45120,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutFindingInput = {
@@ -41304,6 +45130,68 @@ export namespace Prisma {
 
   export type ActionPlanCreateManyFindingInputEnvelope = {
     data: ActionPlanCreateManyFindingInput | ActionPlanCreateManyFindingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutFindingInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput>
+  }
+
+  export type EvidenceCreateManyFindingInputEnvelope = {
+    data: EvidenceCreateManyFindingInput | EvidenceCreateManyFindingInput[]
     skipDuplicates?: boolean
   }
 
@@ -41346,6 +45234,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutFindingsInput = {
@@ -41376,6 +45265,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type AuditUniverseUpsertWithoutFindingsInput = {
@@ -41412,6 +45302,7 @@ export namespace Prisma {
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutFindingsInput = {
@@ -41437,6 +45328,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutResponsibleFindingsInput = {
@@ -41491,6 +45383,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResponsibleFindingsInput = {
@@ -41534,6 +45430,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutManagementResponseFindingsInput = {
@@ -41588,6 +45488,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutManagementResponseFindingsInput = {
@@ -41631,6 +45535,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedFindingsInput = {
@@ -41685,6 +45593,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedFindingsInput = {
@@ -41728,6 +45640,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedFindingsInput = {
@@ -41782,6 +45698,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedFindingsInput = {
@@ -41825,6 +45745,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedFindingsInput = {
@@ -41879,6 +45803,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedFindingsInput = {
@@ -41922,6 +45850,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type ControlTestUpsertWithWhereUniqueWithoutFindingInput = {
@@ -41956,6 +45888,22 @@ export namespace Prisma {
     data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutFindingInput>
   }
 
+  export type EvidenceUpsertWithWhereUniqueWithoutFindingInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutFindingInput, EvidenceUncheckedUpdateWithoutFindingInput>
+    create: XOR<EvidenceCreateWithoutFindingInput, EvidenceUncheckedCreateWithoutFindingInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutFindingInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutFindingInput, EvidenceUncheckedUpdateWithoutFindingInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutFindingInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutFindingInput>
+  }
+
   export type EngagementCreateWithoutControlTestsInput = {
     id?: string
     reference: string
@@ -41984,6 +45932,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutControlTestsInput = {
@@ -42014,6 +45963,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutControlTestsInput = {
@@ -42044,6 +45994,7 @@ export namespace Prisma {
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutControlTestsInput = {
@@ -42069,6 +46020,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutControlTestsInput = {
@@ -42161,6 +46113,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutControlTestsInput = {
@@ -42191,6 +46144,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutControlTestsInput = {
@@ -42239,6 +46193,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutTestedControlTestsInput = {
@@ -42282,6 +46240,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutTestedControlTestsInput = {
@@ -42330,6 +46292,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewedControlTestsInput = {
@@ -42373,6 +46339,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewedControlTestsInput = {
@@ -42421,6 +46391,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedControlTestsInput = {
@@ -42464,6 +46438,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedControlTestsInput = {
@@ -42512,6 +46490,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedControlTestsInput = {
@@ -42555,6 +46537,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedControlTestsInput = {
@@ -42588,6 +46574,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
     updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutControlTestInput = {
@@ -42616,6 +46603,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutControlTestInput = {
@@ -42625,6 +46613,68 @@ export namespace Prisma {
 
   export type ActionPlanCreateManyControlTestInputEnvelope = {
     data: ActionPlanCreateManyControlTestInput | ActionPlanCreateManyControlTestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    actionPlan?: ActionPlanCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutControlTestInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput>
+  }
+
+  export type EvidenceCreateManyControlTestInputEnvelope = {
+    data: EvidenceCreateManyControlTestInput | EvidenceCreateManyControlTestInput[]
     skipDuplicates?: boolean
   }
 
@@ -42667,6 +46717,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutControlTestsInput = {
@@ -42697,6 +46748,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type AuditUniverseUpsertWithoutControlTestsInput = {
@@ -42733,6 +46785,7 @@ export namespace Prisma {
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutControlTestsInput = {
@@ -42758,6 +46811,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type RiskUpsertWithoutControlTestsInput = {
@@ -42862,6 +46916,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutControlTestsInput = {
@@ -42892,6 +46947,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type UserUpsertWithoutTestedControlTestsInput = {
@@ -42946,6 +47002,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTestedControlTestsInput = {
@@ -42989,6 +47049,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutReviewedControlTestsInput = {
@@ -43043,6 +47107,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedControlTestsInput = {
@@ -43086,6 +47154,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedControlTestsInput = {
@@ -43140,6 +47212,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedControlTestsInput = {
@@ -43183,6 +47259,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedControlTestsInput = {
@@ -43237,6 +47317,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedControlTestsInput = {
@@ -43280,6 +47364,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type ActionPlanUpsertWithWhereUniqueWithoutControlTestInput = {
@@ -43296,6 +47384,22 @@ export namespace Prisma {
   export type ActionPlanUpdateManyWithWhereWithoutControlTestInput = {
     where: ActionPlanScalarWhereInput
     data: XOR<ActionPlanUpdateManyMutationInput, ActionPlanUncheckedUpdateManyWithoutControlTestInput>
+  }
+
+  export type EvidenceUpsertWithWhereUniqueWithoutControlTestInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutControlTestInput, EvidenceUncheckedUpdateWithoutControlTestInput>
+    create: XOR<EvidenceCreateWithoutControlTestInput, EvidenceUncheckedCreateWithoutControlTestInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutControlTestInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutControlTestInput, EvidenceUncheckedUpdateWithoutControlTestInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutControlTestInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutControlTestInput>
   }
 
   export type FindingCreateWithoutActionPlansInput = {
@@ -43326,6 +47430,7 @@ export namespace Prisma {
     createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
     controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceCreateNestedManyWithoutFindingInput
   }
 
   export type FindingUncheckedCreateWithoutActionPlansInput = {
@@ -43356,6 +47461,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutFindingInput
   }
 
   export type FindingCreateOrConnectWithoutActionPlansInput = {
@@ -43394,6 +47500,7 @@ export namespace Prisma {
     reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
     createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    evidence?: EvidenceCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestUncheckedCreateWithoutActionPlansInput = {
@@ -43427,6 +47534,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutControlTestInput
   }
 
   export type ControlTestCreateOrConnectWithoutActionPlansInput = {
@@ -43462,6 +47570,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
     findings?: FindingCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementUncheckedCreateWithoutActionPlansInput = {
@@ -43492,6 +47601,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
     findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutEngagementInput
   }
 
   export type EngagementCreateOrConnectWithoutActionPlansInput = {
@@ -43522,6 +47632,7 @@ export namespace Prisma {
     engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
     findings?: FindingCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseUncheckedCreateWithoutActionPlansInput = {
@@ -43547,6 +47658,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
     findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
     controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutAuditEntityInput
   }
 
   export type AuditUniverseCreateOrConnectWithoutActionPlansInput = {
@@ -43595,6 +47707,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutResponsibleActionPlansInput = {
@@ -43638,6 +47754,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutResponsibleActionPlansInput = {
@@ -43686,6 +47806,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutReviewerActionPlansInput = {
@@ -43729,6 +47853,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutReviewerActionPlansInput = {
@@ -43777,6 +47905,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutVerifiedActionPlansInput = {
@@ -43820,6 +47952,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutVerifiedActionPlansInput = {
@@ -43868,6 +48004,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedActionPlansInput = {
@@ -43911,6 +48051,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedActionPlansInput = {
@@ -43959,6 +48103,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedActionPlansInput = {
@@ -44002,6 +48150,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedActionPlansInput = {
@@ -44032,6 +48184,68 @@ export namespace Prisma {
 
   export type ActionPlanUpdateCreateManyActionPlanInputEnvelope = {
     data: ActionPlanUpdateCreateManyActionPlanInput | ActionPlanUpdateCreateManyActionPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EvidenceCreateWithoutActionPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    collectionDate?: Date | string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutEvidenceInput
+    controlTest?: ControlTestCreateNestedOneWithoutEvidenceInput
+    finding?: FindingCreateNestedOneWithoutEvidenceInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutEvidenceInput
+    submittedBy?: UserCreateNestedOneWithoutSubmittedEvidenceInput
+    reviewer?: UserCreateNestedOneWithoutReviewedEvidenceInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEvidenceInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEvidenceInput
+  }
+
+  export type EvidenceUncheckedCreateWithoutActionPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateOrConnectWithoutActionPlanInput = {
+    where: EvidenceWhereUniqueInput
+    create: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput>
+  }
+
+  export type EvidenceCreateManyActionPlanInputEnvelope = {
+    data: EvidenceCreateManyActionPlanInput | EvidenceCreateManyActionPlanInput[]
     skipDuplicates?: boolean
   }
 
@@ -44074,6 +48288,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutActionPlansInput = {
@@ -44104,6 +48319,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type ControlTestUpsertWithoutActionPlansInput = {
@@ -44148,6 +48364,7 @@ export namespace Prisma {
     reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutActionPlansInput = {
@@ -44181,6 +48398,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type EngagementUpsertWithoutActionPlansInput = {
@@ -44222,6 +48440,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutActionPlansInput = {
@@ -44252,6 +48471,7 @@ export namespace Prisma {
     teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type AuditUniverseUpsertWithoutActionPlansInput = {
@@ -44288,6 +48508,7 @@ export namespace Prisma {
     engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutActionPlansInput = {
@@ -44313,6 +48534,7 @@ export namespace Prisma {
     engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type UserUpsertWithoutResponsibleActionPlansInput = {
@@ -44367,6 +48589,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutResponsibleActionPlansInput = {
@@ -44410,6 +48636,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutReviewerActionPlansInput = {
@@ -44464,6 +48694,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewerActionPlansInput = {
@@ -44507,6 +48741,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutVerifiedActionPlansInput = {
@@ -44561,6 +48799,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerifiedActionPlansInput = {
@@ -44604,6 +48846,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutCreatedActionPlansInput = {
@@ -44658,6 +48904,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedActionPlansInput = {
@@ -44701,6 +48951,10 @@ export namespace Prisma {
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUpsertWithoutUpdatedActionPlansInput = {
@@ -44755,6 +49009,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedActionPlansInput = {
@@ -44798,6 +49056,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
     actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type ActionPlanUpdateUpsertWithWhereUniqueWithoutActionPlanInput = {
@@ -44814,6 +49076,22 @@ export namespace Prisma {
   export type ActionPlanUpdateUpdateManyWithWhereWithoutActionPlanInput = {
     where: ActionPlanUpdateScalarWhereInput
     data: XOR<ActionPlanUpdateUpdateManyMutationInput, ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanInput>
+  }
+
+  export type EvidenceUpsertWithWhereUniqueWithoutActionPlanInput = {
+    where: EvidenceWhereUniqueInput
+    update: XOR<EvidenceUpdateWithoutActionPlanInput, EvidenceUncheckedUpdateWithoutActionPlanInput>
+    create: XOR<EvidenceCreateWithoutActionPlanInput, EvidenceUncheckedCreateWithoutActionPlanInput>
+  }
+
+  export type EvidenceUpdateWithWhereUniqueWithoutActionPlanInput = {
+    where: EvidenceWhereUniqueInput
+    data: XOR<EvidenceUpdateWithoutActionPlanInput, EvidenceUncheckedUpdateWithoutActionPlanInput>
+  }
+
+  export type EvidenceUpdateManyWithWhereWithoutActionPlanInput = {
+    where: EvidenceScalarWhereInput
+    data: XOR<EvidenceUpdateManyMutationInput, EvidenceUncheckedUpdateManyWithoutActionPlanInput>
   }
 
   export type ActionPlanCreateWithoutUpdatesInput = {
@@ -44842,6 +49120,7 @@ export namespace Prisma {
     verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
     createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
     updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    evidence?: EvidenceCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanUncheckedCreateWithoutUpdatesInput = {
@@ -44870,6 +49149,7 @@ export namespace Prisma {
     updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    evidence?: EvidenceUncheckedCreateNestedManyWithoutActionPlanInput
   }
 
   export type ActionPlanCreateOrConnectWithoutUpdatesInput = {
@@ -44918,6 +49198,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
     updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutActionPlanUpdatesInput = {
@@ -44961,6 +49245,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
     updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
     verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutActionPlanUpdatesInput = {
@@ -45005,6 +49293,7 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutUpdatesInput = {
@@ -45033,6 +49322,7 @@ export namespace Prisma {
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type UserUpsertWithoutActionPlanUpdatesInput = {
@@ -45087,6 +49377,10 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
     updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutActionPlanUpdatesInput = {
@@ -45130,6 +49424,1510 @@ export namespace Prisma {
     createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
     updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
     verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type EngagementCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closureNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditPlan?: AuditPlanCreateNestedOneWithoutEngagementsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutEngagementsInput
+    risk?: RiskCreateNestedOneWithoutEngagementsInput
+    leadAuditor?: UserCreateNestedOneWithoutLeadEngagementsInput
+    closedBy?: UserCreateNestedOneWithoutClosedEngagementsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedEngagementsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedEngagementsInput
+    teamMembers?: EngagementTeamMemberCreateNestedManyWithoutEngagementInput
+    findings?: FindingCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementUncheckedCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    auditPlanId?: string | null
+    auditEntityId: string
+    riskId?: string | null
+    type?: $Enums.EngagementType
+    status?: $Enums.EngagementStatus
+    objectives: string
+    scope: string
+    methodology?: string | null
+    estimatedResources?: string | null
+    leadAuditorId?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    actualStartDate?: Date | string | null
+    actualEndDate?: Date | string | null
+    closedAt?: Date | string | null
+    closedById?: string | null
+    closureNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    teamMembers?: EngagementTeamMemberUncheckedCreateNestedManyWithoutEngagementInput
+    findings?: FindingUncheckedCreateNestedManyWithoutEngagementInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutEngagementInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutEngagementInput
+  }
+
+  export type EngagementCreateOrConnectWithoutEvidenceInput = {
+    where: EngagementWhereUniqueInput
+    create: XOR<EngagementCreateWithoutEvidenceInput, EngagementUncheckedCreateWithoutEvidenceInput>
+  }
+
+  export type ControlTestCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutControlTestsInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutControlTestsInput
+    risk?: RiskCreateNestedOneWithoutControlTestsInput
+    finding?: FindingCreateNestedOneWithoutControlTestsInput
+    tester?: UserCreateNestedOneWithoutTestedControlTestsInput
+    reviewer?: UserCreateNestedOneWithoutReviewedControlTestsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedControlTestsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedControlTestsInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestUncheckedCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId?: string | null
+    riskId?: string | null
+    controlReference?: string | null
+    status?: $Enums.ControlTestStatus
+    outcome?: $Enums.ControlTestOutcome | null
+    objective: string
+    procedures: string
+    criteria?: string | null
+    sampleDescription?: string | null
+    sampleSize?: number | null
+    expectedResult?: string | null
+    actualResult?: string | null
+    exceptions?: string | null
+    conclusion?: string | null
+    evidenceReference?: string | null
+    testerId?: string | null
+    testedAt?: Date | string | null
+    testerNotes?: string | null
+    reviewerId?: string | null
+    reviewedAt?: Date | string | null
+    reviewerNotes?: string | null
+    findingId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutControlTestInput
+  }
+
+  export type ControlTestCreateOrConnectWithoutEvidenceInput = {
+    where: ControlTestWhereUniqueInput
+    create: XOR<ControlTestCreateWithoutEvidenceInput, ControlTestUncheckedCreateWithoutEvidenceInput>
+  }
+
+  export type FindingCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verificationNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    engagement?: EngagementCreateNestedOneWithoutFindingsInput
+    auditEntity: AuditUniverseCreateNestedOneWithoutFindingsInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleFindingsInput
+    managementRespondedBy?: UserCreateNestedOneWithoutManagementResponseFindingsInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedFindingsInput
+    createdBy?: UserCreateNestedOneWithoutCreatedFindingsInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedFindingsInput
+    controlTests?: ControlTestCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingUncheckedCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    engagementId?: string | null
+    auditEntityId: string
+    category?: $Enums.FindingCategory
+    severity?: $Enums.FindingSeverity
+    status?: $Enums.FindingStatus
+    condition: string
+    criteria?: string | null
+    cause?: string | null
+    impact?: string | null
+    recommendations?: string | null
+    managementResponse?: string | null
+    managementRespondedAt?: Date | string | null
+    managementRespondedById?: string | null
+    responsibleOwnerId?: string | null
+    targetResolutionDate?: Date | string | null
+    closedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    verificationNotes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutFindingInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutFindingInput
+  }
+
+  export type FindingCreateOrConnectWithoutEvidenceInput = {
+    where: FindingWhereUniqueInput
+    create: XOR<FindingCreateWithoutEvidenceInput, FindingUncheckedCreateWithoutEvidenceInput>
+  }
+
+  export type ActionPlanCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    finding?: FindingCreateNestedOneWithoutActionPlansInput
+    controlTest?: ControlTestCreateNestedOneWithoutActionPlansInput
+    engagement?: EngagementCreateNestedOneWithoutActionPlansInput
+    auditEntity?: AuditUniverseCreateNestedOneWithoutActionPlansInput
+    responsibleOwner?: UserCreateNestedOneWithoutResponsibleActionPlansInput
+    reviewer?: UserCreateNestedOneWithoutReviewerActionPlansInput
+    verifiedBy?: UserCreateNestedOneWithoutVerifiedActionPlansInput
+    createdBy?: UserCreateNestedOneWithoutCreatedActionPlansInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedActionPlansInput
+    updates?: ActionPlanUpdateCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanUncheckedCreateWithoutEvidenceInput = {
+    id?: string
+    reference: string
+    title: string
+    description: string
+    findingId?: string | null
+    controlTestId?: string | null
+    engagementId?: string | null
+    auditEntityId?: string | null
+    priority?: $Enums.ActionPlanPriority
+    status?: $Enums.ActionPlanStatus
+    responsibleOwnerId?: string | null
+    reviewerId?: string | null
+    targetDate?: Date | string | null
+    completedAt?: Date | string | null
+    verifiedAt?: Date | string | null
+    verifiedById?: string | null
+    managementJustification?: string | null
+    proposedRectification?: string | null
+    completionEvidence?: string | null
+    verificationNotes?: string | null
+    progressPct?: number
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutActionPlanInput
+  }
+
+  export type ActionPlanCreateOrConnectWithoutEvidenceInput = {
+    where: ActionPlanWhereUniqueInput
+    create: XOR<ActionPlanCreateWithoutEvidenceInput, ActionPlanUncheckedCreateWithoutEvidenceInput>
+  }
+
+  export type AuditUniverseCreateWithoutEvidenceInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: AuditUniverseCreateNestedOneWithoutChildrenInput
+    children?: AuditUniverseCreateNestedManyWithoutParentInput
+    owner?: UserCreateNestedOneWithoutOwnedAuditEntitiesInput
+    createdBy?: UserCreateNestedOneWithoutCreatedAuditEntitiesInput
+    updatedBy?: UserCreateNestedOneWithoutUpdatedAuditEntitiesInput
+    risks?: RiskCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseUncheckedCreateWithoutEvidenceInput = {
+    id?: string
+    code: string
+    name: string
+    description?: string | null
+    entityType: $Enums.AuditEntityType
+    status?: $Enums.AuditEntityStatus
+    parentId?: string | null
+    businessProcess?: string | null
+    department?: string | null
+    riskRating?: string | null
+    notes?: string | null
+    ownerId?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: AuditUniverseUncheckedCreateNestedManyWithoutParentInput
+    risks?: RiskUncheckedCreateNestedManyWithoutAuditEntityInput
+    auditPlans?: AuditPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+    engagements?: EngagementUncheckedCreateNestedManyWithoutAuditEntityInput
+    findings?: FindingUncheckedCreateNestedManyWithoutAuditEntityInput
+    controlTests?: ControlTestUncheckedCreateNestedManyWithoutAuditEntityInput
+    actionPlans?: ActionPlanUncheckedCreateNestedManyWithoutAuditEntityInput
+  }
+
+  export type AuditUniverseCreateOrConnectWithoutEvidenceInput = {
+    where: AuditUniverseWhereUniqueInput
+    create: XOR<AuditUniverseCreateWithoutEvidenceInput, AuditUniverseUncheckedCreateWithoutEvidenceInput>
+  }
+
+  export type UserCreateWithoutSubmittedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutSubmittedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutSubmittedEvidenceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSubmittedEvidenceInput, UserUncheckedCreateWithoutSubmittedEvidenceInput>
+  }
+
+  export type UserCreateWithoutReviewedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedEvidenceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedEvidenceInput, UserUncheckedCreateWithoutReviewedEvidenceInput>
+  }
+
+  export type UserCreateWithoutCreatedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    updatedEvidence?: EvidenceCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    updatedEvidence?: EvidenceUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedEvidenceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedEvidenceInput, UserUncheckedCreateWithoutCreatedEvidenceInput>
+  }
+
+  export type UserCreateWithoutUpdatedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberCreateNestedManyWithoutUserInput
+    createdFindings?: FindingCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutUpdatedEvidenceInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    email: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    ownedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutOwnerInput
+    createdAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditEntities?: AuditUniverseUncheckedCreateNestedManyWithoutUpdatedByInput
+    ownedRisks?: RiskUncheckedCreateNestedManyWithoutOwnerInput
+    createdRisks?: RiskUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedRisks?: RiskUncheckedCreateNestedManyWithoutUpdatedByInput
+    assignedActions?: RiskActionUncheckedCreateNestedManyWithoutAssigneeInput
+    approvedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutApprovedByInput
+    leadAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedAuditPlans?: AuditPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    leadEngagements?: EngagementUncheckedCreateNestedManyWithoutLeadAuditorInput
+    createdEngagements?: EngagementUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedEngagements?: EngagementUncheckedCreateNestedManyWithoutUpdatedByInput
+    closedEngagements?: EngagementUncheckedCreateNestedManyWithoutClosedByInput
+    engagementMemberships?: EngagementTeamMemberUncheckedCreateNestedManyWithoutUserInput
+    createdFindings?: FindingUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedFindings?: FindingUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleFindings?: FindingUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    managementResponseFindings?: FindingUncheckedCreateNestedManyWithoutManagementRespondedByInput
+    verifiedFindings?: FindingUncheckedCreateNestedManyWithoutVerifiedByInput
+    testedControlTests?: ControlTestUncheckedCreateNestedManyWithoutTesterInput
+    reviewedControlTests?: ControlTestUncheckedCreateNestedManyWithoutReviewerInput
+    createdControlTests?: ControlTestUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedControlTests?: ControlTestUncheckedCreateNestedManyWithoutUpdatedByInput
+    responsibleActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutResponsibleOwnerInput
+    reviewerActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutReviewerInput
+    createdActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutCreatedByInput
+    updatedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutUpdatedByInput
+    verifiedActionPlans?: ActionPlanUncheckedCreateNestedManyWithoutVerifiedByInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedCreateNestedManyWithoutUpdatedByInput
+    submittedEvidence?: EvidenceUncheckedCreateNestedManyWithoutSubmittedByInput
+    reviewedEvidence?: EvidenceUncheckedCreateNestedManyWithoutReviewerInput
+    createdEvidence?: EvidenceUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutUpdatedEvidenceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUpdatedEvidenceInput, UserUncheckedCreateWithoutUpdatedEvidenceInput>
+  }
+
+  export type EngagementUpsertWithoutEvidenceInput = {
+    update: XOR<EngagementUpdateWithoutEvidenceInput, EngagementUncheckedUpdateWithoutEvidenceInput>
+    create: XOR<EngagementCreateWithoutEvidenceInput, EngagementUncheckedCreateWithoutEvidenceInput>
+    where?: EngagementWhereInput
+  }
+
+  export type EngagementUpdateToOneWithWhereWithoutEvidenceInput = {
+    where?: EngagementWhereInput
+    data: XOR<EngagementUpdateWithoutEvidenceInput, EngagementUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type EngagementUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditPlan?: AuditPlanUpdateOneWithoutEngagementsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutEngagementsNestedInput
+    risk?: RiskUpdateOneWithoutEngagementsNestedInput
+    leadAuditor?: UserUpdateOneWithoutLeadEngagementsNestedInput
+    closedBy?: UserUpdateOneWithoutClosedEngagementsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEngagementsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEngagementsNestedInput
+    teamMembers?: EngagementTeamMemberUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type EngagementUncheckedUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    auditPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumEngagementTypeFieldUpdateOperationsInput | $Enums.EngagementType
+    status?: EnumEngagementStatusFieldUpdateOperationsInput | $Enums.EngagementStatus
+    objectives?: StringFieldUpdateOperationsInput | string
+    scope?: StringFieldUpdateOperationsInput | string
+    methodology?: NullableStringFieldUpdateOperationsInput | string | null
+    estimatedResources?: NullableStringFieldUpdateOperationsInput | string | null
+    leadAuditorId?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedById?: NullableStringFieldUpdateOperationsInput | string | null
+    closureNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    teamMembers?: EngagementTeamMemberUncheckedUpdateManyWithoutEngagementNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+  }
+
+  export type ControlTestUpsertWithoutEvidenceInput = {
+    update: XOR<ControlTestUpdateWithoutEvidenceInput, ControlTestUncheckedUpdateWithoutEvidenceInput>
+    create: XOR<ControlTestCreateWithoutEvidenceInput, ControlTestUncheckedCreateWithoutEvidenceInput>
+    where?: ControlTestWhereInput
+  }
+
+  export type ControlTestUpdateToOneWithWhereWithoutEvidenceInput = {
+    where?: ControlTestWhereInput
+    data: XOR<ControlTestUpdateWithoutEvidenceInput, ControlTestUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type ControlTestUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutControlTestsNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutControlTestsNestedInput
+    risk?: RiskUpdateOneWithoutControlTestsNestedInput
+    finding?: FindingUpdateOneWithoutControlTestsNestedInput
+    tester?: UserUpdateOneWithoutTestedControlTestsNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type ControlTestUncheckedUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    riskId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlReference?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumControlTestStatusFieldUpdateOperationsInput | $Enums.ControlTestStatus
+    outcome?: NullableEnumControlTestOutcomeFieldUpdateOperationsInput | $Enums.ControlTestOutcome | null
+    objective?: StringFieldUpdateOperationsInput | string
+    procedures?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    sampleSize?: NullableIntFieldUpdateOperationsInput | number | null
+    expectedResult?: NullableStringFieldUpdateOperationsInput | string | null
+    actualResult?: NullableStringFieldUpdateOperationsInput | string | null
+    exceptions?: NullableStringFieldUpdateOperationsInput | string | null
+    conclusion?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceReference?: NullableStringFieldUpdateOperationsInput | string | null
+    testerId?: NullableStringFieldUpdateOperationsInput | string | null
+    testedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    testerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+  }
+
+  export type FindingUpsertWithoutEvidenceInput = {
+    update: XOR<FindingUpdateWithoutEvidenceInput, FindingUncheckedUpdateWithoutEvidenceInput>
+    create: XOR<FindingCreateWithoutEvidenceInput, FindingUncheckedCreateWithoutEvidenceInput>
+    where?: FindingWhereInput
+  }
+
+  export type FindingUpdateToOneWithWhereWithoutEvidenceInput = {
+    where?: FindingWhereInput
+    data: XOR<FindingUpdateWithoutEvidenceInput, FindingUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type FindingUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutFindingsNestedInput
+    auditEntity?: AuditUniverseUpdateOneRequiredWithoutFindingsNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleFindingsNestedInput
+    managementRespondedBy?: UserUpdateOneWithoutManagementResponseFindingsNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedFindingsNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
+    controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+  }
+
+  export type FindingUncheckedUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: StringFieldUpdateOperationsInput | string
+    category?: EnumFindingCategoryFieldUpdateOperationsInput | $Enums.FindingCategory
+    severity?: EnumFindingSeverityFieldUpdateOperationsInput | $Enums.FindingSeverity
+    status?: EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+    condition?: StringFieldUpdateOperationsInput | string
+    criteria?: NullableStringFieldUpdateOperationsInput | string | null
+    cause?: NullableStringFieldUpdateOperationsInput | string | null
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
+    recommendations?: NullableStringFieldUpdateOperationsInput | string | null
+    managementResponse?: NullableStringFieldUpdateOperationsInput | string | null
+    managementRespondedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementRespondedById?: NullableStringFieldUpdateOperationsInput | string | null
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetResolutionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+  }
+
+  export type ActionPlanUpsertWithoutEvidenceInput = {
+    update: XOR<ActionPlanUpdateWithoutEvidenceInput, ActionPlanUncheckedUpdateWithoutEvidenceInput>
+    create: XOR<ActionPlanCreateWithoutEvidenceInput, ActionPlanUncheckedCreateWithoutEvidenceInput>
+    where?: ActionPlanWhereInput
+  }
+
+  export type ActionPlanUpdateToOneWithWhereWithoutEvidenceInput = {
+    where?: ActionPlanWhereInput
+    data: XOR<ActionPlanUpdateWithoutEvidenceInput, ActionPlanUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type ActionPlanUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    finding?: FindingUpdateOneWithoutActionPlansNestedInput
+    controlTest?: ControlTestUpdateOneWithoutActionPlansNestedInput
+    engagement?: EngagementUpdateOneWithoutActionPlansNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutActionPlansNestedInput
+    responsibleOwner?: UserUpdateOneWithoutResponsibleActionPlansNestedInput
+    reviewer?: UserUpdateOneWithoutReviewerActionPlansNestedInput
+    verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
+    updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type ActionPlanUncheckedUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    priority?: EnumActionPlanPriorityFieldUpdateOperationsInput | $Enums.ActionPlanPriority
+    status?: EnumActionPlanStatusFieldUpdateOperationsInput | $Enums.ActionPlanStatus
+    responsibleOwnerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    verifiedById?: NullableStringFieldUpdateOperationsInput | string | null
+    managementJustification?: NullableStringFieldUpdateOperationsInput | string | null
+    proposedRectification?: NullableStringFieldUpdateOperationsInput | string | null
+    completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
+    verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+  }
+
+  export type AuditUniverseUpsertWithoutEvidenceInput = {
+    update: XOR<AuditUniverseUpdateWithoutEvidenceInput, AuditUniverseUncheckedUpdateWithoutEvidenceInput>
+    create: XOR<AuditUniverseCreateWithoutEvidenceInput, AuditUniverseUncheckedCreateWithoutEvidenceInput>
+    where?: AuditUniverseWhereInput
+  }
+
+  export type AuditUniverseUpdateToOneWithWhereWithoutEvidenceInput = {
+    where?: AuditUniverseWhereInput
+    data: XOR<AuditUniverseUpdateWithoutEvidenceInput, AuditUniverseUncheckedUpdateWithoutEvidenceInput>
+  }
+
+  export type AuditUniverseUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: AuditUniverseUpdateOneWithoutChildrenNestedInput
+    children?: AuditUniverseUpdateManyWithoutParentNestedInput
+    owner?: UserUpdateOneWithoutOwnedAuditEntitiesNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedAuditEntitiesNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedAuditEntitiesNestedInput
+    risks?: RiskUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type AuditUniverseUncheckedUpdateWithoutEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    entityType?: EnumAuditEntityTypeFieldUpdateOperationsInput | $Enums.AuditEntityType
+    status?: EnumAuditEntityStatusFieldUpdateOperationsInput | $Enums.AuditEntityStatus
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    businessProcess?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    riskRating?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: AuditUniverseUncheckedUpdateManyWithoutParentNestedInput
+    risks?: RiskUncheckedUpdateManyWithoutAuditEntityNestedInput
+    auditPlans?: AuditPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    engagements?: EngagementUncheckedUpdateManyWithoutAuditEntityNestedInput
+    findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
+    controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
+    actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+  }
+
+  export type UserUpsertWithoutSubmittedEvidenceInput = {
+    update: XOR<UserUpdateWithoutSubmittedEvidenceInput, UserUncheckedUpdateWithoutSubmittedEvidenceInput>
+    create: XOR<UserCreateWithoutSubmittedEvidenceInput, UserUncheckedCreateWithoutSubmittedEvidenceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSubmittedEvidenceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSubmittedEvidenceInput, UserUncheckedUpdateWithoutSubmittedEvidenceInput>
+  }
+
+  export type UserUpdateWithoutSubmittedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSubmittedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutReviewedEvidenceInput = {
+    update: XOR<UserUpdateWithoutReviewedEvidenceInput, UserUncheckedUpdateWithoutReviewedEvidenceInput>
+    create: XOR<UserCreateWithoutReviewedEvidenceInput, UserUncheckedCreateWithoutReviewedEvidenceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedEvidenceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedEvidenceInput, UserUncheckedUpdateWithoutReviewedEvidenceInput>
+  }
+
+  export type UserUpdateWithoutReviewedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedEvidenceInput = {
+    update: XOR<UserUpdateWithoutCreatedEvidenceInput, UserUncheckedUpdateWithoutCreatedEvidenceInput>
+    create: XOR<UserCreateWithoutCreatedEvidenceInput, UserUncheckedCreateWithoutCreatedEvidenceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedEvidenceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedEvidenceInput, UserUncheckedUpdateWithoutCreatedEvidenceInput>
+  }
+
+  export type UserUpdateWithoutCreatedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    updatedEvidence?: EvidenceUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    updatedEvidence?: EvidenceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutUpdatedEvidenceInput = {
+    update: XOR<UserUpdateWithoutUpdatedEvidenceInput, UserUncheckedUpdateWithoutUpdatedEvidenceInput>
+    create: XOR<UserCreateWithoutUpdatedEvidenceInput, UserUncheckedCreateWithoutUpdatedEvidenceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUpdatedEvidenceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUpdatedEvidenceInput, UserUncheckedUpdateWithoutUpdatedEvidenceInput>
+  }
+
+  export type UserUpdateWithoutUpdatedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUpdatedEvidenceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    ownedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutOwnerNestedInput
+    createdAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditEntities?: AuditUniverseUncheckedUpdateManyWithoutUpdatedByNestedInput
+    ownedRisks?: RiskUncheckedUpdateManyWithoutOwnerNestedInput
+    createdRisks?: RiskUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedRisks?: RiskUncheckedUpdateManyWithoutUpdatedByNestedInput
+    assignedActions?: RiskActionUncheckedUpdateManyWithoutAssigneeNestedInput
+    approvedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutApprovedByNestedInput
+    leadAuditPlans?: AuditPlanUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdAuditPlans?: AuditPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedAuditPlans?: AuditPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    leadEngagements?: EngagementUncheckedUpdateManyWithoutLeadAuditorNestedInput
+    createdEngagements?: EngagementUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedEngagements?: EngagementUncheckedUpdateManyWithoutUpdatedByNestedInput
+    closedEngagements?: EngagementUncheckedUpdateManyWithoutClosedByNestedInput
+    engagementMemberships?: EngagementTeamMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdFindings?: FindingUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedFindings?: FindingUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleFindings?: FindingUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    managementResponseFindings?: FindingUncheckedUpdateManyWithoutManagementRespondedByNestedInput
+    verifiedFindings?: FindingUncheckedUpdateManyWithoutVerifiedByNestedInput
+    testedControlTests?: ControlTestUncheckedUpdateManyWithoutTesterNestedInput
+    reviewedControlTests?: ControlTestUncheckedUpdateManyWithoutReviewerNestedInput
+    createdControlTests?: ControlTestUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedControlTests?: ControlTestUncheckedUpdateManyWithoutUpdatedByNestedInput
+    responsibleActionPlans?: ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerNestedInput
+    reviewerActionPlans?: ActionPlanUncheckedUpdateManyWithoutReviewerNestedInput
+    createdActionPlans?: ActionPlanUncheckedUpdateManyWithoutCreatedByNestedInput
+    updatedActionPlans?: ActionPlanUncheckedUpdateManyWithoutUpdatedByNestedInput
+    verifiedActionPlans?: ActionPlanUncheckedUpdateManyWithoutVerifiedByNestedInput
+    actionPlanUpdates?: ActionPlanUpdateUncheckedUpdateManyWithoutUpdatedByNestedInput
+    submittedEvidence?: EvidenceUncheckedUpdateManyWithoutSubmittedByNestedInput
+    reviewedEvidence?: EvidenceUncheckedUpdateManyWithoutReviewerNestedInput
+    createdEvidence?: EvidenceUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -45886,6 +51684,110 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type EvidenceCreateManySubmittedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateManyReviewerInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateManyCreatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EvidenceCreateManyUpdatedByInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
@@ -45924,6 +51826,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutOwnerInput = {
@@ -45949,6 +51852,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutOwnerInput = {
@@ -45992,6 +51896,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutCreatedByInput = {
@@ -46017,6 +51922,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutCreatedByInput = {
@@ -46060,6 +51966,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutUpdatedByInput = {
@@ -46085,6 +51992,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -46687,6 +52595,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutLeadAuditorInput = {
@@ -46717,6 +52626,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutLeadAuditorInput = {
@@ -46773,6 +52683,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutCreatedByInput = {
@@ -46803,6 +52714,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutCreatedByInput = {
@@ -46859,6 +52771,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutUpdatedByInput = {
@@ -46889,6 +52802,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -46945,6 +52859,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutClosedByInput = {
@@ -46975,6 +52890,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutClosedByInput = {
@@ -47049,6 +52965,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutCreatedByInput = {
@@ -47079,6 +52996,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutCreatedByInput = {
@@ -47137,6 +53055,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutUpdatedByInput = {
@@ -47167,6 +53086,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -47225,6 +53145,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutResponsibleOwnerInput = {
@@ -47255,6 +53176,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutResponsibleOwnerInput = {
@@ -47313,6 +53235,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutManagementRespondedByInput = {
@@ -47343,6 +53266,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutManagementRespondedByInput = {
@@ -47401,6 +53325,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutVerifiedByInput = {
@@ -47431,6 +53356,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutVerifiedByInput = {
@@ -47492,6 +53418,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutTesterInput = {
@@ -47525,6 +53452,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutTesterInput = {
@@ -47590,6 +53518,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutReviewerInput = {
@@ -47623,6 +53552,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutReviewerInput = {
@@ -47688,6 +53618,7 @@ export namespace Prisma {
     reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutCreatedByInput = {
@@ -47721,6 +53652,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutCreatedByInput = {
@@ -47786,6 +53718,7 @@ export namespace Prisma {
     reviewer?: UserUpdateOneWithoutReviewedControlTestsNestedInput
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutUpdatedByInput = {
@@ -47819,6 +53752,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -47879,6 +53813,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutResponsibleOwnerInput = {
@@ -47907,6 +53842,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutResponsibleOwnerInput = {
@@ -47962,6 +53898,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutReviewerInput = {
@@ -47990,6 +53927,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutReviewerInput = {
@@ -48045,6 +53983,7 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutCreatedByInput = {
@@ -48073,6 +54012,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutCreatedByInput = {
@@ -48128,6 +54068,7 @@ export namespace Prisma {
     verifiedBy?: UserUpdateOneWithoutVerifiedActionPlansNestedInput
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutUpdatedByInput = {
@@ -48156,6 +54097,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -48211,6 +54153,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutVerifiedByInput = {
@@ -48239,6 +54182,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutVerifiedByInput = {
@@ -48290,6 +54234,318 @@ export namespace Prisma {
     note?: StringFieldUpdateOperationsInput | string
     progressPct?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutSubmittedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutSubmittedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutSubmittedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutReviewerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserRoleCreateManyRoleInput = {
@@ -48529,6 +54785,32 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EvidenceCreateManyAuditEntityInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AuditUniverseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
@@ -48552,6 +54834,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateWithoutParentInput = {
@@ -48577,6 +54860,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutAuditEntityNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutAuditEntityNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutAuditEntityNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutAuditEntityNestedInput
   }
 
   export type AuditUniverseUncheckedUpdateManyWithoutParentInput = {
@@ -48773,6 +55057,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditEntityInput = {
@@ -48803,6 +55088,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -48859,6 +55145,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutAuditEntityInput = {
@@ -48889,6 +55176,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -48950,6 +55238,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutAuditEntityInput = {
@@ -48983,6 +55272,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -49043,6 +55333,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutAuditEntityInput = {
@@ -49071,6 +55362,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutAuditEntityInput = {
@@ -49094,6 +55386,84 @@ export namespace Prisma {
     completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
     verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
     progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutAuditEntityInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49332,6 +55702,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutRiskInput = {
@@ -49362,6 +55733,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutRiskInput = {
@@ -49421,6 +55793,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutRiskInput = {
@@ -49454,6 +55827,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutRiskInput = {
@@ -49542,6 +55916,7 @@ export namespace Prisma {
     findings?: FindingUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateWithoutAuditPlanInput = {
@@ -49572,6 +55947,7 @@ export namespace Prisma {
     findings?: FindingUncheckedUpdateManyWithoutEngagementNestedInput
     controlTests?: ControlTestUncheckedUpdateManyWithoutEngagementNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutEngagementNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutEngagementNestedInput
   }
 
   export type EngagementUncheckedUpdateManyWithoutAuditPlanInput = {
@@ -49693,6 +56069,32 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EvidenceCreateManyEngagementInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EngagementTeamMemberUpdateWithoutEngagementInput = {
     role?: EnumTeamMemberRoleFieldUpdateOperationsInput | $Enums.TeamMemberRole
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49739,6 +56141,7 @@ export namespace Prisma {
     updatedBy?: UserUpdateOneWithoutUpdatedFindingsNestedInput
     controlTests?: ControlTestUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateWithoutEngagementInput = {
@@ -49769,6 +56172,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     controlTests?: ControlTestUncheckedUpdateManyWithoutFindingNestedInput
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutFindingNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutFindingNestedInput
   }
 
   export type FindingUncheckedUpdateManyWithoutEngagementInput = {
@@ -49830,6 +56234,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutEngagementInput = {
@@ -49863,6 +56268,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutEngagementInput = {
@@ -49923,6 +56329,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutEngagementInput = {
@@ -49951,6 +56358,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutEngagementInput = {
@@ -49974,6 +56382,84 @@ export namespace Prisma {
     completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
     verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
     progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutEngagementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50039,6 +56525,32 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EvidenceCreateManyFindingInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ControlTestUpdateWithoutFindingInput = {
     id?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
@@ -50070,6 +56582,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedControlTestsNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedControlTestsNestedInput
     actionPlans?: ActionPlanUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateWithoutFindingInput = {
@@ -50103,6 +56616,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     actionPlans?: ActionPlanUncheckedUpdateManyWithoutControlTestNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutControlTestNestedInput
   }
 
   export type ControlTestUncheckedUpdateManyWithoutFindingInput = {
@@ -50163,6 +56677,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutFindingInput = {
@@ -50191,6 +56706,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutFindingInput = {
@@ -50214,6 +56730,84 @@ export namespace Prisma {
     completionEvidence?: NullableStringFieldUpdateOperationsInput | string | null
     verificationNotes?: NullableStringFieldUpdateOperationsInput | string | null
     progressPct?: IntFieldUpdateOperationsInput | number
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutFindingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: NullableStringFieldUpdateOperationsInput | string | null
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50247,6 +56841,32 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EvidenceCreateManyControlTestInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    findingId?: string | null
+    actionPlanId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ActionPlanUpdateWithoutControlTestInput = {
     id?: StringFieldUpdateOperationsInput | string
     reference?: StringFieldUpdateOperationsInput | string
@@ -50273,6 +56893,7 @@ export namespace Prisma {
     createdBy?: UserUpdateOneWithoutCreatedActionPlansNestedInput
     updatedBy?: UserUpdateOneWithoutUpdatedActionPlansNestedInput
     updates?: ActionPlanUpdateUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateWithoutControlTestInput = {
@@ -50301,6 +56922,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updates?: ActionPlanUpdateUncheckedUpdateManyWithoutActionPlanNestedInput
+    evidence?: EvidenceUncheckedUpdateManyWithoutActionPlanNestedInput
   }
 
   export type ActionPlanUncheckedUpdateManyWithoutControlTestInput = {
@@ -50330,12 +56952,116 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EvidenceUpdateWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    actionPlan?: ActionPlanUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutControlTestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    actionPlanId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ActionPlanUpdateCreateManyActionPlanInput = {
     id?: string
     note: string
     progressPct?: number
     updatedById?: string | null
     createdAt?: Date | string
+  }
+
+  export type EvidenceCreateManyActionPlanInput = {
+    id?: string
+    reference: string
+    title: string
+    description?: string | null
+    evidenceType?: $Enums.EvidenceType
+    source?: string | null
+    engagementId?: string | null
+    controlTestId?: string | null
+    findingId?: string | null
+    auditEntityId?: string | null
+    collectionDate?: Date | string | null
+    submittedById?: string | null
+    reviewerId?: string | null
+    reviewStatus?: $Enums.EvidenceReviewStatus
+    reviewComments?: string | null
+    reviewedAt?: Date | string | null
+    documentReference?: string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: string | null
+    createdById?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ActionPlanUpdateUpdateWithoutActionPlanInput = {
@@ -50360,6 +57086,84 @@ export namespace Prisma {
     progressPct?: IntFieldUpdateOperationsInput | number
     updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUpdateWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    engagement?: EngagementUpdateOneWithoutEvidenceNestedInput
+    controlTest?: ControlTestUpdateOneWithoutEvidenceNestedInput
+    finding?: FindingUpdateOneWithoutEvidenceNestedInput
+    auditEntity?: AuditUniverseUpdateOneWithoutEvidenceNestedInput
+    submittedBy?: UserUpdateOneWithoutSubmittedEvidenceNestedInput
+    reviewer?: UserUpdateOneWithoutReviewedEvidenceNestedInput
+    createdBy?: UserUpdateOneWithoutCreatedEvidenceNestedInput
+    updatedBy?: UserUpdateOneWithoutUpdatedEvidenceNestedInput
+  }
+
+  export type EvidenceUncheckedUpdateWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EvidenceUncheckedUpdateManyWithoutActionPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reference?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    evidenceType?: EnumEvidenceTypeFieldUpdateOperationsInput | $Enums.EvidenceType
+    source?: NullableStringFieldUpdateOperationsInput | string | null
+    engagementId?: NullableStringFieldUpdateOperationsInput | string | null
+    controlTestId?: NullableStringFieldUpdateOperationsInput | string | null
+    findingId?: NullableStringFieldUpdateOperationsInput | string | null
+    auditEntityId?: NullableStringFieldUpdateOperationsInput | string | null
+    collectionDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewStatus?: EnumEvidenceReviewStatusFieldUpdateOperationsInput | $Enums.EvidenceReviewStatus
+    reviewComments?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    documentReference?: NullableStringFieldUpdateOperationsInput | string | null
+    documentMetadata?: NullableJsonNullValueInput | InputJsonValue
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -50467,6 +57271,10 @@ export namespace Prisma {
      * @deprecated Use ActionPlanDefaultArgs instead
      */
     export type ActionPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ActionPlanDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EvidenceDefaultArgs instead
+     */
+    export type EvidenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EvidenceDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
