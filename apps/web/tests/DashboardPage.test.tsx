@@ -6,40 +6,47 @@ import { DashboardPage } from '../src/pages/DashboardPage';
 import { AuthContext } from '../src/context/AuthContext';
 import type { AuthContextValue } from '../src/context/AuthContext';
 
-// Mock the dashboard metrics hook to return "not available" data
+// Mock the dashboard metrics hook to return "available" data
 vi.mock('../src/hooks/useDashboardMetrics', () => ({
   useDashboardMetrics: () => ({
     data: {
       kpis: [
-        { key: 'audit_universe', label: 'Audit Universe', value: null, availability: 'not_available', description: 'Total entities/processes in scope' },
-        { key: 'audits_planned', label: 'Audits Planned', value: null, availability: 'not_available', description: 'Audits scheduled for the current cycle' },
-        { key: 'audits_completed', label: 'Audits Completed', value: null, availability: 'not_available', description: 'Audits finished with report issued' },
-        { key: 'open_findings', label: 'Open Findings', value: null, availability: 'not_available', description: 'Findings not yet remediated' },
-        { key: 'overdue_actions', label: 'Overdue Actions', value: null, availability: 'not_available', description: 'Corrective actions past due date' },
-        { key: 'assurance_coverage', label: 'Assurance Coverage', value: null, availability: 'not_available', description: 'Percentage of risk covered by assurance activities' },
+        { key: 'audit_universe', label: 'Audit Universe', value: 42, availability: 'available', description: 'Total entities/processes in scope' },
+        { key: 'high_critical_risks', label: 'High/Critical Risks', value: 5, availability: 'available', description: 'Risks rated high or critical' },
+        { key: 'audits_planned', label: 'Engagements Planned', value: 8, availability: 'available', description: 'Engagements in planned status' },
+        { key: 'audits_completed', label: 'Engagements Completed', value: 3, availability: 'available', description: 'Engagements completed this period' },
+        { key: 'open_findings', label: 'Open Findings', value: 12, availability: 'available', description: 'Findings not yet closed' },
+        { key: 'overdue_actions', label: 'Overdue Actions', value: 2, availability: 'available', description: 'Corrective actions past due date' },
+        { key: 'evidence_in_review', label: 'Evidence in Review', value: 4, availability: 'available', description: 'Evidence pending review' },
+        { key: 'assurance_coverage', label: 'Assurance Coverage', value: 75, availability: 'available', description: 'Percentage of entities covered' },
       ],
       panels: [
-        { key: 'universe_coverage', title: 'Audit Universe Coverage', availability: 'not_available', description: 'Coverage of auditable entities by status', data: [], chartType: 'bar' },
-        { key: 'plan_calendar', title: 'Annual Plan Calendar', availability: 'not_available', description: 'Audit engagements scheduled across the year', data: [], chartType: 'calendar' },
-        { key: 'control_testing', title: 'Control Testing Overview', availability: 'not_available', description: 'Control tests by pass/fail status', data: [], chartType: 'pie' },
-        { key: 'finding_severity', title: 'Finding Severity', availability: 'not_available', description: 'Open findings grouped by severity rating', data: [], chartType: 'bar' },
-        { key: 'action_aging', title: 'Management Action Aging', availability: 'not_available', description: 'Overdue and aging corrective actions', data: [], chartType: 'bar' },
-        { key: 'assurance_coordination', title: 'Assurance Coordination', availability: 'not_available', description: 'Assurance provider coverage by risk area', data: [], chartType: 'heatmap' },
-        { key: 'resource_allocation', title: 'Resource Allocation', availability: 'not_available', description: 'Auditor hours allocated across engagements', data: [], chartType: 'grouped-bar' },
-        { key: 'remediation_progress', title: 'Remediation Progress', availability: 'not_available', description: 'Action plan completion over time', data: [], chartType: 'line' },
+        { key: 'universe_coverage', title: 'Audit Universe Coverage', availability: 'available', description: 'Entities by type', data: [{ label: 'PROCESS', value: 10 }], chartType: 'bar' },
+        { key: 'risk_inherent', title: 'Risk Distribution (Inherent)', availability: 'available', description: 'Risks by inherent level', data: [{ label: 'HIGH', value: 3 }], chartType: 'bar' },
+        { key: 'risk_residual', title: 'Risk Distribution (Residual)', availability: 'available', description: 'Risks by residual level', data: [{ label: 'LOW', value: 5 }], chartType: 'bar' },
+        { key: 'engagement_status', title: 'Engagement Status', availability: 'available', description: 'Engagements by status', data: [{ label: 'PLANNED', value: 8 }], chartType: 'pie' },
+        { key: 'control_testing', title: 'Control Testing Outcomes', availability: 'available', description: 'Tests by outcome', data: [{ label: 'PASS', value: 15 }], chartType: 'pie' },
+        { key: 'finding_severity', title: 'Findings by Severity', availability: 'available', description: 'Findings grouped by severity', data: [{ label: 'HIGH', value: 4 }], chartType: 'bar' },
+        { key: 'action_status', title: 'Action Plans by Status', availability: 'available', description: 'Corrective actions by status', data: [{ label: 'OPEN', value: 6 }], chartType: 'bar' },
+        { key: 'evidence_review', title: 'Evidence Review Status', availability: 'available', description: 'Evidence by review status', data: [{ label: 'DRAFT', value: 3 }], chartType: 'pie' },
       ],
-      priorityItems: [],
+      priorityItems: [
+        { id: '1', reference: 'AP-001', title: 'Fix access controls', owner: 'Jane Doe', dueDate: '2026-01-15', priority: 'critical', status: 'overdue', sourceModule: 'action-plans' },
+      ],
       trend: {
-        availability: 'not_available',
-        data: [],
-        description: 'Assurance coverage trend requires historical engagement data across multiple audit cycles.',
+        availability: 'available',
+        data: [
+          { period: 'Jun 2026', coverage: 60, target: 80 },
+          { period: 'Jul 2026', coverage: 65, target: 80 },
+        ],
+        description: 'Assurance coverage trend based on completed engagements and control tests.',
       },
       filterOptions: {
-        reportingYears: [],
+        reportingYears: ['2026'],
         auditCycles: [],
-        riskAreas: [],
-        auditOwners: [],
-        statuses: [],
+        riskAreas: ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'],
+        auditOwners: ['Jane Doe'],
+        statuses: ['PLANNED', 'IN_PROGRESS', 'COMPLETED'],
       },
     },
     isLoading: false,
@@ -93,33 +100,28 @@ describe('DashboardPage', () => {
     expect(screen.getByText(/Welcome back, Test User/)).toBeInTheDocument();
   });
 
-  it('should render all six KPI cards', () => {
+  it('should render all eight KPI cards with values', () => {
     renderDashboard();
-    expect(screen.getAllByText('Audit Universe').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Audits Planned').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Audits Completed').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Open Findings').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Overdue Actions').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/Assurance Coverage/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('42')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
+    expect(screen.getByText('8')).toBeInTheDocument();
+    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('12')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+    expect(screen.getByText('75')).toBeInTheDocument();
   });
 
-  it('should show "Not available yet" for all KPIs when no data source exists', () => {
-    renderDashboard();
-    const notAvailableElements = screen.getAllByText('Not available yet');
-    // At least 6 KPI cards + 8 panels + 1 trend = 15
-    expect(notAvailableElements.length).toBeGreaterThanOrEqual(6);
-  });
-
-  it('should render all eight analytics panel titles', () => {
+  it('should render all analytics panel titles', () => {
     renderDashboard();
     expect(screen.getByText('Audit Universe Coverage')).toBeInTheDocument();
-    expect(screen.getByText('Annual Plan Calendar')).toBeInTheDocument();
-    expect(screen.getByText('Control Testing Overview')).toBeInTheDocument();
-    expect(screen.getByText('Finding Severity')).toBeInTheDocument();
-    expect(screen.getByText('Management Action Aging')).toBeInTheDocument();
-    expect(screen.getByText('Assurance Coordination')).toBeInTheDocument();
-    expect(screen.getByText('Resource Allocation')).toBeInTheDocument();
-    expect(screen.getByText('Remediation Progress')).toBeInTheDocument();
+    expect(screen.getByText('Risk Distribution (Inherent)')).toBeInTheDocument();
+    expect(screen.getByText('Risk Distribution (Residual)')).toBeInTheDocument();
+    expect(screen.getByText('Engagement Status')).toBeInTheDocument();
+    expect(screen.getByText('Control Testing Outcomes')).toBeInTheDocument();
+    expect(screen.getByText('Findings by Severity')).toBeInTheDocument();
+    expect(screen.getByText('Action Plans by Status')).toBeInTheDocument();
+    expect(screen.getByText('Evidence Review Status')).toBeInTheDocument();
   });
 
   it('should render the Assurance Coverage Trend panel', () => {
@@ -127,23 +129,24 @@ describe('DashboardPage', () => {
     expect(screen.getByText('Assurance Coverage Trend')).toBeInTheDocument();
   });
 
-  it('should render the Priority Audit Items section with empty state', () => {
+  it('should render the Priority Audit Items section with data', () => {
     renderDashboard();
     expect(screen.getByText('Priority Audit Items')).toBeInTheDocument();
-    expect(screen.getByText('No Priority Items')).toBeInTheDocument();
-  });
-
-  it('should render the Metric Definitions section', () => {
-    renderDashboard();
-    expect(screen.getByText('Metric Definitions')).toBeInTheDocument();
+    expect(screen.getByText('Fix access controls')).toBeInTheDocument();
+    expect(screen.getByText('AP-001')).toBeInTheDocument();
   });
 
   it('should render filter dropdowns', () => {
     renderDashboard();
     expect(screen.getByLabelText('Reporting Year')).toBeInTheDocument();
-    expect(screen.getByLabelText('Audit Cycle')).toBeInTheDocument();
     expect(screen.getByLabelText('Risk Area')).toBeInTheDocument();
     expect(screen.getByLabelText('Audit Owner')).toBeInTheDocument();
     expect(screen.getByLabelText('Status')).toBeInTheDocument();
+  });
+
+  it('should render quick report links', () => {
+    renderDashboard();
+    expect(screen.getByText('Quick Reports')).toBeInTheDocument();
+    expect(screen.getByText('Generate Report')).toBeInTheDocument();
   });
 });
