@@ -1557,3 +1557,60 @@ export interface EvidenceDashboardDto {
 export type CreateEvidenceInput = CreateEvidenceRequest;
 export type UpdateEvidenceInput = UpdateEvidenceRequest;
 export type ListEvidenceInput = EvidenceFilters;
+
+// ---- Reports ----
+
+export type ReportType =
+  | 'EXECUTIVE_SUMMARY'
+  | 'AUDIT_ENGAGEMENT'
+  | 'RISK_ASSESSMENT'
+  | 'AUDIT_UNIVERSE'
+  | 'AUDIT_PLAN_PROGRESS'
+  | 'CONTROL_TESTING'
+  | 'AUDIT_FINDINGS'
+  | 'ACTION_PLANS'
+  | 'EVIDENCE_SUMMARY'
+  | 'ASSURANCE_COVERAGE';
+
+export const REPORT_TYPES: { value: ReportType; label: string; description: string }[] = [
+  { value: 'EXECUTIVE_SUMMARY', label: 'Executive Summary', description: 'High-level overview of audit activity, findings, and metrics for executive leadership and the audit committee.' },
+  { value: 'AUDIT_ENGAGEMENT', label: 'Audit Engagement Report', description: 'Detailed report on engagement objectives, scope, procedures, results, and conclusions.' },
+  { value: 'RISK_ASSESSMENT', label: 'Risk Assessment Report', description: 'Summary of organizational risks, inherent and residual levels, and mitigation status.' },
+  { value: 'AUDIT_UNIVERSE', label: 'Audit Universe Report', description: 'Catalog of auditable entities, their types, status, and coverage.' },
+  { value: 'AUDIT_PLAN_PROGRESS', label: 'Audit Plan Progress Report', description: 'Annual audit plan execution status, coverage, and scheduling.' },
+  { value: 'CONTROL_TESTING', label: 'Control Testing Report', description: 'Control test outcomes, exceptions, and pass/fail summary.' },
+  { value: 'AUDIT_FINDINGS', label: 'Audit Findings Report', description: 'Findings by severity, status, management responses, and remediation progress.' },
+  { value: 'ACTION_PLANS', label: 'Action Plans Report', description: 'Corrective action plans, their priority, status, and verification.' },
+  { value: 'EVIDENCE_SUMMARY', label: 'Evidence & Working Paper Summary', description: 'Evidence records, review status, and working paper coverage.' },
+  { value: 'ASSURANCE_COVERAGE', label: 'Assurance Coverage Report', description: 'Assurance map coverage across providers, gaps, and overlaps.' },
+];
+
+export interface ReportFilters {
+  reportType: ReportType;
+  dateFrom?: string;
+  dateTo?: string;
+  engagementId?: string;
+  auditEntityId?: string;
+  fiscalYear?: number;
+}
+
+export interface ReportSectionDto {
+  title: string;
+  rows: { label: string; value: string | number }[];
+}
+
+export interface ReportTableDto {
+  title: string;
+  columns: { key: string; label: string }[];
+  rows: Record<string, string | number | null>[];
+}
+
+export interface ReportDataDto {
+  reportType: ReportType;
+  reportTitle: string;
+  generatedAt: string;
+  filters: ReportFilters;
+  summary: ReportSectionDto;
+  tables: ReportTableDto[];
+  charts: { title: string; type: 'bar' | 'pie'; data: { label: string; value: number }[] }[];
+}

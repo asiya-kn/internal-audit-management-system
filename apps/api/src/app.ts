@@ -20,6 +20,7 @@ import controlTestRoutes from './routes/controlTest.routes.js';
 import actionPlanRoutes from './routes/actionPlan.routes.js';
 import assuranceMapRoutes from './routes/assuranceMap.routes.js';
 import evidenceRoutes from './routes/evidence.routes.js';
+import reportsRoutes from './routes/reports.routes.js';
 
 function buildHelmetConfig() {
   if (config.isProduction) {
@@ -96,6 +97,7 @@ export function createApp(): express.Express {
   app.use('/api/action-plans', actionPlanRoutes);
   app.use('/api/assurance-map', assuranceMapRoutes);
   app.use('/api/evidence', evidenceRoutes);
+  app.use('/api/reports', reportsRoutes);
 
   // ---- 404 + error handling (must be last) ----
   app.use(notFoundHandler);

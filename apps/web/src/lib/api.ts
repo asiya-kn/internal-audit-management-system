@@ -79,6 +79,8 @@ import type {
   CreateEvidenceRequest,
   UpdateEvidenceRequest,
   ReviewEvidenceRequest,
+  ReportFilters,
+  ReportDataDto,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -416,4 +418,18 @@ export const api = {
     request<EvidenceDetailDto>(`/evidence/${id}/review`, { method: 'PATCH', body: JSON.stringify(data) }),
   deleteEvidence: (id: string) =>
     request<{ message: string }>(`/evidence/${id}`, { method: 'DELETE' }),
+
+  // ---- Reports ----
+
+  generateReport: (filters: ReportFilters) => {
+    const params = new URLSearchParams();
+    if (filters.reportType) params.set('reportType', filters.reportType);
+    if (filters.dateFrom) params.set('dateFrom', filters.dateFrom);
+    if (filters.dateTo) params.set('dateTo', filters.dateTo);
+    if (filters.engagementId) params.set('engagementId', filters.engagementId);
+    if (filters.auditEntityId) params.set('auditEntityId', filters.auditEntityId);
+    if (filters.fiscalYear) params.set('fiscalYear', String(filters.fiscalYear));
+    const qs = params.toString();
+    return request<ReportDataDto>(`/reports${qs ? `?${qs}` : ''}`);
+  },
 };
