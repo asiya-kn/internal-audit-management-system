@@ -1284,3 +1284,101 @@ export interface ActionPlanDashboardDto {
 export type CreateActionPlanInput = CreateActionPlanRequest;
 export type UpdateActionPlanInput = UpdateActionPlanRequest;
 export type ListActionPlanInput = ActionPlanFilters;
+
+// ---- Assurance Map ----
+
+export type AssuranceProvider =
+  | 'INTERNAL_AUDIT'
+  | 'RISK_MANAGEMENT'
+  | 'COMPLIANCE'
+  | 'EXTERNAL_AUDIT'
+  | 'MANAGEMENT'
+  | 'OTHER';
+
+export const ASSURANCE_PROVIDERS: AssuranceProvider[] = [
+  'INTERNAL_AUDIT',
+  'RISK_MANAGEMENT',
+  'COMPLIANCE',
+  'EXTERNAL_AUDIT',
+  'MANAGEMENT',
+  'OTHER',
+];
+
+export const ASSURANCE_PROVIDER_LABELS: Record<AssuranceProvider, string> = {
+  INTERNAL_AUDIT: 'Internal Audit',
+  RISK_MANAGEMENT: 'Risk Management',
+  COMPLIANCE: 'Compliance',
+  EXTERNAL_AUDIT: 'External Audit',
+  MANAGEMENT: 'Management',
+  OTHER: 'Other',
+};
+
+export type AssuranceLevel = 'NONE' | 'PARTIAL' | 'FULL';
+
+export const ASSURANCE_LEVELS: AssuranceLevel[] = ['NONE', 'PARTIAL', 'FULL'];
+
+export const ASSURANCE_LEVEL_LABELS: Record<AssuranceLevel, string> = {
+  NONE: 'None',
+  PARTIAL: 'Partial',
+  FULL: 'Full',
+};
+
+export type AssuranceTargetType = 'AUDIT_ENTITY' | 'RISK';
+
+export const ASSURANCE_TARGET_TYPES: AssuranceTargetType[] = ['AUDIT_ENTITY', 'RISK'];
+
+export interface AssuranceMapCellDto {
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  auditEntityType: string;
+  riskId: string | null;
+  riskTitle: string | null;
+  riskInherentLevel: string | null;
+  riskResidualLevel: string | null;
+  riskStatus: string | null;
+  provider: AssuranceProvider;
+  assuranceLevel: AssuranceLevel;
+  assessmentDate: string | null;
+  notes: string | null;
+  engagementCount: number;
+  controlTestCount: number;
+  findingCount: number;
+}
+
+export interface AssuranceMapMatrixRowDto {
+  auditEntityId: string;
+  auditEntityCode: string;
+  auditEntityName: string;
+  auditEntityType: string;
+  riskId: string | null;
+  riskTitle: string | null;
+  riskInherentLevel: string | null;
+  cells: AssuranceMapCellDto[];
+}
+
+export interface AssuranceMapSummaryDto {
+  totalEntities: number;
+  entitiesWithAssurance: number;
+  coveragePct: number;
+  fullAssuranceCount: number;
+  partialAssuranceCount: number;
+  noAssuranceCount: number;
+  coverageGapsCount: number;
+  byProvider: Record<AssuranceProvider, number>;
+  highRiskWithoutAssurance: number;
+}
+
+export interface AssuranceMapResponse {
+  matrix: AssuranceMapMatrixRowDto[];
+  summary: AssuranceMapSummaryDto;
+}
+
+export interface AssuranceMapFilters {
+  search?: string;
+  provider?: AssuranceProvider;
+  assuranceLevel?: AssuranceLevel;
+  targetType?: AssuranceTargetType;
+  page?: number;
+  pageSize?: number;
+}

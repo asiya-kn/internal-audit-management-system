@@ -67,6 +67,11 @@ import type {
   VerifyActionPlanRequest,
   TransitionActionPlanRequest,
   ActionPlanStatus,
+  AssuranceMapResponse,
+  AssuranceMapFilters,
+  AssuranceProvider,
+  AssuranceLevel,
+  AssuranceTargetType,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -358,4 +363,18 @@ export const api = {
     request<ActionPlanDetailDto>(`/action-plans/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
   deleteActionPlan: (id: string) =>
     request<{ message: string }>(`/action-plans/${id}`, { method: 'DELETE' }),
+
+  // ---- Assurance Map ----
+
+  getAssuranceMap: (filters: AssuranceMapFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.provider) params.set('provider', filters.provider);
+    if (filters.assuranceLevel) params.set('assuranceLevel', filters.assuranceLevel);
+    if (filters.targetType) params.set('targetType', filters.targetType);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    const qs = params.toString();
+    return request<AssuranceMapResponse>(`/assurance-map${qs ? `?${qs}` : ''}`);
+  },
 };
