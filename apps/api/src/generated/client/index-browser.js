@@ -350,6 +350,43 @@ exports.Prisma.ControlTestScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ActionPlanScalarFieldEnum = {
+  id: 'id',
+  reference: 'reference',
+  title: 'title',
+  description: 'description',
+  findingId: 'findingId',
+  controlTestId: 'controlTestId',
+  engagementId: 'engagementId',
+  auditEntityId: 'auditEntityId',
+  priority: 'priority',
+  status: 'status',
+  responsibleOwnerId: 'responsibleOwnerId',
+  reviewerId: 'reviewerId',
+  targetDate: 'targetDate',
+  completedAt: 'completedAt',
+  verifiedAt: 'verifiedAt',
+  verifiedById: 'verifiedById',
+  managementJustification: 'managementJustification',
+  proposedRectification: 'proposedRectification',
+  completionEvidence: 'completionEvidence',
+  verificationNotes: 'verificationNotes',
+  progressPct: 'progressPct',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ActionPlanUpdateScalarFieldEnum = {
+  id: 'id',
+  actionPlanId: 'actionPlanId',
+  note: 'note',
+  progressPct: 'progressPct',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -508,6 +545,22 @@ exports.ControlTestOutcome = exports.$Enums.ControlTestOutcome = {
   INCONCLUSIVE: 'INCONCLUSIVE'
 };
 
+exports.ActionPlanPriority = exports.$Enums.ActionPlanPriority = {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+};
+
+exports.ActionPlanStatus = exports.$Enums.ActionPlanStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  PENDING_VERIFICATION: 'PENDING_VERIFICATION',
+  COMPLETED: 'COMPLETED',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
@@ -522,7 +575,9 @@ exports.Prisma.ModelName = {
   Engagement: 'Engagement',
   EngagementTeamMember: 'EngagementTeamMember',
   Finding: 'Finding',
-  ControlTest: 'ControlTest'
+  ControlTest: 'ControlTest',
+  ActionPlan: 'ActionPlan',
+  ActionPlanUpdate: 'ActionPlanUpdate'
 };
 
 /**
