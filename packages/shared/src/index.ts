@@ -1614,3 +1614,117 @@ export interface ReportDataDto {
   tables: ReportTableDto[];
   charts: { title: string; type: 'bar' | 'pie'; data: { label: string; value: number }[] }[];
 }
+
+// ---- Administration ----
+
+export interface AdminUserSummaryDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  isActive: boolean;
+  lastLoginAt: string | null;
+  roles: RoleDto[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminUserDetailDto extends AdminUserSummaryDto {
+  permissions: string[];
+}
+
+export interface AdminUserListResponse {
+  items: AdminUserSummaryDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface AdminUserFilters {
+  search?: string;
+  isActive?: boolean;
+  roleId?: string;
+  page?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface CreateAdminUserRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  roleIds: string[];
+  isActive?: boolean;
+}
+
+export interface UpdateAdminUserRequest {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  roleIds?: string[];
+  isActive?: boolean;
+}
+
+export interface RoleDetailDto extends RoleDto {
+  permissions: { id: string; name: string; description: string | null }[];
+  userCount: number;
+}
+
+export interface RoleListResponse {
+  items: RoleDetailDto[];
+  total: number;
+}
+
+export interface PermissionDto {
+  id: string;
+  name: string;
+  description: string | null;
+}
+
+export interface UpdateRolePermissionsRequest {
+  permissionIds: string[];
+}
+
+export interface AuditLogDto {
+  id: string;
+  action: string;
+  category: string;
+  userId: string | null;
+  userEmail: string | null;
+  ip: string | null;
+  userAgent: string | null;
+  success: boolean;
+  createdAt: string;
+}
+
+export interface AuditLogListResponse {
+  items: AuditLogDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface AuditLogFilters {
+  category?: string;
+  action?: string;
+  userId?: string;
+  success?: boolean;
+  dateFrom?: string;
+  dateTo?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface AdminStatsDto {
+  totalUsers: number;
+  activeUsers: number;
+  inactiveUsers: number;
+  totalRoles: number;
+  totalPermissions: number;
+  recentLogins: number;
+  failedLoginAttempts: number;
+  totalAuditLogs: number;
+}

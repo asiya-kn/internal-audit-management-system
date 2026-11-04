@@ -1,22 +1,39 @@
 import { Router } from 'express';
 import { authenticate, requirePermission } from '../middleware/auth.js';
-import { sendSuccess } from '../utils/response.js';
-import type { AuthenticatedRequest } from '../middleware/auth.js';
+import {
+  listUsers,
+  getUser,
+  createUser,
+  updateUser,
+  setUserActive,
+  listRoles,
+  updateRolePermissions,
+  listPermissions,
+  listAuditLogs,
+  getStats,
+} from '../controllers/admin.controller.js';
 
 const router = Router();
 
-// Example protected endpoint demonstrating authorization middleware.
-// Returns the current user's permissions — gated behind the users.view permission.
-router.get(
-  '/permissions',
-  authenticate,
-  requirePermission('users.view'),
-  (req: AuthenticatedRequest, res) => {
-    sendSuccess(res, {
-      permissions: req.user?.permissions ?? [],
-      roles: req.user?.roles ?? [],
-    });
-  },
-);
+// All admin routes require authentication
+router.use(authenticate);
+
+// User management
+router.get('/users', requirePermission('users.view'), listUsers);
+router.get('/users/:id', requirePermission('users.view'), getUser);
+router.post('/users', requirePermission('users.create'), createUser);
+router.put('/users/:id', requirePermission('users.update'), updateUser);
+router.patch('/users/:id/active', requirePermission('users.update'), setUserActive);
+
+// Role & permission management
+router.get('/roles', requirePermission('roles.view'), listRoles);
+router.put('/roles/:roleId/permissions', requirePermission('roles.manage'), updateRolePermissions);
+router.get('/permissions', requirePermission('roles.view'), listPermissions);
+
+// Audit logs
+router.get('/audit-logs', requirePermission('activity_logs.view'), listAuditLogs);
+
+// Admin statistics
+router.get('/stats', requirePermission('users.view'), getStats);
 
 export default router;

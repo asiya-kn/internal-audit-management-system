@@ -81,6 +81,18 @@ import type {
   ReviewEvidenceRequest,
   ReportFilters,
   ReportDataDto,
+  AdminUserListResponse,
+  AdminUserDetailDto,
+  AdminUserFilters,
+  CreateAdminUserRequest,
+  UpdateAdminUserRequest,
+  RoleListResponse,
+  RoleDetailDto,
+  PermissionDto,
+  UpdateRolePermissionsRequest,
+  AuditLogListResponse,
+  AuditLogFilters,
+  AdminStatsDto,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -432,4 +444,44 @@ export const api = {
     const qs = params.toString();
     return request<ReportDataDto>(`/reports${qs ? `?${qs}` : ''}`);
   },
+
+  // ---- Administration ----
+
+  listAdminUsers: (filters: AdminUserFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.search) params.set('search', filters.search);
+    if (filters.isActive !== undefined) params.set('isActive', String(filters.isActive));
+    if (filters.roleId) params.set('roleId', filters.roleId);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    if (filters.sortBy) params.set('sortBy', filters.sortBy);
+    if (filters.sortOrder) params.set('sortOrder', filters.sortOrder);
+    const qs = params.toString();
+    return request<AdminUserListResponse>(`/admin/users${qs ? `?${qs}` : ''}`);
+  },
+  getAdminUser: (id: string) => request<AdminUserDetailDto>(`/admin/users/${id}`),
+  createAdminUser: (data: CreateAdminUserRequest) =>
+    request<AdminUserDetailDto>('/admin/users', { method: 'POST', body: JSON.stringify(data) }),
+  updateAdminUser: (id: string, data: UpdateAdminUserRequest) =>
+    request<AdminUserDetailDto>(`/admin/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  setAdminUserActive: (id: string, isActive: boolean) =>
+    request<AdminUserDetailDto>(`/admin/users/${id}/active`, { method: 'PATCH', body: JSON.stringify({ isActive }) }),
+  listRoles: () => request<RoleListResponse>('/admin/roles'),
+  updateRolePermissions: (roleId: string, data: UpdateRolePermissionsRequest) =>
+    request<RoleDetailDto>(`/admin/roles/${roleId}/permissions`, { method: 'PUT', body: JSON.stringify(data) }),
+  listPermissions: () => request<PermissionDto[]>('/admin/permissions'),
+  listAuditLogs: (filters: AuditLogFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.category) params.set('category', filters.category);
+    if (filters.action) params.set('action', filters.action);
+    if (filters.userId) params.set('userId', filters.userId);
+    if (filters.success !== undefined) params.set('success', String(filters.success));
+    if (filters.dateFrom) params.set('dateFrom', filters.dateFrom);
+    if (filters.dateTo) params.set('dateTo', filters.dateTo);
+    if (filters.page) params.set('page', String(filters.page));
+    if (filters.pageSize) params.set('pageSize', String(filters.pageSize));
+    const qs = params.toString();
+    return request<AuditLogListResponse>(`/admin/audit-logs${qs ? `?${qs}` : ''}`);
+  },
+  getAdminStats: () => request<AdminStatsDto>('/admin/stats'),
 };
