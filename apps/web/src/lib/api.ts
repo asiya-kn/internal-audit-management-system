@@ -93,6 +93,9 @@ import type {
   AuditLogListResponse,
   AuditLogFilters,
   AdminStatsDto,
+  UpdateProfileRequest,
+  ChangePasswordRequest,
+  SystemInfoDto,
 } from '@iams/shared';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
@@ -484,4 +487,12 @@ export const api = {
     return request<AuditLogListResponse>(`/admin/audit-logs${qs ? `?${qs}` : ''}`);
   },
   getAdminStats: () => request<AdminStatsDto>('/admin/stats'),
+
+  // ---- Settings ----
+
+  updateProfile: (data: UpdateProfileRequest) =>
+    request<UserDto>('/auth/profile', { method: 'PUT', body: JSON.stringify(data) }),
+  changePassword: (data: ChangePasswordRequest) =>
+    request<{ message: string }>('/auth/change-password', { method: 'POST', body: JSON.stringify(data) }),
+  getSystemInfo: () => request<SystemInfoDto>('/auth/system-info'),
 };

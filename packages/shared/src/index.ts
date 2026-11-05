@@ -1728,3 +1728,41 @@ export interface AdminStatsDto {
   failedLoginAttempts: number;
   totalAuditLogs: number;
 }
+
+// ---- Settings ----
+
+export interface UpdateProfileRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface SystemInfoDto {
+  environment: string;
+  port: number;
+  logLevel: string;
+  cookieMaxAgeHours: number;
+  rateLimitMax: number;
+  authRateLimitMax: number;
+}
+
+export type ThemePreference = 'light' | 'dark' | 'system';
+export type DateFormat = 'iso' | 'us' | 'european';
+export type NotificationPreference = {
+  emailNotifications: boolean;
+  findingAlerts: boolean;
+  overdueReminders: boolean;
+  weeklyDigest: boolean;
+};
+
+export interface UserPreferences {
+  theme: ThemePreference;
+  dateFormat: DateFormat;
+  tablePageSize: number;
+  notifications: NotificationPreference;
+}

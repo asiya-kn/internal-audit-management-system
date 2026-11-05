@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { AuthService } from '../services/auth.service.js';
 import { recordAudit } from '../services/audit.service.js';
 import { sendSuccess } from '../utils/response.js';
-import { AuthenticationError } from '../utils/errors.js';
+import { AuthenticationError, AuthorizationError } from '../utils/errors.js';
 import { config } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.js';
 import type { LoginRequest, LoginResponse, UserDto } from '@iams/shared';
@@ -83,6 +83,85 @@ export async function me(
     }
     const user = await authService.getCurrentUser(req.user.id);
     sendSuccess<UserDto>(res, user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateProfile(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    if (!req.user) {
+      throw new AuthenticationError();
+    }
+    const { firstName, lastName, email } = req.body as {
+      firstName: string;
+      lastName: string;
+      email: string;
+    };
+    const user = await authService.updateProfile(req.user.id, firstName, lastName, email);
+    recordAudit({
+      action: 'profile.update',
+      category: 'auth',
+      userId: req.user.id,
+      ip: clientIp(req),
+      userAgent: req.headers['user-agent'],
+      metadata: { email: user.email },
+    });
+    sendSuccess<UserDto>(res, user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function changePassword(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    if (!req.user) {
+      throw new AuthenticationError();
+    }
+    const { currentPassword, newPassword } = req.body as {
+      currentPassword: string;
+      newPassword: string;
+    };
+    await authService.changePassword(req.user.id, currentPassword, newPassword);
+    recordAudit({
+      action: 'password.change',
+      category: 'auth',
+      userId: req.user.id,
+      ip: clientIp(req),
+      userAgent: req.headers['user-agent'],
+    });
+    sendSuccess(res, { message: 'Password changed successfully' });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getSystemInfo(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    if (!req.user?.permissions.includes('administration.settings.view')) {
+      next(new AuthorizationError());
+      return;
+    }
+    sendSuccess(res, {
+      environment: config.env,
+      port: config.port,
+      logLevel: config.logLevel,
+      cookieMaxAgeHours: Math.round(config.cookieMaxAgeMs / (60 * 60 * 1000)),
+      rateLimitMax: config.rateLimitMax,
+      authRateLimitMax: config.authRateLimitMax,
+    });
   } catch (err) {
     next(err);
   }

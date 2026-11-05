@@ -1,9 +1,10 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { config } from '../config/env.js';
+import { prisma } from '../config/db.js';
 import { UserRepository } from '../repositories/user.repository.js';
 import { mapUserToDto } from './auth.mapper.js';
-import { AuthenticationError } from '../utils/errors.js';
+import { AuthenticationError, ConflictError, ValidationError } from '../utils/errors.js';
 import type { UserDto } from '@iams/shared';
 import { logger } from '../utils/logger.js';
 
@@ -49,5 +50,47 @@ export class AuthService {
       throw new AuthenticationError('User not found or inactive');
     }
     return mapUserToDto(user);
+  }
+
+  async updateProfile(userId: string, firstName: string, lastName: string, email: string): Promise<UserDto> {
+    const normalizedEmail = email.toLowerCase().trim();
+    const existing = await this.users.findById(userId);
+    if (!existing) throw new AuthenticationError('User not found');
+
+    if (normalizedEmail !== existing.email) {
+      const conflict = await prisma.user.findUnique({ where: { email: normalizedEmail } });
+      if (conflict) throw new ConflictError('A user with this email already exists');
+    }
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: normalizedEmail,
+      },
+    });
+
+    const updated = await this.users.findById(userId);
+    if (!updated) throw new AuthenticationError('User not found');
+    return mapUserToDto(updated);
+  }
+
+  async changePassword(userId: string, currentPassword: string, newPassword: string): Promise<void> {
+    const user = await this.users.findById(userId);
+    if (!user) throw new AuthenticationError('User not found');
+
+    const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!valid) throw new ValidationError('Current password is incorrect');
+
+    if (newPassword.length < 8) throw new ValidationError('New password must be at least 8 characters');
+
+    const passwordHash = await bcrypt.hash(newPassword, 12);
+    await prisma.user.update({
+      where: { id: userId },
+      data: { passwordHash },
+    });
+
+    logger.info('User changed password', { userId });
   }
 }
