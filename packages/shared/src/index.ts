@@ -1744,25 +1744,14 @@ export interface ChangePasswordRequest {
 
 export interface SystemInfoDto {
   environment: string;
-  port: number;
-  logLevel: string;
-  cookieMaxAgeHours: number;
-  rateLimitMax: number;
-  authRateLimitMax: number;
+  sessionLifetimeHours: number;
+  loginRateLimitMax: number;
+  apiRateLimitMax: number;
 }
 
-export type ThemePreference = 'light' | 'dark' | 'system';
 export type DateFormat = 'iso' | 'us' | 'european';
-export type NotificationPreference = {
-  emailNotifications: boolean;
-  findingAlerts: boolean;
-  overdueReminders: boolean;
-  weeklyDigest: boolean;
-};
 
 export interface UserPreferences {
-  theme: ThemePreference;
   dateFormat: DateFormat;
   tablePageSize: number;
-  notifications: NotificationPreference;
 }

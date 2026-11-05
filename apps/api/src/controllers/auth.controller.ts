@@ -2,10 +2,10 @@ import type { Request, Response, NextFunction } from 'express';
 import { AuthService } from '../services/auth.service.js';
 import { recordAudit } from '../services/audit.service.js';
 import { sendSuccess } from '../utils/response.js';
-import { AuthenticationError, AuthorizationError } from '../utils/errors.js';
+import { AuthenticationError } from '../utils/errors.js';
 import { config } from '../config/env.js';
 import type { AuthenticatedRequest } from '../middleware/auth.js';
-import type { LoginRequest, LoginResponse, UserDto } from '@iams/shared';
+import type { LoginRequest, LoginResponse, UserDto, SystemInfoDto } from '@iams/shared';
 
 const authService = new AuthService();
 
@@ -144,25 +144,12 @@ export async function changePassword(
   }
 }
 
-export async function getSystemInfo(
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction,
-): Promise<void> {
-  try {
-    if (!req.user?.permissions.includes('administration.settings.view')) {
-      next(new AuthorizationError());
-      return;
-    }
-    sendSuccess(res, {
-      environment: config.env,
-      port: config.port,
-      logLevel: config.logLevel,
-      cookieMaxAgeHours: Math.round(config.cookieMaxAgeMs / (60 * 60 * 1000)),
-      rateLimitMax: config.rateLimitMax,
-      authRateLimitMax: config.authRateLimitMax,
-    });
-  } catch (err) {
-    next(err);
-  }
+export function getSystemInfo(_req: AuthenticatedRequest, res: Response): void {
+  const body: SystemInfoDto = {
+    environment: config.env,
+    sessionLifetimeHours: Math.round(config.cookieMaxAgeMs / (60 * 60 * 1000)),
+    loginRateLimitMax: config.authRateLimitMax,
+    apiRateLimitMax: config.rateLimitMax,
+  };
+  sendSuccess(res, body);
 }

@@ -26,6 +26,8 @@ import { PageLoading } from '../components/ui/Spinner';
 import { ErrorState } from '../components/ui/ErrorState';
 import { EmptyState } from '../components/ui/EmptyState';
 import { ApiError } from '../lib/api';
+import { useUserPreferences } from '../hooks/useUserPreferences';
+import { formatDate } from '../lib/preferences';
 import type {
   AdminUserFilters,
   AdminUserSummaryDto,
@@ -69,7 +71,8 @@ export function AdministrationPage() {
   const [tab, setTab] = useState<Tab>('users');
 
   // User list state
-  const [filters, setFilters] = useState<AdminUserFilters>({ page: 1, pageSize: 20 });
+  const { preferences } = useUserPreferences();
+  const [filters, setFilters] = useState<AdminUserFilters>({ page: 1, pageSize: preferences.tablePageSize });
   const [searchInput, setSearchInput] = useState('');
   const [formState, setFormState] = useState<FormState>({ mode: 'closed' });
   const [detailId, setDetailId] = useState<string | null>(null);
@@ -77,7 +80,7 @@ export function AdministrationPage() {
   const [serverError, setServerError] = useState('');
 
   // Audit log filters
-  const [logFilters, setLogFilters] = useState<AuditLogFilters>({ page: 1, pageSize: 20 });
+  const [logFilters, setLogFilters] = useState<AuditLogFilters>({ page: 1, pageSize: preferences.tablePageSize });
   const [logCategory, setLogCategory] = useState('');
 
   // Role permission editing
@@ -385,7 +388,7 @@ export function AdministrationPage() {
                           </span>
                         </td>
                         <td className="px-4 py-3 text-neutral-600">
-                          {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : 'Never'}
+                          {user.lastLoginAt ? formatDate(user.lastLoginAt, preferences.dateFormat) : 'Never'}
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center justify-end gap-1">
@@ -639,7 +642,7 @@ export function AdministrationPage() {
                     {logItems.map((log) => (
                       <tr key={log.id} className="hover:bg-neutral-50">
                         <td className="px-4 py-3 text-neutral-600 whitespace-nowrap">
-                          {new Date(log.createdAt).toLocaleString()}
+                          {formatDate(log.createdAt, preferences.dateFormat)}
                         </td>
                         <td className="px-4 py-3 font-medium text-neutral-900">{log.action}</td>
                         <td className="px-4 py-3">
