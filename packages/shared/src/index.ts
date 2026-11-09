@@ -149,12 +149,12 @@ export type AuditEntityType =
   | 'ORGANIZATION'
   | 'DIVISION'
   | 'DEPARTMENT'
-  | 'PROCESS'
-  | 'SUB_PROCESS'
+  | 'EXECUTIVE_MANAGEMENT'
+  | 'SECTOR'
   | 'SYSTEM'
   | 'PROJECT'
   | 'THIRD_PARTY'
-  | 'LOCATION';
+  | 'BOARD_OF_DIRECTORS';
 
 export type AuditEntityStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED';
 
@@ -162,12 +162,12 @@ export const AUDIT_ENTITY_TYPES: AuditEntityType[] = [
   'ORGANIZATION',
   'DIVISION',
   'DEPARTMENT',
-  'PROCESS',
-  'SUB_PROCESS',
+  'EXECUTIVE_MANAGEMENT',
+  'SECTOR',
   'SYSTEM',
   'PROJECT',
   'THIRD_PARTY',
-  'LOCATION',
+  'BOARD_OF_DIRECTORS',
 ];
 
 export const AUDIT_ENTITY_STATUSES: AuditEntityStatus[] = [

@@ -59,7 +59,7 @@ export function LoginPage() {
               label="Email"
               type="email"
               name="email"
-              placeholder="admin@example.local"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -99,16 +99,7 @@ export function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-6 rounded-lg bg-neutral-50 px-4 py-3 text-xs text-neutral-500">
-            <p className="font-medium text-neutral-600">Development Credentials</p>
-            <p className="mt-1">Email: admin@example.local</p>
-            <p>Password: AdminPass123!</p>
-          </div>
         </div>
-
-        <p className="mt-6 text-center text-xs text-neutral-500">
-          IAMS v0.1.0 — Phase 1 Foundation
-        </p>
       </div>
     </div>
   );

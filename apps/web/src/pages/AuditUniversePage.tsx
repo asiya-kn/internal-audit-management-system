@@ -33,14 +33,14 @@ const statusStyles: Record<AuditEntityStatus, string> = {
 
 const entityTypeLabels: Record<AuditEntityType, string> = {
   ORGANIZATION: 'Organization',
-  DIVISION: 'Division',
+  EXECUTIVE_MANAGEMENT: 'Executive Management',
   DEPARTMENT: 'Department',
-  PROCESS: 'Process',
-  SUB_PROCESS: 'Sub-process',
+  BOARD_OF_DIRECTORS: 'Board of Directors',
+  SECTOR: 'Sector',
   SYSTEM: 'System',
   PROJECT: 'Project',
   THIRD_PARTY: 'Third Party',
-  LOCATION: 'Location',
+  DIVISION: 'Division',
 };
 
 type FormState =

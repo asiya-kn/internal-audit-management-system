@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { ContextType } from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DashboardPage } from '../src/pages/DashboardPage';
 import { AuthContext } from '../src/context/AuthContext';
-import type { AuthContextValue } from '../src/context/AuthContext';
 
 // Mock the dashboard metrics hook to return "available" data
 vi.mock('../src/hooks/useDashboardMetrics', () => ({
@@ -55,7 +55,7 @@ vi.mock('../src/hooks/useDashboardMetrics', () => ({
   }),
 }));
 
-const mockAuthValue: AuthContextValue = {
+const mockAuthValue: ContextType<typeof AuthContext> = {
   user: {
     id: 'test-id',
     firstName: 'Test',

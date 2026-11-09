@@ -5,8 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuditUniversePage } from '../src/pages/AuditUniversePage';
 import { AuthContext } from '../src/context/AuthContext';
 import { ToastProvider } from '../src/context/ToastContext';
-import type { AuthContextValue } from '../src/context/AuthContext';
 import type { AuditUniverseListResponse, AuditUniverseDetailDto } from '@iams/shared';
+import '@testing-library/jest-dom/vitest';
 
 vi.mock('../src/hooks/useAuditUniverse', () => ({
   useAuditUniverseList: vi.fn(),
@@ -86,7 +86,7 @@ function renderPage(permissions: string[] = [
   'audit_universe.update',
   'audit_universe.delete',
 ]) {
-  const mockAuthValue: AuthContextValue = {
+  const mockAuthValue = {
     user: {
       id: 'test-id',
       firstName: 'Test',
@@ -117,7 +117,12 @@ function renderPage(permissions: string[] = [
   );
 }
 
-function setListMock(returnValue: ReturnType<typeof vi.fn>) {
+function setListMock(returnValue: {
+  data?: AuditUniverseListResponse;
+  isLoading: boolean;
+  isError: boolean;
+  refetch: ReturnType<typeof vi.fn>;
+}) {
   ;(useAuditUniverseList as ReturnType<typeof vi.fn>).mockReturnValue(returnValue);
 }
 
